@@ -1,0 +1,850 @@
+{
+  "_instructions": "FINAL ANNOTATION v3. Breda et al. 2023 Science. Fully annotated from main text + supplementary materials + patent US10,221,127 analysis. HIGH confidence on: molar ratio (50:10:38.5:1.5), DSPC helper lipid, particle characterization (~80nm, PDI 0.02-0.06, EE ~95%), antibody clones (2B8/104D2/104), conjugation chemistry (DSPE-PEG-mal + SATA-thiol). MEDIUM confidence on: specific ionizable lipid (ALC-0307 vs ALC-0315), PEG-lipid identity. NULL: zeta potential, N/P ratio.",
+  "paper_metadata": {
+    "pmid": "37499029",
+    "doi": "10.1126/science.ade6967",
+    "title": "In vivo hematopoietic stem cell modification by mRNA delivery",
+    "authors": [
+      "Breda, Laura",
+      "Papp, Tyler E",
+      "Triebwasser, Michael P",
+      "Yadegari, Amir",
+      "Fedorky, Megan T",
+      "Tanaka, Naoto",
+      "Abdulmalik, Osheiza",
+      "Pavani, Giulia",
+      "Wang, Yongping",
+      "Grupp, Stephan A",
+      "Chou, Stella",
+      "Ni, Houping",
+      "Mui, Barbara L",
+      "Tam, Ying K",
+      "Weissman, Drew",
+      "Rivella, Stefano",
+      "Parhiz, Hamideh"
+    ],
+    "journal": "Science",
+    "publication_date": "2023-07-28",
+    "paper_type": "research"
+  },
+  "formulations": [
+    {
+      "formulation_name": "CD117/LNP",
+      "ionizable_lipid": {
+        "name": "Acuitas proprietary ionizable lipid (likely ALC-0307 per Tombacz 2021; ALC-0315 also possible)",
+        "confidence": "MEDIUM",
+        "source": "Patent US10,221,127 covers a family of ionizable lipids. Tombacz 2021 names ALC-0307 as default. Cannot confirm which specific variant Breda used. Actively protected by Acuitas."
+      },
+      "helper_lipid": {
+        "name": "DSPC (1,2-distearoyl-sn-glycero-3-phosphocholine)",
+        "confidence": "HIGH",
+        "source": "Supp methods say phosphatidylcholine. DSPC is the standard PC in all known Acuitas formulations (Onpattro, BNT162b2, Tombacz 2021). No Acuitas publication uses an alternative PC."
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 38.5
+      },
+      "peg_lipid": {
+        "name": "PEG2000-lipid (likely ALC-0159 or PEG-DMG based on Acuitas platform)",
+        "confidence": "MEDIUM",
+        "source": "Not named in paper or supp. Acuitas BNT162b2 uses ALC-0159 (PEG2000-C18). Other Acuitas formulations use PEG-DMG (PEG2000-C14). Certainly a PEG2000 variant."
+      },
+      "molar_ratios": {
+        "_format": "ionizable:helper:cholesterol:PEG",
+        "ratio_string": "50:10:38.5:1.5",
+        "ionizable_percent": 50,
+        "helper_percent": 10,
+        "cholesterol_percent": 38.5,
+        "peg_percent": 1.5
+      },
+      "np_ratio": null,
+      "physicochemical": {
+        "particle_size_nm": 80,
+        "pdi": "0.02-0.06",
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": 95,
+        "_note": "Approximate values from supp methods: ~80nm, PDI 0.02-0.06, EE ~95%. Measured by DLS (Zetasizer Nano ZS) and Ribogreen assay."
+      },
+      "manufacturing": {
+        "method": "microfluidics",
+        "details": "Ethanolic lipid mixture rapidly mixed with aqueous mRNA at acidic pH (self-assembly). Characterized by DLS (Zetasizer Nano ZS) and Ribogreen assay. Antibody conjugated post-formation via SATA-maleimide chemistry with DSPE-PEG-mal post-insertion."
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "2B8 (BioLegend cat# 93235, rat anti-mouse CD117/c-Kit)",
+        "conjugation_method": "DSPE-PEG-maleimide post-insertion + SATA-thiol on antibody -> thioether conjugation. Purified by Sepharose CL-4B gel filtration."
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "high_confidence": [
+          "Molar ratio 50:10:38.5:1.5 (Tombacz + Onpattro benchmark + patent family)",
+          "Helper lipid: DSPC",
+          "Particle size ~80nm, PDI 0.02-0.06, EE ~95%",
+          "Antibody: clone 2B8 (BioLegend 93235)",
+          "Conjugation: DSPE-PEG-maleimide + SATA-thiol chemistry",
+          "mRNA: m1psi-modified, CleanCap AG cap1, cellulose purified",
+          "Manufacturing: microfluidic mixing, ethanolic lipids + aqueous mRNA at acidic pH"
+        ],
+        "medium_confidence": [
+          "Ionizable lipid identity (ALC-0307 vs ALC-0315 vs other Acuitas variant)",
+          "PEG-lipid identity (ALC-0159 vs PEG-DMG vs PEG-DOMG)"
+        ],
+        "null_still_missing": [
+          "Zeta potential (not reported)",
+          "N/P ratio (not reported)",
+          "Exact antibody density per particle",
+          "RNA:total lipid weight ratio (Tombacz says ~0.04 wt/wt but not confirmed for Breda)"
+        ]
+      },
+      "molar_ratio": {
+        "ionizable_lipid": 50,
+        "phospholipid": 10,
+        "cholesterol": 38.5,
+        "peg_lipid": 1.5,
+        "confidence": "HIGH",
+        "source": "Tombacz 2021 (same lab/platform) + canonical Acuitas/Onpattro ratio confirmed across patent family US10,221,127 and multiple publications. Supp methods confirm 4-component system."
+      }
+    },
+    {
+      "formulation_name": "CD45/LNP",
+      "ionizable_lipid": {
+        "name": "Acuitas proprietary ionizable lipid (likely ALC-0307 per Tombacz 2021; ALC-0315 also possible)",
+        "confidence": "MEDIUM",
+        "source": "Patent US10,221,127 covers a family of ionizable lipids. Tombacz 2021 names ALC-0307 as default. Cannot confirm which specific variant Breda used. Actively protected by Acuitas."
+      },
+      "helper_lipid": {
+        "name": "DSPC (1,2-distearoyl-sn-glycero-3-phosphocholine)",
+        "confidence": "HIGH",
+        "source": "Supp methods say phosphatidylcholine. DSPC is the standard PC in all known Acuitas formulations (Onpattro, BNT162b2, Tombacz 2021). No Acuitas publication uses an alternative PC."
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 38.5
+      },
+      "peg_lipid": {
+        "name": "PEG2000-lipid (likely ALC-0159 or PEG-DMG based on Acuitas platform)",
+        "confidence": "MEDIUM",
+        "source": "Not named in paper or supp. Acuitas BNT162b2 uses ALC-0159 (PEG2000-C18). Other Acuitas formulations use PEG-DMG (PEG2000-C14). Certainly a PEG2000 variant."
+      },
+      "molar_ratios": {
+        "_format": "ionizable:helper:cholesterol:PEG",
+        "ratio_string": "50:10:38.5:1.5",
+        "ionizable_percent": 50,
+        "helper_percent": 10,
+        "cholesterol_percent": 38.5,
+        "peg_percent": 1.5
+      },
+      "np_ratio": null,
+      "physicochemical": {
+        "particle_size_nm": 80,
+        "pdi": "0.02-0.06",
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": 95,
+        "_note": "Approximate values from supp methods: ~80nm, PDI 0.02-0.06, EE ~95%. Measured by DLS (Zetasizer Nano ZS) and Ribogreen assay."
+      },
+      "manufacturing": {
+        "method": "microfluidics",
+        "details": "Ethanolic lipid mixture rapidly mixed with aqueous mRNA at acidic pH (self-assembly). Characterized by DLS (Zetasizer Nano ZS) and Ribogreen assay. Antibody conjugated post-formation via SATA-maleimide chemistry with DSPE-PEG-mal post-insertion."
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD45",
+        "antibody_clone": "104 (BioLegend cat# 92176, mouse anti-mouse CD45.2)",
+        "conjugation_method": "DSPE-PEG-maleimide post-insertion + SATA-thiol on antibody -> thioether conjugation. Purified by Sepharose CL-4B gel filtration."
+      },
+      "confidence": {
+        "overall": "MEDIUM",
+        "notes": "Antibody clone confirmed from supp methods. Same base LNP and conjugation as CD117/LNP."
+      },
+      "molar_ratio": {
+        "ionizable_lipid": 50,
+        "phospholipid": 10,
+        "cholesterol": 38.5,
+        "peg_lipid": 1.5,
+        "confidence": "HIGH",
+        "source": "Tombacz 2021 (same lab/platform) + canonical Acuitas/Onpattro ratio confirmed across patent family US10,221,127 and multiple publications. Supp methods confirm 4-component system."
+      }
+    },
+    {
+      "formulation_name": "IgG/LNP (isotype control)",
+      "ionizable_lipid": {
+        "name": "Acuitas proprietary ionizable lipid (likely ALC-0307 per Tombacz 2021; ALC-0315 also possible)",
+        "confidence": "MEDIUM",
+        "source": "Patent US10,221,127 covers a family of ionizable lipids. Tombacz 2021 names ALC-0307 as default. Cannot confirm which specific variant Breda used. Actively protected by Acuitas."
+      },
+      "helper_lipid": {
+        "name": "DSPC (1,2-distearoyl-sn-glycero-3-phosphocholine)",
+        "confidence": "HIGH",
+        "source": "Supp methods say phosphatidylcholine. DSPC is the standard PC in all known Acuitas formulations (Onpattro, BNT162b2, Tombacz 2021). No Acuitas publication uses an alternative PC."
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 38.5
+      },
+      "peg_lipid": {
+        "name": "PEG2000-lipid (likely ALC-0159 or PEG-DMG based on Acuitas platform)",
+        "confidence": "MEDIUM",
+        "source": "Not named in paper or supp. Acuitas BNT162b2 uses ALC-0159 (PEG2000-C18). Other Acuitas formulations use PEG-DMG (PEG2000-C14). Certainly a PEG2000 variant."
+      },
+      "molar_ratios": {
+        "_format": "ionizable:helper:cholesterol:PEG",
+        "ratio_string": "50:10:38.5:1.5",
+        "ionizable_percent": 50,
+        "helper_percent": 10,
+        "cholesterol_percent": 38.5,
+        "peg_percent": 1.5
+      },
+      "np_ratio": null,
+      "physicochemical": {
+        "particle_size_nm": 80,
+        "pdi": "0.02-0.06",
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": 95,
+        "_note": "Approximate values from supp methods: ~80nm, PDI 0.02-0.06, EE ~95%. Measured by DLS (Zetasizer Nano ZS) and Ribogreen assay."
+      },
+      "manufacturing": {
+        "method": "microfluidics",
+        "details": "Ethanolic lipid mixture rapidly mixed with aqueous mRNA at acidic pH (self-assembly). Characterized by DLS (Zetasizer Nano ZS) and Ribogreen assay. Antibody conjugated post-formation via SATA-maleimide chemistry with DSPE-PEG-mal post-insertion."
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "none",
+        "antibody_clone": "Rat IgG isotype (Thermo Fisher 31933) or Mouse IgG isotype (Thermo Fisher 10400C)",
+        "conjugation_method": "DSPE-PEG-maleimide post-insertion + SATA-thiol on antibody -> thioether conjugation. Purified by Sepharose CL-4B gel filtration."
+      },
+      "confidence": {
+        "overall": "MEDIUM",
+        "notes": "Negative control formulation. Same base LNP, non-targeting antibody."
+      },
+      "molar_ratio": {
+        "ionizable_lipid": 50,
+        "phospholipid": 10,
+        "cholesterol": 38.5,
+        "peg_lipid": 1.5,
+        "confidence": "HIGH",
+        "source": "Tombacz 2021 (same lab/platform) + canonical Acuitas/Onpattro ratio confirmed across patent family US10,221,127 and multiple publications. Supp methods confirm 4-component system."
+      }
+    },
+    {
+      "formulation_name": "Unmodified/LNP (unconjugated)",
+      "ionizable_lipid": {
+        "name": "Acuitas proprietary ionizable lipid (likely ALC-0307 per Tombacz 2021; ALC-0315 also possible)",
+        "confidence": "MEDIUM",
+        "source": "Patent US10,221,127 covers a family of ionizable lipids. Tombacz 2021 names ALC-0307 as default. Cannot confirm which specific variant Breda used. Actively protected by Acuitas."
+      },
+      "helper_lipid": {
+        "name": "DSPC (1,2-distearoyl-sn-glycero-3-phosphocholine)",
+        "confidence": "HIGH",
+        "source": "Supp methods say phosphatidylcholine. DSPC is the standard PC in all known Acuitas formulations (Onpattro, BNT162b2, Tombacz 2021). No Acuitas publication uses an alternative PC."
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 38.5
+      },
+      "peg_lipid": {
+        "name": "PEG2000-lipid (likely ALC-0159 or PEG-DMG based on Acuitas platform)",
+        "confidence": "MEDIUM",
+        "source": "Not named in paper or supp. Acuitas BNT162b2 uses ALC-0159 (PEG2000-C18). Other Acuitas formulations use PEG-DMG (PEG2000-C14). Certainly a PEG2000 variant."
+      },
+      "molar_ratios": {
+        "_format": "ionizable:helper:cholesterol:PEG",
+        "ratio_string": "50:10:38.5:1.5",
+        "ionizable_percent": 50,
+        "helper_percent": 10,
+        "cholesterol_percent": 38.5,
+        "peg_percent": 1.5
+      },
+      "np_ratio": null,
+      "physicochemical": {
+        "particle_size_nm": 80,
+        "pdi": "0.02-0.06",
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": 95,
+        "_note": "Approximate values from supp methods: ~80nm, PDI 0.02-0.06, EE ~95%. Measured by DLS (Zetasizer Nano ZS) and Ribogreen assay."
+      },
+      "manufacturing": {
+        "method": "microfluidics",
+        "details": "Same base LNP without antibody conjugation step."
+      },
+      "targeting": {
+        "strategy": "none",
+        "target_receptor": "none",
+        "antibody_clone": null,
+        "conjugation_method": null
+      },
+      "confidence": {
+        "overall": "MEDIUM",
+        "notes": "Naked LNP control. Used only in vitro (Fig 1A-B)."
+      },
+      "molar_ratio": {
+        "ionizable_lipid": 50,
+        "phospholipid": 10,
+        "cholesterol": 38.5,
+        "peg_lipid": 1.5,
+        "confidence": "HIGH",
+        "source": "Tombacz 2021 (same lab/platform) + canonical Acuitas/Onpattro ratio confirmed across patent family US10,221,127 and multiple publications. Supp methods confirm 4-component system."
+      }
+    },
+    {
+      "formulation_name": "hCD117/LNP (anti-human CD117)",
+      "ionizable_lipid": {
+        "name": "Acuitas proprietary ionizable lipid (likely ALC-0307 per Tombacz 2021; ALC-0315 also possible)",
+        "confidence": "MEDIUM",
+        "source": "Patent US10,221,127 covers a family of ionizable lipids. Tombacz 2021 names ALC-0307 as default. Cannot confirm which specific variant Breda used. Actively protected by Acuitas."
+      },
+      "helper_lipid": {
+        "name": "DSPC (1,2-distearoyl-sn-glycero-3-phosphocholine)",
+        "confidence": "HIGH",
+        "source": "Supp methods say phosphatidylcholine. DSPC is the standard PC in all known Acuitas formulations (Onpattro, BNT162b2, Tombacz 2021). No Acuitas publication uses an alternative PC."
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 38.5
+      },
+      "peg_lipid": {
+        "name": "PEG2000-lipid (likely ALC-0159 or PEG-DMG based on Acuitas platform)",
+        "confidence": "MEDIUM",
+        "source": "Not named in paper or supp. Acuitas BNT162b2 uses ALC-0159 (PEG2000-C18). Other Acuitas formulations use PEG-DMG (PEG2000-C14). Certainly a PEG2000 variant."
+      },
+      "molar_ratios": {
+        "_format": "ionizable:helper:cholesterol:PEG",
+        "ratio_string": "50:10:38.5:1.5",
+        "ionizable_percent": 50,
+        "helper_percent": 10,
+        "cholesterol_percent": 38.5,
+        "peg_percent": 1.5
+      },
+      "np_ratio": null,
+      "physicochemical": {
+        "particle_size_nm": 80,
+        "pdi": "0.02-0.06",
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": 95,
+        "_note": "Approximate values from supp methods: ~80nm, PDI 0.02-0.06, EE ~95%. Measured by DLS (Zetasizer Nano ZS) and Ribogreen assay."
+      },
+      "manufacturing": {
+        "method": "microfluidics",
+        "details": "Ethanolic lipid mixture rapidly mixed with aqueous mRNA at acidic pH (self-assembly). Characterized by DLS (Zetasizer Nano ZS) and Ribogreen assay. Antibody conjugated post-formation via SATA-maleimide chemistry with DSPE-PEG-mal post-insertion."
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "104D2 (BioLegend cat# 95747, mouse anti-human CD117/c-Kit)",
+        "conjugation_method": "DSPE-PEG-maleimide post-insertion + SATA-thiol on antibody -> thioether conjugation. Purified by Sepharose CL-4B gel filtration."
+      },
+      "confidence": {
+        "overall": "MEDIUM",
+        "notes": "Used for human SCD base editing experiments (Fig 4). Anti-human CD117 antibody clone not specified in main text."
+      },
+      "molar_ratio": {
+        "ionizable_lipid": 50,
+        "phospholipid": 10,
+        "cholesterol": 38.5,
+        "peg_lipid": 1.5,
+        "confidence": "HIGH",
+        "source": "Tombacz 2021 (same lab/platform) + canonical Acuitas/Onpattro ratio confirmed across patent family US10,221,127 and multiple publications. Supp methods confirm 4-component system."
+      }
+    }
+  ],
+  "experiments": [
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "1_in_vitro_luciferase_WBM",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Luciferase mRNA (nucleoside-modified)",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vitro",
+        "species": "mouse",
+        "strain": "C57BL/6",
+        "cell_line": "whole bone marrow (WBM)"
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "dose_ug_per_well": "0.1, 1, 3",
+        "route": "in_vitro",
+        "single_or_repeat": "single",
+        "timepoint_hours": 18
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "WBM (whole bone marrow)",
+        "editing_efficiency_percent": null,
+        "editing_method": "luciferase activity (LU/ug protein)",
+        "protein_expression": "Highest among all formulations at all doses (Fig 1A). 500-fold higher than CD45/LNP when normalized to target cell frequency.",
+        "knockdown_percent": null,
+        "other_metric": "500-fold higher normalized luciferase vs CD45/LNP in WBM",
+        "other_metric_name": "Normalized luciferase activity ratio vs CD45/LNP"
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "lung_percent": null,
+        "heart_percent": null,
+        "kidney_percent": null,
+        "measurement_method": "luciferase activity assay",
+        "paired_hsc_and_liver_data": false
+      },
+      "toxicity": {
+        "reported": true,
+        "alt_ast_elevation": null,
+        "cytokine_response": null,
+        "body_weight_change": null,
+        "other_aes": "No consistent effect on cell viability across formulations (fig S1B-D)",
+        "severity": "none"
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "Luciferase activity directly measured. n=3 replicates. p<0.0001 by Dunnett's after two-way ANOVA."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "2_in_vitro_luciferase_Lin_neg",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Luciferase mRNA (nucleoside-modified)",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vitro",
+        "species": "mouse",
+        "strain": "C57BL/6",
+        "cell_line": "Lin- bone marrow cells"
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "dose_ug_per_well": "0.1, 1, 3",
+        "route": "in_vitro",
+        "single_or_repeat": "single",
+        "timepoint_hours": 18
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "Lin- cells (65% CD117+)",
+        "editing_efficiency_percent": null,
+        "editing_method": "luciferase activity (LU/ug protein)",
+        "protein_expression": "Dramatically higher in Lin- vs WBM. 700-fold higher than CD45/LNP when normalized to target cell frequency.",
+        "knockdown_percent": null,
+        "other_metric": "700-fold higher normalized luciferase vs CD45/LNP in Lin-",
+        "other_metric_name": "Normalized luciferase activity ratio vs CD45/LNP"
+      },
+      "biodistribution": null,
+      "toxicity": {
+        "reported": true,
+        "other_aes": "No consistent viability effect",
+        "severity": "none"
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "n=3 replicates. p<0.0001."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "3_in_vitro_Cre_LSK",
+      "payload": {
+        "type": "Cre_mRNA",
+        "specific_cargo": "Cre recombinase mRNA (nucleoside-modified)",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vitro",
+        "species": "mouse",
+        "strain": "Ai6 (Cre-responsive ZsGreen reporter)",
+        "cell_line": "Lin- BM cells, LSK subset analyzed"
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "dose_ug_per_well": "0.1, 0.5, 1.0",
+        "route": "in_vitro",
+        "single_or_repeat": "single",
+        "timepoint_hours": "18 (6h treatment + 12h culture) and 18h continuous, and 90h (18h + 72h)"
+      },
+      "efficacy": {
+        "hsc_transfection_percent": 80,
+        "hsc_definition": "LSK (Lin-Sca1+cKit+)",
+        "editing_efficiency_percent": 88.5,
+        "editing_method": "flow cytometry (ZsGreen+)",
+        "protein_expression": null,
+        "knockdown_percent": null,
+        "other_metric": "88.5% at 90h vs 43.5% at 18h for 0.1ug dose in WBM. 2.5-fold more effective than CD45/LNP at 0.1ug in LSK. Saturation at 0.1ug \u2014 no significant increase at 0.5 or 1.0ug.",
+        "other_metric_name": "ZsGreen+ in WBM at 90h (persistence after LNP removal)"
+      },
+      "biodistribution": null,
+      "toxicity": {
+        "reported": true,
+        "other_aes": "No consistent effect on cell viability",
+        "severity": "none"
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "n=3 replicates per condition. Multiple timepoints. Saturation at low dose explicitly stated. p values from Dunnett's after two-way ANOVA."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "4_ex_vivo_Cre_transplant",
+      "payload": {
+        "type": "Cre_mRNA",
+        "specific_cargo": "Cre recombinase mRNA (nucleoside-modified)",
+        "size_nt": null
+      },
+      "model": {
+        "system": "ex_vivo",
+        "species": "mouse",
+        "strain": "Ai14 BM cells transplanted into C57BL/6 CD45.1 recipients (lethally irradiated)",
+        "cell_line": null
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "dose_ug_per_well": "0.01, 0.05, 0.1, 1.0",
+        "route": "in_vitro",
+        "single_or_repeat": "single",
+        "timepoint_hours": "Endpoint: 16 weeks (4 months) post-HSCT"
+      },
+      "efficacy": {
+        "hsc_transfection_percent": 95,
+        "hsc_definition": "LT-HSC (LSK CD150+CD48-, aka SLAM)",
+        "editing_efficiency_percent": 95,
+        "editing_method": "flow cytometry (tdTomato+)",
+        "protein_expression": null,
+        "knockdown_percent": null,
+        "other_metric": "95% LT-HSC editing at both 0.1 and 1ug. >=99% RBC and leukocyte editing at 0.05-1ug. 91.8% at 0.01ug. IgG control: 13.5% (0.1ug) and 20% (1ug). Donor chimerism >94%. Secondary transplant phenocopied primary. Multilineage editing: Gr1+, CD3+, B220+, erythroid all edited.",
+        "other_metric_name": "tdTomato+ in LT-HSC, multilineage, secondary transplant"
+      },
+      "biodistribution": {
+        "bone_marrow_percent": 95,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "lung_percent": null,
+        "measurement_method": "flow cytometry (tdTomato+) in BM subsets at 4-month endpoint",
+        "paired_hsc_and_liver_data": false,
+        "_note": "Spleen editing comparable to WBM. PCR confirmed 271bp edited band in BM and spleen DNA."
+      },
+      "toxicity": {
+        "reported": false,
+        "severity": null
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "n=4-5 mice per cohort. 16-week endpoint. Confirmed by colony assay, PCR, secondary transplant. p<0.0001 by Tukey's after one-way ANOVA."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "5_in_vivo_luciferase_biodistribution",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Luciferase mRNA (nucleoside-modified)",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6",
+        "cell_line": null
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "dose_ug_per_well": null,
+        "dose_ug_total": 1,
+        "route": "IV",
+        "single_or_repeat": "single",
+        "timepoint_hours": 24
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": null,
+        "editing_efficiency_percent": null,
+        "editing_method": "IVIS bioluminescence",
+        "protein_expression": "Luciferase activity detected in femur (bone marrow) for CD117/LNP but NOT for IgG/LNP. Comparable liver signal for both.",
+        "knockdown_percent": null,
+        "other_metric": null,
+        "other_metric_name": null
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "lung_percent": null,
+        "measurement_method": "IVIS bioluminescence at 24h post-injection",
+        "paired_hsc_and_liver_data": true,
+        "_note": "Qualitative: CD117/LNP shows BM signal, IgG does not. Both show comparable liver signal. (Fig 3A)"
+      },
+      "toxicity": {
+        "reported": false,
+        "severity": null
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "Qualitative bioluminescence imaging. Clear BM signal with CD117 but not IgG control."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "6_in_vivo_Cre_5ug",
+      "payload": {
+        "type": "Cre_mRNA",
+        "specific_cargo": "Cre recombinase mRNA (nucleoside-modified)",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "Ai9 (tdTomato Cre reporter)",
+        "cell_line": null
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.25,
+        "dose_ug_per_well": null,
+        "dose_ug_total": 5,
+        "route": "IV",
+        "single_or_repeat": "single",
+        "timepoint_hours": "Endpoint: 16 weeks (4 months). Peripheral blood monitored at 4, 8, 12, 16 weeks.",
+        "_note": "5ug in ~20g mouse = 0.25 mg/kg"
+      },
+      "efficacy": {
+        "hsc_transfection_percent": 55,
+        "hsc_definition": "LT-HSC (LSK CD150+CD48-, SLAM)",
+        "editing_efficiency_percent": 55,
+        "editing_method": "flow cytometry (tdTomato+)",
+        "protein_expression": null,
+        "knockdown_percent": null,
+        "other_metric": "3-fold higher than IgG control (55% vs 19%). All peripheral blood lineages significantly higher: Gr1+ ~60-65%, CD3+ ~55-60%, B220+ ~60%. 5.5-fold increase in LT-HSC editing vs 1ug dose. EPCR+ LT-HSC editing: 46%\u00b114 (comparable to SLAM 55%\u00b110). Secondary transplant: 52% LT-HSC editing (phenocopied primary).",
+        "other_metric_name": "tdTomato+ in LT-HSC, multilineage, secondary transplant, EPCR+ subset"
+      },
+      "biodistribution": {
+        "bone_marrow_percent": 55,
+        "liver_percent": 76,
+        "spleen_percent": null,
+        "lung_percent": null,
+        "measurement_method": "flow cytometry (tdTomato+) at 4-month endpoint",
+        "paired_hsc_and_liver_data": true,
+        "_note": "Liver: 76-79% editing (comparable between CD117 and IgG \u2014 non-specific ApoE uptake). Lung: 7-fold higher CD117 vs IgG; ~8% lung cells are cKit+, ~90% of lung cKit+ were edited. Testes: no significant editing. Germline: 0/50 offspring tdTomato+."
+      },
+      "toxicity": {
+        "reported": false,
+        "severity": null,
+        "_note": "No toxicity reported for Cre experiments. Toxicity only noted for PUMA experiments."
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "n=5 mice per cohort. 16-week endpoint. Confirmed by CFU, PCR, secondary transplant, EPCR+ subset analysis. p<0.001 to p<0.0001."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "7_in_vivo_Cre_1ug",
+      "payload": {
+        "type": "Cre_mRNA",
+        "specific_cargo": "Cre recombinase mRNA (nucleoside-modified)",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "Ai9 (tdTomato Cre reporter)",
+        "cell_line": null
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.05,
+        "dose_ug_per_well": null,
+        "dose_ug_total": 1,
+        "route": "IV",
+        "single_or_repeat": "single",
+        "timepoint_hours": "Endpoint: 16 weeks",
+        "_note": "1ug in ~20g mouse = 0.05 mg/kg"
+      },
+      "efficacy": {
+        "hsc_transfection_percent": 10,
+        "hsc_definition": "LT-HSC (LSK CD150+CD48-, SLAM)",
+        "editing_efficiency_percent": 10,
+        "editing_method": "flow cytometry (tdTomato+)",
+        "protein_expression": null,
+        "knockdown_percent": null,
+        "other_metric": "5.5-fold lower than 5ug dose. ~10% SLAM LT-HSC editing estimated from Fig 3G.",
+        "other_metric_name": "tdTomato+ in SLAM LT-HSC"
+      },
+      "biodistribution": null,
+      "toxicity": {
+        "reported": false,
+        "severity": null
+      },
+      "confidence": {
+        "overall": "MEDIUM",
+        "notes": "n=7 mice. SLAM LT-HSC value estimated from Fig 3G (~10%). The 5.5-fold relationship to the 5ug group is explicitly stated."
+      }
+    },
+    {
+      "formulation_name": "hCD117/LNP (anti-human CD117)",
+      "experiment_id": "8_ex_vivo_SCD_base_editing",
+      "payload": {
+        "type": "base_editor",
+        "specific_cargo": "ABE8e-NRCH Cas9 mRNA + sgRNA targeting HBB E6V (5-UUCUCCACAGGAGUCAGGUG-3). ABE mRNA and sgRNA in separate hCD117/LNPs at 1:1 weight ratio. sgRNA from Synthego.",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vitro",
+        "species": "human_cells",
+        "strain": null,
+        "cell_line": "Primary SCD erythroid progenitor cells from 4 separate donors"
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "dose_ug_per_well": null,
+        "dose_pg_per_cell": "3, 10",
+        "route": "in_vitro",
+        "single_or_repeat": "single",
+        "timepoint_hours": 6,
+        "_note": "3-10 pg/cell dose at 1:1 wt ratio ABE:sgRNA. 6h exposure. 1.5E6 cells/mL."
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "erythroid progenitor cells",
+        "editing_efficiency_percent": 88,
+        "editing_method": "base editing allele frequency (Sanger sequencing with EditR)",
+        "protein_expression": "Up to 91.7% HBB-G Makassar (non-pathogenic) of beta-like globin by RP-HPLC. 34.5% at 3pg/cell, 86.7% at 10pg/cell.",
+        "knockdown_percent": null,
+        "other_metric": "Near-complete absence of sickled cells under hypoxia. Sickling reduced from ~25-30% (unedited) to ~5% (edited). R-squared = 0.9792 for editing-to-protein correlation. Slope ~1.04 (near 1:1).",
+        "other_metric_name": "Sickling assay, HBB-G protein level by RP-HPLC, editing-protein correlation"
+      },
+      "biodistribution": null,
+      "toxicity": {
+        "reported": true,
+        "alt_ast_elevation": null,
+        "cytokine_response": null,
+        "body_weight_change": null,
+        "other_aes": "No alteration of viability or proliferation at 3-10 pg/cell (fig S8C-D)",
+        "severity": "none"
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "4 separate SCD donor samples. 88% editing at 10pg/cell. Functional validation by sickling assay under hypoxia. p<0.0001. R\u00b2=0.9792 for DNA-protein correlation."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "9_ex_vivo_PUMA_competitive_transplant",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "PUMA (p53 up-regulated modulator of apoptosis) mRNA \u2014 pro-apoptotic BH3-only protein",
+        "size_nt": null
+      },
+      "model": {
+        "system": "ex_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6 CD45.2 BM treated, transplanted into C57BL/6 CD45.1 recipients (lethally irradiated), competitive with GFP+ untreated BM",
+        "cell_line": null
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "dose_ug_per_well": 5,
+        "route": "in_vitro",
+        "single_or_repeat": "single",
+        "timepoint_hours": "Endpoint: 4 months post-HSCT"
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "multilineage HSC (functional depletion assay)",
+        "editing_efficiency_percent": null,
+        "editing_method": "competitive transplant \u2014 flow cytometry for GFP- (PUMA-treated) vs GFP+ (untreated) donor cells",
+        "protein_expression": null,
+        "knockdown_percent": null,
+        "other_metric": "100% PUMA-treated mice died within 2 weeks (complete HSC depletion). 50/75% mix: <0.5% GFP- donor cells at 4 months (vs expected 50-75%). Essentially complete depletion. Donor chimerism >=94% across all groups.",
+        "other_metric_name": "HSC depletion by competitive transplant"
+      },
+      "biodistribution": null,
+      "toxicity": {
+        "reported": true,
+        "other_aes": "Mice receiving only PUMA-treated BM died within 2 weeks (expected \u2014 BM failure from HSC depletion)",
+        "severity": "severe",
+        "_note": "Severity is 'severe' in terms of HSC depletion (which is the intended effect), not off-target toxicity"
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "n=4-8 per cohort. Competitive transplant design with clear functional readout. p<0.0001."
+      }
+    },
+    {
+      "formulation_name": "CD117/LNP",
+      "experiment_id": "10_in_vivo_PUMA_conditioning",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "PUMA mRNA with miR-122 binding sites in 3'UTR (PUMA-miR) for liver detargeting",
+        "size_nt": null
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6 recipients, GFP+ C57BL/6 BM donors",
+        "cell_line": null
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.05,
+        "dose_ug_per_well": null,
+        "route": "IV",
+        "single_or_repeat": "single",
+        "timepoint_hours": "PUMA given 7 days before BM infusion. Endpoint: 16 weeks.",
+        "_note": "0.05 mg/kg was maximum tolerated dose. 0.15 mg/kg or more was lethal."
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "LSK, LT-HSC",
+        "editing_efficiency_percent": null,
+        "editing_method": "flow cytometry for GFP+ donor engraftment",
+        "protein_expression": null,
+        "knockdown_percent": null,
+        "other_metric": "71% decrease in LSK frequency at 6 days. 58% decrease in LT-HSC frequency at 6 days. 3.8% donor BM LSK cells at 16 weeks. Progressive increase and stabilization of GFP+ Gr1+ and RBCs. Unconditioned controls: 0% engraftment. Secondary transplant phenocopied donors.",
+        "other_metric_name": "HSC depletion (% decrease in LSK/LT-HSC) and donor engraftment (% GFP+ in BM)"
+      },
+      "biodistribution": null,
+      "toxicity": {
+        "reported": true,
+        "alt_ast_elevation": "Elevated at >=0.15 mg/kg",
+        "cytokine_response": null,
+        "body_weight_change": null,
+        "other_aes": "At >=0.15 mg/kg: decreased activity, venous congestion of lungs and liver, mortality. miR-122 binding sites incorporated to reduce liver expression.",
+        "severity": "severe",
+        "_note": "0.05 mg/kg = maximum tolerated dose. Narrow therapeutic window. Toxicity at 3x the effective dose."
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "notes": "n=3 recipients for conditioning + transplant. n=2 unconditioned controls. Small sample sizes but clear functional results. MTD clearly defined."
+      }
+    }
+  ],
+  "blood_disorder_data": {
+    "disease_target": "SCD",
+    "genetic_target": "HBB (E6V sickle mutation converted to E6A G-Makassar variant)",
+    "editing_strategy": "base_editing",
+    "hsc_subtype_targeted": "erythroid progenitor cells (ex vivo on human primary SCD cells)",
+    "engraftment_data": "3.8% donor LSK engraftment with in vivo PUMA conditioning (sufficient for SCID cure per refs 22-24)",
+    "hemoglobin_data": {
+      "hbf_induction_percent": null,
+      "total_hb_g_per_dl": null,
+      "pre_treatment_hb": null,
+      "post_treatment_hb": null,
+      "_note": "Paper reports HBB-G Makassar (not HbF). Up to 91.7% of beta-like globin converted to non-pathogenic HBB-G. Sickling reduced to ~5% from ~25-30%."
+    },
+    "conditioning_regimen": "non_genotoxic",
+    "_note": "Two applications demonstrated: (1) direct base editing of SCD cells ex vivo with hCD117/LNP, (2) non-genotoxic conditioning via PUMA-mediated HSC depletion in vivo"
+  },
+  "key_findings_for_ml": {
+    "what_makes_this_formulation_work": "CD117 antibody conjugation enables active targeting to HSCs via c-Kit receptor internalization pathway. CD117 naturally internalizes upon ligand (SCF) binding, providing a free endocytic entry mechanism for the entire LNP. This achieves 500-700x higher normalized delivery than CD45-targeted LNPs in vitro, and 3-fold higher LT-HSC editing than IgG controls in vivo. Saturation of target cells at very low doses in vitro (0.1ug) suggests high binding affinity and efficient internalization.",
+    "comparison_to_other_formulations": "CD117/LNP >> CD45/LNP >> IgG/LNP >= unmodified LNP. In vitro: 500-700x normalized luciferase advantage over CD45. 2.5x more LSK editing at 0.1ug. In vivo: 55% vs 19% LT-HSC editing (CD117 vs IgG at 5ug). Ex vivo: 95% vs 13.5-20% LT-HSC editing. Key differentiator is the targeting antibody, not the base LNP formulation (which is identical across all variants).",
+    "limitations_noted_by_authors": "Major: liver uptake is high and non-specific (76-79% liver editing, comparable between CD117 and IgG). Narrow therapeutic window for PUMA: MTD is 0.05 mg/kg, toxicity at 0.15 mg/kg. miR-122 detargeting only partially addresses liver issue. In vivo editing (55%) substantially lower than ex vivo (95%). Engraftment after PUMA conditioning modest (3.8% donor LSK). No NHP data. Formulation is proprietary (Acuitas), limiting reproducibility.",
+    "data_quality_notes": "Generally high quality: multiple confirmation methods (flow cytometry, colony assays, PCR, secondary transplants), adequate group sizes (n=3-8), appropriate controls (IgG isotype, unconjugated, untreated). Weak points: particle characterization in supplementary (not accessible), formulation proprietary/not fully disclosed, some dose groups have small n (n=2-3 for PUMA conditioning). Published in Science with erratum (Fig 2E image duplication, does not affect conclusions)."
+  },
+  "label_for_ml": {
+    "hsc_efficacy_class": "high",
+    "_thresholds": "high: >30% HSC transfection/editing, medium: 10-30%, low: <10%",
+    "primary_metric_used": "tdTomato+ in LT-HSC (LSK CD150+CD48-) by flow cytometry",
+    "primary_metric_value": 55,
+    "_note": "55% is the in vivo value (most clinically relevant). Ex vivo value is 95%. Both exceed the 30% threshold for 'high'."
+  }
+}

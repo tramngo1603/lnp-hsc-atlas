@@ -1,0 +1,918 @@
+{
+  "_instructions": "Annotation of Shi, Toyonaga & Anderson (2023) Nano Letters — 'In Vivo RNA Delivery to Hematopoietic Stem and Progenitor Cells via Targeted Lipid Nanoparticles'. NOTE: The annotation guide referred to this paper as 'Bhatt et al. 2023' but the actual authors are Shi D, Toyonaga S, Anderson DG (MIT/Koch Institute). v2 final — updated with supplementary materials data (Table S1, Figures S3-S5, full Methods). Confidence: HIGH for formulation components (now directly confirmed from supp methods), HIGH for physicochemical data (Table S1), HIGH for experimental results.",
+
+  "paper_metadata": {
+    "pmid": "36988645",
+    "doi": "10.1021/acs.nanolett.3c00304",
+    "title": "In Vivo RNA Delivery to Hematopoietic Stem and Progenitor Cells via Targeted Lipid Nanoparticles",
+    "authors": ["Shi D", "Toyonaga S", "Anderson DG"],
+    "journal": "Nano Letters",
+    "volume": "23",
+    "issue": "7",
+    "pages": "2938-2944",
+    "publication_date": "2023-03-29",
+    "paper_type": "research_article",
+    "pmcid": "PMC10103292",
+    "institution": "MIT Koch Institute for Integrative Cancer Research / Department of Chemical Engineering",
+    "funding": ["FUJIFILM Corporation (Tokyo, Japan)", "NIH 5R01HL162564", "Koch Institute Support Grant P30-CA014051 (NCI)"],
+    "_name_correction": "The annotation guide called this 'Bhatt et al. 2023' — that was an error. The correct citation is Shi, Toyonaga & Anderson 2023."
+  },
+
+  "formulations": [
+    {
+      "formulation_id": "F1_MC3_C14PEG",
+      "formulation_name": "anti-CD117(2B8)/LNP-MC3-DMG-PEG",
+      "description": "In vitro screening formulation with DLin-MC3-DMA ionizable lipid and DMG-PEG2000 (C14). Conjugated to anti-CD117 clone 2B8. Used only for EML cell line siCD45 knockdown (Fig 1b).",
+      "ionizable_lipid": {
+        "name": "DLin-MC3-DMA",
+        "source_vendor": "Cayman Chemicals",
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'Ionizable lipids (MC3, Lipid 5, SM-102, and ALC-0315) were purchased from Cayman Chemicals'"
+      },
+      "helper_lipid": {
+        "name": "DSPC",
+        "source_vendor": "Avanti Polar Lipids",
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'DSPC...purchased from Avanti Polar Lipids'"
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 38,
+        "source_vendor": "Sigma-Aldrich",
+        "confidence": "HIGH",
+        "source": "Supp Methods: ratio 50:10:38:1.5:0.5"
+      },
+      "peg_lipid": {
+        "name": "DMG-PEG2000",
+        "alkyl_chain": "C14",
+        "source_vendor": "Avanti Polar Lipids",
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'DSPC, DMG-PEG2000, DSG-PEG2000 were purchased from Avanti Polar Lipids'"
+      },
+      "maleimide_peg_lipid": {
+        "name": "DSPE-PEG2000-Maleimide",
+        "mol_percent": 0.5,
+        "source_vendor": "NOF America",
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'DSPE-PEG2000-Maleimide was purchased from NOF America'",
+        "_note": "This is a FIFTH lipid component incorporated during formulation for antibody conjugation. This is different from Breda (post-insertion)."
+      },
+      "molar_ratios": {
+        "_format": "ionizable:DSPC:cholesterol:PEG-lipid:DSPE-PEG-Mal",
+        "ratio_string": "50:10:38:1.5:0.5",
+        "ionizable_percent": 50,
+        "helper_percent": 10,
+        "cholesterol_percent": 38,
+        "peg_percent": 1.5,
+        "maleimide_peg_percent": 0.5,
+        "total": 100,
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'ionizable lipid, DSPC, cholesterol, PEG-lipid, and functionalized maleimide PEG-lipid at a ratio of 50:10:38:1.5:0.5'"
+      },
+      "np_ratio": null,
+      "physicochemical": {
+        "particle_size_nm": null,
+        "pdi": null,
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": null,
+        "_note": "Table S1 only reports values for the optimized ALC-0315/C18 formulation, not individual lipid variants."
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117 (c-Kit)",
+        "antibody_clone": "2B8",
+        "antibody_source": "Bio X Cell",
+        "conjugation_method": "TCEP reduction (5 eq, 37°C, 1h) → thiol-maleimide with DSPE-PEG2000-Maleimide in LNP → SEC purification (qEVoriginal, Izon Sciences) → Amicon ultrafiltration concentration",
+        "_note_vs_breda": "Different from Breda: (1) TCEP reduction instead of SATA thiolation, (2) maleimide PEG-lipid incorporated DURING formulation instead of POST-INSERTION, (3) Bio X Cell antibody instead of BioLegend"
+      },
+      "manufacturing": {
+        "method": "microfluidic_mixing",
+        "details": "Ethanol phase (lipids) rapidly mixed with aqueous RNA in 10 mM citrate buffer pH 3.0 at 3:1 aqueous:ethanol ratio. Dialyzed ≥18h at 4°C in PBS + 10 mM EDTA using Slide-A-Lyzer 10K MWCO. Characterized by Malvern ZetaSizer (size, PDI) and RiboGreen (EE).",
+        "reference": "Chen et al. JACS 2012 (ref 2 in supp)"
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "high_confidence": ["ionizable_lipid", "helper_lipid", "cholesterol", "peg_lipid", "maleimide_peg_lipid", "molar_ratios", "conjugation_chemistry", "antibody_source"],
+        "null_still_missing": ["particle_size_per_variant", "pdi_per_variant", "zeta_potential", "encapsulation_efficiency_per_variant", "np_ratio"]
+      }
+    },
+    {
+      "formulation_id": "F2_cKKE12_C14PEG",
+      "formulation_name": "anti-CD117(2B8)/LNP-cKKE12-DMG-PEG",
+      "description": "In vitro screening. cKK-E12 synthesized in-house (Dong et al. PNAS 2014). Used only for Fig 1b.",
+      "ionizable_lipid": {
+        "name": "cKK-E12",
+        "source_vendor": "Synthesized in-house per Dong et al. 2014",
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'cKK-E12 was synthesized as previously described (ref 1)'"
+      },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": { "name": "DMG-PEG2000", "alkyl_chain": "C14", "confidence": "HIGH" },
+      "maleimide_peg_lipid": { "name": "DSPE-PEG2000-Maleimide", "mol_percent": 0.5, "confidence": "HIGH" },
+      "molar_ratios": {
+        "ratio_string": "50:10:38:1.5:0.5",
+        "confidence": "HIGH"
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "2B8",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F3_Lipid5_C14PEG",
+      "formulation_name": "anti-CD117(2B8)/LNP-Lipid5-DMG-PEG",
+      "description": "In vitro screening. Moderna's Lipid 5. Used only for Fig 1b.",
+      "ionizable_lipid": {
+        "name": "Lipid 5 (Moderna)",
+        "source_vendor": "Cayman Chemicals",
+        "confidence": "HIGH"
+      },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": { "name": "DMG-PEG2000", "alkyl_chain": "C14", "confidence": "HIGH" },
+      "maleimide_peg_lipid": { "name": "DSPE-PEG2000-Maleimide", "mol_percent": 0.5, "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "2B8",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F4_SM102_C14PEG",
+      "formulation_name": "anti-CD117(2B8)/LNP-SM102-DMG-PEG",
+      "description": "In vitro screening. SM-102. Used only for Fig 1b.",
+      "ionizable_lipid": {
+        "name": "SM-102",
+        "source_vendor": "Cayman Chemicals",
+        "confidence": "HIGH"
+      },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": { "name": "DMG-PEG2000", "alkyl_chain": "C14", "confidence": "HIGH" },
+      "maleimide_peg_lipid": { "name": "DSPE-PEG2000-Maleimide", "mol_percent": 0.5, "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "2B8",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F5_ALC0315_C14PEG",
+      "formulation_name": "anti-CD117(2B8)/LNP-ALC0315-DMG-PEG(C14)",
+      "description": "ALC-0315 with DMG-PEG2000 (C14). Used in vitro (Fig 1b) and in vivo PEG-lipid comparison (Fig 1c-d). Baseline before PEG optimization. Selected for in vivo use due to FDA-approved safety profile of ALC-0315.",
+      "ionizable_lipid": {
+        "name": "ALC-0315",
+        "source_vendor": "Cayman Chemicals",
+        "confidence": "HIGH",
+        "source": "Supp Methods + main text: 'we decided to use ALC-0315 as the ionizable lipid...because ALC-0315 has been FDA approved'"
+      },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": {
+        "name": "DMG-PEG2000",
+        "alkyl_chain": "C14",
+        "confidence": "HIGH",
+        "source": "Fig S3 x-axis label: 'DMG-PEG (C14)'"
+      },
+      "maleimide_peg_lipid": { "name": "DSPE-PEG2000-Maleimide", "mol_percent": 0.5, "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "2B8",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F6_ALC0315_C16PEG",
+      "formulation_name": "anti-CD117(2B8)/LNP-ALC0315-DPG-PEG(C16)",
+      "description": "ALC-0315 with DPG-PEG2000 (C16). Intermediate in PEG alkyl chain length screen. Purchased from NOF America.",
+      "ionizable_lipid": { "name": "ALC-0315", "confidence": "HIGH" },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": {
+        "name": "DPG-PEG2000",
+        "alkyl_chain": "C16",
+        "source_vendor": "NOF America",
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'DPG-PEG2000...purchased from...NOF America'. Fig S3 x-axis: 'DPG-PEG (C16)'"
+      },
+      "maleimide_peg_lipid": { "name": "DSPE-PEG2000-Maleimide", "mol_percent": 0.5, "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "2B8",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F7_ALC0315_C18PEG",
+      "formulation_name": "anti-CD117(2B8)/LNP-ALC0315-DSG-PEG(C18)",
+      "description": "*** OPTIMIZED FORMULATION *** ALC-0315 with DSG-PEG2000 (C18). Winner of PEG-lipid screen. Used for all key in vivo experiments: siCD45 dose-response, Cre mRNA editing, biodistribution. The C18 PEG-lipid has slower desorption from LNP surface → increased circulation time → improved bone marrow delivery.",
+      "ionizable_lipid": {
+        "name": "ALC-0315",
+        "source_vendor": "Cayman Chemicals",
+        "confidence": "HIGH"
+      },
+      "helper_lipid": {
+        "name": "DSPC",
+        "source_vendor": "Avanti Polar Lipids",
+        "confidence": "HIGH"
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 38,
+        "source_vendor": "Sigma-Aldrich",
+        "confidence": "HIGH"
+      },
+      "peg_lipid": {
+        "name": "DSG-PEG2000",
+        "full_name": "1,2-Distearoyl-rac-glycero-3-methoxypolyethylene glycol-2000",
+        "alkyl_chain": "C18",
+        "source_vendor": "Avanti Polar Lipids",
+        "confidence": "HIGH",
+        "source": "Supp Methods: 'DSG-PEG2000 were purchased from Avanti Polar Lipids'. Fig S3 x-axis: 'DSG-PEG (C18)'"
+      },
+      "maleimide_peg_lipid": {
+        "name": "DSPE-PEG2000-Maleimide",
+        "mol_percent": 0.5,
+        "source_vendor": "NOF America",
+        "confidence": "HIGH"
+      },
+      "molar_ratios": {
+        "_format": "ionizable:DSPC:cholesterol:PEG-lipid:DSPE-PEG-Mal",
+        "ratio_string": "50:10:38:1.5:0.5",
+        "ionizable_percent": 50,
+        "helper_percent": 10,
+        "cholesterol_percent": 38,
+        "peg_percent": 1.5,
+        "maleimide_peg_percent": 0.5,
+        "total": 100,
+        "confidence": "HIGH",
+        "source": "Supp Methods directly"
+      },
+      "physicochemical": {
+        "unconjugated": {
+          "particle_size_nm": 71.24,
+          "pdi": 0.06,
+          "encapsulation_efficiency_percent": 90,
+          "measurement_method": "Malvern ZetaSizer (size, PDI); Quant-iT RiboGreen (EE)"
+        },
+        "conjugated_aCD117": {
+          "particle_size_nm": 91.04,
+          "pdi": 0.14,
+          "encapsulation_efficiency_percent": 92,
+          "size_increase_from_conjugation_nm": 19.8
+        },
+        "zeta_potential_mv": null,
+        "confidence": "HIGH",
+        "source": "Table S1"
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117 (c-Kit)",
+        "antibody_clone": "2B8 (non-antagonistic, rat anti-mouse CD117)",
+        "antibody_source": "Bio X Cell",
+        "conjugation_method": "TCEP partial reduction (5 eq, 37°C, 1h, gentle shaking) → excess TCEP removed by Zeba 7K MWCO desalting column → reduced Ab quantified by A280 NanoDrop → incubated with maleimide-LNPs 1h RT with end-over-end mixing → SEC purification (qEVoriginal columns, Izon Sciences, PBS mobile phase) → Amicon ultracentrifugation concentration → BCA protein quantification → stored 4°C",
+        "optimal_antibody_maleimide_ratio": "1:20",
+        "ligand_density_data": {
+          "source": "Fig S4",
+          "ratios_tested": ["1:100", "1:20", "1:10"],
+          "uptake_at_1_100": "~20% DiR+",
+          "uptake_at_1_20": "~75% DiR+ (optimum)",
+          "uptake_at_1_10": "~50% DiR+",
+          "note": "1:20 is optimal; higher antibody (1:10) actually reduces uptake, possibly due to steric crowding"
+        }
+      },
+      "manufacturing": {
+        "method": "microfluidic_mixing",
+        "details": "Ethanol phase (5 lipid components) rapidly mixed with aqueous RNA in 10 mM citrate buffer pH 3.0 at 3:1 aqueous:ethanol. Dialyzed ≥18h at 4°C in PBS + 10 mM EDTA (Slide-A-Lyzer 10K MWCO). For DiR-labeled uptake experiments: 0.5 mol% DiR included in ethanol phase.",
+        "reference": "Chen et al. JACS 134:6948-6951 (2012)"
+      },
+      "confidence": {
+        "overall": "HIGH",
+        "high_confidence": ["all_lipid_identities", "molar_ratios", "particle_size", "pdi", "encapsulation_efficiency", "conjugation_chemistry_full_protocol", "antibody_source_and_clone", "optimal_ligand_density"],
+        "null_still_missing": ["zeta_potential", "np_ratio", "exact_antibodies_per_particle_count", "RNA_to_total_lipid_weight_ratio"]
+      }
+    },
+    {
+      "formulation_id": "F8_ALC0315_C18PEG_ACK2",
+      "formulation_name": "anti-CD117(ACK2)/LNP-ALC0315-DSG-PEG(C18)",
+      "description": "Same optimized base LNP as F7 but conjugated to antagonistic clone ACK2. Poor performer in vivo. Used in biodistribution (Fig 3) and receptor screen (Fig 1f).",
+      "ionizable_lipid": { "name": "ALC-0315", "confidence": "HIGH" },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": { "name": "DSG-PEG2000", "alkyl_chain": "C18", "confidence": "HIGH" },
+      "maleimide_peg_lipid": { "name": "DSPE-PEG2000-Maleimide", "mol_percent": 0.5, "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117 (c-Kit)",
+        "antibody_clone": "ACK2 (antagonistic, rat anti-mouse CD117)",
+        "antibody_source": "Bio X Cell",
+        "conjugation_method": "Same TCEP/maleimide protocol as F7"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F9_IgG_isotype",
+      "formulation_name": "IgG-isotype/LNP-ALC0315-DSG-PEG(C18)",
+      "description": "Negative control. Rat IgG2b isotype. Used across all key in vivo experiments.",
+      "ionizable_lipid": { "name": "ALC-0315", "confidence": "HIGH" },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": { "name": "DSG-PEG2000", "alkyl_chain": "C18", "confidence": "HIGH" },
+      "maleimide_peg_lipid": { "name": "DSPE-PEG2000-Maleimide", "mol_percent": 0.5, "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "None (isotype control)",
+        "antibody_clone": "Rat IgG2b isotype control",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F10_unconjugated",
+      "formulation_name": "Unconjugated/LNP-ALC0315-DSG-PEG(C18)",
+      "description": "No antibody. Untargeted control. Showed ~25% TdTomato at 1 mg/kg Cre mRNA — baseline HSPC transfection without targeting.",
+      "ionizable_lipid": { "name": "ALC-0315", "confidence": "HIGH" },
+      "helper_lipid": { "name": "DSPC", "confidence": "HIGH" },
+      "cholesterol": { "included": true, "mol_percent": 38, "confidence": "HIGH" },
+      "peg_lipid": { "name": "DSG-PEG2000", "alkyl_chain": "C18", "confidence": "HIGH" },
+      "maleimide_peg_lipid": {
+        "name": "DSPE-PEG2000-Maleimide",
+        "mol_percent": 0.5,
+        "confidence": "HIGH",
+        "_note": "Still contains maleimide PEG-lipid but no antibody conjugated"
+      },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "physicochemical": {
+        "particle_size_nm": 71.24,
+        "pdi": 0.06,
+        "encapsulation_efficiency_percent": 90,
+        "confidence": "HIGH",
+        "source": "Table S1 — 'Unconjugated LNP'"
+      },
+      "targeting": {
+        "strategy": "none",
+        "target_receptor": null,
+        "antibody_clone": null
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F11_anti_CD44",
+      "formulation_name": "anti-CD44/LNP-ALC0315-DSG-PEG(C18)",
+      "description": "Alternative receptor screen. Ineffective for HSPC delivery (Fig 1f).",
+      "ionizable_lipid": { "name": "ALC-0315", "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD44",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F12_anti_CD49d",
+      "formulation_name": "anti-CD49d/LNP-ALC0315-DSG-PEG(C18)",
+      "description": "Alternative receptor screen. Ineffective for HSPC delivery (Fig 1f).",
+      "ionizable_lipid": { "name": "ALC-0315", "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD49d",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    },
+    {
+      "formulation_id": "F13_anti_IL6R",
+      "formulation_name": "anti-IL-6R/LNP-ALC0315-DSG-PEG(C18)",
+      "description": "Alternative receptor screen. Ineffective for HSPC delivery (Fig 1f).",
+      "ionizable_lipid": { "name": "ALC-0315", "confidence": "HIGH" },
+      "molar_ratios": { "ratio_string": "50:10:38:1.5:0.5", "confidence": "HIGH" },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "IL-6R",
+        "antibody_source": "Bio X Cell"
+      },
+      "confidence": { "overall": "HIGH" }
+    }
+  ],
+
+  "experiments": [
+    {
+      "experiment_id": "E1_in_vitro_siCD45_lipid_screen",
+      "experiment_type": "in_vitro_knockdown",
+      "figure_reference": "Fig 1b",
+      "formulations_tested": ["F1_MC3_C14PEG", "F2_cKKE12_C14PEG", "F3_Lipid5_C14PEG", "F4_SM102_C14PEG", "F5_ALC0315_C14PEG"],
+      "control_formulations": ["Isotype control LNP for each ionizable lipid"],
+      "payload": {
+        "type": "siRNA",
+        "specific_cargo": "siCD45",
+        "size_nt": null
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "N/A (cell line)",
+        "cell_type_or_organ": "EML cells (ATCC CRL-11691, CD117+ hematopoietic progenitor cell line)",
+        "system_type": "in_vitro",
+        "culture_conditions": "IMDM + 1% Pen/Strep + 20% HI-FBS + 200 ng/µL murine SCF, 37°C 5% CO2"
+      },
+      "dosing": {
+        "dose_ug": 0.05,
+        "dose_per_well_ng": 50,
+        "cells_per_well": 40000,
+        "plate_format": "96-well U-bottom",
+        "route": "in_vitro",
+        "duration_hours": 48
+      },
+      "primary_outcome": {
+        "metric": "CD45 mRNA knockdown by qPCR (ddCt, B2m housekeeping, vs PBS control)",
+        "value": "50-80%",
+        "unit": "% knockdown",
+        "timepoint": "48h post-transfection",
+        "confidence": "HIGH",
+        "source": "Main text: 'All tested formulations showed very high level of silencing (50–80%) in vitro at a dose of 50 ng siRNA'"
+      },
+      "secondary_outcomes": [
+        {
+          "metric": "Isotype control knockdown",
+          "value": "not effective",
+          "note": "LNPs conjugated to isotype control were not effective at transfecting EML cells"
+        }
+      ],
+      "statistical_test": "Multiple unpaired two-tailed t tests comparing isotype control of each group",
+      "n_per_group": 3,
+      "n_unit": "wells",
+      "ml_label": {
+        "efficacy_class": "HIGH",
+        "threshold_note": "50-80% knockdown across all 5 ionizable lipids — targeting is antibody-driven, not lipid-dependent"
+      },
+      "key_finding": "CD117-targeting works with all tested ionizable lipids. The ionizable lipid identity is not the critical variable for targeted delivery."
+    },
+    {
+      "experiment_id": "E2_in_vivo_PEG_lipid_uptake_screen",
+      "experiment_type": "in_vivo_uptake",
+      "figure_reference": "Fig 1c-d",
+      "formulations_tested": ["F5_ALC0315_C14PEG", "F6_ALC0315_C16PEG", "F7_ALC0315_C18PEG"],
+      "control_formulations": [],
+      "payload": {
+        "type": "siRNA",
+        "specific_cargo": "siCD45 (DiR-labeled LNPs, 0.5 mol% DiR in ethanol phase)",
+        "size_nt": null
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "C57BL/6 (F, 6-10 weeks, Jackson Labs #000664)",
+        "cell_type_or_organ": "Bone marrow HSPCs and LT-HSCs",
+        "system_type": "in_vivo",
+        "hspc_definition": "Lin- Sca1+ c-Kit+ (LSK)",
+        "lthsc_definition": "LSK CD34- CD135-",
+        "gating_strategy": "Figure S2"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 1.0,
+        "dose_ug": 20,
+        "route": "IV (tail vein)",
+        "duration_hours": 72
+      },
+      "primary_outcome": {
+        "metric": "% DiR+ cells in HSPCs by flow cytometry",
+        "values": {
+          "DMG_PEG_C14": "~30%",
+          "DPG_PEG_C16": "intermediate (estimated ~60% from figure)",
+          "DSG_PEG_C18": "~90%"
+        },
+        "unit": "% DiR+ cells",
+        "timepoint": "72h post-injection",
+        "confidence": "HIGH",
+        "source": "Main text: 'from around 30% uptake with conventional C14-PEG lipid to almost 90% uptake with C18-PEG lipid'"
+      },
+      "statistical_test": "Two-way ANOVA with Tukey's multiple comparison test",
+      "n_per_group": 2,
+      "n_unit": "mice (initial screening)",
+      "ml_label": {
+        "efficacy_class": "HIGH for C18; MEDIUM for C16; LOW for C14",
+        "threshold_note": "PEG-lipid alkyl chain length is the critical formulation parameter for bone marrow delivery. C18 >> C14."
+      },
+      "key_finding": "Longer PEG alkyl chains (slower desorption) dramatically improve bone marrow HSPC delivery. C18 gives ~3x uptake vs C14."
+    },
+    {
+      "experiment_id": "E2b_in_vivo_PEG_lipid_mRNA_screen",
+      "experiment_type": "in_vivo_editing",
+      "figure_reference": "Fig S3",
+      "formulations_tested": ["F5_ALC0315_C14PEG", "F6_ALC0315_C16PEG", "F7_ALC0315_C18PEG"],
+      "control_formulations": ["PBS"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Cre recombinase mRNA",
+        "size_nt": null
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "Ai14",
+        "cell_type_or_organ": "Bone marrow LSK cells",
+        "system_type": "in_vivo"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.3,
+        "route": "IV (tail vein)",
+        "duration_hours": 48
+      },
+      "primary_outcome": {
+        "metric": "% TdTomato+ in LSK cells",
+        "values": {
+          "DMG_PEG_C14": "~45%",
+          "DPG_PEG_C16": "~60%",
+          "DSG_PEG_C18": "~70%",
+          "PBS": "0%"
+        },
+        "unit": "% TdTomato+ cells",
+        "timepoint": "48h post-injection",
+        "confidence": "MEDIUM",
+        "source": "Estimated from Fig S3 bar chart"
+      },
+      "statistical_test": "One-way ANOVA with Tukey's multiple comparison test",
+      "n_per_group": "3-4 (estimated from data points in figure)",
+      "ml_label": {
+        "efficacy_class": "HIGH for C18; MEDIUM for C16 and C14",
+        "threshold_note": "Confirms PEG-lipid effect with functional mRNA delivery (not just uptake). C18 > C16 > C14."
+      },
+      "key_finding": "PEG-lipid alkyl chain effect confirmed with mRNA (Cre). C14→C18 improves functional editing from ~45% to ~70% at 0.3 mg/kg."
+    },
+    {
+      "experiment_id": "E3_in_vivo_siCD45_dose_response",
+      "experiment_type": "in_vivo_knockdown",
+      "figure_reference": "Fig 1e",
+      "formulations_tested": ["F7_ALC0315_C18PEG"],
+      "payload": {
+        "type": "siRNA",
+        "specific_cargo": "siCD45"
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "C57BL/6 (F, 6-10 weeks)",
+        "cell_type_or_organ": "Bone marrow LSK cells",
+        "system_type": "in_vivo"
+      },
+      "dosing": {
+        "doses_tested": [
+          { "dose_ug": 2, "dose_mg_per_kg": 0.1 },
+          { "dose_ug": 6, "dose_mg_per_kg": 0.3 },
+          { "dose_ug": 20, "dose_mg_per_kg": 1.0 }
+        ],
+        "route": "IV (tail vein)",
+        "duration_hours": 72,
+        "note": "Dose conversion: 2/6/20 µg RNA = 0.1/0.3/1.0 mg/kg assuming ~20g mouse"
+      },
+      "primary_outcome": {
+        "metric": "DiR uptake in LSK (left panel) + CD45 MFI knockdown (right panel)",
+        "values": {
+          "0.1_mg_kg": "No uptake or silencing",
+          "0.3_mg_kg": "Intermediate (from figure)",
+          "1.0_mg_kg": "~40% CD45 knockdown"
+        },
+        "unit": "% CD45 MFI knockdown vs untreated (MFI-based)",
+        "timepoint": "72h",
+        "confidence": "HIGH",
+        "source": "Main text + supp methods: CD45 knockdown assessed by 'comparing the median fluorescence intensity of CD45 of treated LSK cells to the MFI of untreated control'"
+      },
+      "statistical_test": "One-way ANOVA with Tukey's multiple comparison test",
+      "n_per_group": 2,
+      "n_unit": "mice (screening)",
+      "ml_label": {
+        "efficacy_class": "MEDIUM",
+        "threshold_note": "40% protein-level CD45 knockdown at 1 mg/kg siRNA. Note: this is MFI-based protein knockdown, not mRNA-level."
+      }
+    },
+    {
+      "experiment_id": "E4_in_vivo_receptor_and_clone_screen",
+      "experiment_type": "in_vivo_uptake",
+      "figure_reference": "Fig 1f + Fig S5",
+      "formulations_tested": ["F7_ALC0315_C18PEG", "F8_ALC0315_C18PEG_ACK2", "F11_anti_CD44", "F12_anti_CD49d", "F13_anti_IL6R"],
+      "control_formulations": ["F9_IgG_isotype", "Free antibody + unconjugated LNP"],
+      "payload": {
+        "type": "siRNA",
+        "specific_cargo": "siCD45 (DiR-labeled)"
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "C57BL/6 (F, 6-10 weeks)",
+        "cell_type_or_organ": "Bone marrow HSPCs",
+        "system_type": "in_vivo"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 1.0,
+        "route": "IV (tail vein)",
+        "duration_hours": 72
+      },
+      "primary_outcome": {
+        "metric": "% DiR+ HSPCs (LNP uptake)",
+        "values": {
+          "CD117_2B8": "~85% (effective)",
+          "CD117_ACK2": "minimal (ineffective)",
+          "CD44": "minimal (ineffective)",
+          "CD49d": "minimal (ineffective)",
+          "IL6R": "minimal (ineffective)",
+          "Isotype": "minimal",
+          "Free_Ab_plus_LNP": "minimal"
+        },
+        "unit": "% DiR+ cells by flow cytometry",
+        "timepoint": "72h",
+        "confidence": "HIGH"
+      },
+      "secondary_outcomes": [
+        {
+          "metric": "HSC depletion (Fig S5)",
+          "value": "No significant depletion with any Ab-LNP vs PBS control",
+          "note": "All ns by one-way ANOVA with Dunnett's vs PBS. Important safety data."
+        },
+        {
+          "metric": "Covalent vs passive adsorption",
+          "value": "Free antibody mixed with unconjugated LNP showed minimal uptake",
+          "note": "Covalent conjugation is required — passive antibody adsorption is insufficient"
+        },
+        {
+          "metric": "Clone comparison rationale",
+          "value": "2B8 = non-antagonistic; ACK2 = antagonistic. Both internalize in vitro (per ref 17) but only 2B8 works for LNP delivery. Reason unknown.",
+          "note": "Interestingly, in ADC context, 2B8-ADCs are also better at depleting HSCs than ACK2-ADCs (ref 17)"
+        }
+      ],
+      "statistical_test": "One-way ANOVA with Dunnett's multiple comparison test",
+      "n_per_group": "n=3 mice (anti-CD49d), n=2 mice (all others)",
+      "ml_label": {
+        "efficacy_class": "HIGH for 2B8; LOW for all others",
+        "threshold_note": "Clone selection is critical. Same receptor, dramatically different LNP delivery outcomes."
+      },
+      "key_finding": "Only CD117 clone 2B8 works for HSPC-targeted LNP delivery. Other HSPC markers (CD44, CD49d, IL-6R) and the antagonistic CD117 clone ACK2 are all ineffective."
+    },
+    {
+      "experiment_id": "E5_in_vivo_Cre_dose_response",
+      "experiment_type": "in_vivo_editing",
+      "figure_reference": "Fig 2c-d",
+      "formulations_tested": ["F7_ALC0315_C18PEG"],
+      "control_formulations": ["F10_unconjugated"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Cre recombinase mRNA",
+        "size_nt": null
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "Ai14 (B6.Cg-Gt(ROSA)26Sortm14(CAG-tdTomato)Hze/J, Jackson Labs #007914, bred in-house)",
+        "sex": "both males and females",
+        "age": "6-10 weeks",
+        "cell_type_or_organ": "Bone marrow HSPCs and LT-HSCs",
+        "system_type": "in_vivo",
+        "hspc_definition": "Lin- Sca1+ c-Kit+ (LSK)",
+        "lthsc_definition": "LSK CD34- CD135-"
+      },
+      "dosing": {
+        "doses_tested": [
+          { "dose_ug": 2, "dose_mg_per_kg": 0.1 },
+          { "dose_ug": 6, "dose_mg_per_kg": 0.3 },
+          { "dose_ug": 20, "dose_mg_per_kg": 1.0 }
+        ],
+        "route": "IV (tail vein, single injection)",
+        "analysis_timepoint_hours": 48
+      },
+      "primary_outcome": {
+        "metric": "% TdTomato+ in HSPCs and LT-HSCs by flow cytometry",
+        "values": {
+          "0.3_mg_kg_HSPC": "~75%",
+          "0.3_mg_kg_LT_HSC": "~75%",
+          "1.0_mg_kg_HSPC": "~90%",
+          "1.0_mg_kg_LT_HSC": "~90%",
+          "1.0_mg_kg_unconjugated": "~25%"
+        },
+        "unit": "% TdTomato+ cells",
+        "timepoint": "48h post-injection",
+        "confidence": "HIGH",
+        "source": "Main text: '0.3 mg/kg...about 75% TdTomato+ cells in both HSPC and LT-HSC...20 µg of mRNA, almost all (~90%)...Unconjugated LNPs at a dose of 1 mg/kg...about 25% TdTomato'"
+      },
+      "statistical_test": "Two-way ANOVA with Tukey's multiple comparison test",
+      "n_per_group": "n=4 mice (1 mg/kg Ab-LNP), n=3 mice (all other groups)",
+      "ml_label": {
+        "efficacy_class": "HIGH",
+        "threshold_note": "~90% HSPC and LT-HSC editing at 1 mg/kg. ~75% at 0.3 mg/kg. Both exceed 30% threshold. THE key number for this paper."
+      },
+      "key_finding": "Single IV injection edits ~90% of both HSPCs and LT-HSCs. Untargeted LNPs still achieve ~25% — indicating some inherent bone marrow tropism with C18-PEG formulation."
+    },
+    {
+      "experiment_id": "E6_peripheral_blood_lineage_tracking",
+      "experiment_type": "in_vivo_lineage_tracking",
+      "figure_reference": "Fig 2e-g",
+      "formulations_tested": ["F7_ALC0315_C18PEG"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Cre recombinase mRNA"
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "Ai14",
+        "cell_type_or_organ": "Peripheral blood (myeloid CD11b+, B cells B220+, T cells CD3e+, erythrocytes TER-119+)",
+        "system_type": "in_vivo",
+        "blood_collection": "Submandibular bleed into EDTA-coated BD Microtainer",
+        "gating_strategy": "Fig S6 (immune cells), Fig S7 (erythrocytes)"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 1.0,
+        "route": "IV (tail vein)",
+        "note": "Same mice as E5, tracked longitudinally"
+      },
+      "primary_outcome": {
+        "metric": "% TdTomato+ in peripheral blood populations over time",
+        "values": {
+          "2wk_myeloid_CD11b": "~90%",
+          "2wk_B_cells_B220": "~32%",
+          "2wk_T_cells_CD3e": "~3.3%",
+          "14wk_myeloid": "~90%",
+          "14wk_B_cells": "~70%",
+          "14wk_T_cells": "~50%",
+          "14wk_erythrocytes_TER119": "~100%",
+          "4wk_CD4_T_cells": "> CD8 T cells at each timepoint"
+        },
+        "unit": "% TdTomato+",
+        "timepoints": ["2wk", "4wk", "6wk", "8wk", "14wk"],
+        "confidence": "HIGH",
+        "source": "Main text provides exact numbers"
+      },
+      "n_per_group": 3,
+      "n_unit": "mice",
+      "ml_label": {
+        "efficacy_class": "HIGH",
+        "threshold_note": "Near-complete multilineage reconstitution: 90% myeloid, 70% B, 50% T, ~100% erythrocytes at 14wk. Proves stem cell-level editing with maintained stemness."
+      },
+      "key_finding": "Edited HSPCs produce corrected progeny across all lineages. ~100% erythrocyte editing at 14 weeks is the key therapeutic metric for hemoglobinopathies."
+    },
+    {
+      "experiment_id": "E7_biodistribution_luciferase",
+      "experiment_type": "in_vivo_biodistribution",
+      "figure_reference": "Fig 3a-b",
+      "formulations_tested": ["F7_ALC0315_C18PEG", "F8_ALC0315_C18PEG_ACK2", "F9_IgG_isotype"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Firefly luciferase mRNA"
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "C57BL/6 (F, 6-10 weeks)",
+        "cell_type_or_organ": "Whole-body organ panel: lung, heart, liver, spleen, intestines, femur/tibia, skin",
+        "system_type": "in_vivo"
+      },
+      "dosing": {
+        "dose_ug": 6,
+        "dose_mg_per_kg": 0.3,
+        "route": "IV (tail vein)",
+        "analysis_timepoint_hours": 6,
+        "imaging": "IVIS Spectrum (PerkinElmer) after IP D-luciferin (130 µL of 30 mg/mL, 10 min prior to sacrifice)"
+      },
+      "primary_outcome": {
+        "metric": "Organ-level luciferase expression (average radiance, IVIS)",
+        "values": {
+          "isotype_control": "Spleen > liver primarily",
+          "CD117_2B8": "Lung highest; bone marrow, intestines, skin significantly above isotype; also spleen/liver",
+          "CD117_ACK2": "Some lung signal (lower than 2B8); no significant difference from isotype elsewhere"
+        },
+        "unit": "Average radiance (p/s/cm²/sr)",
+        "timepoint": "6h post-injection",
+        "confidence": "HIGH"
+      },
+      "secondary_outcomes": [
+        {
+          "metric": "Off-target lung signal",
+          "value": "Highest signal with 2B8 clone is in lung — unexpected since CD117 is lowly expressed in lung",
+          "note": "Paper suggests nonspecific antibody binding. CD117 is on intestinal Cajal cells and skin melanocytes, explaining those signals. Lung signal remains unexplained."
+        }
+      ],
+      "statistical_test": "Two-way ANOVA with Dunnett's multiple comparison test vs isotype",
+      "n_per_group": 4,
+      "n_unit": "mice",
+      "ml_label": {
+        "efficacy_class": "MEDIUM",
+        "threshold_note": "Bone marrow delivery confirmed but significant off-target lung signal. Lower dose (0.3 mg/kg) than Cre experiments."
+      }
+    },
+    {
+      "experiment_id": "E8_ligand_density_optimization",
+      "experiment_type": "in_vivo_uptake",
+      "figure_reference": "Fig S4",
+      "formulations_tested": ["F7_ALC0315_C18PEG at varying antibody:maleimide ratios"],
+      "payload": {
+        "type": "siRNA",
+        "specific_cargo": "siCD45 (DiR-labeled)"
+      },
+      "model_system": {
+        "species": "mouse",
+        "strain": "C57BL/6",
+        "cell_type_or_organ": "Bone marrow HSPCs",
+        "system_type": "in_vivo"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.3,
+        "route": "IV",
+        "duration_hours": 72
+      },
+      "primary_outcome": {
+        "metric": "% DiR+ in BM HSPCs at varying antibody:maleimide ratios",
+        "values": {
+          "1_to_100": "~20% uptake",
+          "1_to_20": "~75% uptake (OPTIMUM)",
+          "1_to_10": "~50% uptake",
+          "PBS": "~0%"
+        },
+        "unit": "% DiR+",
+        "timepoint": "72h",
+        "confidence": "MEDIUM",
+        "source": "Estimated from Fig S4 bar chart"
+      },
+      "statistical_test": "One-way ANOVA with Tukey's multiple comparison test",
+      "n_per_group": 2,
+      "n_unit": "mice",
+      "ml_label": {
+        "efficacy_class": "N/A (optimization experiment)",
+        "threshold_note": "Optimal ratio is 1:20 antibody:maleimide. Too much antibody (1:10) reduces uptake — possible steric crowding or aggregation."
+      },
+      "key_finding": "Antibody density has an optimum — not monotonically increasing. Critical manufacturing parameter."
+    }
+  ],
+
+  "label_for_ml": {
+    "hsc_efficacy_class": "HIGH",
+    "primary_metric_used": "% TdTomato+ in LT-HSCs (LSK CD34- CD135-) by flow cytometry",
+    "primary_metric_value": 90,
+    "primary_metric_dose_mg_kg": 1.0,
+    "primary_metric_payload": "Cre mRNA",
+    "primary_metric_timepoint": "48h post single IV injection",
+    "secondary_metric": "~75% at 0.3 mg/kg",
+    "multilineage_confirmation": true,
+    "multilineage_timepoint": "14 weeks",
+    "erythrocyte_editing_14wk": "~100%"
+  },
+
+  "cross_references_to_breda_2023": {
+    "same_target": "Both target CD117/c-Kit",
+    "same_clone": "Both use clone 2B8 as primary",
+    "different_lab": "Shi/Anderson (MIT Koch) vs Breda/Parhiz/Weissman (UPenn)",
+    "different_ionizable_lipid": "ALC-0315 (Shi) vs likely ALC-0307 (Breda/Acuitas)",
+    "different_conjugation_chemistry": {
+      "shi": "TCEP reduction → thiol-maleimide with DSPE-PEG-Mal incorporated DURING formulation as 5th lipid component (0.5 mol%). SEC + ultrafiltration purification.",
+      "breda": "SATA thiolation → thiol-maleimide with DSPE-PEG-Mal POST-INSERTED into preformed LNPs. Sepharose CL-4B purification.",
+      "implication": "Shi's approach is simpler (fewer steps) but maleimide may be partially hydrolyzed during formulation at pH 3. Breda's post-insertion may give better control over antibody orientation."
+    },
+    "different_molar_ratio": {
+      "shi": "50:10:38:1.5:0.5 (5 components — includes 0.5% maleimide PEG-lipid)",
+      "breda": "50:10:38.5:1.5 (4 components — maleimide PEG-lipid added post-formation)"
+    },
+    "different_peg_lipid": {
+      "shi": "DSG-PEG2000 (C18, optimized) — critical innovation",
+      "breda": "Standard short-chain PEG (likely DMG-PEG2000 or ALC-0159, C14)"
+    },
+    "different_antibody_source": "Bio X Cell (Shi) vs BioLegend (Breda) — same clone 2B8 but different vendors",
+    "different_lthsc_definition": {
+      "shi": "LSK CD34- CD135-",
+      "breda": "LSK CD150+ CD48-",
+      "note": "Overlapping but not identical populations. Important caveat for ML cross-paper comparisons."
+    },
+    "efficacy_comparison": {
+      "shi": "~90% HSPC/LT-HSC at 1 mg/kg",
+      "breda": "55% LT-HSC at ~0.25 mg/kg (5 µg in ~20g mouse)",
+      "note": "Not directly comparable: different doses, different LT-HSC definitions, different ionizable lipids, different PEG-lipids. Shi's C18-PEG likely contributes significantly to higher efficacy."
+    }
+  },
+
+  "annotation_notes": {
+    "version": "v2 — updated with supplementary materials",
+    "key_updates_from_supp": [
+      "Exact 5-component molar ratio: 50:10:38:1.5:0.5 (NOT standard 4-component 50:10:38.5:1.5)",
+      "Exact PEG-lipid identities: DMG-PEG2000 (C14), DPG-PEG2000 (C16), DSG-PEG2000 (C18)",
+      "Table S1 physicochemical data: unconjugated 71.24 nm/0.06 PDI/90% EE; conjugated 91.04 nm/0.14 PDI/92% EE",
+      "Full conjugation protocol: TCEP reduction, not SATA",
+      "Antibody vendor: Bio X Cell (not BioLegend)",
+      "Mouse strain confirmed: C57BL/6 female 6-10wk; Ai14 bred in-house both sexes",
+      "Ligand density optimization data (Fig S4): optimal 1:20 Ab:maleimide ratio",
+      "Fig S3 Cre mRNA PEG-lipid comparison: C14 ~45%, C16 ~60%, C18 ~70% at 0.3 mg/kg",
+      "Fig S5 safety: no HSPC depletion with any Ab-LNP",
+      "Added experiments E2b (Fig S3) and E8 (Fig S4)"
+    ],
+    "naming_correction": "Paper is Shi, Toyonaga & Anderson 2023, NOT 'Bhatt et al. 2023' as listed in annotation guide.",
+    "annotation_date": "2026-03-04",
+    "annotator": "Claude (with Tram)"
+  }
+}

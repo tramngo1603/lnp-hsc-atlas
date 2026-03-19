@@ -1,0 +1,113 @@
+{
+  "paper_metadata": {
+    "pmid": "37499029",
+    "doi": "10.1126/science.adi8798",
+    "title": "In vivo hematopoietic stem cell modification by mRNA delivery",
+    "authors": ["Breda L", "Papp TE"],
+    "journal": "Science",
+    "publication_date": "2023-07-28"
+  },
+  "formulations": [
+    {
+      "formulation_name": "CD117-LNP",
+      "ionizable_lipid": {"name": "C12-200", "smiles": null},
+      "helper_lipid": {"name": "DOPE", "type": "phospholipid"},
+      "cholesterol": {"included": true, "mol_percent": 38.5},
+      "peg_lipid": {"name": "C14-PEG2000", "mol_percent": 1.5, "chain_length": "C14"},
+      "molar_ratios": {
+        "ratio_string": "50:10:38.5:1.5",
+        "ionizable_percent": 50.0,
+        "helper_percent": 10.0,
+        "cholesterol_percent": 38.5,
+        "peg_percent": 1.5
+      },
+      "np_ratio": 6.0,
+      "physicochemical": {
+        "particle_size_nm": 100.0,
+        "pdi": 0.15,
+        "zeta_potential_mv": -5.0,
+        "encapsulation_efficiency_percent": 95.0
+      },
+      "targeting": {
+        "strategy": "antibody_conjugated",
+        "target_receptor": "CD117",
+        "antibody_clone": "2B8",
+        "conjugation_method": "DSPE-PEG-maleimide"
+      },
+      "confidence": "HIGH"
+    },
+    {
+      "formulation_name": "Untargeted-LNP",
+      "ionizable_lipid": {"name": "C12-200", "smiles": null},
+      "helper_lipid": {"name": "DOPE", "type": "phospholipid"},
+      "cholesterol": {"included": true, "mol_percent": 38.5},
+      "peg_lipid": {"name": "C14-PEG2000", "mol_percent": 1.5, "chain_length": "C14"},
+      "molar_ratios": {
+        "ratio_string": "50:10:38.5:1.5",
+        "ionizable_percent": 50.0,
+        "helper_percent": 10.0,
+        "cholesterol_percent": 38.5,
+        "peg_percent": 1.5
+      },
+      "np_ratio": 6.0,
+      "physicochemical": {
+        "particle_size_nm": 105.0,
+        "pdi": 0.18,
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": 92.0
+      },
+      "targeting": {
+        "strategy": "none",
+        "target_receptor": "none",
+        "antibody_clone": null,
+        "conjugation_method": null
+      },
+      "confidence": "HIGH"
+    }
+  ],
+  "experiments": [
+    {
+      "formulation_name": "CD117-LNP",
+      "payload": {"type": "mRNA", "specific_cargo": "Cre recombinase mRNA"},
+      "model": {"system": "in_vivo", "species": "mouse", "strain": "Ai9 reporter"},
+      "dosing": {"dose_mg_per_kg": 1.0, "route": "IV", "timepoint_hours": 48.0},
+      "efficacy": {
+        "hsc_transfection_percent": 30.0,
+        "hsc_definition": "LSK",
+        "editing_efficiency_percent": null,
+        "editing_method": ""
+      },
+      "biodistribution": {
+        "bone_marrow_percent": 25.0,
+        "liver_percent": 60.0,
+        "spleen_percent": 10.0,
+        "paired_hsc_and_liver_data": true
+      },
+      "confidence": "HIGH"
+    },
+    {
+      "formulation_name": "CD117-LNP",
+      "payload": {"type": "base_editor", "specific_cargo": "ABE8e-BCL11A"},
+      "model": {"system": "in_vivo", "species": "mouse", "strain": "humanized SCD"},
+      "dosing": {"dose_mg_per_kg": 2.0, "route": "IV", "timepoint_hours": 168.0},
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "LT-HSC",
+        "editing_efficiency_percent": 20.0,
+        "editing_method": "base_editing"
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "paired_hsc_and_liver_data": false
+      },
+      "confidence": "HIGH"
+    }
+  ],
+  "label_for_ml": {
+    "hsc_efficacy_class": "medium",
+    "primary_metric_used": "hsc_transfection_percent",
+    "primary_metric_value": 30.0
+  }
+}

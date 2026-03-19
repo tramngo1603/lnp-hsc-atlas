@@ -1,0 +1,113 @@
+{
+  "source": "kim_2024_experiments",
+  "paper": "kim_2024",
+  "doi": "10.1038/s41587-024-02470-2",
+  "formulations": [
+    {
+      "formulation_id": "F1_LNP67",
+      "formulation_name": "LNP67",
+      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "helper_lipid": {"name": "DOTAP"},
+      "peg_lipid": {"name": "C14PEG2000", "chain_length": "C14"},
+      "molar_ratios": {
+        "ionizable_percent": 35, "helper_percent": 15,
+        "cholesterol_percent": 47.5, "peg_percent": 2.5
+      },
+      "targeting": {"strategy": "intrinsic_tropism"}
+    },
+    {
+      "formulation_id": "F2_LNP95",
+      "formulation_name": "LNP95",
+      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "helper_lipid": {"name": "DOTAP"},
+      "peg_lipid": {"name": "C18PEG2000", "chain_length": "C18"},
+      "molar_ratios": {},
+      "targeting": {"strategy": "intrinsic_tropism"}
+    },
+    {
+      "formulation_id": "F3_LNP108",
+      "formulation_name": "LNP108",
+      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "helper_lipid": {"name": "DSPC"},
+      "peg_lipid": {"name": "C14PEG2000", "chain_length": "C14"},
+      "molar_ratios": {},
+      "targeting": {"strategy": "intrinsic_tropism"}
+    },
+    {
+      "formulation_id": "F4_LP01",
+      "formulation_name": "LP01",
+      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "helper_lipid": {"name": "DSPC"},
+      "peg_lipid": {"name": "C14PEG2000", "chain_length": "C14"},
+      "molar_ratios": {
+        "ionizable_percent": 50, "helper_percent": 10,
+        "cholesterol_percent": 38.5, "peg_percent": 1.5
+      },
+      "targeting": {"strategy": "intrinsic_tropism"}
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "E2_individual_validation",
+      "formulations_tested": ["F1_LNP67", "F2_LNP95", "F3_LNP108", "F4_LP01"],
+      "payload": {"type": "mRNA", "specific_cargo": "anchored VHH (aVHH)"},
+      "model_system": {"species": "mouse", "strain": "C57BL/6J", "hspc_definition": "LSK"},
+      "dosing": {"dose_mg_per_kg": 0.5, "route": "IV"},
+      "primary_outcome": {
+        "unit": "% aVHH+ in BM LSK",
+        "values": {
+          "F1_LNP67": 20.9,
+          "F2_LNP95": 4.4,
+          "F3_LNP108": 8.8,
+          "F4_LP01": 5.0
+        }
+      }
+    },
+    {
+      "experiment_id": "E3_dose_response_mouse",
+      "formulations_tested": ["F1_LNP67"],
+      "payload": {"type": "mRNA", "specific_cargo": "anchored VHH (aVHH)"},
+      "model_system": {"species": "mouse", "strain": "C57BL/6J", "hspc_definition": "LSK CD48-"},
+      "dosing": {"route": "IV"},
+      "primary_outcome": {
+        "unit": "% aVHH+ in HSC",
+        "values": {
+          "0.5_mg_kg": 12,
+          "1.0_mg_kg": 23,
+          "2.0_mg_kg": 35
+        }
+      }
+    },
+    {
+      "experiment_id": "E6_human_ex_vivo",
+      "formulations_tested": ["F1_LNP67"],
+      "payload": {"type": "mRNA", "specific_cargo": "anchored VHH (aVHH)"},
+      "model_system": {"species": "human", "strain": "primary CD34+ BM cells", "system_type": "ex_vivo", "hspc_definition": "CD34+CD38-CD45RA-CD90+ (HSC)"},
+      "dosing": {"route": "ex_vivo"},
+      "primary_outcome": {
+        "unit": "% aVHH+ in HSC",
+        "values": {
+          "0.25_ug_ml": 15,
+          "0.5_ug_ml": 22,
+          "1.0_ug_ml": 25,
+          "2.0_ug_ml": 38,
+          "4.0_ug_ml": 72
+        }
+      }
+    },
+    {
+      "experiment_id": "E8_freeze_thaw",
+      "formulations_tested": ["F1_LNP67"],
+      "payload": {"type": "mRNA", "specific_cargo": "anchored VHH (aVHH)"},
+      "model_system": {"species": "mouse", "strain": "C57BL/6J", "hspc_definition": "LSK CD48-"},
+      "dosing": {"dose_mg_per_kg": 1.0, "route": "IV"},
+      "primary_outcome": {
+        "unit": "% aVHH+ in HSC",
+        "values": {
+          "fresh": 20,
+          "freeze_thaw": 25
+        }
+      }
+    }
+  ]
+}

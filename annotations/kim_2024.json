@@ -1,0 +1,851 @@
+{
+  "_instructions": "Annotation of Kim et al. (2024) Nature Biotechnology — 'Lipid nanoparticle-mediated mRNA delivery to CD34+ cells in rhesus monkeys'. Published Nov 22 2024 online, Nat Biotechnol 43(11):1813-1820 (2025). Lab: Dahlman lab, Georgia Tech / Emory. This paper is fundamentally different from Breda/Shi — it uses UNTARGETED LNPs (intrinsic tropism, no antibody) and includes NHP (rhesus monkey) data. The ionizable lipid is proprietary (patent-protected). Source: HHS Public Access author manuscript (nihms-2043304.pdf). No supplementary PDF uploaded — some supplementary figure data is referenced but not available. v1 final.",
+
+  "paper_metadata": {
+    "pmid": "39578569",
+    "doi": "10.1038/s41587-024-02470-2",
+    "title": "Lipid nanoparticle-mediated mRNA delivery to CD34+ cells in rhesus monkeys",
+    "authors": ["Kim H", "Zenhausern R", "Gentry K", "Lian L", "Huayamares SG", "Radmand A", "Loughrey D", "Podilapu AR", "Hatit MZC", "Ni H", "Li A", "Shajii A", "Peck HE", "Han K", "Hua X", "Jia S", "Martinez M", "Lee C", "Santangelo PJ", "Tarantal A", "Dahlman JE"],
+    "journal": "Nature Biotechnology",
+    "volume": "43",
+    "issue": "11",
+    "pages": "1813-1820",
+    "publication_date": "2024-11-22",
+    "paper_type": "research_article",
+    "pmcid": "PMC available Nov 2025",
+    "institution": "Wallace H. Coulter Department of Biomedical Engineering, Georgia Institute of Technology and Emory University School of Medicine",
+    "nhp_site": "California National Primate Research Center, University of California Davis",
+    "funding": ["NIH SCGE Consortium UH3-TR002855 (Dahlman, Santangelo)", "U42 OD027094 (Tarantal, NHP Testing Center)", "P51-OD011107 (CNPRC base grant)", "TL1DK136047 ATLANTIS training grant (Zenhausern)"],
+    "competing_interests": "Hatit, Ni, and Dahlman filed provisional patent US 63/632,354 related to the ionizable lipid. Dahlman advises GV, Readout, Edge Animal Health, Nava Therapeutics. Santangelo co-founded Tether Therapeutics."
+  },
+
+  "screening_design": {
+    "_note": "This paper uses a high-throughput barcoded screen (SENT-seq) to evaluate 105 LNPs in a single mouse. This is fundamentally different from Breda/Shi which tested individual formulations.",
+    "total_formulated": 128,
+    "passed_qc": 105,
+    "qc_criteria": "Hydrodynamic diameter 20-200 nm, monodisperse (1 inflection point in correlation function)",
+    "screening_dose_per_lnp": "0.016 mg/kg average (1.7 mg/kg total / 105 LNPs)",
+    "readout": "SENT-seq — single-cell nanoparticle targeting sequencing. Quantifies DNA barcode delivery + aVHH protein expression + transcriptome in single cells.",
+    "selection_metric": "On-target (BM Lin-) to off-target (liver EC) barcode delivery ratio",
+    "matrix": {
+      "ionizable_lipids": 1,
+      "ionizable_lipid_note": "Single proprietary ionizable lipid used across all 128 LNPs (described in US patent 63/632,354, synthesized in-house)",
+      "helper_lipids_and_ids": {"1": "DDAB (MW 630.952)", "2": "DOTMA (MW 670.575)", "3": "DOTAP (MW 698.542)", "4": "18:1 EPC (MW 850.628)"},
+      "peg_lipids_and_ids": {"1": "C14PEG2000 (MW 2693.32)", "2": "C18PEG2000 (MW 2805.497)", "3": "DMG-PEG (MW 2509.2)", "4": "ALC-0159 (MW 2464.24)"},
+      "cholesterol_mw": 386.654,
+      "molar_ratios_table": {
+        "_format": "ionizable:cholesterol:PEG:helper (mol%)",
+        "ratio_1": {"ionizable": 50, "cholesterol": 35.0, "peg": 5.0, "helper": 10},
+        "ratio_2": {"ionizable": 45, "cholesterol": 37.5, "peg": 2.5, "helper": 15},
+        "ratio_3": {"ionizable": 35, "cholesterol": 47.5, "peg": 2.5, "helper": 15},
+        "ratio_4": {"ionizable": 50, "cholesterol": 17.5, "peg": 2.5, "helper": 30},
+        "ratio_5": {"ionizable": 45, "cholesterol": 22.5, "peg": 2.5, "helper": 30},
+        "ratio_6": {"ionizable": 45, "cholesterol": 17.5, "peg": 2.5, "helper": 35},
+        "ratio_7": {"ionizable": 35, "cholesterol": 18.0, "peg": 2.5, "helper": 44.5},
+        "ratio_8": {"ionizable": 30, "cholesterol": 30.0, "peg": 1.5, "helper": 38.5}
+      },
+      "lnp67_is_ratio": 3,
+      "lnp95_is_ratio": 4,
+      "lnp108_is_ratio": 2,
+      "total_combinations": "4 PEG-lipids x 4 helper lipids x 8 molar ratios = 128",
+      "_note_helper_lipid_naming": "The paper calls these 'phospholipids' but DOTAP, DOTMA, and DDAB are all permanently cationic lipids. Only 18:1 EPC is a true phospholipid. Three of four helper lipids are cationic — this library was specifically designed to explore cationic helper lipid effects on tropism.",
+      "grid_numbering": {
+        "_note": "Supp Fig 1a shows a 16-column × 8-row grid. Columns cycle PEG ID 1-4 within HL ID groups 1-4. LNP_ID = (col-1)*8 + row. Row 1 IDs: 1,9,17,25,33,41,49,57,65,73,81,89,97,105,113,121. Row 8 IDs: 8,16,24,32,40,48,56,64,72,80,88,96,104,112,120,128. Rows 2-7 are shown as arrows only (IDs inferred by incrementing).",
+        "column_to_hl_peg": "Col 1-4: HL1(DDAB)/PEG1-4. Col 5-8: HL2(DOTMA)/PEG1-4. Col 9-12: HL3(DOTAP)/PEG1-4. Col 13-16: HL4(18:1 EPC)/PEG1-4.",
+        "hl_peg_confidence": "HIGH — verified against Supp Fig 7 for all 3 leads (LNP67=col9=DOTAP/C14PEG2000, LNP95=col12=DOTAP/ALC-0159, LNP108=col14=18:1 EPC/C18PEG2000)",
+        "ratio_assignment_caveat": "CRITICAL: The row position within a column does NOT equal the ratio number from the molar_ratios_table. LNP67 is at row 3 and uses Ratio 3 — but LNP95 is at row 7 and uses Ratio 4 (not Ratio 7), and LNP108 is at row 4 and uses Ratio 2 (not Ratio 4). The mapping from grid row to ratio composition is non-sequential/shuffled. Only leads confirmed via Supp Fig 7 have reliable ratio assignments. The other 125 LNPs have known HL+PEG but UNKNOWN molar ratios."
+      },
+      "confidence": "HIGH for ratio compositions and HL/PEG IDs. HIGH for 128 HL+PEG column assignments. UNKNOWN for row-to-ratio mapping of non-lead LNPs."
+    },
+    "lead_candidates": ["LNP67", "LNP95", "LNP108"],
+    "winner": "LNP67",
+    "supp_fig_6_digitized": {
+      "_note": "Normalized barcode counts digitized from Supp Fig 6b horizontal bar charts. MEDIUM confidence (±1-2 BC counts). 66 LNPs visible (those with total BC > 20 across tissues). BM = bone marrow aVHH+ Lin- cells. Liver EC = CD31+CD45- endothelial cells.",
+      "digitization_date": "2026-03-06",
+      "bm_delivery": {
+        "95": 48, "108": 15, "67": 13, "111": 8, "85": 6, "99": 5.5, "89": 5,
+        "115": 4, "91": 3.5, "102": 3, "107": 3, "113": 3, "122": 2.5, "116": 2.5,
+        "109": 2, "126": 2, "125": 2, "98": 2,
+        "118": 1.5, "103": 1.5, "101": 1.5, "105": 1.5, "127": 1.5, "84": 1.5,
+        "44": 1, "68": 1, "60": 1, "63": 1, "51": 1, "27": 1, "87": 1, "54": 1, "59": 1, "71": 1, "33": 1,
+        "62": 0.5, "38": 0.5, "42": 0.5, "47": 0.5, "69": 0.5, "22": 0.5, "79": 0.5,
+        "61": 0.5, "31": 0.5, "81": 0.5, "35": 0.5, "53": 0.5, "39": 0.5,
+        "5": 0.5, "7": 0.5, "82": 0.5, "30": 0.5,
+        "6": 0.3, "20": 0.3, "57": 0.3, "77": 0.3, "73": 0.3, "25": 0.3, "17": 0.3,
+        "9": 0.3, "14": 0.3, "19": 0.3,
+        "1": 0.2, "21": 0.2, "76": 0.2, "11": 0.2
+      },
+      "liver_ec_delivery": {
+        "95": 4, "108": 8, "67": 5, "111": 3, "85": 2, "99": 3, "89": 2,
+        "115": 2, "91": 2, "102": 3, "107": 4, "113": 2, "122": 2, "116": 2,
+        "109": 2, "126": 3, "125": 2, "98": 2, "127": 6, "105": 4, "103": 3,
+        "101": 3, "118": 2, "84": 1, "44": 2, "68": 1
+      },
+      "sar_from_digitized_screen": {
+        "by_helper_lipid": {
+          "DDAB": {"n": 16, "mean_bm": 0.4, "max_bm": 1.0},
+          "DOTMA": {"n": 16, "mean_bm": 0.7, "max_bm": 1.0},
+          "DOTAP": {"n": 16, "mean_bm": 5.2, "max_bm": 48.0},
+          "18:1 EPC": {"n": 18, "mean_bm": 3.4, "max_bm": 15.0}
+        },
+        "by_peg_lipid": {
+          "C14PEG2000": {"n": 17, "mean_bm": 1.9, "max_bm": 13.0},
+          "C18PEG2000": {"n": 15, "mean_bm": 2.2, "max_bm": 15.0},
+          "DMG-PEG": {"n": 17, "mean_bm": 1.4, "max_bm": 6.0},
+          "ALC-0159": {"n": 17, "mean_bm": 4.2, "max_bm": 48.0}
+        },
+        "key_insights": [
+          "DOTAP and 18:1 EPC are the ONLY helpers enabling BM delivery; DDAB and DOTMA produce zero signal",
+          "DOTAP has highest variance — some DOTAP LNPs are top performers, most are not. Composition context matters.",
+          "ALC-0159 has highest mean across PEG lipids, driven by LNP95 outlier (48)",
+          "Screen measures absolute delivery, not selectivity — LNP95 has highest BM barcode (48) but is lung-tropic (94.3% lung in validation). LNP67 was selected for best BM:liver RATIO (2.6), not absolute BM."
+        ]
+      }
+    },
+    "formulation_delivery_relationships_supp_fig_5": {
+      "_note": "Authors report no statistically significant relationships (linear tests). However, scatter plots reveal patterns a nonlinear ML model could exploit.",
+      "by_ratio": "Ratios 2 and 3 have highest outliers (~12-15 and ~23 normalized delivery). Ratios 4-8 mostly cluster low (<5). LNP67 (Ratio 3) is likely the ~23 outlier.",
+      "by_peg_lipid": "C14PEG2000 has widest spread and highest outlier (~23). C18PEG2000 and DMG-PEG moderate. ALC-0159 higher median but lower peak.",
+      "by_helper_lipid": "DOTAP has highest outlier (~23) but also many low values. DDAB and DOTMA cluster low. 18:1 EPC has moderate outliers (~12-15).",
+      "by_helper_mol_percent": "15% helper lipid has the highest delivery points. 30-44.5% helper mostly cluster very low. CRITICAL INSIGHT: moderate cationic content helps BM delivery but too much kills it.",
+      "by_ionizable_mol_percent": "35% ionizable has the two highest outliers (~15, ~23). 45% has moderate outliers. 50% and 30% cluster low. Lower ionizable lipid content may favor BM tropism.",
+      "sar_summary_for_ml": [
+        "Low ionizable lipid (35%) + high cholesterol (47.5%) is the optimal composition space for BM delivery",
+        "Moderate DOTAP (15%) drives BM tropism; high DOTAP (30%+) drives lung tropism instead",
+        "C14PEG2000 enables the widest range of BM delivery — PEG identity matters",
+        "The optimal BM-targeting composition is far from the standard 50:38.5:1.5:10 used in liver LNPs",
+        "No single variable predicts BM delivery linearly — the model must capture interactions between ionizable lipid %, helper lipid type, helper lipid %, and PEG identity"
+      ],
+      "confidence": "MEDIUM — values estimated from scatter plots; trends are clear but exact values approximate",
+      "source": "Supplementary Fig 5"
+    }
+  },
+
+  "formulations": [
+    {
+      "formulation_id": "F1_LNP67",
+      "formulation_name": "LNP67",
+      "description": "Lead untargeted LNP selected from 105-LNP barcoded screen for best bone marrow:liver delivery ratio. 4-component system with proprietary ionizable lipid, cholesterol, C14-PEG2000, and DOTAP (cationic helper lipid). No antibody or targeting ligand. Used for all downstream mouse, NHP, and human ex vivo experiments.",
+      "ionizable_lipid": {
+        "name": "PPZ-A10 (piperazine-based ionizable lipid, Pi-Lipid)",
+        "lipid_class": "Diketopiperazine-amide with symmetric tertiary amine headgroups",
+        "scaffold": "PPZ-A (n=1, two-carbon amide linker)",
+        "tail_group": "C10 alkyl (decyl) — four total tails, two per headgroup",
+        "molecular_formula": "C56H114N6O2",
+        "mw_estimated": 452.45,
+        "smiles": null,
+        "source_vendor": "Synthesized in-house (Podilapu, Hatit, Ni)",
+        "patent": "US 2025/0127727 A1 (published Apr 24, 2025). Title: 'Ionizable Lipids with Bioactive Motifs'. Inventors: Dahlman, Hatit, Ni. Based on provisional 63/293,287 (Dec 23, 2021).",
+        "confidence": "HIGH for lipid class (piperazine/PPZ); MEDIUM for exact variant (PPZ-A10 is the patent's lead compound, and the molar ratio 35:46.5:2.5:16 closely matches LNP67's 35:47.5:2.5:15, but the Kim paper doesn't explicitly state which PPZ variant was used)",
+        "source": "Patent US 2025/0127727 A1 Fig 1, Fig 3A, paragraphs [0026]-[0027], [0054], [0062], [0073]. Cross-referenced with Kim 2024 Nature Biotech which cites US provisional 63/632,354 — this may be a continuation or related filing.",
+        "_note_for_ml": "The PPZ scaffold has a piperazine core with amide bonds — this is structurally distinct from the ester-linked lipids used in Breda/Shi (ALC-0315, ALC-0307) and from standard lipids like MC3 and SM-102. The amide bonds may confer different pH-dependent behavior and metabolic stability. With the scaffold identified, we can now compute molecular descriptors even without the exact SMILES — the PPZ-A series shares a common core, and tail length (C10 vs C11 vs C12 vs C18) is the primary variable.",
+        "_patent_note": "The patent describes PPZ lipids as preferentially targeting liver and splenic immune cells — the bone marrow targeting in Kim 2024 comes from reformulating with DOTAP helper lipid instead of DOPE. The ionizable lipid alone doesn't drive BM tropism; the full 4-component composition does."
+      },
+      "helper_lipid": {
+        "name": "DOTAP",
+        "helper_lipid_id": 3,
+        "type": "permanently cationic lipid",
+        "mol_percent": 15,
+        "mw": 698.542,
+        "confidence": "HIGH",
+        "source": "Supplementary Fig 1a: HL ID 3 = DOTAP, Ratio 3 helper = 15 mol%. MW from Supp Fig 1b.",
+        "_note": "DOTAP is a permanently cationic lipid (not zwitterionic like DSPC/DOPE). 15 mol% is a substantial cationic charge content. This is the key differentiator — DOTAP at this level shifts LNP tropism away from liver, consistent with the SORT system literature (Cheng et al. 2020). The combination of low ionizable lipid (35%) + high cholesterol (47.5%) + cationic helper (15%) is what makes LNP67 unique."
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": 47.5,
+        "mw": 386.654,
+        "_note": "Very high cholesterol content at 47.5 mol% — substantially above the 38-38.5% used in Breda/Shi and standard vaccine LNPs. High cholesterol may contribute to particle stability and affect protein corona composition.",
+        "confidence": "HIGH",
+        "source": "Supplementary Fig 1a: Ratio 3 cholesterol = 47.5 mol%"
+      },
+      "peg_lipid": {
+        "name": "C14PEG2000",
+        "peg_id": 1,
+        "alkyl_chain": "C14",
+        "alkyl_chain_carbons": 14,
+        "mol_percent": 2.5,
+        "mw": 2693.32,
+        "confidence": "HIGH",
+        "source": "Supplementary Fig 1a: PEG ID 1 = C14PEG2000, Ratio 3 PEG = 2.5 mol%. MW from Supp Fig 1b."
+      },
+      "maleimide_peg_lipid": {
+        "name": null,
+        "mol_percent": null,
+        "_note": "No maleimide PEG-lipid — this is an untargeted LNP with no antibody conjugation."
+      },
+      "molar_ratios": {
+        "ratio_string": "35:47.5:2.5:15 (ionizable:cholesterol:C14PEG2000:DOTAP)",
+        "ratio_id": 3,
+        "n_components": 4,
+        "ionizable_percent": 35,
+        "cholesterol_percent": 47.5,
+        "peg_percent": 2.5,
+        "helper_percent": 15,
+        "total": 100,
+        "_comparison": "Very unusual vs standard LNP formulations: ionizable lipid is only 35% (vs 50% in Breda/Shi/vaccines), cholesterol is very high at 47.5% (vs 38-38.5%), DOTAP helper at 15% is substantial cationic content, PEG at 2.5% is slightly above standard 1.5%.",
+        "confidence": "HIGH",
+        "source": "Supplementary Fig 1a: Ratio 3 = ionizable 35, cholesterol 47.5, PEG-lipid 2.5, helper lipid 15 mol%. LNP67 decoded as column 9 (PEG ID 1 = C14PEG2000, HL ID 3 = DOTAP) × Ratio 3 (LNP65=R1, LNP66=R2, LNP67=R3)."
+      },
+      "np_ratio": null,
+      "manufacturing": {
+        "method": "Microfluidic mixing",
+        "instrument": "NanoAssemblr NxGen Mixer / Spark (ring micromixer)",
+        "flow_rate_ratio": "3:1 (aqueous phase:ethanol phase)",
+        "aqueous_phase": "25 mM sodium acetate buffer, pH 5",
+        "organic_phase": "100% ethanol with lipid components",
+        "dialysis": "Sterile 1X PBS in 20 kDa microdialysis plate at 4°C overnight",
+        "filtration": "0.22 μm sterile filter",
+        "lipid_to_rna_mass_ratio": "10:1",
+        "mrna_to_barcode_mass_ratio": "10:1 (for barcoded screen)",
+        "cryopreservation": "10% sucrose (w/v) in PBS, flash-frozen in dry ice-ethanol, stored ≤ -80°C",
+        "_note_buffer_ph": "pH 5 is different from Shi (pH 3 citrate buffer) and Breda. Higher pH during formulation may affect ionizable lipid protonation state and RNA complexation efficiency.",
+        "confidence": "HIGH",
+        "source": "Methods section + Supplementary Fig 1c"
+      },
+      "physicochemical": {
+        "particle_size_nm": 80,
+        "particle_size_method": "DLS (hydrodynamic diameter)",
+        "cryo_tem_diameter_nm": 35,
+        "cryo_tem_diameter_note": "Cryo-TEM core diameter (~35 nm) is much smaller than DLS (80 nm) due to PEG hydration shell. n=14 particles measured.",
+        "cryo_tem_circularity": 0.87,
+        "cryo_tem_morphology": "Solid core, spherical. Similar to LP01 liver-targeting control (circularity ~0.90, diameter ~35 nm). Structural similarity confirms tropism is driven by surface chemistry/corona, not particle morphology.",
+        "pdi": null,
+        "zeta_potential_mv": -2.58,
+        "encapsulation_efficiency_percent": 86.7,
+        "pka": 6.4,
+        "pka_note": "Measured for complete LNP formulation, not ionizable lipid alone. With 15% DOTAP (permanently cationic) present, the apparent pKa reflects both ionizable and cationic components.",
+        "morphology": "Spherical particles with solid core (TEM and cryo-TEM, Supp Fig 10)",
+        "stability_freeze_thaw": "No changes to Dh (~85 nm) or PDI (~0.15) after freeze-thaw with 10% sucrose",
+        "confidence": "HIGH",
+        "source": "Fig 2c-f (DLS, zeta, pKa, EE), Supp Fig 10 (cryo-TEM circularity and diameter)"
+      },
+      "targeting": {
+        "strategy": "intrinsic_tropism",
+        "target_receptor": "none",
+        "antibody_clone": null,
+        "antibody_vendor": null,
+        "conjugation_method": null,
+        "conjugation_chemistry": null,
+        "maleimide_incorporation": null,
+        "_note": "Key differentiator from Breda/Shi: NO targeting ligand. Bone marrow tropism is intrinsic to the LNP composition itself. The DOTAP helper lipid + C14PEG combination likely drives de-targeting from liver and enables BM delivery."
+      },
+      "protein_corona": {
+        "method": "Mass spectrometry after 37°C incubation with mouse plasma (1:1, 15 min) and sucrose cushion separation",
+        "n_corona_proteins_identified": 66,
+        "n_enriched_vs_liver_lnp": 9,
+        "enriched_proteins_ranked": {
+          "A": {"name": "Vitronectin", "log2_fc": 2.5, "abundance_pct": 3, "_significance": "Binds integrins αvβ3/αvβ5 expressed on HSCs. Potential key mediator of BM targeting."},
+          "B": {"name": "Glia-derived nexin", "log2_fc": 2, "abundance_pct": 2},
+          "C": {"name": "Transferrin receptor protein 1", "log2_fc": 2, "abundance_pct": 2, "_significance": "TfR1/CD71 is highly expressed on erythroid progenitors and HSCs. Could facilitate HSC uptake."},
+          "D": {"name": "Serine protease inhibitor A3K", "log2_fc": 1.5, "abundance_pct": 2},
+          "E": {"name": "Thrombospondin-1", "log2_fc": 1, "abundance_pct": 1.5},
+          "F": {"name": "Fibrinogen alpha chain", "log2_fc": 1.5, "abundance_pct": 1.5},
+          "G": {"name": "Apolipoprotein B-100", "log2_fc": 1.5, "abundance_pct": 1.5, "_significance": "ApoB-100 binds LDL receptor family — different pathway from ApoE-mediated liver uptake."},
+          "H": {"name": "Clusterin", "log2_fc": 1, "abundance_pct": 1.2, "_significance": "Known dysopsonin — reduces macrophage clearance, extends circulation time."},
+          "I": {"name": "UDP-glucuronosyltransferase 1-1", "log2_fc": 1, "abundance_pct": 1}
+        },
+        "key_absence": "ApoE is NOT enriched on LNP67 relative to LP01 — most corona proteins cluster near log2(fc)=0 or are depleted. ApoE depletion explains reduced liver tropism since ApoE-LDLR is the primary liver uptake pathway.",
+        "_note_for_phase6_block_c": "These 9 proteins plus the ApoE depletion pattern are the key training data for the corona prediction model. Vitronectin and TfR1 enrichment are the most mechanistically plausible drivers of BM tropism.",
+        "confidence": "HIGH — protein identities and fold-changes from Supp Fig 11",
+        "source": "Supplementary Fig 11"
+      },
+      "confidence": "HIGH for composition identity; NULL for molar ratios"
+    },
+    {
+      "formulation_id": "F2_LNP95",
+      "formulation_name": "LNP95",
+      "description": "Second-ranked lead from barcoded screen. Actually a LUNG-targeting LNP (94.3% lung delivery). 50% ionizable lipid with very high DOTAP (30%) and very low cholesterol (17.5%). The high cationic content drove lung tropism, consistent with SORT system predictions.",
+      "ionizable_lipid": {"name": "Proprietary (same as LNP67)", "mol_percent": 50, "confidence": "HIGH", "source": "Supp Fig 7"},
+      "helper_lipid": {"name": "DOTAP", "mol_percent": 30, "type": "permanently cationic lipid", "mw": 698.542, "_note": "30% DOTAP is very high cationic content — this drove the LNP to lung, not BM"},
+      "cholesterol": {"included": true, "mol_percent": 17.5, "_note": "Very low cholesterol"},
+      "peg_lipid": {"name": "ALC-0159", "mol_percent": 2.5, "mw": 2464.24},
+      "molar_ratios": {"ratio_string": "50:17.5:2.5:30 (ionizable:chol:ALC-0159:DOTAP)", "ratio_id": 4},
+      "targeting": {"strategy": "intrinsic_tropism", "target_receptor": "none"},
+      "confidence": "HIGH — composition from Supp Fig 7"
+    },
+    {
+      "formulation_id": "F3_LNP108",
+      "formulation_name": "LNP108",
+      "description": "Third-ranked lead from barcoded screen. The only lead with a zwitterionic helper lipid (18:1 EPC) instead of cationic. Uses C18PEG2000 (longer alkyl chain). Moderate BM delivery (8.8%) but low liver (1.6%).",
+      "ionizable_lipid": {"name": "Proprietary (same as LNP67)", "mol_percent": 45, "confidence": "HIGH", "source": "Supp Fig 7"},
+      "helper_lipid": {"name": "18:1 EPC", "mol_percent": 15, "type": "zwitterionic phospholipid (oleoyl egg PC)", "mw": 850.628, "_note": "Only non-cationic helper lipid among the 3 leads. Interesting that it still achieves some BM tropism — different mechanism than DOTAP?"},
+      "cholesterol": {"included": true, "mol_percent": 37.5},
+      "peg_lipid": {"name": "C18PEG2000", "mol_percent": 2.5, "alkyl_chain": "C18", "mw": 2805.497, "_note": "C18 PEG — same long-chain PEG that Shi 2023 found optimal for BM delivery. Coincidence or convergent finding?"},
+      "molar_ratios": {"ratio_string": "45:37.5:2.5:15 (ionizable:chol:C18PEG2000:18:1 EPC)", "ratio_id": 2},
+      "targeting": {"strategy": "intrinsic_tropism", "target_receptor": "none"},
+      "confidence": "HIGH — composition from Supp Fig 7"
+    },
+    {
+      "formulation_id": "F4_LP01_control",
+      "formulation_name": "LP01 LNP (liver-targeting control)",
+      "description": "Established liver-targeting LNP. Uses LP01 ionizable lipid (different from the proprietary IL in LNP67/95/108), DSPC helper, DMG-PEG. Classic liver-tropic formulation with standard composition.",
+      "ionizable_lipid": {"name": "LP01", "mol_percent": 45, "confidence": "HIGH", "source": "Supp Fig 7 + Ref 39 (Finn et al. Cell Rep 2018)"},
+      "helper_lipid": {"name": "DSPC", "mol_percent": 9, "type": "zwitterionic phospholipid", "_note": "Standard DSPC at only 9 mol% — lower than the 10% used in Breda/Shi/vaccines"},
+      "cholesterol": {"included": true, "mol_percent": 44.0},
+      "peg_lipid": {"name": "DMG-PEG", "mol_percent": 2.0, "alkyl_chain": "C14", "mw": 2509.2},
+      "molar_ratios": {"ratio_string": "45:44.0:2.0:9 (LP01:chol:DMG-PEG:DSPC)", "total": 100},
+      "targeting": {"strategy": "none", "_note": "Standard liver-tropic LNP via ApoE/LDLR pathway"},
+      "biodistribution_from_supp_fig_9": {
+        "bone_marrow_LSK_percent": 4,
+        "liver_EC_percent": 60,
+        "liver_immune_percent": 55,
+        "spleen_immune_percent": 30,
+        "lung_EC_percent": 10,
+        "_note": "From Supp Fig 9 at 0.5 mg/kg. BM LSK CORRECTED from 30% to 4% per Tram's verification. Strong liver tropism (60%) with minimal BM delivery (4%). LNP67 delivers 5x more to BM (20.9%) than LP01 (4%) in absolute terms."
+      },
+      "confidence": "HIGH — composition from Supp Fig 7, biodistribution from Supp Fig 9"
+    }
+  ],
+
+  "experiments": [
+    {
+      "experiment_id": "E1_barcoded_screen",
+      "experiment_name": "105-LNP barcoded in vivo screen (SENT-seq)",
+      "figure": "Fig 1",
+      "formulations_tested": "105 LNPs (from 128 formulated, 105 passed QC)",
+      "payload": {
+        "type": "mRNA + DNA barcode",
+        "specific_cargo": "GPI-anchored camelid VHH antibody (aVHH) mRNA + unique DNA barcode per LNP",
+        "barcode_ratio": "10:1 mRNA:barcode mass ratio"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J",
+        "source": "Jackson Laboratory"
+      },
+      "dosing": {
+        "total_dose_mg_per_kg": 1.7,
+        "per_lnp_dose_mg_per_kg": 0.016,
+        "route": "IV (lateral tail vein)",
+        "timepoint_hours": null,
+        "_note": "Timepoint for scRNA-seq not explicitly stated for barcoded screen"
+      },
+      "readout": {
+        "method": "SENT-seq: scRNA-seq + DNA barcode quantification + aVHH protein detection via oligo-tagged anti-VHH antibody",
+        "cells_analyzed": 21618,
+        "cell_isolation": "MACS Lin- enrichment from bone marrow; FACS for liver ECs and immune cells",
+        "cell_populations": "HSC, MPP, OPP (transcriptionally defined from scRNA-seq)"
+      },
+      "efficacy": {
+        "key_finding": "Barcode and aVHH delivery observed in transcriptionally defined HSC, MPP, and OPP populations. LNP67 identified as best BM:liver ratio.",
+        "hsc_transfection_percent": null,
+        "hsc_definition": "Transcriptionally defined from scRNA-seq marker genes (Lin-Sca1+cKit+CD48-CD150+ for HSC)",
+        "_note": "This is a screening experiment — quantitative delivery values per LNP are in Supplementary Figs (not available). The key output is the ranked list of leads."
+      },
+      "statistical_relationships": "No statistically significant relationships found between LNP molar ratios/PEG content/helper lipid content/ionizable lipid mol% and BM delivery. Authors note larger/more diverse libraries needed.",
+      "confidence": "HIGH for methodology; MEDIUM for quantitative results (details in supplementary)"
+    },
+    {
+      "experiment_id": "E2_individual_validation",
+      "experiment_name": "Individual validation of 3 leads + LP01 control (24 cell types)",
+      "figure": "Fig 2a, Supp Fig 8-9",
+      "formulations_tested": ["LNP67", "LNP95", "LNP108", "LP01"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "aVHH mRNA"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.5,
+        "route": "IV",
+        "timepoint_hours": 16
+      },
+      "readout": {
+        "method": "Flow cytometry — % aVHH+ cells in 24 cell types from BM, liver, spleen, lung, heart, kidney"
+      },
+      "efficacy": {
+        "key_finding": "LNP67 had most favorable BM:liver delivery profile. BM and liver delivery nearly identical (~20.9% vs ~20.1%). LNP95 was actually lung-tropic (94.3% lung). LP01 was strongly liver-tropic (42.4% liver).",
+        "lnp67_results": {
+          "bone_marrow_LSK_percent_avhh_positive": 20.9,
+          "liver_EC_percent": 20.1,
+          "spleen_immune_percent": 18.6,
+          "kidney_EC_percent": 2.4,
+          "heart_EC_percent": 0.7,
+          "lung_EC_percent": 1.8,
+          "bm_to_liver_ratio": 1.04,
+          "_note": "All values read directly from Fig 2a radar plot printed numbers. BM:liver ratio is almost exactly 1:1."
+        },
+        "lnp95_results": {
+          "bone_marrow_LSK_percent": 4.4,
+          "liver_EC_percent": 14.7,
+          "spleen_immune_percent": 4.7,
+          "kidney_EC_percent": 23.4,
+          "heart_EC_percent": 28.3,
+          "lung_EC_percent": 94.3,
+          "_note": "LNP95 is actually a LUNG-targeting LNP (94.3% lung). Poor BM delivery."
+        },
+        "lnp108_results": {
+          "bone_marrow_LSK_percent": 8.8,
+          "liver_EC_percent": 1.6,
+          "spleen_immune_percent": 2.7,
+          "kidney_EC_percent": 12.5,
+          "heart_EC_percent": 6.8,
+          "lung_EC_percent": 2.7
+        },
+        "lp01_results": {
+          "bone_marrow_LSK_percent": 5.0,
+          "liver_EC_percent": 42.4,
+          "spleen_immune_percent": 4.8,
+          "kidney_EC_percent": 2.0,
+          "heart_EC_percent": 1.8,
+          "lung_EC_percent": 0.4,
+          "_note": "LP01 strongly liver-targeting as expected (42.4% liver vs 5.0% BM)"
+        },
+        "pbs_results": {
+          "bone_marrow_LSK_percent": 0.9,
+          "liver_EC_percent": 1.5,
+          "spleen_immune_percent": 1.0,
+          "kidney_EC_percent": 1.8,
+          "heart_EC_percent": 1.2,
+          "lung_EC_percent": 1.2
+        },
+        "hsc_definition": "LSK (Lin-Sca1+cKit+) for bone marrow",
+        "confidence": "HIGH — exact values printed on Fig 2a radar plots"
+      }
+    },
+    {
+      "experiment_id": "E3_dose_response_mouse",
+      "experiment_name": "LNP67 mouse dose-response (8 HSC subtypes)",
+      "figure": "Fig 2i",
+      "formulations_tested": ["LNP67"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "aVHH mRNA"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J"
+      },
+      "dosing": {
+        "doses_mg_per_kg": [0.5, 1.0, 2.0],
+        "route": "IV",
+        "timepoint_hours": 16
+      },
+      "readout": {
+        "method": "Flow cytometry — % aVHH+ cells in 8 HSC subtypes"
+      },
+      "efficacy": {
+        "key_finding": "Dose-dependent delivery across all 8 HSC subtypes",
+        "at_2_mg_per_kg": {
+          "HSC_percent_avhh_positive": 35,
+          "HPC1_percent": 40,
+          "MPP_percent": 80,
+          "LSK_percent": 55,
+          "LK_percent": 35,
+          "LSloKlo_percent": 30,
+          "Lin_negative_percent": 35,
+          "Lin_positive_percent": 22,
+          "_note": "HSC CORRECTED from 60% to 35% based on zoomed Fig 2i screenshot. Individual data points at ~28%, 33%, 38%. MPP remains highest at ~80%. HSC is just above the 30% HIGH threshold."
+        },
+        "at_1_mg_per_kg": {
+          "HSC_percent": 23,
+          "HPC1_percent": 28,
+          "MPP_percent": 75,
+          "LSK_percent": 35,
+          "LK_percent": 25,
+          "LSloKlo_percent": 20,
+          "Lin_negative_percent": 25,
+          "Lin_positive_percent": 10,
+          "_note": "Cross-validated with Fig 4b freeze-thaw data which independently shows HSC ~20-25% and MPP ~75-80% at 1.0 mg/kg"
+        },
+        "at_0.5_mg_per_kg": {
+          "HSC_percent": 12,
+          "HPC1_percent": 15,
+          "MPP_percent": 15,
+          "LSK_percent": 10
+        },
+        "hsc_definition": "LSK/SLAM: Lin-Sca1+cKit+CD48-CD150+",
+        "confidence": "MEDIUM — values estimated from bar chart (Fig 2i)"
+      },
+      "statistics": "Two-way ANOVA with Tukey post-hoc. p<0.0001 for all cell types at 2.0 mg/kg vs PBS",
+      "n_per_group": 3
+    },
+    {
+      "experiment_id": "E4_scrnaseq_validation",
+      "experiment_name": "Single-cell multiomics validation of LNP67 (transcriptionally defined HSCs)",
+      "figure": "Fig 3",
+      "formulations_tested": ["LNP67"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "aVHH mRNA"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 2.0,
+        "route": "IV",
+        "timepoint_hours": 24
+      },
+      "readout": {
+        "method": "Single-cell multiomics: scRNA-seq (BD Rhapsody WTA) + oligo-tagged anti-VHH antibody for aVHH protein quantification",
+        "cells_analyzed": 36142,
+        "clusters": 21,
+        "lin_negative_annotation": "Manual: LSK CD48-, LSK CD48+, Lin-Sca1+, Lin-Sca1-, MEP",
+        "lin_positive_annotation": "Automated (BioTuring Browser X): 6 lymphoid, 9 myeloid, 1 unclassified"
+      },
+      "efficacy": {
+        "key_finding": "~50% of LSK cells (both CD48- and CD48+) showed aVHH protein expression. CD48- cells (HSCs/MPPs) had significantly higher expression than CD48+ (OPPs). aVHH+ cells significantly higher than PBS in 18/21 clusters. Delivery to cKit+ cells confirmed — supporting that LNP67 reaches the same cells as antibody-targeted approaches, just without the antibody.",
+        "lsk_cd48_neg_percent_avhh_positive": "~50",
+        "lsk_cd48_pos_percent_avhh_positive": "~50 (but lower expression level)",
+        "lin_neg_vs_lin_pos": "Lin- cells had significantly higher aVHH expression than Lin+ cells",
+        "hsc_definition": "Transcriptionally defined: LSK CD48- includes HSCs and MPPs",
+        "confidence": "MEDIUM — ~50% estimated from text ('approximately 50% of the LSK cells')"
+      },
+      "n_per_group": 3
+    },
+    {
+      "experiment_id": "E5_nhp_in_vivo",
+      "experiment_name": "LNP67 in rhesus monkeys — PRIMARY NHP EFFICACY",
+      "figure": "Fig 4c-h",
+      "formulations_tested": ["LNP67"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "Anchored nanoluciferase (aNLuc) mRNA"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "NHP",
+        "strain": "Rhesus macaque (Macaca mulatta)",
+        "age": "7-8 months",
+        "weight_kg": "1.5-1.8",
+        "sex": "4 males, 3 females (treated) + 1 male control",
+        "screening": "Pre-screened seronegative for PEG antibodies",
+        "site": "California National Primate Research Center, UC Davis"
+      },
+      "dosing": {
+        "doses_mg_per_kg": [0.25, 0.4],
+        "n_per_dose": {"0.25": 4, "0.4": 3, "control": 1},
+        "route": "IV (slow injection under sedation with telazol 5-8 mg/kg IM)",
+        "timepoint_hours": 24,
+        "formulation_state": "Cryopreserved (10% sucrose), shipped frozen Georgia→California, thawed and tested for sterility/endotoxin before injection",
+        "pretreatment": "NONE — no anti-inflammatory pre-treatment (unusual, most NHP LNP studies use steroid + antihistamine)"
+      },
+      "readout": {
+        "method": "IVIS luminescence (NanoGlo substrate) on immunoselected CD34+, CD34-, and liver cell fractions. Also volumetric light-field microscopy with anti-NanoLuc + anti-CD34/anti-ASGPR antibodies.",
+        "bone_marrow_isolation": "All long bones collected, immunoselection with mini-MACS (Miltenyi Biotec) for CD34+ and CD34- fractions"
+      },
+      "efficacy": {
+        "key_finding": "Dose-dependent delivery to CD34+ cells, CD34- cells, and liver. CD34+ and liver delivery were approximately similar at both doses. No adverse findings. No serum cytokine activation.",
+        "quantification": {
+          "_note": "Luminescence readout (total flux in p/s), not % cells transfected. Values read from Fig 4e log-scale bar charts. This is a limitation acknowledged by authors — luciferase makes it difficult to quantify percentage of cells transfected.",
+          "cd34_negative": {
+            "control_ps": "5e7",
+            "0.25_mpk_ps": "8e7",
+            "0.4_mpk_ps": "2e8",
+            "fold_over_background_0.4": 4
+          },
+          "cd34_positive": {
+            "control_ps": "2e7",
+            "0.25_mpk_ps": "3e8",
+            "0.4_mpk_ps": "1e9",
+            "fold_over_background_0.25": 15,
+            "fold_over_background_0.4": 50
+          },
+          "liver": {
+            "control_ps": "3e7",
+            "0.25_mpk_ps": "3e8",
+            "0.4_mpk_ps": "1e9",
+            "fold_over_background_0.25": 10,
+            "fold_over_background_0.4": 33
+          },
+          "cd34_pos_to_liver_ratio_0.25": "~0.67 (liver slightly higher)",
+          "cd34_pos_to_liver_ratio_0.4": "~1.0 (approximately equal)",
+          "cd34_pos_vs_cd34_neg": "CD34+ signal is higher than CD34- at both doses — delivery preferentially reaches stem/progenitor compartment",
+          "confidence": "MEDIUM — values estimated from log-scale bar charts (Fig 4e), but dose-dependent trends and ratios are clear"
+        },
+        "hsc_definition": "CD34+ (immunoselected by MACS)",
+        "safety": {
+          "cytokines": "23 serum cytokines analyzed (Milliplex MAP NHP panel): GM-CSF, TGF-α, G-CSF, IFN-γ, IL-2, IL-10, IL-15, sCD40L, IL-17a, IL-1ra, IL-13, IL-1β, IL-4, IL-5, IL-6, IL-8, MIP-1α, MCP-1, TNF-α, IL-12/23(p40), MIP-1β, VEGF, IL-18. No cytokine showed dose-dependent elevation in treated vs naive. Highest baseline values were IL-1ra (~1000 pg/ml), IL-8 (~1000-2000 pg/ml), and MCP-1 (~500 pg/ml) — all similar across groups.",
+          "cytokine_confidence": "HIGH — exact analytes and visual patterns read from Fig 4h",
+          "cbc_chemistry": "CBCs and clinical chemistry panels within normal limits pre- and post-administration",
+          "adverse_findings": "None observed either immediately after dosing or in post-administration period",
+          "pretreatment": "NONE — no anti-inflammatory pre-treatment. This is notable because most NHP LNP studies and FDA-approved LNP products (e.g., patisiran) use steroid + antihistamine pretreatment. Clean safety without pretreatment is a strong signal."
+        },
+        "imaging_confirmation": "Volumetric light-field microscopy confirmed NanoLuc protein co-localized with CD34+ (bone marrow) and ASGPR+ (liver) cells",
+        "confidence": "HIGH for methodology and safety; MEDIUM for quantitative delivery (luminescence, not % cells)"
+      },
+      "_critical_for_ml": "This is THE key experiment — first demonstration of LNP delivery to CD34+ HSPCs in NHPs without targeting ligands at clinically relevant doses. However, the readout (luminescence) is NOT directly comparable to the flow cytometry % positive readouts from Breda/Shi."
+    },
+    {
+      "experiment_id": "E6_human_ex_vivo",
+      "experiment_name": "LNP67 on primary human CD34+ bone marrow cells (ex vivo dose-response)",
+      "figure": "Fig 5, Supp Fig 16-17",
+      "formulations_tested": ["LNP67"],
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "aVHH mRNA"
+      },
+      "model": {
+        "system": "ex_vivo",
+        "species": "human",
+        "cell_type": "Primary human CD34+ cells isolated from bone marrow (positive immunomagnetic selection, StemCell Technologies)",
+        "culture": "StemSpan SFEM II + CD34+ Expansion Supplement, 4 days before experiment",
+        "donor_status": "Normal, virus-tested (HIV, HepB, HepC)"
+      },
+      "dosing": {
+        "doses_ug_per_ml": [0.25, 0.5, 1.0, 2.0, 4.0],
+        "timepoint_hours": 24,
+        "seeding": "1e5 cells/ml in 24-well plate, treated 24h after seeding"
+      },
+      "readout": {
+        "method": "Flow cytometry — % aVHH+ cells in 6 subtypes: HSC (CD34+CD38-CD45RA-CD90+), MPP (CD34+CD38-CD45RA-CD90-), MLP (CD34+CD38-CD45RA+), MEP+CMP (CD34+CD38+), CD34+, CD34-"
+      },
+      "efficacy": {
+        "key_finding": "Dose-dependent delivery with strong selectivity: HSC and MPP are most efficiently transfected (~72% at 4.0 μg/ml). MEP+CMP is essentially resistant (all doses ns or borderline). MLP only responds at ≥1.0 μg/ml. CD34+ consistently higher than CD34-. Steep dose-response between 2.0 and 4.0 μg/ml suggests threshold effect.",
+        "at_4_ug_per_ml": {
+          "HSC_percent_avhh_positive": 72,
+          "MPP_percent": 72,
+          "MLP_percent": 30,
+          "MEP_CMP_percent": 15,
+          "CD34_positive_percent": 55,
+          "CD34_negative_percent": 25
+        },
+        "at_2_ug_per_ml": {
+          "HSC_percent": 38,
+          "MPP_percent": 35,
+          "MLP_percent": 5,
+          "MEP_CMP_percent": 8,
+          "CD34_positive_percent": 22,
+          "CD34_negative_percent": 12
+        },
+        "at_1_ug_per_ml": {
+          "HSC_percent": 25,
+          "MPP_percent": 28,
+          "MLP_percent": 3,
+          "MEP_CMP_percent": 5,
+          "CD34_positive_percent": 15,
+          "CD34_negative_percent": 8
+        },
+        "at_0.5_ug_per_ml": {
+          "HSC_percent": 22,
+          "MPP_percent": 25,
+          "MLP_percent": 2,
+          "CD34_positive_percent": 12,
+          "CD34_negative_percent": 7
+        },
+        "at_0.25_ug_per_ml": {
+          "HSC_percent": 15,
+          "MPP_percent": 15,
+          "MLP_percent": 1,
+          "CD34_positive_percent": 8,
+          "CD34_negative_percent": 5
+        },
+        "significance_notes": {
+          "HSC": "p<0.0001 at all doses ≥0.25 μg/ml",
+          "MPP": "p<0.0001 at all doses ≥0.25 μg/ml",
+          "MLP": "ns at 0.25 and 0.5; p=0.0017 at 1.0; p=0.0039 at 2.0; p<0.0001 at 4.0",
+          "MEP_CMP": "ns at all doses up to 2.0 (p=0.0753); only significant at 4.0",
+          "CD34_pos": "p<0.0001 at all doses ≥0.25 μg/ml",
+          "CD34_neg": "p<0.001 at 0.25; p<0.0001 at ≥0.5; p=0.00003 at 4.0"
+        },
+        "selectivity_insight": "LNP67 shows cell-type selectivity even without a targeting ligand: HSC/MPP >> MLP >> MEP+CMP. Primitive stem cells are more efficiently transfected than committed progenitors. This may relate to differences in endocytic activity, membrane composition, or cell cycle status between these populations.",
+        "hsc_definition": "CD34+CD38-CD45RA-CD90+ (human HSPC markers)",
+        "confidence": "HIGH — values read directly from Fig 5 bar chart with printed p-values"
+      },
+      "statistics": "Two-way ANOVA with Tukey post-hoc. p<0.0001 for HSC and MPP at 2.0 and 4.0 ug/ml",
+      "n_per_group": 3
+    },
+    {
+      "experiment_id": "E7_safety_mouse",
+      "experiment_name": "Mouse safety (histopathology + cytokines)",
+      "figure": "Fig 2g-h, Supp Fig 12",
+      "formulations_tested": ["LNP67"],
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 1.5,
+        "route": "IV",
+        "timepoint_hours": "6 and 24"
+      },
+      "safety": {
+        "histopathology": "No differences in liver histopathology vs PBS at 24h (H&E staining)",
+        "cytokines": "No robust changes in serum cytokines at 6 or 24h vs PBS. 45+ markers tested (chemokines, cytokines, CSFs, growth factors, soluble adhesion molecules). LPS (1 mg/kg) positive control showed expected activation.",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "experiment_id": "E8_freeze_thaw",
+      "experiment_name": "LNP67 freeze-thaw stability",
+      "figure": "Fig 4a-b, Supp Fig 14",
+      "formulations_tested": ["LNP67"],
+      "result": {
+        "dh_fresh_nm": 85,
+        "dh_freeze_thaw_nm": 85,
+        "pdi_fresh": 0.15,
+        "pdi_freeze_thaw": 0.10,
+        "dh_pdi_significance": "ns for both (two-tailed unpaired t-test)",
+        "in_vivo_activity_at_1_mpk": {
+          "_note": "Fresh vs freeze-thawed LNP67 at 1.0 mg/kg, 8 HSC subtypes. All ns. Values from Fig 4b.",
+          "HSC_fresh_percent": 20,
+          "HSC_freeze_thaw_percent": 25,
+          "MPP_fresh_percent": 75,
+          "MPP_freeze_thaw_percent": 80,
+          "LSK_fresh_percent": 25,
+          "LSK_freeze_thaw_percent": 30,
+          "_note2": "These values at 1.0 mg/kg cross-validate the dose-response from Fig 2i (E3). HSC ~20-25% at 1 mg/kg is consistent."
+        },
+        "cryoprotectant": "10% sucrose (w/v) in PBS",
+        "freezing_method": "Flash freezing in dry ice-ethanol bath",
+        "storage": "≤ -80°C",
+        "confidence": "HIGH — values from Fig 4a (Dh, PDI) and Fig 4b (in vivo activity)"
+      }
+    }
+  ],
+
+  "biodistribution": {
+    "_note": "Biodistribution data is distributed across multiple experiments rather than a dedicated biodistribution study.",
+    "e2_individual_validation_0.5_mpk_16h": {
+      "tissues_sampled": ["bone_marrow", "liver", "spleen", "lung", "heart", "kidney"],
+      "cell_types_per_tissue": 24,
+      "lnp67_bm_lsk_percent": 20.9,
+      "lnp67_liver_ec_percent": 20.1,
+      "lnp67_spleen_percent": 18.6,
+      "lnp67_kidney_percent": 2.4,
+      "lnp67_heart_percent": 0.7,
+      "lnp67_lung_percent": 1.8,
+      "lnp67_bm_to_liver_ratio": 1.04,
+      "lnp95_lung_percent": 94.3,
+      "lp01_liver_percent": 42.4,
+      "_note": "All values from Fig 2a (HIGH confidence). Key insight: LNP67 has near-equal BM:liver delivery (20.9 vs 20.1). LNP95 is actually lung-tropic (94.3%). LP01 is strongly liver-tropic (42.4%). Compare Breda liver off-target of 76-79% — LNP67's 50:50 split is substantially better for BM:liver ratio.",
+      "confidence": "HIGH — exact values from Fig 2a"
+    },
+    "e5_nhp_0.25_and_0.4_mpk_24h": {
+      "tissues_sampled": ["bone_marrow", "liver"],
+      "bone_marrow_cd34_positive": true,
+      "bone_marrow_cd34_negative": true,
+      "liver": true,
+      "at_0.25_mpk": {
+        "cd34_pos_flux": "2e8",
+        "cd34_neg_flux": "8e7",
+        "liver_flux": "3e8",
+        "cd34_pos_to_liver_ratio": 0.67,
+        "_note": "Liver slightly higher than CD34+ at lower dose"
+      },
+      "at_0.4_mpk": {
+        "cd34_pos_flux": "1e9",
+        "cd34_neg_flux": "2e8",
+        "liver_flux": "1e9",
+        "cd34_pos_to_liver_ratio": 1.0,
+        "_note": "CD34+ and liver approximately equal at higher dose"
+      },
+      "key_observation": "CD34+ signal consistently higher than CD34- at both doses — LNP67 preferentially reaches the stem/progenitor compartment within bone marrow. BM:liver ratio improves with dose (0.67 at 0.25 mpk → 1.0 at 0.4 mpk).",
+      "confidence": "MEDIUM — values estimated from log-scale bar chart (Fig 4e)"
+    }
+  },
+
+  "label_for_ml": {
+    "hsc_efficacy_class": "HIGH",
+    "primary_metric_used": "% aVHH+ HSC (flow cytometry, mouse in vivo at 2 mg/kg)",
+    "primary_metric_value": 35,
+    "hsc_efficacy_class_at_0.5_mpk": "LOW",
+    "hsc_at_0.5_mpk": 12,
+    "estimated_dose_for_30pct_hsc_mpk": 1.8,
+    "secondary_metric_1": "% aVHH+ MPP at 2 mg/kg = ~80%",
+    "secondary_metric_2": "Luminescence in CD34+ cells (NHP, qualitative dose-dependent delivery)",
+    "confidence": "MEDIUM — HSC value CORRECTED from 60% to 35% after zoomed figure review. Now borderline HIGH (just above 30% threshold). Individual data points span 28-38%.",
+    "rationale": "Classified as HIGH because HSC mean ~35% at 2 mg/kg exceeds 30% threshold, and MPP ~80% at 2 mg/kg is clearly HIGH. However, this is borderline — at the more clinically comparable 0.5 mg/kg dose, HSC is only ~12% (LOW). Dose-normalized comparison: Breda achieves 30% HSC at ~0.15 mg/kg, Shi at ~0.5 mg/kg, Kim at ~1.8 mg/kg. Kim requires ~12x more drug than Breda for equivalent HSC delivery.",
+    "track": "A_intrinsic_tropism",
+    "_note": "For the ML model, this paper represents Track A (intrinsic tropism) vs Breda/Shi which are Track B (antibody-conjugated). Dose MUST be an input feature — labeling Kim and Breda both as HIGH without dose context would be misleading."
+  },
+
+  "cross_paper_comparison": {
+    "vs_breda_2023": {
+      "targeting": "Breda uses CD117 antibody conjugation; Kim uses no targeting (intrinsic tropism)",
+      "helper_lipid": "Breda uses DSPC (zwitterionic); Kim uses DOTAP (permanently cationic)",
+      "ionizable_lipid": "Breda uses likely ALC-0307 (Acuitas); Kim uses proprietary (patent-protected)",
+      "peg_lipid": "Breda uses standard C14; Kim also uses C14PEG2000",
+      "species": "Breda is mouse-only in vivo; Kim has mouse + NHP in vivo + human ex vivo",
+      "hsc_efficacy": "Breda ~55% LT-HSC at 0.25 mg/kg (mouse); Kim ~35% HSC at 2 mg/kg (mouse) — Breda achieves higher efficacy at 8x lower dose. Per mg/kg: Breda ~220%/mg, Shi ~90%/mg, Kim ~17.5%/mg. Antibody targeting is ~12x more dose-efficient.",
+      "liver_offtarget": "Breda ~76-79% liver; Kim 20.1% liver (with 20.9% BM) — Kim has dramatically better BM:liver ratio (1:1 vs ~1:4 for Breda). And LP01 control only delivers 4% to BM vs 60% liver, confirming LNP67's BM tropism is real and not just baseline.",
+      "manufacturing_complexity": "Breda requires antibody production, thiolation, conjugation, purification; Kim is simple 4-component LNP — major manufacturing advantage"
+    },
+    "vs_shi_2023": {
+      "targeting": "Shi uses CD117 clone 2B8; Kim uses no targeting",
+      "helper_lipid": "Shi uses DSPC; Kim uses DOTAP",
+      "peg_lipid": "Shi optimized to C18-PEG for BM delivery; Kim uses C14-PEG",
+      "hsc_efficacy": "Shi ~90% HSPC at 1 mg/kg (mouse); Kim ~35% HSC at 2 mg/kg (mouse) — Shi achieves 2.5x higher efficacy at half the dose via active targeting. Per mg/kg: Shi ~90%/mg vs Kim ~17.5%/mg.",
+      "_note": "Shi's C18-PEG optimization increased BM delivery 3x over C14-PEG. Kim uses C14 but with DOTAP helper — different mechanism for BM tropism."
+    }
+  },
+
+  "schema_implications_for_ml": {
+    "new_fields_needed": [
+      "helper_lipid_charge_class: 'permanently_cationic' | 'zwitterionic' | 'anionic' | 'neutral' — DOTAP changes everything about tropism",
+      "screening_method: 'individual' | 'barcoded_pool' | 'SENT-seq' — this paper uses pooled barcoded screening",
+      "species_tested: array of species with data (mouse, NHP, human_ex_vivo)",
+      "nhp_data_available: boolean — very rare and valuable for ML",
+      "readout_type: 'percent_positive_flow' | 'MFI' | 'luminescence' | 'scrnaseq' — these are NOT interchangeable metrics"
+    ],
+    "critical_observations": [
+      "LNP67's formulation (35:47.5:2.5:15 ionizable:chol:PEG:DOTAP) is radically different from standard LNPs (50:38.5:1.5:10). Low ionizable lipid (35 vs 50%), very high cholesterol (47.5 vs 38.5%), and 15% permanently cationic DOTAP.",
+      "DOTAP (permanently cationic helper lipid) at 15 mol% is the key differentiator for BM tropism. Consistent with SORT system literature where cationic lipids shift tropism away from liver.",
+      "The high cholesterol (47.5%) may reduce ApoE adsorption compared to standard formulations, reducing liver uptake via the LDLR pathway. This is testable with the corona data.",
+      "Three of four helper lipids in the library are cationic (DOTAP, DOTMA, DDAB) — this library was designed to explore cationic effects on tropism, not a random sampling of helper lipids.",
+      "Ionizable lipid is proprietary — this is a significant gap for ML. We cannot compute molecular descriptors. But at 35 mol% it contributes less to the formulation than in standard LNPs.",
+      "NHP readout (luminescence) is not directly comparable to mouse readout (% aVHH+ by flow). Need readout normalization strategy for cross-paper ML.",
+      "Buffer pH 5 (sodium acetate) vs pH 3 (citrate) in Shi — different ionization environment during formulation may affect LNP internal structure.",
+      "The entire 128-LNP molar ratio table is now available — all 128 formulations can be decoded for the ML training set, not just LNP67."
+    ]
+  },
+
+  "annotation_metadata": {
+    "annotator": "Claude (AI-assisted annotation)",
+    "annotation_date": "2026-03-04",
+    "last_updated": "2026-03-06",
+    "version": "v2",
+    "version_history": [
+      "v1 (2026-03-04): Initial annotation from main text + Supp Figs 1a-c + main figures 1-5",
+      "v2 (2026-03-06): Added Supp Fig 6 digitized delivery data (66 LNPs), Supp Fig 7 composition verification, grid numbering analysis, 128-formulation HL+PEG decoding"
+    ],
+    "sources": [
+      "Main text (HHS Public Access author manuscript, nihms-2043304.pdf)",
+      "Supplementary Fig 1a (molar ratios, lipid structures, formulation parameters, LNP ID grid)",
+      "Supplementary Fig 6 (per-LNP barcode counts in BM and liver — digitized)",
+      "Supplementary Fig 7 (LNP67/95/108/LP01 compositions — verified)",
+      "Main figures 1-5 (uploaded as screenshots)"
+    ],
+    "missing_sources": ["Supplementary Figures 2-5, 8-19 (not uploaded)", "US Patent Application 63/632,354 (ionizable lipid structure)", "Source data spreadsheet (not deposited by authors)"],
+    "total_formulations": 4,
+    "total_experiments": 8,
+    "total_screen_lnps_decoded": 128,
+    "total_screen_lnps_with_delivery": 66,
+    "key_gaps": [
+      "Ionizable lipid exact SMILES: PPZ-A10 scaffold is identified but full SMILES string not yet generated (could be drawn from patent Fig 3A structure + NMR data)",
+      "Molar ratios for 125/128 screen LNPs: HL+PEG identity known, but row-to-ratio mapping is shuffled — cannot assign compositions without source data spreadsheet",
+      "Quantitative NHP delivery as % cells (luminescence readout only, acknowledged limitation)"
+    ],
+    "resolved_gaps": [
+      "Molar ratios: RESOLVED from Supp Fig 1a — LNP67 is Ratio 3 = 35:47.5:2.5:15 (ionizable:chol:PEG:DOTAP)",
+      "All 8 molar ratio compositions: RESOLVED from Supp Fig 1a",
+      "Lipid molecular weights: RESOLVED from Supp Fig 1b",
+      "Buffer pH: RESOLVED from Supp Fig 1c — pH 5 sodium acetate",
+      "Biodistribution exact values: RESOLVED from Fig 2a radar plot",
+      "Human ex vivo dose-response: RESOLVED from Fig 5 with p-values",
+      "NHP luminescence values and cytokine panel: RESOLVED from Fig 4e,h",
+      "Ionizable lipid identity: LARGELY RESOLVED from patent US 2025/0127727 A1 — PPZ-A10 piperazine lipid (diketopiperazine-amide scaffold, C10 alkyl tails). Patent molar ratio 35:46.5:2.5:16 closely matches LNP67's 35:47.5:2.5:15.",
+      "LNP95 and LNP108 compositions: RESOLVED from Supp Fig 7, VERIFIED against Supp Fig 1a grid (HL+PEG match, ratio compositions confirmed)",
+      "Corona proteins: RESOLVED from Supp Fig 11 — 9 enriched proteins identified including vitronectin and transferrin receptor",
+      "Cryo-TEM structural comparison: RESOLVED from Supp Fig 10 — similar morphology LNP67 vs LP01, confirming tropism is surface chemistry-driven",
+      "Per-LNP delivery data: RESOLVED — digitized from Supp Fig 6 for 66 LNPs with BM and liver normalized barcode counts",
+      "128-formulation HL+PEG decoding: RESOLVED — all 128 LNP IDs mapped to helper lipid + PEG lipid identity via Supp Fig 1a grid column assignments"
+    ],
+    "verification_notes": [
+      "Supp Fig 7 compositions (LNP67/95/108/LP01) cross-checked against Supp Fig 1a grid. HL and PEG identities match perfectly. Ratio compositions confirmed. Note: grid row position ≠ ratio number (see screening_design.matrix.grid_numbering).",
+      "LNP95 composition (IL=50, Chol=17.5, DOTAP=30) is Ratio 4 by composition but sits at grid row 7 in column 12. This proves the ratio-to-row mapping is shuffled, likely randomized in the screening design.",
+      "LNP108 composition (IL=45, Chol=37.5, 18:1 EPC=15) is Ratio 2 by composition but sits at grid row 4 in column 14."
+    ]
+  }
+}
