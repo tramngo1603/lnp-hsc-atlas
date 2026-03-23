@@ -6,7 +6,7 @@
     {
       "formulation_id": "F1_LNP67",
       "formulation_name": "LNP67",
-      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "ionizable_lipid": {"name": "PPZ-A10 (CAS 2941268-67-1)"},
       "helper_lipid": {"name": "DOTAP"},
       "peg_lipid": {"name": "C14PEG2000", "chain_length": "C14"},
       "molar_ratios": {
@@ -18,7 +18,7 @@
     {
       "formulation_id": "F2_LNP95",
       "formulation_name": "LNP95",
-      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "ionizable_lipid": {"name": "PPZ-A10 (CAS 2941268-67-1)"},
       "helper_lipid": {"name": "DOTAP"},
       "peg_lipid": {"name": "C18PEG2000", "chain_length": "C18"},
       "molar_ratios": {},
@@ -27,7 +27,7 @@
     {
       "formulation_id": "F3_LNP108",
       "formulation_name": "LNP108",
-      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "ionizable_lipid": {"name": "PPZ-A10 (CAS 2941268-67-1)"},
       "helper_lipid": {"name": "DSPC"},
       "peg_lipid": {"name": "C14PEG2000", "chain_length": "C14"},
       "molar_ratios": {},
@@ -36,7 +36,7 @@
     {
       "formulation_id": "F4_LP01",
       "formulation_name": "LP01",
-      "ionizable_lipid": {"name": "PPZ-A10 (proprietary)"},
+      "ionizable_lipid": {"name": "PPZ-A10 (CAS 2941268-67-1)"},
       "helper_lipid": {"name": "DSPC"},
       "peg_lipid": {"name": "C14PEG2000", "chain_length": "C14"},
       "molar_ratios": {

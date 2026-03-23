@@ -1,0 +1,179 @@
+{
+  "gap_formulations": [
+    {
+      "name": "Gap #1: CD117/2B8 + DOTAP + C18-PEG",
+      "p_high": 0.4510173797855117,
+      "entropy": 0.6883408810741038,
+      "nearest_formulation": "F1_LNP67",
+      "nearest_paper": "kim_2024",
+      "nearest_efficacy": "medium",
+      "distance_euclidean": 4.707939674099973,
+      "distance_sd": 3.1264637923369047,
+      "confidence": "LOW",
+      "top3_neighbors": [
+        {
+          "formulation": "F1_LNP67",
+          "paper": "kim_2024",
+          "efficacy": "medium",
+          "distance": 4.707939674099973
+        },
+        {
+          "formulation": "F1_LNP67",
+          "paper": "kim_2024",
+          "efficacy": "medium",
+          "distance": 4.707939674099973
+        },
+        {
+          "formulation": "F1_LNP67",
+          "paper": "kim_2024",
+          "efficacy": "medium",
+          "distance": 5.344398915269295
+        }
+      ],
+      "liver_estimate": 77.9,
+      "expected_bm": 20.0,
+      "liver_reference": [
+        "IgG/LNP",
+        "CD117/LNP"
+      ]
+    },
+    {
+      "name": "Gap #2: LNP67 + C18-PEG swap",
+      "status": "DISPROVEN",
+      "disproven_reason": "All 4 measured DOTAP + C18PEG2000 LNPs in Kim screen show background BM (0.2-0.5). C18-PEG abolishes BM tropism in untargeted LNPs. ALC-0159 (also C18) preserves BM — PEG architecture, not chain length, determines tropism.",
+      "p_high": 0.38474708595555285,
+      "entropy": 0.6663403056822736,
+      "nearest_formulation": "F1_LNP67",
+      "nearest_paper": "kim_2024",
+      "nearest_efficacy": "medium",
+      "distance_euclidean": 2.1189138534559038,
+      "distance_sd": 1.4071351590071954,
+      "confidence": "DISPROVEN",
+      "top3_neighbors": [
+        {
+          "formulation": "F1_LNP67",
+          "paper": "kim_2024",
+          "efficacy": "medium",
+          "distance": 2.1189138534559038
+        },
+        {
+          "formulation": "LNP67",
+          "paper": "kim_2024",
+          "efficacy": "high",
+          "distance": 2.1189138534559038
+        },
+        {
+          "formulation": "F1_LNP67",
+          "paper": "kim_2024",
+          "efficacy": "medium",
+          "distance": 2.1189138534559038
+        }
+      ],
+      "liver_estimate": 17.7,
+      "expected_bm": 20.0,
+      "liver_reference": [
+        "LNP67",
+        "LNP108",
+        "LNP111"
+      ]
+    },
+    {
+      "name": "Gap #3: Breda + C16GalCer",
+      "p_high": 0.5947846484556294,
+      "entropy": 0.675069724296298,
+      "nearest_formulation": "F5_ALC0315_C14PEG",
+      "nearest_paper": "shi_2023",
+      "nearest_efficacy": "high",
+      "distance_euclidean": 2.2532666456978108,
+      "distance_sd": 1.4963565954360696,
+      "confidence": "MEDIUM",
+      "top3_neighbors": [
+        {
+          "formulation": "F5_ALC0315_C14PEG",
+          "paper": "shi_2023",
+          "efficacy": "high",
+          "distance": 2.2532666456978108
+        },
+        {
+          "formulation": "CD117/LNP",
+          "paper": "breda_2023",
+          "efficacy": "high",
+          "distance": 2.4827637113222245
+        },
+        {
+          "formulation": "F6_ALC0315_C16PEG",
+          "paper": "shi_2023",
+          "efficacy": "high",
+          "distance": 2.4899115559003495
+        }
+      ],
+      "liver_estimate": 77.1,
+      "expected_bm": 35.0,
+      "liver_reference": [
+        "IgG/LNP",
+        "CD117/LNP"
+      ]
+    },
+    {
+      "name": "Gap #5: Low-dose Ab + high-dose untargeted",
+      "p_high": 0.37205515039187276,
+      "entropy": 0.6600404132401945,
+      "nearest_formulation": "F5_ALC0315_C14PEG",
+      "nearest_paper": "shi_2023",
+      "nearest_efficacy": "medium",
+      "distance_euclidean": 4.670821093379156,
+      "distance_sd": 3.1018139653042858,
+      "confidence": "LOW",
+      "top3_neighbors": [
+        {
+          "formulation": "F5_ALC0315_C14PEG",
+          "paper": "shi_2023",
+          "efficacy": "medium",
+          "distance": 4.670821093379156
+        },
+        {
+          "formulation": "CD117/LNP",
+          "paper": "breda_2023",
+          "efficacy": "high",
+          "distance": 4.789469559977126
+        },
+        {
+          "formulation": "CD117/LNP",
+          "paper": "breda_2023",
+          "efficacy": "high",
+          "distance": 4.789469559977126
+        }
+      ],
+      "liver_estimate": 77.9,
+      "expected_bm": 20.0,
+      "liver_reference": [
+        "IgG/LNP",
+        "CD117/LNP"
+      ]
+    }
+  ],
+  "dex_intervention": {
+    "deprecated": true,
+    "retraction_reason": "Loughrey 2025 (ChemComm) showed dexamethasone pre-treatment INCREASES Kupffer cell LNP uptake by 124%, contradicting the original hypothesis. EC30 improvement estimates below are retracted.",
+    "retracted_estimates": [
+      {
+        "approach": "Breda_CD117",
+        "original_ec30": 0.1237,
+        "adjusted_ec30": 0.0952,
+        "improvement_pct": 23.1
+      },
+      {
+        "approach": "Shi_CD117_C18",
+        "original_ec30": 0.0356,
+        "adjusted_ec30": 0.0274,
+        "improvement_pct": 23.1
+      },
+      {
+        "approach": "Kim_LNP67",
+        "original_ec30": 1.5479,
+        "adjusted_ec30": 1.1907,
+        "improvement_pct": 23.1
+      }
+    ]
+  }
+}

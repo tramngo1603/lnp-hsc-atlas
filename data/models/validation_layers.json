@@ -1,0 +1,155 @@
+{
+  "sar_table": [
+    {
+      "id": "SAR1",
+      "name": "PEG density up \u2192 BM uptake down",
+      "feature": "peg_mol_pct",
+      "expected_dir": "negative",
+      "rank": 21,
+      "n_features": 29,
+      "shap_value": 0.007,
+      "verdict": "INCONCLUSIVE",
+      "detail": "rank 21/29, |SHAP|=0.0070"
+    },
+    {
+      "id": "SAR2",
+      "name": "C18-PEG > C14-PEG for HSC",
+      "feature": "peg_chain_numeric",
+      "expected_dir": "positive",
+      "rank": 15,
+      "n_features": 29,
+      "shap_value": 0.0776,
+      "verdict": "SUPPORTED",
+      "detail": "rank 15/29, |SHAP|=0.0776"
+    },
+    {
+      "id": "SAR3",
+      "name": "Higher cholesterol \u2192 liver bias",
+      "feature": "cholesterol_mol_pct",
+      "expected_dir": "negative",
+      "rank": 10,
+      "n_features": 29,
+      "shap_value": 0.1288,
+      "verdict": "SUPPORTED",
+      "detail": "rank 10/29, |SHAP|=0.1288"
+    },
+    {
+      "id": "SAR4",
+      "name": "CD117 targeting boosts HSC delivery",
+      "feature": "receptor_cd117",
+      "expected_dir": "positive",
+      "rank": 2,
+      "n_features": 29,
+      "shap_value": 0.6764,
+      "verdict": "CONFIRMED",
+      "detail": "rank 2/29, |SHAP|=0.6764"
+    },
+    {
+      "id": "SAR5",
+      "name": "Clone 2B8 >> ACK2",
+      "feature": "clone_2b8",
+      "expected_dir": "positive",
+      "rank": 23,
+      "n_features": 29,
+      "shap_value": 0.0002,
+      "verdict": "INCONCLUSIVE",
+      "detail": "rank 23/29, |SHAP|=0.0002"
+    },
+    {
+      "id": "SAR6",
+      "name": "DOTAP enables BM tropism",
+      "feature": "hl_dotap",
+      "expected_dir": "positive",
+      "rank": 4,
+      "n_features": 29,
+      "shap_value": 0.238,
+      "verdict": "CONFIRMED",
+      "detail": "rank 4/29, |SHAP|=0.2380"
+    },
+    {
+      "id": "SAR7",
+      "name": "Low IL% better for BM",
+      "feature": "ionizable_mol_pct",
+      "expected_dir": "negative",
+      "rank": 1,
+      "n_features": 29,
+      "shap_value": 0.9264,
+      "verdict": "CONFIRMED",
+      "detail": "rank 1/29, |SHAP|=0.9264"
+    },
+    {
+      "id": "SAR8",
+      "name": "Dose-dependent HSC delivery",
+      "feature": "dose_mg_per_kg",
+      "expected_dir": "positive",
+      "rank": 3,
+      "n_features": 29,
+      "shap_value": 0.3864,
+      "verdict": "CONFIRMED",
+      "detail": "rank 3/29, |SHAP|=0.3864"
+    },
+    {
+      "id": "SAR9",
+      "name": "IL pKa 6.2-6.5 optimal",
+      "feature": "pka",
+      "expected_dir": "N/A",
+      "rank": null,
+      "shap_value": null,
+      "verdict": "NOT_TESTABLE",
+      "detail": "Feature 'pka' not in matrix"
+    },
+    {
+      "id": "SAR10",
+      "name": "Optimal Ab:mal ratio ~1:20",
+      "feature": "ab_mal_ratio",
+      "expected_dir": "N/A",
+      "rank": null,
+      "shap_value": null,
+      "verdict": "NOT_TESTABLE",
+      "detail": "Feature 'ab_mal_ratio' not in matrix"
+    }
+  ],
+  "sar_stability": {
+    "ionizable_mol_pct": [
+      4,
+      1,
+      5
+    ],
+    "receptor_cd117": [
+      2,
+      7,
+      3
+    ],
+    "dose_mg_per_kg": [
+      1,
+      6,
+      2
+    ],
+    "hl_dotap": [
+      23,
+      3,
+      4
+    ],
+    "helper_is_cationic": [
+      15,
+      12,
+      8
+    ],
+    "peg_chain_numeric": [
+      3,
+      5,
+      13
+    ]
+  },
+  "cross_target": {
+    "ab_to_intrinsic": 0.5399036807705538,
+    "intrinsic_to_ab": 0.3333333333333333
+  },
+  "ablation": {
+    "baseline": 0.46726948089177195,
+    "shuffled_labels": 0.4182708544410672,
+    "drop_top1": 0.46726948089177195,
+    "drop_top3": 0.423354136976428,
+    "gaussian_noise": 0.5015709207659672
+  }
+}

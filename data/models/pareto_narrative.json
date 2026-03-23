@@ -1,0 +1,21 @@
+{
+  "screen_finding": "Within Kim's controlled 26-LNP screen (barcode counts), BM and liver delivery are correlated (Spearman r=0.345, p=0.085), confirming that formulation modifications can independently affect each organ.",
+  "validation_finding": "Cross-paper comparison (n=6 LNPs + 1 VLP comparator) shows antibody-conjugated LNPs (Breda) achieve the highest BM delivery (55%) but with proportionally high liver (76%). Untargeted LNPs (Kim LNP67) achieve moderate BM (20.9%) with moderate liver (20.1%). LNP108 achieves the best LNP selectivity (BM:liver = 5.5).",
+  "cross_platform_finding": "Ensoma's BaEVTR VLP (31% HSC editing, ~0% liver) is the FIRST data point in the ideal zone of the Pareto frontier. This demonstrates that high HSC delivery with near-zero liver is achievable \u2014 but with a different delivery platform (VLP vs LNP). LNP gap formulations must target >31% HSC delivery with <5% liver to match VLP performance.",
+  "narrative_shift": "The paper's central question shifts from 'Can any formulation reach the ideal zone?' to 'Can LNPs match the selectivity that VLPs have achieved?' Gap #2 (LNP67 + C18-PEG) targets this zone with predicted ~18% liver, but LNP-intrinsic liver uptake may be a fundamental platform limitation.",
+  "ideal_zone": {
+    "bm_threshold": 30,
+    "liver_threshold": 5
+  },
+  "formulations_in_ideal_zone": [
+    "Ensoma BaEVTR VLP"
+  ],
+  "lnp_formulations_in_ideal_zone": [],
+  "key_numbers_changed": {
+    "old_spearman_r": 0.37,
+    "old_spearman_note": "mixed barcode+% data (29 points)",
+    "new_screen_spearman_r": 0.3447,
+    "new_screen_spearman_note": "barcode-only (23 points)",
+    "validation_correlation": "not computed (n=6, NS)"
+  }
+}

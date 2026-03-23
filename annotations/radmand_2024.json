@@ -1,0 +1,103 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-13",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Radmand_2024_PNAS",
+    "title": "Cationic cholesterol-dependent LNP delivery to lung stem cells, the liver, and heart",
+    "authors": "Radmand A et al.",
+    "journal": "Proceedings of the National Academy of Sciences",
+    "year": 2024,
+    "doi_or_id": "10.1073/pnas.2307801120",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.2307801120",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET"
+  },
+  "formulations": [
+    {
+      "id": "F1_cationic_cholesterol_library",
+      "ionizable_lipid": "Multiple (Dahlman lab ionizable lipids)",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "Variable (including cationic helper lipids)",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "Variable",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Cationic cholesterol analogs as structural component. Different from cationic helper lipid approach (DOTAP). Charge on cholesterol vs charge on helper lipid leads to different tropism profiles.",
+      "size_nm": null,
+      "formulation_notes": "196 LNPs tested. Cationic cholesterol analogs shift tropism differently than cationic helper lipids. Combining cationic cholesterol + cationic helper lipid enables heart and lung stem cell delivery."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_196_LNP_screen_22_cell_types",
+      "formulation_ref": "F1_cationic_cholesterol_library",
+      "payload": "Cre mRNA + DNA barcode",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": 72,
+      "species": "mouse",
+      "strain_or_model": "Ai14 tdTomato reporter",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "barcode_count",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "Normalized delivery across 22 cell types in 5 organs",
+        "liver_notes": "Key finding: cationic cholesterol yields DIFFERENT lung:liver ratios than cationic helper lipid (DOTAP). Combining both enables heart delivery + lung stem cell delivery.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Multiple figures (PNAS open access via PMC)",
+      "data_confidence": "MEDIUM",
+      "notes": "196 LNPs, 22 cell types, 5 organs (liver, lung, spleen, heart, + 1 more). Barcoded screen + Cre/tdTom validation. scRNA-seq used for cell-type resolution. Extends SORT concept: which component carries the charge matters."
+    }
+  ],
+  "key_findings_for_project": [
+    "Which component carries the charge matters: cationic cholesterol ≠ cationic helper lipid for tropism",
+    "196 LNPs, 22 cell types across 5 organs - large barcoded dataset",
+    "Combining cationic cholesterol + cationic helper lipid enables HEART + lung stem cell delivery",
+    "Extends the SORT paradigm: it's not just 'cationic = lung' but 'which lipid component is cationic' matters",
+    "BM cell types NOT measured (only liver, lung, spleen, heart)",
+    "Lung stem cell delivery is novel but not directly relevant to HSC project",
+    "Dahlman lab - compatible methodology with Kim screen data"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Different approach entirely. Radmand explores charge on cholesterol; Breda uses antibody targeting.",
+    "vs_shi": "Not directly comparable.",
+    "vs_kim": "Same lab (Dahlman), compatible barcoding methodology. Extends the design space that Kim's BM-targeting screen explored. The cholesterol charge concept could potentially be applied to BM-targeting formulations.",
+    "new_pareto_points": "No BM data. Cannot place on Pareto.",
+    "therapeutic_window_update": "Expands understanding of how charge distribution across LNP components affects tropism. Useful for rational design but no direct HSC relevance.",
+    "gap_formulation_relevance": "Medium. The 196 LNP compositions could add to the training set if per-formulation data is extracted from the full paper. However, readout is lung/liver/spleen/heart, not BM."
+  },
+  "limitations_and_caveats": [
+    "BM not measured as a separate organ",
+    "Barcoded screen data behind PNAS paywall (though PMC may have full text)",
+    "Per-formulation compositions need extraction from supplementary tables",
+    "Heart delivery is novel finding but not relevant to HSC project",
+    "Lung stem cells are different from BM HSCs - different niche biology",
+    "Mouse data only"
+  ]
+}

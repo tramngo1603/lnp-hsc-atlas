@@ -1,0 +1,104 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Patel_2024_Theranostics",
+    "title": "Bile acid-containing lipid nanoparticles enhance extrahepatic mRNA delivery",
+    "authors": "Patel SK et al.",
+    "journal": "Theranostics",
+    "year": 2024,
+    "doi_or_id": "10.7150/thno.89913",
+    "url": "https://www.thno.org/v14p0001.htm",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET"
+  },
+  "formulations": [
+    {
+      "id": "F1_CA100_bile_acid_LNP",
+      "ionizable_lipid": "C14-4",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "DOPE (standard)",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": 0,
+      "peg_lipid": "C14-PEG2000",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Cholesterol fully replaced with cholic acid (CA). CA-100 = 100% cholic acid replacement. Four-component LNP with bile acid instead of cholesterol.",
+      "size_nm": null,
+      "formulation_notes": "CA-100 is highly spleen-tropic. Cholic acid, chenodeoxycholic acid, deoxycholic acid, and lithocholic acid all tested at various replacement ratios. Cholic acid at 100% replacement (CA-100) = best spleen tropism. Generalizable: C12-200 with cholic acid also shifted liver → spleen. LNPs displayed polygonal morphology by cryo-EM."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_CA100_IV_biodistribution",
+      "formulation_ref": "F1_CA100_bile_acid_LNP",
+      "payload": "Luciferase mRNA",
+      "dose_mg_per_kg": 1.0,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": 6,
+      "species": "mouse",
+      "strain_or_model": "BALB/c",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "luminescence",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "Spleen-tropic; liver delivery reduced vs standard cholesterol LNP",
+        "liver_notes": "CA-100 shifted delivery from liver to spleen. Mechanism unclear — could be differential protein corona or morphology-driven (polygonal shape). Also demonstrated reduced liver delivery in vitro.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "Bile acids are naturally occurring — potentially good tolerability profile."
+        }
+      },
+      "figure_source": "Figs 3-5 (open access PMC)",
+      "data_confidence": "MEDIUM",
+      "notes": "Spleen-tropic. BM NOT measured. In vitro: reduced liver cell delivery, improved delivery to T cells, B cells, epithelial cells. Generalizable across two ionizable lipids (C14-4 and C12-200). Polygonal LNP morphology is unusual and may contribute to tropism."
+    }
+  ],
+  "key_findings_for_project": [
+    "Bile acid (cholic acid) fully replaces cholesterol for liver de-targeting — another cholesterol replacement strategy",
+    "Converges with Su/Liu 2024 finding: cholesterol = liver sink",
+    "Spleen-tropic at 100% cholic acid replacement (CA-100)",
+    "Generalizable across C14-4 and C12-200 ionizable lipids",
+    "Polygonal LNP morphology by cryo-EM — novel shape may affect biodistribution",
+    "In vitro: improved delivery to T cells, B cells, epithelial cells — immune cell tropism",
+    "BM NOT measured — another study where BM is absent from organ panel",
+    "Mitchell lab (UPenn) — same lab as Palanki CD45-targeted in utero paper"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Different approach. Bile acid replacement could complement antibody targeting.",
+    "vs_shi": "Could combine bile acid LNP with CD117 targeting for dual liver de-targeting.",
+    "vs_kim": "Different cholesterol strategy. Kim's formulations contain standard cholesterol.",
+    "new_pareto_points": "No BM data. Spleen-tropic, not BM-tropic.",
+    "therapeutic_window_update": "Third independent confirmation that cholesterol replacement de-targets liver (after glycolipid/Gentry and cholesterol removal/Su).",
+    "gap_formulation_relevance": "Medium. C14-4 and cholic acid are known compounds. The bile acid replacement is a novel feature not in your current matrix. Could encode as cholesterol_analog = cholic_acid."
+  },
+  "limitations_and_caveats": [
+    "BM not measured",
+    "Spleen-focused, not BM-focused",
+    "Mechanism for spleen tropism unclear (protein corona vs morphology)",
+    "Polygonal morphology may be unstable for clinical development",
+    "Only reporter readout (luciferase), no editing cargo",
+    "Bile acids have their own biological activity (FXR agonism) — potential confound"
+  ]
+}

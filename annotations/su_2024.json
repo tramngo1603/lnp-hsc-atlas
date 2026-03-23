@@ -1,0 +1,117 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Su_Liu_2024_NatComm",
+    "title": "Reformulating lipid nanoparticles for organ-targeted mRNA accumulation and translation",
+    "authors": "Su K et al.",
+    "journal": "Nature Communications",
+    "year": 2024,
+    "doi_or_id": "10.1038/s41467-024-50093-7",
+    "url": "https://www.nature.com/articles/s41467-024-50093-7",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET"
+  },
+  "formulations": [
+    {
+      "id": "F1_3comp_lung_LNP",
+      "ionizable_lipid": "nAcx-Cm series (degradable ester-core ionizable lipids, e.g. 6Ac1-C12)",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "NONE (3-component LNP: IL + cationic lipid + PEG-lipid)",
+      "helper_lipid_mol_pct": 0,
+      "cholesterol_mol_pct": 0,
+      "peg_lipid": "DMG-PEG2000",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "3-component LNP with NO cholesterol and NO phospholipid. Cholesterol removal prevents liver accumulation. Cationic lipid addition drives lung targeting.",
+      "size_nm": null,
+      "formulation_notes": "Key paradigm shift: cholesterol and phospholipid are DISPENSABLE for LNP functionality. Removing cholesterol prevents liver accumulation. 3-component (IL + cationic + PEG) achieves lung targeting. 4-component (IL + cationic + cholesterol + PEG) also targets lung but with some liver spillover."
+    },
+    {
+      "id": "F2_4comp_liver_LNP",
+      "ionizable_lipid": "6Ac1-C12 (degradable ester-core)",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "DOPE",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "DMG-PEG2000",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Standard 4-component LNP with conventional composition. Liver-targeted. Targets hepatic endothelial cells (not just hepatocytes).",
+      "size_nm": null,
+      "formulation_notes": "6Ac1-C12 LNPs with standard 4-component composition target liver, but primarily to endothelial cell subsets rather than hepatocytes. This is unusual and clinically relevant."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_cholesterol_removal_lung",
+      "formulation_ref": "F1_3comp_lung_LNP",
+      "payload": "Firefly luciferase mRNA",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "C57BL/6 or BALB/c",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "luminescence",
+        "hsc_n_animals": 3,
+        "hsc_range_or_sd": "mean +/- SD",
+        "liver_delivery_pct": null,
+        "liver_metric": "Organ-level luminescence imaging",
+        "liver_notes": "Cholesterol removal eliminates liver accumulation. 3-component (no cholesterol, no phospholipid) + cationic lipid = exclusive lung mRNA translation. 4-component (no phospholipid but with cholesterol) + cationic = lung-selective but with some liver.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Fig 2 (open access via PMC)",
+      "data_confidence": "MEDIUM",
+      "notes": "Paradigm-breaking finding: cholesterol and phospholipid are dispensable. Cholesterol is what drives liver accumulation via ApoE/cholesterol/LDL-R axis. Removing it breaks the liver sink."
+    }
+  ],
+  "key_findings_for_project": [
+    "PARADIGM SHIFT: Cholesterol and phospholipid are DISPENSABLE for LNP functionality",
+    "Cholesterol removal prevents liver accumulation — breaks ApoE/cholesterol/LDL-R axis",
+    "3-component LNP (IL + cationic + PEG) achieves exclusive lung targeting with no liver signal",
+    "Novel degradable ester-core ionizable lipids (nAcx-Cm series) — biodegradable design",
+    "Liver-targeting with standard composition primarily reaches hepatic endothelial cells, not hepatocytes",
+    "BM NOT measured — lung/liver/spleen/kidney/heart organ panel only",
+    "Implications for HSC project: cholesterol-free LNPs might avoid liver sink entirely"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Different approach. Suggests cholesterol removal could potentially be combined with antibody targeting for maximal liver de-targeting.",
+    "vs_shi": "Complementary mechanism: cholesterol removal for passive liver de-targeting + CD117 for active HSC targeting could be powerful combination.",
+    "vs_kim": "Cholesterol is a major component of Kim's formulations. This paper suggests removing it entirely as a liver de-targeting strategy.",
+    "new_pareto_points": "No BM data. Cannot place on Pareto.",
+    "therapeutic_window_update": "Cholesterol-free LNP is a novel design parameter not in your current feature matrix. Could be encoded as cholesterol_mol_pct = 0.",
+    "gap_formulation_relevance": "Medium-high. The principle (cholesterol = liver sink) is important for rational design. nAcx-Cm ionizable lipids are novel but structures are in the paper."
+  },
+  "limitations_and_caveats": [
+    "BM not measured",
+    "Lung-focused study — unclear if cholesterol-free LNPs can also deliver to BM",
+    "nAcx-Cm ionizable lipids are novel and may not be in external databases",
+    "3-component LNP stability and scalability unknown",
+    "Cholesterol removal may affect LNP stability for larger cargo (gene editors)",
+    "Chinese academic group (Zhejiang University) — different from Dahlman/Siegwart labs"
+  ]
+}

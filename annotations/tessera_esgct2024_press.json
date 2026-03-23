@@ -1,0 +1,184 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "source_quality": "press release"
+  },
+  "paper": {
+    "id": "Tessera_ESGCT2024_PressRelease",
+    "title": "Tessera Therapeutics Presents New Preclinical Data in In Vivo AATD and SCD Programs at ESGCT 2024",
+    "authors": "Tessera Therapeutics",
+    "journal": "GlobeNewswire / Company Press Release",
+    "year": 2024,
+    "doi_or_id": "",
+    "url": "https://www.globenewswire.com/news-release/2024/10/24/2968505/0/en/",
+    "paper_type": "press_release",
+    "delivery_platform": "tLNP",
+    "group": "HSC"
+  },
+  "formulations": [
+    {
+      "id": "F1_Tessera_HSC_tLNP_ESGCT",
+      "ionizable_lipid": "PROPRIETARY",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "PROPRIETARY",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "PROPRIETARY",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "other",
+      "targeting_details": "PROPRIETARY HSC-targeted LNP. Same platform.",
+      "size_nm": null,
+      "formulation_notes": "ESGCT October 2024 is chronologically BEFORE ASH 2024 (December). First disclosure of 52% HBB number."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_HBB_52pct_humanized_mice",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ESGCT",
+      "payload": "Gene Writer mRNA + HBB template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "humanized_mouse",
+      "strain_or_model": "NBSGW humanized mice",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": 52,
+        "hsc_definition": "LT-HSCs",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 52,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Press release text / ESGCT oral presentation",
+      "data_confidence": "MEDIUM",
+      "notes": "52% HBB rewriting in LT-HSCs, single dose, humanized mice. 'Carrier level efficiency' — meaning matching the editing level expected in sickle cell carriers who are asymptomatic. Holmes CSO presented this as oral talk at ESGCT. NOTE: This '52% HBB editing' is NOT the same as ASH 2024's '52x BM fold-change' — completely different experiments (editing % vs GFP reporter fold-change), coincidental number. HBB editing subsequently improved to 62% by ASH Dec 2024 via cargo optimization (Gene Writer improvement, not LNP reformulation)."
+    },
+    {
+      "id": "E2_B2M_NHP_70pct",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ESGCT",
+      "payload": "Gene Writer mRNA + B2M template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "NHP",
+      "strain_or_model": "NHP (species not specified)",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "LT-HSCs or broader cell population",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Press release text",
+      "data_confidence": "LOW",
+      "notes": ">70% B2M rewriting in NHP using surrogate reagent. Consistent with 76% B2M reported at ASH 2024."
+    },
+    {
+      "id": "E3_secondary_transplant",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ESGCT",
+      "payload": "Gene Writer mRNA + HBB template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "humanized_mouse",
+      "strain_or_model": "NBSGW humanized mice → secondary transplant",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "LT-HSCs confirmed by secondary transplant engraftment",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Press release text",
+      "data_confidence": "LOW",
+      "notes": "CRITICAL: Secondary transplant confirms TRUE LT-HSC editing (not just progenitor). Edited HSCs maintained engraftment levels in secondary recipients. This is the gold-standard assay for confirming HSC self-renewal capacity after editing."
+    }
+  ],
+  "key_findings_for_project": [
+    "52% HBB editing in humanized mouse LT-HSCs — single dose, 'carrier level efficiency' (improved to 62% by ASH Dec 2024 via cargo optimization)",
+    ">70% B2M in NHP (surrogate, consistent with 76% at ASH 2024)",
+    "SECONDARY TRANSPLANT CONFIRMS TRUE LT-HSC EDITING — gold standard functional assay",
+    "Edited HSCs maintained engraftment in secondary recipients — confirms self-renewal preserved",
+    "Chronologically first Tessera presentation of 52% HBB number (before ASH 2024's 30%+ number)",
+    "CRITICAL DISAMBIGUATION: ESGCT '52% HBB editing' ≠ ASH 2024 '52x BM fold-change' — completely different experiments, coincidental number",
+    "HBB editing improved: 52% (ESGCT Oct 2024) → 62% (ASH Dec 2024) in humanized mice, via cargo optimization not LNP reformulation"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Massively outperforms. Breda did not perform secondary transplant after in vivo LNP editing.",
+    "vs_shi": "Outperforms. Shi did not report functional HSC assays.",
+    "vs_kim": "Kim did not perform therapeutic editing.",
+    "new_pareto_points": "52% HBB is highest single-dose humanized mouse number. No liver data for Pareto.",
+    "therapeutic_window_update": "52% exceeds carrier level (40-50% Hb S). Secondary transplant confirms durability at stem cell level.",
+    "gap_formulation_relevance": "Zero — proprietary."
+  },
+  "limitations_and_caveats": [
+    "Press release only",
+    "Proprietary everything",
+    "52% HBB (ESGCT) vs >30% Makassar (ASH 2024) — different targets and experiments; 52% HBB ≠ 52x BM fold-change",
+    "Secondary transplant details sparse (editing level in secondary recipients not quantified in press release)",
+    "N animals not reported"
+  ]
+}

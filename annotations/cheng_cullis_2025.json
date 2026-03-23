@@ -1,0 +1,152 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "updated_date": "2026-03-21",
+    "source_quality": "full paper",
+    "update_notes": "Major correction: BM data comes from Chander 2023 (Paper A), not Cheng 2025 (Paper B). BM readout is bulk BM cells, no HSC gating. Downgraded from 'BM CONFIRMED' to 'BM detected in bulk cells'. Not Pareto-plottable. Formulation details filled in (MC3, full mol%)."
+  },
+  "paper": {
+    "id": "Cheng_Cullis_2025_NatComm",
+    "title": "Liposomal lipid nanoparticles for extrahepatic delivery of mRNA",
+    "authors": "Cheng MHY, Zhang Y, Fox K, et al., Cullis PR",
+    "journal": "Nature Communications",
+    "year": 2025,
+    "volume": 16,
+    "pages": "4135",
+    "doi_or_id": "10.1038/s41467-025-58523-w",
+    "url": "https://www.nature.com/articles/s41467-025-58523-w",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET",
+    "related_paper": {
+      "id": "Chander_2023_MTMCD",
+      "title": "Lipid nanoparticle mRNA systems containing high levels of sphingomyelin engender higher protein expression in hepatic and extra-hepatic tissues",
+      "authors": "Chander N, Basha G, Cheng MHY, Witzigmann D, Cullis PR",
+      "journal": "Mol Ther Methods Clin Dev",
+      "year": 2023,
+      "volume": 30,
+      "pages": "235-245",
+      "note": "THIS is where the BM flow cytometry data lives (Fig 8). The 2025 NatComm paper builds on this with optimized liposomal LNP formulations."
+    }
+  },
+  "formulations": [
+    {
+      "id": "F1_liposomal_LNP_40pct_ESM",
+      "ionizable_lipid": "DLin-MC3-DMA (MC3)",
+      "ionizable_lipid_smiles": "known — FDA-approved (Onpattro)",
+      "ionizable_lipid_mol_pct": 33,
+      "helper_lipid": "Egg sphingomyelin (ESM)",
+      "helper_lipid_mol_pct": 40,
+      "cholesterol_mol_pct": 25.5,
+      "peg_lipid": "PEG-lipid (standard)",
+      "peg_lipid_mol_pct": 1.5,
+      "targeting_moiety": "none",
+      "targeting_details": "No active targeting. High ESM content (40 mol%) creates liposomal morphology with longer circulation time, enabling extrahepatic biodistribution via enhanced circulation.",
+      "size_nm": null,
+      "formulation_notes": "Bilayer lipid to ionizable lipid ratio (RB/I) of 4 yields liposomal morphology: solid core in aqueous interior surrounded by lipid bilayer. 90-100% mRNA encapsulation. Extended circulation (3.7h half-life at 1.5 mg/kg) vs 15 min for Onpattro. IL/ESM/Chol/PEG = 33:40:25.5:1.5 mol%. MC3 has known SMILES — useful for feature engineering."
+    },
+    {
+      "id": "F2_10pct_ESM",
+      "ionizable_lipid": "DLin-MC3-DMA (MC3)",
+      "ionizable_lipid_mol_pct": 50,
+      "helper_lipid": "Egg sphingomyelin (ESM)",
+      "helper_lipid_mol_pct": 10,
+      "cholesterol_mol_pct": 38.5,
+      "peg_lipid": "PEG-lipid",
+      "peg_lipid_mol_pct": 1.5,
+      "targeting_moiety": "none",
+      "targeting_details": "Lower ESM comparator.",
+      "size_nm": null,
+      "formulation_notes": "10% ESM formulation for comparison. IL/ESM/Chol/PEG = 50:10:38.5:1.5 mol%."
+    },
+    {
+      "id": "F3_onpattro_control",
+      "ionizable_lipid": "DLin-MC3-DMA (MC3)",
+      "ionizable_lipid_mol_pct": 50,
+      "helper_lipid": "DSPC",
+      "helper_lipid_mol_pct": 10,
+      "cholesterol_mol_pct": 38.5,
+      "peg_lipid": "PEG-lipid",
+      "peg_lipid_mol_pct": 1.5,
+      "targeting_moiety": "none",
+      "targeting_details": "Standard Onpattro-like LNP composition for comparison.",
+      "size_nm": null,
+      "formulation_notes": "Control formulation matching clinically validated Onpattro composition. IL/DSPC/Chol/PEG = 50:10:38.5:1.5 mol%."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_ESM40_extrahepatic_delivery",
+      "formulation_ref": "F1_liposomal_LNP_40pct_ESM",
+      "payload": "NanoLuc mRNA or Firefly luciferase mRNA",
+      "dose_mg_per_kg": 1.5,
+      "dose_other_units": "3 mg/kg for expression studies",
+      "route": "IV",
+      "timepoint_hours": 24,
+      "species": "mouse",
+      "strain_or_model": "C57BL/6",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "NOT MEASURED — bulk BM cells only, no HSC gating (no Lin-/Sca-1+/CD117+ or similar)",
+        "hsc_metric": "protein_expression_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "Gene expression quantified in liver, spleen, and bone marrow",
+        "liver_notes": "40 mol% ESM LNPs showed improved gene expression in liver AND spleen AND bone marrow vs 10% DSPC control. Liver is ALSO enhanced — this is NOT a BM-selective formulation, it is 'better at everything' via extended circulation. Not useful for liver de-targeting.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null,
+          "bone_marrow_notes": "BM delivery statistically significant by flow cytometry (Fig 8 of Chander 2023; %GFP+ in bulk BM cells, p<0.05 for 40% ESM vs 10% ESM at 24h). BUT: no HSC-specific markers used. Bulk BM cells include macrophages, stromal cells, erythroid precursors. Actual %GFP+ values not reported numerically in text (only shown in bar graphs, suggesting low values)."
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "DSPC/Chol liposomes very well tolerated; doses up to 1 g lipid/kg administered with no adverse effects historically."
+        }
+      },
+      "figure_source": "Chander 2023 Fig 8 (BM flow cytometry); Cheng 2025 NatComm (PK, biodistribution, optimized formulations)",
+      "data_confidence": "MEDIUM",
+      "notes": "BM delivery detected in BULK BM cells by flow cytometry (Chander 2023 Fig 8, p<0.05 for 40% ESM vs 10% ESM). However: NO HSC-specific gating performed. Bulk BM includes macrophages, stromal cells, erythroid precursors — NOT evidence of HSC transfection. Liver also enhanced (not BM-selective). Extended circulation (3.7h) drives general extrahepatic biodistribution. From Pieter Cullis lab (UBC)."
+    }
+  ],
+  "key_findings_for_project": [
+    "BM delivery DETECTED in bulk BM cells (no HSC gating) — statistically significant by flow cytometry (Chander 2023 Fig 8)",
+    "NOT HSC-specific: no Lin-/Sca-1+/CD117+ or any stem cell markers used. Bulk BM includes macrophages, stromal, erythroid cells",
+    "NOT BM-selective: liver delivery is ALSO enhanced by 40% ESM — formulation is 'better at everything' via extended circulation",
+    "Mechanism: liposomal morphology (40% ESM) → extended circulation (3.7h vs 15 min Onpattro) → enhanced extrahepatic biodistribution",
+    "Supports 'extended circulation → BM access' hypothesis but cannot confirm HSC transfection",
+    "Fully disclosed formulation: MC3 33 / ESM 40 / Chol 25.5 / PEG 1.5 mol% — known SMILES, useful for feature engineering",
+    "Sphingomyelin is a new architecture class: liposomal LNPs vs conventional inverted hexagonal phase LNPs",
+    "From Pieter Cullis lab (UBC) — inventor of LNP technology"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Different mechanism (passive circulation extension vs antibody targeting). Cullis detects bulk BM signal but without HSC gating, not comparable to Breda's LSK-specific editing.",
+    "vs_shi": "Complementary mechanistically. Cullis shows passive BM access via circulation; Shi uses active targeting. But Cullis has no HSC-specific readout.",
+    "vs_kim": "Different approach. Kim uses endogenous targeting via protein corona with HSC-specific barcoding. Cullis uses liposomal architecture for extended circulation but only measures bulk BM cells.",
+    "new_pareto_points": "CANNOT place on Pareto: (1) no HSC-specific readout (bulk BM ≠ HSCs), (2) liver also enhanced (no de-targeting), (3) actual BM %GFP+ values not reported numerically.",
+    "therapeutic_window_update": "ESM at 40 mol% is a new formulation variable. Extended circulation provides ACCESS (longer circulation = more passes through BM sinusoids) but NOT SELECTIVITY — Cullis demonstrates access without HSC specificity, liver also enhanced. In the 2-layer framework (access + selectivity), this paper validates the access layer only. Optimal approach likely layers access (extended circulation / liver de-targeting) with selectivity (active targeting or corona engineering).",
+    "gap_formulation_relevance": "Formulation is fully defined with known SMILES (MC3). Useful for feature engineering (helper_lipid_type = ESM, helper_lipid_mol_pct = 40) even without HSC-specific ML training rows.",
+    "ml_rows": "0 — BM detected in bulk cells but no HSC gating; not usable for HSC feature matrix or Pareto analysis"
+  },
+  "limitations_and_caveats": [
+    "BM readout is BULK BM cells — no HSC-specific markers (Lin-/Sca-1+/CD117+ or equivalent). Cannot confirm HSC transfection.",
+    "Liver delivery is ALSO enhanced — not a BM-selective formulation",
+    "BM flow cytometry data is from Chander 2023 (Paper A), not Cheng 2025 (Paper B). Must cite correctly.",
+    "Actual BM %GFP+ values not reported numerically in text (only bar graphs), suggesting low values",
+    "No gene editing cargo tested — only reporter mRNA",
+    "Mouse data only (C57BL/6)",
+    "The liposomal morphology may not be compatible with all ionizable lipids",
+    "ESM is of egg origin — batch-to-batch variability possible",
+    "Extended circulation (3.7h) is 'relatively modest' per authors — higher lipid doses could extend further"
+  ]
+}

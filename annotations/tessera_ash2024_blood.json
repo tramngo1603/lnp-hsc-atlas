@@ -1,0 +1,269 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-13",
+    "source_quality": "abstract only"
+  },
+  "paper": {
+    "id": "Tessera_ASH2024_Blood_2197_515",
+    "title": "Delivery of Gene Writers In Vivo to Hematopoietic Stem Cells and T Cells Using Targeted and Untargeted Lipid Nanoparticles (LNP)",
+    "authors": "Monte MT et al.",
+    "journal": "Blood",
+    "year": 2024,
+    "doi_or_id": "10.1182/blood-2024-208968",
+    "url": "https://ashpublications.org/blood/article/144/Supplement%201/2197/532661/",
+    "paper_type": "conference_abstract",
+    "delivery_platform": "tLNP",
+    "group": "HSC"
+  },
+  "formulations": [
+    {
+      "id": "F1_Tessera_HSC_tLNP_ASH2024",
+      "ionizable_lipid": "PROPRIETARY (library of proprietary ionizable lipids screened)",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "PROPRIETARY",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "PROPRIETARY",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "other",
+      "targeting_details": "PROPRIETARY active targeting moieties. Three optimization strategies: (1) novel ionizable lipid library, (2) LNP formulation optimization for liver de-targeting, (3) active targeting ligands for HSC specificity.",
+      "size_nm": null,
+      "formulation_notes": "First detailed disclosure of Tessera's LNP platform. Proprietary ionizable lipid library with 'multiple lipid families'. Formulation optimized for liver de-targeting. Active targeting for specificity. This is the foundational ASH abstract for all subsequent Tessera data."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_GFP_reporter_LT_HSCs",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ASH2024",
+      "payload": "GFP mRNA",
+      "dose_mg_per_kg": 1.0,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "humanized_mouse",
+      "strain_or_model": "NBSGW humanized mice",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": 95,
+        "hsc_definition": "LT-HSCs: Lin-CD34+CD38-CD90+CD45RA-",
+        "hsc_metric": "protein_expression_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "11-fold LOWER GFP delivery in liver vs liver-tropic LNP control",
+        "liver_notes": "11-fold LOWER liver delivery AND 52-fold HIGHER BM delivery vs liver-tropic LNP control (GFP reporter readout; metric unspecified — %GFP+ or MFI unknown). Combined BM:liver ratio improvement ~572x vs liver LNP. 52x figure from press release only, not in abstract text. Cannot derive absolute Pareto coordinates without liver-LNP baseline values.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "ASH 2024 abstract text",
+      "data_confidence": "MEDIUM",
+      "notes": "95% GFP delivery to LT-HSCs at 1 mpk. SOURCE of the 52-fold BM enhancement and 11-fold liver reduction numbers (vs liver-tropic LNP control, GFP reporter, readout metric unspecified). 52x figure from press release only, not in abstract text. Abstract explicitly flags reporter cargos 'are not fully representative of true genome editing cargos'."
+    },
+    {
+      "id": "E2_B2M_editing_humanized_mice_ASH2024",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ASH2024",
+      "payload": "Gene Writer mRNA + B2M template guide RNA",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "humanized_mouse",
+      "strain_or_model": "NBSGW humanized mice",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": 76,
+        "hsc_definition": "LT-HSCs",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 76,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "ASH 2024 abstract text",
+      "data_confidence": "MEDIUM",
+      "notes": "76% B2M rewriting in LT-HSCs, single dose, humanized mice. Amplicon sequencing readout."
+    },
+    {
+      "id": "E3_B2M_editing_NHP_ASH2024",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ASH2024",
+      "payload": "Gene Writer mRNA + B2M template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "NHP",
+      "strain_or_model": "Cynomolgus macaque",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": 76,
+        "hsc_definition": "LT-HSCs (day 30 post-dose)",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 76,
+          "off_target_editing_pct": null,
+          "duration_months": 2.8
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "Stable editing at day 84"
+        }
+      },
+      "figure_source": "ASH 2024 abstract #515",
+      "data_confidence": "MEDIUM",
+      "notes": "76% B2M rewriting in NHP LT-HSCs at day 30. Flow cytometry confirmed >60% complete B2M knockout. Stable to day 84. This is the longest-term NHP data reported at this conference."
+    },
+    {
+      "id": "E4_HBB_Makassar_humanized_mice_ASH2024",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ASH2024",
+      "payload": "Gene Writer mRNA + HBB Makassar template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "humanized_mouse",
+      "strain_or_model": "NBSGW humanized mice (healthy donors)",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": 30,
+        "hsc_definition": "LT-HSCs",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 30,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "ASH 2024 abstract #515",
+      "data_confidence": "MEDIUM",
+      "notes": ">30% Makassar installation in LT-HSCs, single dose. Near-linear increase with 2nd dose. This is the earlier number before optimization (later: 50% at ASH 2025)."
+    },
+    {
+      "id": "E5_HBB_NHP_ASH2024",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ASH2024",
+      "payload": "Gene Writer mRNA + HBB Makassar template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "NHP",
+      "strain_or_model": "Cynomolgus macaque",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": 24,
+        "hsc_definition": "LT-HSCs",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 24,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "ASH 2024 abstract #515",
+      "data_confidence": "MEDIUM",
+      "notes": "Average 24% HBB Makassar in NHP LT-HSCs, single dose. First NHP HBB editing data reported. This is the baseline number that improved to 40% by ASH 2025."
+    }
+  ],
+  "key_findings_for_project": [
+    "SOURCE of the 52-fold BM / 11-fold liver numbers (GFP reporter fold-changes vs liver-tropic LNP in mice; readout metric unspecified; 52x from press release only)",
+    "95% GFP delivery to LT-HSCs at 1 mpk (slightly higher than '90%' reported at ASH 2025)",
+    "76% B2M editing in both humanized mice AND NHP LT-HSCs - remarkable cross-species consistency",
+    "24% HBB Makassar in NHP (single dose) - first NHP HBB editing data, above therapeutic threshold",
+    ">30% Makassar in humanized mice with near-linear increase on 2nd dose",
+    "Day 84 durability in NHP (B2M readout) - earliest durability data",
+    "Three-pronged platform: proprietary IL library + liver de-targeting + active targeting",
+    "This is the foundational Tessera HSC abstract - all later numbers build on this"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Massively outperforms. 76% B2M vs Breda's ~6% HSC editing.",
+    "vs_shi": "Outperforms. 95% GFP vs Shi's ~20% reporter.",
+    "vs_kim": "Different readout but Tessera's functional editing far exceeds any BM delivery metric from Kim's barcoded screen.",
+    "new_pareto_points": "52-fold HIGHER BM and 11-fold LOWER liver vs liver-tropic LNP (GFP reporter). ~572x improvement in BM:liver ratio vs liver LNP. Cannot be placed on absolute Pareto axes without knowing the liver-LNP baseline values.",
+    "therapeutic_window_update": "24% NHP HBB editing exceeds 20% therapeutic threshold. 52x/11x are relative fold-changes, not absolute biodistribution.",
+    "gap_formulation_relevance": "Zero - fully proprietary."
+  },
+  "limitations_and_caveats": [
+    "100% PROPRIETARY formulation",
+    "52-fold / 11-fold are GFP reporter fold-changes vs liver-tropic LNP control, not absolute values; readout metric (%GFP+ vs MFI) unspecified; 52x from press release only",
+    "ESGCT '52% HBB' ≠ ASH '52x BM' — completely different experiments (editing % vs reporter fold-change), coincidental number",
+    "Conference abstract quality",
+    "Cross-reference: 95% GFP at ASH 2024 vs >90% at ASH 2025 - slight discrepancy or different experiment",
+    "N animals not reported",
+    "Gene Writer modality ≠ CRISPR for efficiency comparisons"
+  ]
+}

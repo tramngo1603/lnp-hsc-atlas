@@ -1,0 +1,159 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-13",
+    "source_quality": "abstract only"
+  },
+  "paper": {
+    "id": "DaSilvaSanchez_2022_NanoLett",
+    "title": "Universal Barcoding Predicts In Vivo ApoE-Independent Lipid Nanoparticle Delivery",
+    "authors": "Da Silva Sanchez AJ et al.",
+    "journal": "Nano Letters",
+    "year": 2022,
+    "doi_or_id": "10.1021/acs.nanolett.2c01133",
+    "url": "https://pubs.acs.org/doi/10.1021/acs.nanolett.2c01133",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET"
+  },
+  "formulations": [
+    {
+      "id": "F1_98_LNP_library",
+      "ionizable_lipid": "Multiple (including stereopure C12-200 variants)",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "Variable or none (3-component LNPs tested)",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "Variable",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "No active targeting. Library includes 3-component LNPs without helper lipid. Endogenous targeting via protein corona.",
+      "size_nm": null,
+      "formulation_notes": "98 chemically distinct LNPs formulated with DNA barcodes and siRNA. Universal barcoding allows testing in any mouse model. Stereopure (R vs S) C12-200 variants included."
+    },
+    {
+      "id": "F2_ApoE_independent_stereopure",
+      "ionizable_lipid": "Stereopure C12-200 variant",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "PROPRIETARY/not specified",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "not specified",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "ApoE-independent delivery to Kupffer cells, endothelial cells, and hepatocytes. Novel stereopure LNP identified from screen.",
+      "size_nm": null,
+      "formulation_notes": "Lead ApoE-independent LNP identified from the 98-LNP screen. Targets liver cells via non-ApoE mechanism. Stereopure (specific stereoisomer) version of C12-200."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_98LNP_WT_screen",
+      "formulation_ref": "F1_98_LNP_library",
+      "payload": "siRNA (functional knockdown readout)",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "Wild-type C57BL/6",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "knockdown_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "siRNA-mediated protein knockdown in 11 cell types",
+        "liver_notes": "11 cell types measured across multiple organs. Liver cell types: hepatocytes, Kupffer cells, endothelial cells. Focus is on functional delivery (protein knockdown), not biodistribution.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Main figures (behind ACS paywall)",
+      "data_confidence": "LOW",
+      "notes": "98 LNPs tested in WT mice. 11 cell types quantified. Functional siRNA knockdown readout. Per-formulation data behind paywall."
+    },
+    {
+      "id": "E2_98LNP_ApoE_KO",
+      "formulation_ref": "F1_98_LNP_library",
+      "payload": "siRNA",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "ApoE-/- knockout",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "knockdown_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "siRNA knockdown in ApoE-/- vs WT",
+        "liver_notes": "Key finding: identified novel stereopure LNP that delivers to Kupffer cells, endothelial cells, and hepatocytes ApoE-independently.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Main figures (behind ACS paywall)",
+      "data_confidence": "LOW",
+      "notes": "Same 98 LNPs tested in ApoE-/- mice. Also tested in LDLR-/- and VLDLR-/- mice. Universal barcoding enables cross-genotype comparison."
+    }
+  ],
+  "key_findings_for_project": [
+    "Establishes that ApoE-independent delivery mechanisms EXIST for LNPs",
+    "98 LNPs profiled across 4 mouse genotypes (WT, ApoE-/-, LDLR-/-, VLDLR-/-) and 11 cell types",
+    "Stereopure C12-200 variant identified as ApoE-independent - stereochemistry matters for tropism",
+    "Universal barcoding methodology applicable to any knockout model",
+    "BM cell types NOT explicitly reported in abstract - focus is liver cell types",
+    "Dahlman lab - compatible methodology with Kim 2024 and Gentry 2025 datasets",
+    "Critical for understanding translation: human ApoE-LNP interactions may differ from mouse"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Breda used CD117-targeted tLNPs (ApoE role unclear). Da Silva Sanchez data could inform whether Breda's delivery is ApoE-dependent.",
+    "vs_shi": "Shi/Anderson used CD117-targeted tLNPs. ApoE independence of targeted LNPs is an open question.",
+    "vs_kim": "Kim used PPZ-A10 untargeted LNPs. Kim's system in ApoE-KO context unknown. Da Silva Sanchez's barcoding approach is the predecessor methodology to Kim's screen.",
+    "new_pareto_points": "No BM data, no Pareto placement possible.",
+    "therapeutic_window_update": "Indirect value: understanding ApoE dependence informs which formulations will translate to human patients.",
+    "gap_formulation_relevance": "3-component LNPs (no helper) mentioned in user notes. If validated, this simplifies formulation space. C12-200 has known SMILES."
+  },
+  "limitations_and_caveats": [
+    "PAYWALL: Quantitative per-formulation delivery data behind ACS paywall",
+    "BM cell types not mentioned in abstract - unclear if BM was measured at all",
+    "siRNA readout (knockdown) rather than mRNA delivery - different pharmacology",
+    "C12-200 is known to have tolerability issues - not clinically viable base lipid",
+    "3-component LNP claim (from user notes) needs verification from full paper",
+    "11 cell types measured but cell type identities only partially listed in abstract",
+    "Mouse-only data"
+  ]
+}

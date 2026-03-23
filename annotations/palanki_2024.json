@@ -1,0 +1,145 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Palanki_2024_PNAS",
+    "title": "In utero delivery of targeted ionizable lipid nanoparticles facilitates in vivo gene editing of hematopoietic stem cells",
+    "authors": "Palanki R et al.",
+    "journal": "Proceedings of the National Academy of Sciences",
+    "year": 2024,
+    "doi_or_id": "10.1073/pnas.2400783121",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.2400783121",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "tLNP",
+    "group": "HSC"
+  },
+  "formulations": [
+    {
+      "id": "F1_STEM_LNP_CD45_targeted",
+      "ionizable_lipid": "Known ionizable lipid library (Mitchell/Weissman lab)",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "Not specified in abstract",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "Not specified",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "CD45",
+      "targeting_details": "Anti-CD45 antibody conjugated to LNP surface. CD45 is expressed on all hematopoietic cells (broader than CD117). STEM LNP = Systematically optimized Targeted Editing Machinery.",
+      "size_nm": null,
+      "formulation_notes": "CD45-targeted LNP for in utero delivery. Different receptor than CD117 (used by Shi/Anderson and Breda). CD45 is pan-hematopoietic marker. Protein corona analysis: 94% of 859 adsorbed proteins were not differentially abundant between untargeted and CD45-targeted LNPs."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_in_utero_GFP_delivery",
+      "formulation_ref": "F1_STEM_LNP_CD45_targeted",
+      "payload": "Cre mRNA or GFP mRNA",
+      "dose_mg_per_kg": 1.0,
+      "dose_other_units": null,
+      "route": "IV (in utero, fetal)",
+      "timepoint_hours": 60,
+      "species": "mouse",
+      "strain_or_model": "R26mT/mG or Balb/c fetal mice (E13.5)",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "Fetal HSCs: Lin-/Sca1+/cKit+ (LSK)",
+        "hsc_metric": "protein_expression_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "CD45-targeted vs untargeted comparison in hepatocytes (CD45-/CD31-) vs HSCs (LSK)",
+        "liver_notes": "CD45-targeted LNPs increased HSC delivery relative to untargeted. Hepatocyte delivery was also present (fetal liver is the HSC niche at E13.5). Colocalization of CD45 and RFP confirmed delivery to CD45+ cells.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "Safe in utero delivery demonstrated. No adverse effects on fetal development noted."
+        }
+      },
+      "figure_source": "Fig 3A-B (open access PNAS)",
+      "data_confidence": "MEDIUM",
+      "notes": "In utero IV delivery at E13.5. HSCs reside in fetal liver at this stage, making them MORE accessible than adult BM HSCs. CD45 targeting improved delivery to HSCs vs untargeted. Durable gene editing demonstrated."
+    },
+    {
+      "id": "E2_in_utero_CRISPR_editing",
+      "formulation_ref": "F1_STEM_LNP_CD45_targeted",
+      "payload": "CRISPR-based nucleic acid cargo",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV (in utero, fetal)",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "Fetal mice",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "Fetal HSCs",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Later figures in paper",
+      "data_confidence": "LOW",
+      "notes": "Proof-of-concept CRISPR editing in fetal HSCs after single in utero injection. Quantitative editing % not extracted from abstract. Full paper needed for numbers."
+    }
+  ],
+  "key_findings_for_project": [
+    "CD45 receptor targeting (alternative to CD117) — broader hematopoietic coverage",
+    "In utero delivery exploits fetal liver HSC niche — avoids BM access barrier entirely",
+    "STEM LNP platform from Mitchell/Weissman labs (UPenn) — known ionizable lipid library",
+    "Protein corona minimally altered by CD45 antibody conjugation (94% of proteins unchanged)",
+    "Safe and durable gene editing in fetal HSCs demonstrated",
+    "TAG AS exclude_from_training: in utero delivery context is incomparable to adult IV",
+    "Relevance: demonstrates CD45 as alternative targeting receptor for HSCs"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Different receptor (CD45 vs CD117). Different delivery context (in utero vs adult IV). Both use antibody-targeted LNPs.",
+    "vs_shi": "Both use antibody targeting but different receptors (CD45 vs CD117) and contexts (fetal vs adult).",
+    "vs_kim": "Completely different approach (targeted vs untargeted, fetal vs adult).",
+    "new_pareto_points": "Cannot place on adult Pareto — different delivery context. Should be annotated as 'exclude_from_training' but included in comparison.",
+    "therapeutic_window_update": "Opens a new therapeutic modality: in utero gene correction before disease onset. Relevant for thalassemia major (hydrops fetalis).",
+    "gap_formulation_relevance": "Mitchell/Weissman lab ionizable lipids may be in external databases. CD45 targeting is a new receptor variable. But in utero context makes direct comparison impossible."
+  },
+  "limitations_and_caveats": [
+    "In utero delivery is a fundamentally different context than adult IV — fetal HSCs are in liver, not BM",
+    "Tag as exclude_from_training for ML model — incomparable delivery biology",
+    "Quantitative editing % not extracted from abstract",
+    "Mouse-only data",
+    "CD45 is pan-hematopoietic — targets all blood cells, not just HSCs (less specific than CD117)",
+    "Translation to human in utero delivery faces enormous regulatory barriers",
+    "Formulation details sparse in abstract"
+  ]
+}

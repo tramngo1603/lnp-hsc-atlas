@@ -1,6 +1,6 @@
 # Contributing to HSC-LNP Atlas
 
-Thanks for your interest in contributing. This project aims to become a community-maintained quantitative atlas of in vivo HSC delivery approaches — **The Marrow Map** — and contributions from researchers across the field are essential to that vision.
+Thanks for your interest in contributing to the HSC-LNP Atlas — a curated dataset and computational framework comparing in vivo HSC delivery approaches. Contributions from researchers across the field help make the analysis more complete and robust.
 
 ## How to Contribute
 
@@ -40,11 +40,7 @@ See `annotations/kim_2024.json` for the most thorough example.
 
 - **Linting:** `ruff check .` must pass
 - **Type checking:** `mypy --ignore-missing-imports` must pass
-- **Tests:** `pytest tests/ -v` — all 259 tests must pass, and new code should include tests
+- **Tests:** `pytest tests/ -v` — all 295 tests must pass, and new code should include tests
 - **Style:** Type hints on all functions. No function >50 lines. No module >300 lines.
 
-## Vision: The Marrow Map
-
-This repo is the seed of a living quantitative review — updated monthly as new data drops, with standardized metrics (EC30, therapeutic window, Pareto position, safety profile) across all in vivo HSC delivery platforms. The goal is a resource that any researcher can use to understand where their formulation sits in the landscape and what the most promising next experiments are.
-
-Every new paper annotated makes the map more complete. Every contribution compounds.
+The goal is a resource that any researcher can use to understand where their formulation sits in the landscape and what the most promising next experiments are. Every new paper annotated makes the analysis more complete.

@@ -1,0 +1,146 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-13",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Cheng_2020_NatNanotech",
+    "title": "Selective organ targeting (SORT) nanoparticles for tissue-specific mRNA delivery and CRISPR-Cas gene editing",
+    "authors": "Cheng Q et al.",
+    "journal": "Nature Nanotechnology",
+    "year": 2020,
+    "doi_or_id": "10.1038/s41565-019-0631-3",
+    "url": "https://www.nature.com/articles/s41565-019-0631-3",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET"
+  },
+  "formulations": [
+    {
+      "id": "F1_mDLNP_base_liver",
+      "ionizable_lipid": "5A2-SC8",
+      "ionizable_lipid_mol_pct": 23.8,
+      "helper_lipid": "DOPE",
+      "helper_lipid_mol_pct": 23.8,
+      "cholesterol_mol_pct": 47.6,
+      "peg_lipid": "DMG-PEG2000",
+      "peg_lipid_mol_pct": 4.8,
+      "targeting_moiety": "none",
+      "targeting_details": "Base 4-component mDLNP. Liver-tropic. No SORT molecule.",
+      "size_nm": null,
+      "formulation_notes": "Standard Siegwart lab mDLNP. Lipid:mRNA weight ratio 40:1. This is the starting point from which SORT LNPs are derived."
+    },
+    {
+      "id": "F2_SORT_lung_50pct_DOTAP",
+      "ionizable_lipid": "5A2-SC8",
+      "ionizable_lipid_mol_pct": 11.9,
+      "helper_lipid": "DOPE",
+      "helper_lipid_mol_pct": 11.9,
+      "cholesterol_mol_pct": 23.8,
+      "peg_lipid": "C14-PEG2000",
+      "peg_lipid_mol_pct": 2.4,
+      "targeting_moiety": "none",
+      "targeting_details": "Lung SORT: 50 mol% DOTAP as 5th component. Endogenous targeting via cationic charge-dependent protein corona.",
+      "size_nm": null,
+      "formulation_notes": "50% DOTAP shifts delivery exclusively to lung. Cationic quaternary ammonium lipid. DDAB and EPC also work as lung-targeting SORT molecules."
+    },
+    {
+      "id": "F3_SORT_spleen_30pct_18PA",
+      "ionizable_lipid": "5A2-SC8",
+      "ionizable_lipid_mol_pct": 16.7,
+      "helper_lipid": "DOPE",
+      "helper_lipid_mol_pct": 16.7,
+      "cholesterol_mol_pct": 33.3,
+      "peg_lipid": "C14-PEG2000",
+      "peg_lipid_mol_pct": 3.3,
+      "targeting_moiety": "none",
+      "targeting_details": "Spleen SORT: 30 mol% 18PA (anionic lipid) as 5th component. Citrate buffer pH 3.0.",
+      "size_nm": null,
+      "formulation_notes": "30% anionic SORT lipid (18PA) shifts delivery to spleen. Maximum spleen selectivity at ~30% anionic lipid."
+    },
+    {
+      "id": "F4_SORT_liver_enhanced_20pct_DODAP",
+      "ionizable_lipid": "5A2-SC8",
+      "ionizable_lipid_mol_pct": 19.0,
+      "helper_lipid": "DOPE",
+      "helper_lipid_mol_pct": 19.0,
+      "cholesterol_mol_pct": 38.0,
+      "peg_lipid": "C14-PEG2000",
+      "peg_lipid_mol_pct": 4.0,
+      "targeting_moiety": "none",
+      "targeting_details": "Liver SORT: 20 mol% DODAP (ionizable cationic lipid). Enhances liver delivery >10-fold vs base mDLNP.",
+      "size_nm": null,
+      "formulation_notes": "20% ionizable cationic SORT lipid maximizes liver delivery. DODAP or C12-200 or additional 5A2-SC8 all enhance liver."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_SORT_organ_titration",
+      "formulation_ref": "F2_SORT_lung_50pct_DOTAP",
+      "payload": "Luciferase mRNA",
+      "dose_mg_per_kg": 0.1,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": 6,
+      "species": "mouse",
+      "strain_or_model": "C57BL/6",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "luminescence",
+        "hsc_n_animals": 4,
+        "hsc_range_or_sd": "mean +/- SEM",
+        "liver_delivery_pct": null,
+        "liver_metric": "Relative luciferase expression per organ",
+        "liver_notes": "Systematic titration: 0% DOTAP = liver dominant. 5-15% DOTAP = spleen increases. 20-40% DOTAP = spleen dominant. 50%+ DOTAP = lung dominant. Liver delivery decreases monotonically with increasing DOTAP.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "High DOTAP (40:1 mass ratio) can cause embolisms in mice per later work"
+        }
+      },
+      "figure_source": "Fig 1b-d",
+      "data_confidence": "HIGH",
+      "notes": "Foundational SORT data. DOTAP % is the most important factor for tissue-specific delivery. Generalizable across 5A2-SC8, DLin-MC3-DMA, and C12-200 ionizable lipids. BM was NOT measured as a separate organ."
+    }
+  ],
+  "key_findings_for_project": [
+    "FOUNDATIONAL PAPER: Established charge-dependent organ targeting paradigm",
+    "Cationic (DOTAP/DDAB/EPC) -> lung; Anionic (18PA) -> spleen; Ionizable cationic (DODAP) -> enhanced liver",
+    "Complete mol% compositions disclosed for all SORT formulations - excellent ML training data",
+    "Generalizable across 3 ionizable lipid classes (5A2-SC8, DLin-MC3-DMA, C12-200)",
+    "BM was NOT measured - critical gap for our project",
+    "DOTAP at 30% confirmed to shift tropism toward spleen/lung (consistent with Kim's finding that DOTAP at 30% -> lung tropism)",
+    "5A2-SC8 base formulation is the same platform used in Lian 2024 BM-homing LNPs",
+    "All lipids have known SMILES and are commercially available"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Different approach (passive charge-based vs antibody targeting). SORT demonstrates liver de-targeting principles that could complement Breda's tLNP approach.",
+    "vs_shi": "SORT is untargeted; Shi uses CD117 antibody. SORT shows how to reduce liver accumulation through composition alone.",
+    "vs_kim": "Kim's DOTAP findings (30% -> lung) are consistent with SORT's cationic lipid predictions. SORT provides the theoretical framework for Kim's empirical observations.",
+    "new_pareto_points": "No BM data. Cannot place on HSC-LNP Pareto. Liver de-targeting quantification is relative (fractional expression per organ), not absolute %.",
+    "therapeutic_window_update": "Defines the design space for charge-based liver de-targeting. Key SAR: DOTAP mol% is the primary determinant of lung:liver ratio. Already captured in your headgroup_tropism.py SHAP analysis.",
+    "gap_formulation_relevance": "Very high. All 4 SORT formulations have complete mol% data and known lipid SMILES. Can be directly added to feature matrix. However, these are organ-level data (liver/lung/spleen), not cell-type-level."
+  },
+  "limitations_and_caveats": [
+    "BM not measured as a separate organ in any experiment",
+    "Organ-level readout only (luminescence), not cell-type-level",
+    "High DOTAP concentrations (40:1 mass ratio) associated with embolism risk in mice (noted in Gentry 2025)",
+    "Translation to NHP/human uncertain - SORT mechanism depends on mouse serum protein corona",
+    "Paper behind Nature Nanotechnology paywall, but SORT protocol paper (Wang 2023, Nat Protoc) and Dilliard 2021 PNAS are more detailed and partially accessible",
+    "Luciferase readout at 6h timepoint may not reflect therapeutic cargo kinetics"
+  ]
+}

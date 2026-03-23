@@ -1,0 +1,146 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-13",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Loughrey_2025_ChemComm",
+    "title": "The time course of in vivo cellular responses to LNPs",
+    "authors": "Loughrey D, Paunovska K et al.",
+    "lab": "Dahlman_GeorgiaTech",
+    "journal": "Chemical Communications",
+    "year": 2025,
+    "doi_or_id": "10.1039/D4CC06659F",
+    "url": "https://pubs.rsc.org/en/content/articlehtml/2025/cc/d4cc06659f",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET"
+  },
+  "formulations": [
+    {
+      "id": "F1_standard_LNP_kupffer_study",
+      "ionizable_lipid": "cKK-E12",
+      "ionizable_lipid_reference": "Dong et al. PNAS 2014 — known Dahlman lab lipid with published SMILES",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "Not specified",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "Not specified",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Standard cKK-E12 LNP used for Kupffer cell transcriptomic profiling",
+      "size_nm": null,
+      "formulation_notes": "cKK-E12 ionizable lipid (Dong et al. PNAS 2014). Paper focuses on mechanism (Kupffer cell transcriptomic response) rather than formulation optimization."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_kupffer_transcriptomics_timecourse",
+      "formulation_ref": "F1_standard_LNP_kupffer_study",
+      "payload": "Cre mRNA (tdTomato reporter; 89% Kupffer cell tdTom+ at 72h)",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "C57BL/6 (inferred)",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "protein_expression_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "Kupffer cell transcriptomic profiling at 1, 3, 6, 24h post-injection",
+        "liver_notes": "CCL7 was the only gene significantly upregulated at ALL FOUR timepoints (1h, 3h, 6h, 24h; p<0.01, FC>2) — this is the Kupffer cell response to the LNP itself. TLR1, TLR4, TLR6 involvement noted. Temporal gene expression progresses from membrane (1h) to nucleus (3h). No significant pro-inflammatory response at any timepoint.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": "CCL7 upregulated at all timepoints. No significant pro-inflammatory response overall.",
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Figures in main text (RSC open access)",
+      "data_confidence": "MEDIUM",
+      "notes": "Low-input bulk RNA transcriptomic profiling of Kupffer cells. Time-dependent response to LNPs mapped. Key limitation acknowledged by authors: did not establish how Kupffer cell heterogeneity affects delivery."
+    },
+    {
+      "id": "E2_dexamethasone_pretreatment",
+      "formulation_ref": "F1_standard_LNP_kupffer_study",
+      "payload": "aVHH mRNA (anti-VHH nanobody)",
+      "dose_mg_per_kg": null,
+      "dose_other_units": "4 LNP doses tested: 0.1, 0.3, 0.5, 1.0 mg/kg",
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "C57BL/6 (inferred)",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "protein_expression_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "Kupffer cell functional mRNA delivery (protein expression) quantified by flow cytometry",
+        "liver_notes": "Dexamethasone pre-treatment (2.5 mg/kg, 1h prior to LNP): +124% increase in Kupffer cell functional mRNA delivery at 0.3 mg/kg LNP; +82% increase at 1.0 mg/kg LNP. cKK-E12 LNP, aVHH cargo. Mechanism may be improved endosomal escape, not necessarily increased cellular uptake per se. Also increased delivery to some other liver cell types.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "Dexamethasone is clinically established. Mechanism: suppresses TLR1, TLR6, modulates TLR4. Dex was hypothesized to inhibit CCL7 induction based on prior literature."
+        }
+      },
+      "figure_source": "Fig 3a",
+      "data_confidence": "MEDIUM",
+      "notes": "KEY FINDING: Dex pre-treatment INCREASES functional Kupffer cell mRNA delivery (protein expression), not decreases it. +124% at 0.3 mg/kg LNP, +82% at 1.0 mg/kg LNP (2.5 mg/kg dex, 1h prior, cKK-E12 LNP, aVHH cargo). Mechanism may be improved endosomal escape rather than increased cellular uptake. For HSC project: dex pre-treatment does NOT de-target liver. Dex was hypothesized to inhibit CCL7 induction based on prior literature."
+    }
+  ],
+  "key_findings_for_project": [
+    "Dex pre-treatment increases functional Kupffer cell mRNA delivery (protein expression) by +124% at 0.3 mg/kg LNP and +82% at 1.0 mg/kg LNP (2.5 mg/kg dex 1h prior, cKK-E12 LNP, aVHH cargo)",
+    "This is OPPOSITE to the expected liver de-targeting — dex increases functional delivery, possibly via improved endosomal escape",
+    "Mechanism: dex suppresses TLR1/TLR4/TLR6 and CCL7, which paradoxically improves LNP functional delivery",
+    "CCL7 is the only gene significantly upregulated at ALL FOUR timepoints (1h, 3h, 6h, 24h; p<0.01, FC>2) — this is the response to the LNP itself",
+    "Temporal response: membrane effects at 1h, nuclear effects at 3h, resolution by 24h",
+    "No significant pro-inflammatory response observed - important safety signal",
+    "For HSC project: dex pre-treatment is NOT a liver de-targeting strategy for our purposes"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Not directly comparable. Breda used CD117-targeted tLNP; this studies untargeted Kupffer cell response.",
+    "vs_shi": "Not directly comparable.",
+    "vs_kim": "Same lab (Dahlman). Provides mechanistic context for why Kupffer cells capture LNPs and how to modulate this.",
+    "new_pareto_points": "No Pareto data. Mechanistic study only.",
+    "therapeutic_window_update": "Counterintuitive: dex pre-treatment increases functional liver (Kupffer) mRNA delivery (+124% at 0.3 mg/kg, +82% at 1.0 mg/kg). NOT useful for liver de-targeting.",
+    "gap_formulation_relevance": "Minimal direct formulation relevance. Mechanistic insight into Kupffer cell biology useful for understanding liver sink."
+  },
+  "limitations_and_caveats": [
+    "Title in your list ('suppresses Kupffer cell scavenging and enhances LNP delivery') is MISLEADING for our purposes - dex INCREASES Kupffer cell delivery, which means MORE liver uptake",
+    "The paper's actual title is 'The time course of in vivo cellular responses to LNPs' - it's a transcriptomics study with dex as a follow-up experiment",
+    "Kupffer cell heterogeneity not addressed",
+    "Did not deconvolute mRNA cargo vs lipid component effects",
+    "Effect on non-liver organs (BM, spleen) not measured",
+    "Ionizable lipid is cKK-E12 (Dong et al. PNAS 2014) — known Dahlman lab lipid with published SMILES"
+  ]
+}

@@ -1,0 +1,67 @@
+graph TB
+    subgraph Dashboard["Streamlit Dashboard"]
+        KB[Knowledge Base Explorer]
+        REC[Recommender UI]
+        CL[Competitive Landscape]
+        DQ[Data Quality]
+        MP[Model Performance]
+    end
+
+    subgraph API["FastAPI Backend"]
+        EP1["POST /recommend"]
+        EP2["GET /papers"]
+        EP3["GET /landscape"]
+        EP4["GET /alerts"]
+    end
+
+    subgraph PubMedAgent["PubMed Agent — Data Engine"]
+        PMC[PubMed Client]
+        PP[Paper Preprocessor]
+        EXT[LLM Extractor]
+        BF[Backfill Orchestrator]
+        AL[Alert System]
+    end
+
+    subgraph LNPOptimizer["LNP Optimizer — Intelligence Layer"]
+        FE[Feature Engineering]
+        ML[ML Models — XGBoost / LightGBM]
+        RM[Recommender Engine]
+        SH[SHAP Interpretability]
+        UQ[Uncertainty Quantification]
+    end
+
+    subgraph Shared["Shared Infrastructure"]
+        CFG[Config — .env + Pydantic Settings]
+        DB[(SQLite / Postgres)]
+        LLM[LLM Client — Claude API]
+        SCH[Pydantic Schemas]
+    end
+
+    subgraph External["External Services"]
+        PUBMED[(PubMed / PMC OA)]
+        CLAUDE[(Claude API)]
+        CT[(ClinicalTrials.gov)]
+    end
+
+    Dashboard --> API
+    API --> PubMedAgent
+    API --> LNPOptimizer
+
+    PMC -->|fetch papers| PUBMED
+    EXT -->|structured extraction| LLM
+    LLM -->|API calls| CLAUDE
+
+    PMC --> PP
+    PP --> EXT
+    EXT -->|structured data| DB
+    BF --> PMC
+    AL --> PMC
+
+    FE -->|read formulations| DB
+    ML --> FE
+    RM --> ML
+    SH --> ML
+    UQ --> ML
+
+    PubMedAgent --> Shared
+    LNPOptimizer --> Shared

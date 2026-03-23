@@ -29,8 +29,42 @@ Thumbs.db
 # Jupyter
 .ipynb_checkpoints/
 
-# Generated figures (regenerate with generate_figures.py)
-outputs/*.png
+# Generated outputs
+outputs/
+
+# Paper seeds (internal drafts)
+papers/seeds/
+
+# Unused modules (not part of current analysis)
+src/pubmed_agent/
+src/external_data/
+src/dashboard/
+
+# Streamlit app (WIP, not ready)
+app/
+
+# External datasets (transfer learning — negative result, not needed)
+data/external/
+
+# Exploration scripts + generated figures (regenerable)
+data/explore/
+
+# Large external data (not distributable)
+LNPDB.csv
+explore_papers/
+
+# Dead code from early DB architecture
+alembic/
+alembic.ini
+
+# Claude Code internal state
+.claude/
+
+# Streamlit
+.streamlit/
+
+# Ruff cache
+.ruff_cache/
 
 # Test / coverage
 .coverage
@@ -38,6 +72,39 @@ htmlcov/
 .pytest_cache/
 .mypy_cache/
 
+# Project management / private docs (never commit)
+CLAUDE.md
+annotations/MEMORY_annotation_pipeline.md
+docs/SESSION_PLAN.md
+docs/PRESENTATION_LOG.md
+docs/ARCHITECTURE.md
+docs/annotation_guide.md
+docs/EXPLORE.md
+docs/DOMAIN_CONTEXT.md
+docs/TESTING_GUIDE.md
+
+# Data files that shouldn't be public
+*.db
+data/**/*.pdf
+
+# Node / Explorer (deploy separately)
+explorer/
+node_modules/
+
+# Temporary working files
+*.bak
+project_structure.txt
+*_summary.md
+*_sync_report.md
+explorer_data/
+explorer_data_formulations.json
+
+# Generated SHAP plots (regenerable)
+data/models/shap_plots/
+data/models/shap_values.csv
+
 # Misc
 *.log
 tmp/
+tmp.md
+.tmux.conf

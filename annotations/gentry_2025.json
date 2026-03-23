@@ -1,0 +1,159 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-13",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Gentry_2025_PNAS",
+    "title": "Glycolipid nanoparticles target the spleen and detarget the liver without charge",
+    "authors": "Gentry K et al.",
+    "journal": "Proceedings of the National Academy of Sciences",
+    "year": 2025,
+    "doi_or_id": "10.1073/pnas.2409569122",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.2409569122",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "LIVER_DETARGET"
+  },
+  "formulations": [
+    {
+      "id": "F1_GlycoLNP61",
+      "ionizable_lipid": "SM-102 or cKK-E12",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "C16GalphaCer (C16 galactosyl-alpha-ceramide)",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "variable (4 PEG-lipids tested)",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Endogenous targeting via glycolipid-mediated protein corona change. Charge-independent liver de-targeting. C16GalphaCer replaces DSPC as helper lipid.",
+      "size_nm": 115,
+      "formulation_notes": "GlycoLNP61 is the lead particle from 109-LNP barcoded screen. 8 molar ratio combinations tested per ionizable lipid. Exact mol% not reported in accessible text. Encapsulation efficiency 58%. Formed blebbed morphology vs smooth control."
+    },
+    {
+      "id": "F2_ControlLNP61",
+      "ionizable_lipid": "SM-102 or cKK-E12",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "DSPC",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "same PEG-lipid as GlycoLNP61",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Matched control with DSPC instead of C16GalphaCer. Identical molar ratios otherwise.",
+      "size_nm": 60,
+      "formulation_notes": "Control particle for GlycoLNP61 comparison. Encapsulation efficiency 76%. Standard smooth LNP morphology."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_barcoded_screen_109LNPs",
+      "formulation_ref": "F1_GlycoLNP61",
+      "payload": "Thy1.1 mRNA + DNA barcode",
+      "dose_mg_per_kg": 1.5,
+      "dose_other_units": "0.03 mg/kg per particle average (pooled screen)",
+      "route": "IV",
+      "timepoint_hours": 16,
+      "species": "mouse",
+      "strain_or_model": "C57BL/6",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "barcode_count",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "Thy1.1+ cells in liver endothelial cells, Kupffer cells, hepatocytes, immune cells",
+        "liver_notes": "SM-102 library: splenic F480+ delivery HIGHER than liver endothelial cells. cKK-E12 library: splenic F480+ delivery EQUAL to liver endothelial cells.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Fig 1D-H",
+      "data_confidence": "MEDIUM",
+      "notes": "Pooled barcoded screen. C16GalphaCer LNPs colocalized with Thy1.1+ splenic cells. C8GalphaCer did not. 25 cell types measured across liver, spleen, blood, lymph nodes. BM was NOT measured."
+    },
+    {
+      "id": "E2_GlycoLNP61_individual_validation",
+      "formulation_ref": "F1_GlycoLNP61",
+      "payload": "Thy1.1 mRNA",
+      "dose_mg_per_kg": 0.8,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "C57BL/6",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "",
+        "hsc_metric": "protein_expression_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "Thy1.1+ % in liver vs spleen",
+        "liver_notes": "GlycoLNP61 showed higher Thy1.1+ cells in spleen than liver. Significant difference in spleen:liver ratio vs ControlLNP61. Neither particle delivered efficiently to other tested tissues.",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Fig 2B, Fig 3B",
+      "data_confidence": "MEDIUM",
+      "notes": "Individual validation confirmed screen results. Dose-response showed splenic delivery at doses as low as 0.2 mg/kg. scRNA-seq on 18,585 cells confirmed delivery to splenic cell types."
+    }
+  ],
+  "key_findings_for_project": [
+    "Charge-INDEPENDENT liver de-targeting: replacing DSPC with neutral glycolipid C16GalphaCer shifts tropism from liver to spleen",
+    "No antibodies or permanent charge required - potentially safer than DOTAP-based approaches (avoids embolism risk at 40:1 ratio)",
+    "109 LNPs screened with DNA barcoding - large dataset for ML",
+    "Two ionizable lipids tested (SM-102 and cKK-E12) - generalizable principle",
+    "BM was NOT measured - critical gap for our project",
+    "Splenic macrophages (F480+) are primary target - not directly relevant to HSC but mechanism could inform BM de-targeting strategies",
+    "NKT cell engagement mentioned as possible mechanism for glycolipid-mediated tropism change"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Completely different approach (liver de-targeting vs HSC targeting). Complementary strategy.",
+    "vs_shi": "No antibody targeting. Different goal (spleen enrichment vs HSC targeting).",
+    "vs_kim": "Dahlman lab (same as Kim). Uses SM-102 and cKK-E12 instead of PPZ-A10. Compatible barcoding methodology.",
+    "new_pareto_points": "No BM data so cannot place on Pareto. Liver de-targeting quantified but only as spleen:liver ratio, not absolute %.",
+    "therapeutic_window_update": "Demonstrates liver de-targeting principle without charge - relevant if combined with BM-targeting strategy.",
+    "gap_formulation_relevance": "High relevance as novel mechanism for liver de-targeting. If combined with BM-targeting (e.g., CD117 antibody), could improve therapeutic window. SM-102 and cKK-E12 are known lipids with SMILES."
+  },
+  "limitations_and_caveats": [
+    "BM was NOT measured in any experiment - cannot assess HSC delivery",
+    "Spleen-focused delivery: may or may not translate to BM delivery",
+    "Exact molar ratios of GlycoLNP61 not extracted (8 ratio permutations tested)",
+    "Low encapsulation efficiency (58%) may limit therapeutic utility",
+    "Size difference between GlycoLNP61 (115nm) and control (60nm) confounds direct comparison",
+    "Only reporter readout (Thy1.1), no genome editing cargo tested",
+    "C16GalphaCer may engage NKT cells - potential immunogenicity concern for repeat dosing"
+  ]
+}

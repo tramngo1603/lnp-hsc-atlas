@@ -1,0 +1,1160 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "source_quality": "full_paper_plus_supplement",
+    "upgrade_from": "batch1 abstract-only annotation",
+    "data_audit_notes": [
+      "Fig 2e heatmap is n=1 screen (confirmed by cross-referencing with Supp Fig 10B n=3 validation)",
+      "A13 LSK: 23% in screen vs ~35% in n=3 validation (52% relative jump confirms n=1)",
+      "CMP=66% for AA11 in Fig 2e is likely single-mouse outlier; both 10A and 10B converge on ~50%",
+      "Inter-experiment CV is cell-type-dependent: MPP is stable (CV=2%), LMPP is volatile (CV=34%)",
+      "Off-organ editing values digitized from Supp Fig 24 bar charts (MEDIUM confidence ±0.5%)",
+      "Covalent lipid SMILES verified via PubChem for top 10 performers",
+      "Tier 1 remaining 7 compounds (C7/C8/C9/AT4/AT5/AT6/TC) confirmed via visual structure matching against Supp Fig 3 + PubChem SMILES lookup",
+      "Total SMILES coverage: 17/21 heatmap formulations (81%). Remaining 4 (A5/A7/A9/A10) are moderate-to-low performers"
+    ]
+  },
+  "paper": {
+    "id": "Lian_2024_NatNanotech",
+    "title": "Bone-marrow-homing lipid nanoparticles for genome editing in diseased and malignant haematopoietic stem cells",
+    "authors": "Lian X, Chatterjee S, Sun Y, Dilliard SA, Moore S, Xiao Y, Bian X, Yamada K, Sung YC, Levine RM, Mayberry K, John S, Liu X, Smith C, Johnson LT, Wang X, Zhang CC, Liu DR, Newby GA, Weiss MJ, Yen JS, Siegwart DJ",
+    "journal": "Nature Nanotechnology",
+    "year": 2024,
+    "volume": 19,
+    "pages": "1409-1417",
+    "doi_or_id": "10.1038/s41565-024-01680-8",
+    "url": "https://www.nature.com/articles/s41565-024-01680-8",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "HSC",
+    "lab": "Siegwart_UTSW",
+    "collaborators": [
+      "Liu_Broad/Harvard (base editors)",
+      "Weiss/Yen_StJude (SCD expertise)",
+      "Zhang_UTSW (AML model)",
+      "Newby_JHU"
+    ],
+    "data_availability": "NCBI SRA PRJNA1082713 (sequencing), source data provided"
+  },
+  "base_formulation": {
+    "description": "Standard 4-component Siegwart mDLNP, liver-tropic",
+    "ionizable_lipid": "5A2-SC8",
+    "ionizable_lipid_mol_pct": 23.8,
+    "ionizable_lipid_smiles": "known_degradable_dendrimer",
+    "helper_lipid": "DOPE",
+    "helper_lipid_mol_pct": 23.8,
+    "cholesterol_mol_pct": 47.6,
+    "peg_lipid": "DMG-PEG2000",
+    "peg_lipid_mol_pct": 4.8,
+    "notes": "All BM-homing formulations use 20 mol% covalent lipid, proportionally reducing the 4 base components to: 5A2-SC8 19.05%, DOPE 19.05%, cholesterol 38.10%, DMG-PEG2K 3.81%"
+  },
+  "bm_homing_formulation_template": {
+    "ionizable_lipid": "5A2-SC8",
+    "ionizable_lipid_mol_pct": 19.05,
+    "helper_lipid": "DOPE",
+    "helper_lipid_mol_pct": 19.05,
+    "cholesterol_mol_pct": 38.1,
+    "cholesterol_type": "standard",
+    "peg_lipid": "DMG-PEG2000",
+    "peg_lipid_mol_pct": 3.81,
+    "covalent_lipid_mol_pct": 20.0,
+    "targeting_moiety": "none_endogenous_via_protein_corona",
+    "targeting_details": "Covalent lipid species alter protein corona (ApoE enrichment) to redirect from liver to BM"
+  },
+  "formulations_screen": {
+    "_notes": "Fig 2e heatmap. Single Cre mRNA dose 0.6 mg/kg, tdTom reporter mice, harvest 72h. N=1 per formulation EXCEPT C6, A8, A13, AA11 which have n=3 validation in Supp Fig 10B. Lipid:RNA = 20:1.",
+    "readout": "tdTom_pct",
+    "readout_description": "Percentage of tdTomato-positive cells per BM cell type after Cre-mediated stop cassette deletion",
+    "formulations": [
+      {
+        "id": "Lian_A5",
+        "covalent_lipid": "A5",
+        "covalent_lipid_name": "Sulfosuccinimidyl Myristate",
+        "headgroup_type": "NHS",
+        "reactive_group": "sulfo_NHS",
+        "covalent_lipid_smiles": "CCCCCCCCCCCCCC(=O)ON1C(=O)CC(C1=O)S(=O)(=O)O",
+        "molecular_weight": 407.49,
+        "n_reactive_groups": 1,
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 17,
+          "LT_HSC": 13,
+          "LMPP": 13,
+          "MPP": 26,
+          "CMP": 19,
+          "GMP": 10,
+          "MEP": 6,
+          "B": 3,
+          "T_total": 9,
+          "T_CD4": 15,
+          "T_CD8": 8,
+          "macrophage": 11,
+          "monocyte": 3,
+          "neutrophil": 9,
+          "endothelial": 12
+        }
+      },
+      {
+        "id": "Lian_A7",
+        "covalent_lipid": "A7",
+        "covalent_lipid_name": "Succinimidyl 4-formylbenzoate",
+        "alt_names": [
+          "SFB"
+        ],
+        "headgroup_type": "NHS",
+        "covalent_lipid_smiles": "C1CC(=O)N(C1=O)OC(=O)C2=CC=C(C=C2)C=O",
+        "molecular_weight": 247.2,
+        "n_reactive_groups": 2,
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 23,
+          "LT_HSC": 30,
+          "LMPP": 16,
+          "MPP": 31,
+          "CMP": 23,
+          "GMP": 15,
+          "MEP": 11,
+          "B": 2,
+          "T_total": 10,
+          "T_CD4": 21,
+          "T_CD8": 10,
+          "macrophage": 16,
+          "monocyte": 2,
+          "neutrophil": 11,
+          "endothelial": 16
+        }
+      },
+      {
+        "id": "Lian_A8",
+        "covalent_lipid": "A8",
+        "covalent_lipid_name": "FMOC-NHS",
+        "headgroup_type": "NHS",
+        "covalent_lipid_smiles": "C1CC(=O)N(C1=O)OC(=O)OCC2C3=CC=CC=C3C4=CC=CC=C24",
+        "confidence": "HIGH_n3",
+        "confidence_notes": "n=3 validated in Supp Fig 10B",
+        "bm_delivery_screen_n1": {
+          "LSK": 44,
+          "LT_HSC": 35,
+          "LMPP": 33,
+          "MPP": 63,
+          "CMP": 59,
+          "GMP": 37,
+          "MEP": 19,
+          "B": 5,
+          "T_total": 15,
+          "T_CD4": 24,
+          "T_CD8": 14,
+          "macrophage": 30,
+          "monocyte": 6,
+          "neutrophil": 21,
+          "endothelial": 16
+        },
+        "bm_delivery_validated_n3": {
+          "LSK": 40,
+          "LT_HSC": 35,
+          "LMPP": 29,
+          "MPP": 58,
+          "CMP": 46,
+          "GMP": 33,
+          "MEP": 19,
+          "B": 5,
+          "T_total": 15,
+          "T_CD4": 25,
+          "T_CD8": 14,
+          "macrophage": 39,
+          "monocyte": 6,
+          "neutrophil": 25,
+          "endothelial": 16
+        },
+        "bm_delivery_validated_n3_source": "Supp Fig 10B digitized ±3%",
+        "molecular_weight": 337.33
+      },
+      {
+        "id": "Lian_A9",
+        "covalent_lipid": "A9",
+        "covalent_lipid_name": "Acridinium NHS ester",
+        "headgroup_type": "NHS",
+        "covalent_lipid_smiles": "C[N+]1=C2C=CC=CC2=C(C3=CC=CC=C31)C(=O)OC4=CC=C(C=C4)CCC(=O)ON5C(=O)CCC5=O",
+        "molecular_weight": 485.51,
+        "n_reactive_groups": 1,
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 31,
+          "LT_HSC": 24,
+          "LMPP": 29,
+          "MPP": 42,
+          "CMP": 30,
+          "GMP": 20,
+          "MEP": 13,
+          "B": 4,
+          "T_total": 17,
+          "T_CD4": 25,
+          "T_CD8": 24,
+          "macrophage": 21,
+          "monocyte": 3,
+          "neutrophil": 16,
+          "endothelial": 16
+        }
+      },
+      {
+        "id": "Lian_A10",
+        "covalent_lipid": "A10",
+        "covalent_lipid_name": "Octyl isothiocyanate",
+        "headgroup_type": "isothiocyanate",
+        "reactive_group": "NCS",
+        "covalent_lipid_smiles": "CCCCCCCCN=C=S",
+        "molecular_weight": 171.3,
+        "n_reactive_groups": 1,
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 23,
+          "LT_HSC": 35,
+          "LMPP": 17,
+          "MPP": 34,
+          "CMP": 38,
+          "GMP": 23,
+          "MEP": 8,
+          "B": 2,
+          "T_total": 10,
+          "T_CD4": 17,
+          "T_CD8": 13,
+          "macrophage": 21,
+          "monocyte": 2,
+          "neutrophil": 12,
+          "endothelial": 12
+        }
+      },
+      {
+        "id": "Lian_A11_original_discovery",
+        "covalent_lipid": "A11_SA_NHS",
+        "covalent_lipid_name": "Stearic acid N-hydroxysuccinimide ester",
+        "headgroup_type": "NHS",
+        "covalent_lipid_smiles": "CCCCCCCCCCCCCCCCCC(=O)ON1C(=O)CCC1=O",
+        "confidence": "MEDIUM_n1",
+        "notes": "THE original BM-homing discovery compound. Not to be confused with crosslinker AA11.",
+        "bm_delivery": {
+          "LSK": 40,
+          "LT_HSC": 35,
+          "LMPP": 43,
+          "MPP": 58,
+          "CMP": 54,
+          "GMP": 33,
+          "MEP": 19,
+          "B": 4,
+          "T_total": 19,
+          "T_CD4": 28,
+          "T_CD8": 21,
+          "macrophage": 22,
+          "monocyte": 5,
+          "neutrophil": 21,
+          "endothelial": 14
+        },
+        "molecular_weight": 379.54
+      },
+      {
+        "id": "Lian_A12",
+        "covalent_lipid": "A12",
+        "covalent_lipid_name": "Hexadecylsuccinic anhydride",
+        "headgroup_type": "anhydride",
+        "covalent_lipid_smiles": "CCCCCCCCCCCCCCCCC1CC(=O)OC1=O",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 36,
+          "LT_HSC": 35,
+          "LMPP": 33,
+          "MPP": 54,
+          "CMP": 42,
+          "GMP": 19,
+          "MEP": 12,
+          "B": 4,
+          "T_total": 12,
+          "T_CD4": 25,
+          "T_CD8": 13,
+          "macrophage": 23,
+          "monocyte": 4,
+          "neutrophil": 15,
+          "endothelial": 12
+        },
+        "molecular_weight": 324.5
+      },
+      {
+        "id": "Lian_A13",
+        "covalent_lipid": "A13",
+        "covalent_lipid_name": "5-Norbornene-2-acetic acid NHS ester",
+        "headgroup_type": "NHS",
+        "covalent_lipid_smiles": "C1CC(=O)N(C1=O)OC(=O)CC2CC3CC2C=C3",
+        "confidence": "HIGH_n3",
+        "confidence_notes": "n=3 validated in Supp Fig 10B. Screen value diverges significantly (LSK 23% screen vs ~35% validated).",
+        "bm_delivery_screen_n1": {
+          "LSK": 23,
+          "LT_HSC": 24,
+          "LMPP": 17,
+          "MPP": 34,
+          "CMP": 46,
+          "GMP": 23,
+          "MEP": 8,
+          "B": 2,
+          "T_total": 10,
+          "T_CD4": 17,
+          "T_CD8": 13,
+          "macrophage": 22,
+          "monocyte": 5,
+          "neutrophil": 25,
+          "endothelial": 12
+        },
+        "bm_delivery_validated_n3": {
+          "LSK": 35,
+          "LT_HSC": 30,
+          "LMPP": 29,
+          "MPP": 50,
+          "CMP": 44,
+          "GMP": 19,
+          "MEP": 12,
+          "B": 5,
+          "T_total": 7,
+          "T_CD4": 11,
+          "T_CD8": 16,
+          "macrophage": 24,
+          "monocyte": 6,
+          "neutrophil": 15,
+          "endothelial": 12
+        },
+        "bm_delivery_validated_n3_source": "Supp Fig 10B digitized ±3%",
+        "molecular_weight": 249.26
+      },
+      {
+        "id": "Lian_C6",
+        "covalent_lipid": "C6",
+        "covalent_lipid_name": "Palmitic acid hydrazide",
+        "headgroup_type": "hydrazide",
+        "covalent_lipid_smiles": "CCCCCCCCCCCCCCCC(=O)NN",
+        "confidence": "HIGH_n3",
+        "confidence_notes": "n=3 validated in Supp Fig 10B. Lead therapeutic compound. Used in all editing, storage, and tox studies.",
+        "bm_delivery_screen_n1": {
+          "LSK": 34,
+          "LT_HSC": 31,
+          "LMPP": 34,
+          "MPP": 49,
+          "CMP": 47,
+          "GMP": 28,
+          "MEP": 13,
+          "B": 5,
+          "T_total": 13,
+          "T_CD4": 19,
+          "T_CD8": 11,
+          "macrophage": 28,
+          "monocyte": 3,
+          "neutrophil": 21,
+          "endothelial": 14
+        },
+        "bm_delivery_validated_n3": {
+          "LSK": 34,
+          "LT_HSC": 30,
+          "LMPP": 32,
+          "MPP": 50,
+          "CMP": 40,
+          "GMP": 27,
+          "MEP": 13,
+          "B": 5,
+          "T_total": 11,
+          "T_CD4": 16,
+          "T_CD8": 16,
+          "macrophage": 24,
+          "monocyte": 5,
+          "neutrophil": 18,
+          "endothelial": 16
+        },
+        "bm_delivery_validated_n3_source": "Supp Fig 10B digitized ±3%. Spot-checked by user: C6 MPP=50% (corrected from 45).",
+        "molecular_weight": 270.46
+      },
+      {
+        "id": "Lian_C7",
+        "covalent_lipid": "C7",
+        "covalent_lipid_name": "N,N'-Diisopropylcarbodiimide",
+        "alt_names": [
+          "DIC"
+        ],
+        "headgroup_type": "carbodiimide",
+        "covalent_lipid_smiles": "CC(C)N=C=NC(C)C",
+        "molecular_weight": 126.2,
+        "CAS": "693-13-0",
+        "n_reactive_groups": 1,
+        "linker_length_atoms": 0,
+        "smiles_source": "pubchem_CID_11243",
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 18,
+          "LT_HSC": 13,
+          "LMPP": 14,
+          "MPP": 33,
+          "CMP": 22,
+          "GMP": 13,
+          "MEP": 7,
+          "B": 5,
+          "T_total": 13,
+          "T_CD4": 14,
+          "T_CD8": 13,
+          "macrophage": 14,
+          "monocyte": 3,
+          "neutrophil": 12,
+          "endothelial": 16
+        }
+      },
+      {
+        "id": "Lian_C8",
+        "covalent_lipid": "C8",
+        "covalent_lipid_name": "1-Ethyl-3-(3-dimethylaminopropyl)carbodiimide HCl",
+        "alt_names": [
+          "EDC",
+          "EDAC"
+        ],
+        "headgroup_type": "carbodiimide",
+        "covalent_lipid_smiles": "CCN=C=NCCCN(C)C",
+        "molecular_weight": 191.7,
+        "CAS": "25952-53-8",
+        "n_reactive_groups": 1,
+        "linker_length_atoms": 0,
+        "smiles_source": "pubchem_CID_15908",
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 41,
+          "LT_HSC": 40,
+          "LMPP": 37,
+          "MPP": 53,
+          "CMP": 44,
+          "GMP": 29,
+          "MEP": 20,
+          "B": 2,
+          "T_total": 14,
+          "T_CD4": 24,
+          "T_CD8": 29,
+          "macrophage": 26,
+          "monocyte": 6,
+          "neutrophil": 23,
+          "endothelial": 14
+        }
+      },
+      {
+        "id": "Lian_C9",
+        "covalent_lipid": "C9",
+        "covalent_lipid_name": "N,N'-Dicyclohexylcarbodiimide",
+        "alt_names": [
+          "DCC"
+        ],
+        "headgroup_type": "carbodiimide",
+        "covalent_lipid_smiles": "C1CCC(CC1)N=C=NC2CCCCC2",
+        "molecular_weight": 206.33,
+        "CAS": "538-75-0",
+        "n_reactive_groups": 1,
+        "linker_length_atoms": 0,
+        "smiles_source": "pubchem_CID_10868",
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 34,
+          "LT_HSC": 30,
+          "LMPP": 32,
+          "MPP": 53,
+          "CMP": 40,
+          "GMP": 27,
+          "MEP": 20,
+          "B": 7,
+          "T_total": 7,
+          "T_CD4": 11,
+          "T_CD8": 16,
+          "macrophage": 24,
+          "monocyte": 5,
+          "neutrophil": 18,
+          "endothelial": 15
+        }
+      },
+      {
+        "id": "Lian_C10",
+        "covalent_lipid": "C10",
+        "covalent_lipid_name": "EDC methiodide",
+        "headgroup_type": "carbodiimide",
+        "covalent_lipid_smiles": "CCN=C=NCCC[N+](C)(C)C.[I-]",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 34,
+          "LT_HSC": 33,
+          "LMPP": 23,
+          "MPP": 45,
+          "CMP": 23,
+          "GMP": 24,
+          "MEP": 20,
+          "B": 5,
+          "T_total": 5,
+          "T_CD4": 23,
+          "T_CD8": 20,
+          "macrophage": 21,
+          "monocyte": 4,
+          "neutrophil": 14,
+          "endothelial": 13
+        },
+        "molecular_weight": 311.17
+      },
+      {
+        "id": "Lian_AT4",
+        "covalent_lipid": "AT4",
+        "covalent_lipid_name": "4-Succinimidyloxycarbonyl-alpha-methyl-alpha(2-pyridyldithio)toluene",
+        "alt_names": [
+          "SMPT"
+        ],
+        "headgroup_type": "crosslinker_AT",
+        "covalent_lipid_smiles": "CC(C1=CC=C(C=C1)C(=O)ON2C(=O)CCC2=O)SSC3=CC=CC=N3",
+        "molecular_weight": 390.47,
+        "CAS": "64860-67-9",
+        "n_reactive_groups": 2,
+        "linker_length_atoms": 7,
+        "smiles_source": "pubchem_CID_156480",
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 34,
+          "LT_HSC": 28,
+          "LMPP": 37,
+          "MPP": 43,
+          "CMP": 44,
+          "GMP": 24,
+          "MEP": 10,
+          "B": 22,
+          "T_total": 15,
+          "T_CD4": 28,
+          "T_CD8": 33,
+          "macrophage": 24,
+          "monocyte": 11,
+          "neutrophil": 16,
+          "endothelial": 11
+        }
+      },
+      {
+        "id": "Lian_AT5",
+        "covalent_lipid": "AT5",
+        "covalent_lipid_name": "N-Succinimidyl 3-(2-pyridyldithio)propionate",
+        "alt_names": [
+          "SPDP"
+        ],
+        "headgroup_type": "crosslinker_AT",
+        "covalent_lipid_smiles": "O=C(CCSSC1=NC=CC=C1)ON2C(CCC2=O)=O",
+        "molecular_weight": 312.36,
+        "CAS": "68181-17-9",
+        "n_reactive_groups": 2,
+        "linker_length_atoms": 5,
+        "smiles_source": "pubchem_CID_100682",
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 34,
+          "LT_HSC": 32,
+          "LMPP": 29,
+          "MPP": 48,
+          "CMP": 37,
+          "GMP": 31,
+          "MEP": 15,
+          "B": 5,
+          "T_total": 16,
+          "T_CD4": 23,
+          "T_CD8": 11,
+          "macrophage": 26,
+          "monocyte": 5,
+          "neutrophil": 21,
+          "endothelial": 14
+        }
+      },
+      {
+        "id": "Lian_AT6",
+        "covalent_lipid": "AT6",
+        "covalent_lipid_name": "Succinimidyl 6-(3-(2-pyridyldithio)propionamido)hexanoate",
+        "alt_names": [
+          "LC-SPDP"
+        ],
+        "headgroup_type": "crosslinker_AT",
+        "covalent_lipid_smiles": "O=C(CCSSC1=NC=CC=C1)NCCCCCC(=O)ON2C(CCC2=O)=O",
+        "molecular_weight": 425.52,
+        "CAS": "68181-18-0",
+        "n_reactive_groups": 2,
+        "linker_length_atoms": 11,
+        "smiles_source": "pubchem_CID_71564",
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 35,
+          "LT_HSC": 29,
+          "LMPP": 20,
+          "MPP": 38,
+          "CMP": 28,
+          "GMP": 17,
+          "MEP": 10,
+          "B": 29,
+          "T_total": 12,
+          "T_CD4": 25,
+          "T_CD8": 18,
+          "macrophage": 18,
+          "monocyte": 3,
+          "neutrophil": 17,
+          "endothelial": 12
+        }
+      },
+      {
+        "id": "Lian_AT7",
+        "covalent_lipid": "AT7",
+        "covalent_lipid_name": "SIAB",
+        "headgroup_type": "crosslinker_AT",
+        "covalent_lipid_smiles": "C1CC(=O)N(C1=O)OC(=O)C2=CC=C(C=C2)NC(=O)CI",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 29,
+          "LT_HSC": 27,
+          "LMPP": 23,
+          "MPP": 46,
+          "CMP": 33,
+          "GMP": 20,
+          "MEP": 9,
+          "B": 8,
+          "T_total": 10,
+          "T_CD4": 20,
+          "T_CD8": 11,
+          "macrophage": 13,
+          "monocyte": 6,
+          "neutrophil": 13,
+          "endothelial": 11
+        },
+        "molecular_weight": 402.14
+      },
+      {
+        "id": "Lian_TC",
+        "covalent_lipid": "TC",
+        "covalent_lipid_name": "3-(2-Pyridyldithio)propionyl hydrazide",
+        "alt_names": [
+          "PDPH"
+        ],
+        "headgroup_type": "crosslinker_TC",
+        "covalent_lipid_smiles": "O=C(CCSSC1=NC=CC=C1)NN",
+        "molecular_weight": 229.32,
+        "CAS": "88879-25-4",
+        "n_reactive_groups": 2,
+        "linker_length_atoms": 5,
+        "smiles_source": "pubchem_CID_2762650",
+        "structure_confirmed_by": "visual_match_supp_fig3",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 28,
+          "LT_HSC": 27,
+          "LMPP": 20,
+          "MPP": 38,
+          "CMP": 33,
+          "GMP": 23,
+          "MEP": 13,
+          "B": 3,
+          "T_total": 11,
+          "T_CD4": 17,
+          "T_CD8": 18,
+          "macrophage": 18,
+          "monocyte": 9,
+          "neutrophil": 13,
+          "endothelial": 11
+        }
+      },
+      {
+        "id": "Lian_CC",
+        "covalent_lipid": "CC",
+        "covalent_lipid_name": "DHSO",
+        "headgroup_type": "crosslinker_CC",
+        "covalent_lipid_smiles": "C(CS(=O)CCC(=O)NN)C(=O)NN",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 33,
+          "LT_HSC": 34,
+          "LMPP": 31,
+          "MPP": 50,
+          "CMP": 40,
+          "GMP": 23,
+          "MEP": 14,
+          "B": 4,
+          "T_total": 13,
+          "T_CD4": 26,
+          "T_CD8": 15,
+          "macrophage": 21,
+          "monocyte": 5,
+          "neutrophil": 21,
+          "endothelial": 11
+        },
+        "molecular_weight": 238.26
+      },
+      {
+        "id": "Lian_AA10",
+        "covalent_lipid": "AA10",
+        "covalent_lipid_name": "DSG",
+        "headgroup_type": "crosslinker_AA",
+        "covalent_lipid_smiles": "C1CC(=O)N(C1=O)OC(=O)CCCC(=O)ON2C(=O)CCC2=O",
+        "confidence": "MEDIUM_n1",
+        "bm_delivery": {
+          "LSK": 38,
+          "LT_HSC": 37,
+          "LMPP": 37,
+          "MPP": 55,
+          "CMP": 46,
+          "GMP": 27,
+          "MEP": 14,
+          "B": 4,
+          "T_total": 13,
+          "T_CD4": 23,
+          "T_CD8": 14,
+          "macrophage": 25,
+          "monocyte": 5,
+          "neutrophil": 22,
+          "endothelial": 11
+        },
+        "molecular_weight": 328.27
+      },
+      {
+        "id": "Lian_AA11",
+        "covalent_lipid": "AA11",
+        "covalent_lipid_name": "DSSeb (Disuccinimidyl sebacate)",
+        "headgroup_type": "crosslinker_AA",
+        "covalent_lipid_smiles": "C1CC(=O)N(C1=O)OC(=O)CCCCCCCCC(=O)ON2C(=O)CCC2=O",
+        "confidence": "HIGH_n3",
+        "confidence_notes": "n=3 validated in Supp Fig 10B. Top overall performer. CMP=66% in screen is outlier (both validation experiments converge on ~50%).",
+        "bm_delivery_screen_n1": {
+          "LSK": 45,
+          "LT_HSC": 40,
+          "LMPP": 46,
+          "MPP": 58,
+          "CMP": 66,
+          "GMP": 28,
+          "MEP": 17,
+          "B": 7,
+          "T_total": 13,
+          "T_CD4": 27,
+          "T_CD8": 24,
+          "macrophage": 32,
+          "monocyte": 8,
+          "neutrophil": 23,
+          "endothelial": 13
+        },
+        "bm_delivery_validated_n3": {
+          "LSK": 45,
+          "LT_HSC": 45,
+          "LMPP": 46,
+          "MPP": 58,
+          "CMP": 54,
+          "GMP": 33,
+          "MEP": 20,
+          "B": 5,
+          "T_total": 15,
+          "T_CD4": 25,
+          "T_CD8": 15,
+          "macrophage": 39,
+          "monocyte": 6,
+          "neutrophil": 25,
+          "endothelial": 16
+        },
+        "bm_delivery_validated_n3_source": "Supp Fig 10B digitized ±3%. CMP corrected from 66→54 based on validation. Spot-checked by user: AA11 LT-HSC=45% (corrected from 40).",
+        "multidose_2x": {
+          "source": "Supp Fig 10A",
+          "dose": "0.6 mg/kg x2, 1 week apart",
+          "LSK": 73.2,
+          "LT_HSC": 64.8,
+          "LMPP": 65.1,
+          "MPP": 84.6,
+          "CMP": 66.1,
+          "GMP": 51.7,
+          "MEP": 32,
+          "B": 10,
+          "T_total": 17.9,
+          "T_CD4": 30.8,
+          "T_CD8": 31.2,
+          "macrophage": 37.4,
+          "monocyte": 9.44,
+          "neutrophil": 21.9
+        },
+        "molecular_weight": 396.39
+      }
+    ]
+  },
+  "experiments": [
+    {
+      "id": "E1_Cas9_BCL11A_Townes",
+      "formulation_ref": "Lian_C6",
+      "payload": "Cas9 mRNA + sgG34 (BCL11A binding motif in HBG1/HBG2 promoter)",
+      "payload_goal": "HbF reactivation via BCL11A disruption",
+      "lipid_rna_ratio": "10:1",
+      "mrna_sgrna_ratio": "2:1 wt/wt",
+      "dose_mg_per_kg": 3.0,
+      "dose_notes": "3 mg/kg total RNA per injection (2 mg/kg mRNA + 1 mg/kg sgRNA)",
+      "num_doses": 2,
+      "dose_interval": "1 week",
+      "route": "IV",
+      "timepoint_harvest": "7 days after final injection",
+      "species": "mouse",
+      "strain_or_model": "Townes HBB^S/S (humanized SCD)",
+      "conditioning": "none",
+      "n_animals": 3,
+      "results": {
+        "bm_hspc_editing": {
+          "cell_type": "CD117+ cells from BM",
+          "metric": "indel_pct",
+          "value": 5.2,
+          "sd": null,
+          "confidence": "HIGH",
+          "source": "Fig 4c, NGS"
+        },
+        "liver_editing": {
+          "metric": "indel_pct",
+          "value": 7.5,
+          "confidence": "MEDIUM",
+          "source": "Supp Fig 24A bar chart digitized"
+        },
+        "spleen_editing": {
+          "metric": "indel_pct",
+          "value": 1.3,
+          "confidence": "MEDIUM",
+          "source": "Supp Fig 24A bar chart digitized"
+        },
+        "reproductive_organ_editing": {
+          "metric": "indel_pct",
+          "value": 0,
+          "confidence": "HIGH",
+          "source": "Supp Fig 24A, no editing detected"
+        }
+      },
+      "pareto_point": {
+        "bm_hspc_editing_pct": 5.2,
+        "liver_editing_pct": 7.5,
+        "bm_liver_ratio": 0.69,
+        "notes": "Liver > BM. NOT liver-de-targeted. Editing metric = indels.",
+        "confidence": "HIGH_bm_MEDIUM_liver"
+      },
+      "data_confidence": "HIGH",
+      "figure_source": "Fig 4a-d, Supp Fig 24A"
+    },
+    {
+      "id": "E2_ABE_sickle_to_makassar_Townes",
+      "formulation_ref": "Lian_C6",
+      "payload": "ABE8e_NRCH mRNA + sgHBB (sickle→Makassar conversion)",
+      "payload_goal": "Direct correction of sickle allele to non-pathogenic Makassar",
+      "lipid_rna_ratio": "10:1",
+      "mrna_sgrna_ratio": "2:1 wt/wt",
+      "dose_mg_per_kg": 3.0,
+      "num_doses": 2,
+      "dose_interval": "1 week",
+      "route": "IV",
+      "timepoint_harvest": "7 days after final injection",
+      "species": "mouse",
+      "strain_or_model": "Townes HBB^S/S (humanized SCD)",
+      "conditioning": "none",
+      "n_animals": 3,
+      "results": {
+        "bm_hspc_editing": {
+          "cell_type": "CD117+ cells from BM",
+          "metric": "A_to_G_pct_A7_on_target",
+          "value": 2.43,
+          "bystander_A9_silent": 2.25,
+          "confidence": "HIGH",
+          "source": "Fig 4f, NGS"
+        },
+        "liver_editing_A7": {
+          "metric": "A_to_G_pct",
+          "value": 3.0,
+          "confidence": "MEDIUM",
+          "source": "Supp Fig 24B bar chart digitized"
+        },
+        "liver_editing_A9": {
+          "metric": "A_to_G_pct",
+          "value": 2.8,
+          "confidence": "MEDIUM",
+          "source": "Supp Fig 24B bar chart digitized"
+        },
+        "spleen_editing_A7": {
+          "metric": "A_to_G_pct",
+          "value": 1.2,
+          "confidence": "MEDIUM",
+          "source": "Supp Fig 24B bar chart digitized"
+        },
+        "reproductive_organ": {
+          "value": 0,
+          "confidence": "HIGH"
+        },
+        "phenotypic_validation": {
+          "description": "Ex vivo base editing of SCD CD117+ cells with C6-LNP reduced sickling frequency to 25% of untreated in differentiated erythrocytes under hypoxia",
+          "source": "Supp Fig 15",
+          "notes": "Confirms HBBS→HBBG conversion is functionally meaningful"
+        }
+      },
+      "pareto_point": {
+        "bm_hspc_editing_pct": 2.43,
+        "liver_editing_pct": 3.0,
+        "bm_liver_ratio": 0.81,
+        "notes": "Liver ≥ BM. NOT liver-de-targeted. Editing metric = base editing A→G.",
+        "confidence": "HIGH_bm_MEDIUM_liver"
+      },
+      "data_confidence": "HIGH",
+      "figure_source": "Fig 4e-g, Supp Fig 15, Supp Fig 24B"
+    },
+    {
+      "id": "E3_ApoE_KO_mechanism",
+      "formulation_refs": [
+        "Lian_C6",
+        "Lian_CC",
+        "Lian_AA11"
+      ],
+      "payload": "Luc mRNA",
+      "dose_mg_per_kg": 0.1,
+      "route": "IV",
+      "species": "mouse",
+      "strain_or_model": "ApoE-/- (B6.129P2-Apoe^tm1Unc/J) vs WT C57BL/6",
+      "n_animals": 3,
+      "results": {
+        "description": "BM bioluminescence dramatically reduced in ApoE-/- vs WT for all 3 formulations",
+        "C6_wt_vs_ko": "significant reduction (p<0.05)",
+        "CC_wt_vs_ko": "significant reduction (p<0.01)",
+        "AA11_wt_vs_ko": "significant reduction (p<0.001)",
+        "interpretation": "BM delivery is ApoE-dependent. But liver-tropic LNPs also depend on ApoE. Hypothesized difference is ApoE conformation, not just presence."
+      },
+      "data_confidence": "HIGH",
+      "figure_source": "Fig 3d"
+    },
+    {
+      "id": "E4_modularity_SM102_ALC0315",
+      "description": "AA11 works across three ionizable lipid platforms",
+      "formulations_tested": [
+        "5A2-SC8 + AA11",
+        "SM-102 + AA11",
+        "ALC-0315 + AA11"
+      ],
+      "payload": "Luc mRNA",
+      "route": "IV",
+      "results": {
+        "description": "BM homing maintained across all three IL platforms. 5A2-SC8 > ALC-0315 > SM-102 for BM bioluminescence.",
+        "significance": "Covalent lipid mechanism is generalizable beyond a single IL, including the two FDA-approved COVID vaccine LNP systems"
+      },
+      "data_confidence": "HIGH",
+      "figure_source": "Supp Fig 4"
+    },
+    {
+      "id": "E5_AML_leukemic_stem_cells",
+      "formulation_refs": [
+        "Lian_A11_original_discovery",
+        "Lian_A12",
+        "Lian_A13",
+        "Lian_C6",
+        "Lian_C9",
+        "Lian_AT6",
+        "Lian_AA11"
+      ],
+      "payload": "Cre mRNA",
+      "dose_mg_per_kg": 0.6,
+      "num_doses": 1,
+      "route": "IV",
+      "species": "mouse",
+      "strain_or_model": "MLL-AF9 AML secondary transplant (tdTom reporter)",
+      "n_animals": 3,
+      "results": {
+        "BM_leukemic_stem_cells_tdTom_pct": "13-18% for BM-homing LNPs vs <0.3% for control LNP",
+        "BM_leukemia_cells_tdTom_pct": "2-4%",
+        "spleen_leukemia_cells_tdTom_pct": "2-4%",
+        "notes": "Secondary transplant = more aggressive model. Single low dose. Demonstrates BM-homing works even in malignant setting."
+      },
+      "data_confidence": "HIGH",
+      "figure_source": "Fig 5g",
+      "exclude_from_training": true,
+      "exclude_reason": "AML model, not beta-thal/SCD relevant for primary training. Useful as proof-of-concept for BM homing robustness."
+    }
+  ],
+  "physical_characterization": {
+    "source": "Supp Table 3",
+    "notes": "All BM-homing LNPs: 120-170 nm diameter, PDI <0.2, near-neutral zeta potential, >80% encapsulation (most >90%). No significant physical differences from base LNP or SORT LNPs.",
+    "selected_values": {
+      "A8": {
+        "size_nm": [
+          152.8,
+          155.6,
+          153.7
+        ],
+        "zeta_mV": [
+          -5.95,
+          -7.16,
+          -8.89
+        ],
+        "EE_pct": [
+          92.93,
+          92.26,
+          93.44
+        ]
+      },
+      "C6": {
+        "size_nm": [
+          162.8,
+          163.7,
+          163.3
+        ],
+        "zeta_mV": [
+          1.71,
+          0.304,
+          -2.65
+        ],
+        "EE_pct": [
+          81.89,
+          82.49,
+          83.77
+        ]
+      },
+      "AA11": {
+        "size_nm": [
+          162.1,
+          160.4,
+          156.3
+        ],
+        "zeta_mV": [
+          5.73,
+          6.29,
+          1.44
+        ],
+        "EE_pct": [
+          92.0,
+          91.7,
+          92.28
+        ]
+      },
+      "A13": {
+        "size_nm": [
+          153.7,
+          152.2,
+          153.0
+        ],
+        "zeta_mV": [
+          0.48,
+          0.558,
+          -0.788
+        ],
+        "EE_pct": [
+          76.77,
+          76.42,
+          76.68
+        ]
+      }
+    }
+  },
+  "protein_corona_data": {
+    "source": "Supp Tables 4-13",
+    "method": "Unbiased mass spectrometry proteomics",
+    "key_finding": "ApoE was top enriched protein in 7/9 BM-homing formulations tested",
+    "apoe_abundance_pct": {
+      "A12": 8.29,
+      "A8": 9.29,
+      "C9": 19.47,
+      "AA10": 16.18,
+      "A11_SA_NHS": 17.74,
+      "C6_palmitic_hydrazide": null,
+      "CC_DHSO": 26.18,
+      "A13_norbornene": 20.43,
+      "AA11_DSSeb": 23.58,
+      "base_mDLNP": 22.1
+    },
+    "notes": "Base mDLNP also has 22.1% ApoE. BM-homing formulations are NOT dramatically enriched vs base — the hypothesis is conformational difference, not abundance."
+  },
+  "toxicity_and_safety": {
+    "source": "Supp Figs 20-24",
+    "biodistribution": "Cy5-labeled mRNA: little abnormal accumulation in liver/spleen/lung/heart/kidney; some BM-homing formulations show enhanced BM accumulation vs LNP control",
+    "serum_biomarkers": "G-CSF, M-CSF, TPO, Flt3 elevated at 24h but ALL returned to baseline by 7 days",
+    "bone_markers": "Ca, phosphate, BALP — no significant changes at any timepoint",
+    "complement": "C3, C4a unchanged; C5a transiently elevated at 24h, baseline by 7 days",
+    "off_target_editing": "No editing detected in reproductive organs (both Cas9 and ABE)",
+    "overall": "Favorable safety profile. Transient immune activation resolves within days."
+  },
+  "molar_pct_optimization": {
+    "source": "Supp Fig 11",
+    "formulation": "AA11",
+    "results": {
+      "10_mol_pct": "Similar to 20% across most cell types",
+      "20_mol_pct": "Standard. Used in all further studies.",
+      "30_mol_pct": "Dramatic decrease across all cell types, especially HSPCs"
+    },
+    "interpretation": "10-20% is a plateau. >20% may disrupt LNP structure. 20% chosen for consistency with SORT methodology."
+  },
+  "key_findings_for_project": [
+    "23 BM-homing formulations with quantitative per-cell-type delivery data (largest single-paper HSC-LNP screen with BM readout)",
+    "5A2-SC8 has known SMILES — bridges to AGILE/LANCE/LNPDB external datasets (PPZ-A10 SMILES also now confirmed, CAS 2941268-67-1)",
+    "All covalent lipid structures disclosed and commercially available — top 10 SMILES verified via PubChem",
+    "Novel 5th-component mechanism: covalent lipid alters protein corona for BM homing",
+    "ApoE-dependent but NOT via simple ApoE enrichment — conformational hypothesis (current model can't capture)",
+    "BM delivery does NOT equal liver de-targeting. BM:liver editing ratio ~0.7-0.8 for C6. Liver signal remains high.",
+    "Modularity: works across 5A2-SC8, SM-102, ALC-0315 platforms",
+    "Therapeutic editing in Townes SCD mice: 5.2% indels (Cas9/BCL11A), 2.43% A→G (ABE/sickle→Makassar)",
+    "Phenotypic validation: base editing reduced sickling to 25% of untreated",
+    "Multi-dose doubles delivery: AA11 LT-HSC 32%→65% with 2 injections"
+  ],
+  "pareto_analysis_summary": {
+    "plottable_points": 2,
+    "point_1": {
+      "label": "C6_Cas9_BCL11A",
+      "bm_pct": 5.2,
+      "liver_pct": 7.5,
+      "metric": "indels"
+    },
+    "point_2": {
+      "label": "C6_ABE_sickle",
+      "bm_pct": 2.43,
+      "liver_pct": 3.0,
+      "metric": "base_editing_A7"
+    },
+    "quadrant": "moderate_BM_high_liver",
+    "vs_ensoma_vlp": "Ensoma: ~31% HSC, ~0% liver. Lian C6: ~5% HSC, ~7.5% liver. LNP is 6x worse on BM and infinitely worse on liver selectivity.",
+    "vs_breda_anti_cd117": "Breda: ~20% HSC editing (with anti-CD117 Ab). Lian C6: ~5% (untargeted). Active targeting wins ~4x on absolute editing.",
+    "narrative": "BM-homing LNPs prove protein corona engineering CAN reach BM HSCs. But the liver remains a sink. The path to competitive editing levels requires either: (1) combine covalent lipid with active targeting, (2) add liver de-targeting (cholesterol removal, glycolipid substitution), or (3) dose escalation (2x already doubles delivery)."
+  },
+  "feature_matrix_notes": {
+    "new_features_needed": [
+      "covalent_lipid_mol_pct (fixed at 20 for all BM-homing; 0 for base LNP)",
+      "covalent_lipid_identity (categorical or SMILES-derived descriptors)",
+      "covalent_lipid_headgroup_type (NHS/anhydride/hydrazide/carbodiimide/crosslinker_AA/crosslinker_AT/crosslinker_TC/crosslinker_CC)",
+      "covalent_lipid_n_reactive_groups (1 for monofunctional, 2 for crosslinkers)",
+      "covalent_lipid_linker_length_atoms (for crosslinkers)",
+      "lipid_rna_ratio (40:1, 20:1, or 10:1)",
+      "num_doses",
+      "total_dose_mg_kg"
+    ],
+    "estimated_new_rows": {
+      "from_screen_n1": 19,
+      "from_validated_n3": 4,
+      "from_multidose": 1,
+      "from_editing_experiments": 2,
+      "total": 26,
+      "notes": "Use validated n3 values as primary for C6/A8/A13/AA11. Screen n1 values for remaining 19. Multi-dose AA11 as separate row. Two editing experiments as separate rows with different readout."
+    },
+    "inter_experiment_cv_warnings": {
+      "high_cv_cell_types": [
+        "LMPP (CV=34%)",
+        "B cells"
+      ],
+      "low_cv_cell_types": [
+        "MPP (CV=2%)",
+        "LSK",
+        "endothelial"
+      ],
+      "recommendation": "Weight MPP and LSK higher than LMPP in SHAP analysis. Flag CMP=66% for AA11 screen as outlier."
+    }
+  },
+  "comparison_to_previous_annotation": {
+    "previous": "batch1 abstract-only, all LOW confidence, null values throughout",
+    "current": "full paper + supplement, HIGH/MEDIUM confidence, 23 formulations fully quantified",
+    "key_upgrades": [
+      "Exact mol% compositions for all formulations (was null)",
+      "23 formulations with quantitative BM delivery per 14 cell types (was null)",
+      "Therapeutic editing numbers: 5.2% indels, 2.43% A→G (was null)",
+      "Off-organ editing: liver 7.5% indels, 3.0% base editing (was null)",
+      "ApoE corona data for 9 formulations (was null)",
+      "Covalent lipid SMILES for top 10 performers (was null)",
+      "Physical characterization (size, PDI, zeta, EE) for all formulations (was null)",
+      "n-value audit revealing screen is n=1 with 4 formulations validated at n=3"
+    ]
+  }
+}

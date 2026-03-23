@@ -1,0 +1,172 @@
+{
+    "_instructions": "Fill in what you can find in the paper. Use null for fields not reported. Add confidence: HIGH (explicitly stated), MEDIUM (inferred from context/figures), LOW (ambiguous/estimated).",
+    "_paper_filename": "breda_2023.json",
+  
+    "paper_metadata": {
+      "pmid": null,
+      "doi": null,
+      "title": "",
+      "authors": ["Last, First", "Last, First"],
+      "journal": "",
+      "publication_date": "YYYY-MM-DD",
+      "paper_type": "research | review | preprint | conference_abstract"
+    },
+  
+    "formulations": [
+      {
+        "_note": "One entry per DISTINCT formulation tested. If the paper tests 5 different LNPs, create 5 entries.",
+        "formulation_name": "e.g. CD117/LNP-Cre, LNP67, YOLT-204",
+  
+        "ionizable_lipid": {
+          "name": "e.g. MC3, DLin-MC3-DMA, C12-200, SM-102, ALC-0315, or 'proprietary'",
+          "smiles": null,
+          "_tip": "SMILES is rarely in the paper. Check supplementary. If not available, use null."
+        },
+        "helper_lipid": {
+          "name": "e.g. DSPC, DOPE, DPPC",
+          "type": "phospholipid | other"
+        },
+        "cholesterol": {
+          "included": true,
+          "mol_percent": null
+        },
+        "peg_lipid": {
+          "name": "e.g. C14PEG2000-DMG, C18PEG2000-DSPE, ALC-0159",
+          "mol_percent": null,
+          "chain_length": "C14 | C18 | other"
+        },
+        "molar_ratios": {
+          "_format": "ionizable:helper:cholesterol:PEG",
+          "ratio_string": "e.g. 50:10:38.5:1.5",
+          "ionizable_percent": null,
+          "helper_percent": null,
+          "cholesterol_percent": null,
+          "peg_percent": null
+        },
+        "np_ratio": null,
+  
+        "physicochemical": {
+          "particle_size_nm": null,
+          "pdi": null,
+          "zeta_potential_mv": null,
+          "encapsulation_efficiency_percent": null
+        },
+  
+        "manufacturing": {
+          "method": "microfluidics | ethanol_injection | t_junction | other",
+          "details": null
+        },
+  
+        "targeting": {
+          "strategy": "antibody_conjugated | intrinsic_tropism | aptamer | peptide | none",
+          "target_receptor": "CD117 | CD45 | CD34 | CD46 | none | other",
+          "antibody_clone": "e.g. 2B8, ACK2, or null if not antibody-targeted",
+          "conjugation_method": "e.g. DSPE-PEG-maleimide, post-insertion, or null"
+        },
+  
+        "confidence": {
+          "_tip": "Rate your confidence in the formulation data above",
+          "overall": "HIGH | MEDIUM | LOW",
+          "notes": "e.g. 'molar ratios not explicitly stated, inferred from methods section'"
+        }
+      }
+    ],
+  
+    "experiments": [
+      {
+        "_note": "One entry per distinct experiment. Link to the formulation by name.",
+        "formulation_name": "must match a name from formulations array above",
+  
+        "payload": {
+          "type": "mRNA | siRNA | sgRNA | RNP | base_editor | prime_editor | Cre_mRNA | DNA_barcode",
+          "specific_cargo": "e.g. Cre recombinase mRNA, ABE8e + sgRNA targeting BCL11A, siCD45, GFP mRNA",
+          "size_nt": null
+        },
+  
+        "model": {
+          "system": "in_vitro | in_vivo | ex_vivo",
+          "species": "mouse | rat | NHP | human_cells | other",
+          "strain": "e.g. C57BL/6, Ai14, NBSGW humanized, Rhesus macaque",
+          "cell_line": "e.g. EML, K562, HeLa, primary CD34+, or null if in vivo"
+        },
+  
+        "dosing": {
+          "dose_mg_per_kg": null,
+          "dose_ug_per_well": null,
+          "route": "IV | intraperitoneal | intrahepatic | in_utero | in_vitro",
+          "single_or_repeat": "single | repeat",
+          "timepoint_hours": null
+        },
+  
+        "efficacy": {
+          "_tip": "Record ALL efficacy metrics reported. Use the fields that apply.",
+          "hsc_transfection_percent": null,
+          "hsc_definition": "e.g. LSK, CD34+CD38-, LT-HSC (LSK CD150+CD48-), Lin-Sca1+cKit+",
+          "editing_efficiency_percent": null,
+          "editing_method": "e.g. flow cytometry (GFP+), flow cytometry (TdTomato+), amplicon sequencing (indel%), qPCR",
+          "protein_expression": null,
+          "knockdown_percent": null,
+          "other_metric": null,
+          "other_metric_name": null
+        },
+  
+        "biodistribution": {
+          "_tip": "Record organ-level delivery data if available. This is CRITICAL for our model.",
+          "bone_marrow_percent": null,
+          "liver_percent": null,
+          "spleen_percent": null,
+          "lung_percent": null,
+          "heart_percent": null,
+          "kidney_percent": null,
+          "measurement_method": "e.g. IVIS bioluminescence, flow cytometry TdTomato+, luciferase activity",
+          "paired_hsc_and_liver_data": false
+        },
+  
+        "toxicity": {
+          "reported": false,
+          "alt_ast_elevation": null,
+          "cytokine_response": null,
+          "body_weight_change": null,
+          "other_aes": null,
+          "severity": "none | mild | moderate | severe | null"
+        },
+  
+        "confidence": {
+          "overall": "HIGH | MEDIUM | LOW",
+          "notes": ""
+        }
+      }
+    ],
+  
+    "blood_disorder_data": {
+      "_note": "Only fill if the paper specifically targets a blood disorder",
+      "disease_target": "beta_thal | SCD | alpha_thal | SCID | fanconi_anemia | other | null",
+      "genetic_target": "e.g. HBB, BCL11A, HBG1/2 promoter, KLKB1, or null",
+      "editing_strategy": "base_editing | HDR | NHEJ | gene_addition | gene_silencing | null",
+      "hsc_subtype_targeted": "e.g. CD34+, LT-HSC, erythroid progenitor",
+      "engraftment_data": null,
+      "hemoglobin_data": {
+        "hbf_induction_percent": null,
+        "total_hb_g_per_dl": null,
+        "pre_treatment_hb": null,
+        "post_treatment_hb": null
+      },
+      "conditioning_regimen": "myeloablative | non_genotoxic | none | null"
+    },
+  
+    "key_findings_for_ml": {
+      "_tip": "Free-text notes on what's most relevant for our ML model",
+      "what_makes_this_formulation_work": "",
+      "comparison_to_other_formulations": "",
+      "limitations_noted_by_authors": "",
+      "data_quality_notes": "e.g. 'small n=2 for dose group, results from single experiment'"
+    },
+  
+    "label_for_ml": {
+      "_tip": "Our harmonized classification label for ML training",
+      "hsc_efficacy_class": "high | medium | low | null",
+      "_thresholds": "high: >30% HSC transfection/editing, medium: 10-30%, low: <10%",
+      "primary_metric_used": "e.g. TdTomato+ in LT-HSC by flow cytometry",
+      "primary_metric_value": null
+    }
+  }

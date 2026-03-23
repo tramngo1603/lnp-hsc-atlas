@@ -1,0 +1,262 @@
+{
+  "paper_metadata": {
+    "pmid": "39578569",
+    "doi": "10.1038/s41587-024-02470-2",
+    "title": "Lipid nanoparticle-mediated mRNA delivery to CD34+ cells in rhesus monkeys.",
+    "authors": [
+      "Kim Hyejin",
+      "Zenhausern Ryan",
+      "Gentry Kara",
+      "Lian Liming",
+      "Huayamares Sebastian G",
+      "Radmand Afsane",
+      "Loughrey David",
+      "Podilapu Ananda R",
+      "Hatit Marine Z C",
+      "Ni Huanzhen",
+      "Li Andrea",
+      "Shajii Aram",
+      "Peck Hannah E",
+      "Han Keyi",
+      "Hua Xuanwen",
+      "Jia Shu",
+      "Martinez Michele",
+      "Lee Charles",
+      "Santangelo Philip J",
+      "Tarantal Alice",
+      "Dahlman James E"
+    ],
+    "journal": "Nature biotechnology",
+    "publication_date": "2025-Nov"
+  },
+  "formulations": [
+    {
+      "formulation_name": "LNP 67",
+      "ionizable_lipid": {
+        "name": "Ionizable lipid (described in U.S. patent application 63/632,354)",
+        "smiles": null
+      },
+      "helper_lipid": {
+        "name": "",
+        "type": ""
+      },
+      "cholesterol": {
+        "included": true,
+        "mol_percent": null
+      },
+      "peg_lipid": {
+        "name": "",
+        "mol_percent": null,
+        "chain_length": ""
+      },
+      "molar_ratios": {
+        "ratio_string": "",
+        "ionizable_percent": null,
+        "helper_percent": null,
+        "cholesterol_percent": null,
+        "peg_percent": null
+      },
+      "np_ratio": null,
+      "physicochemical": {
+        "particle_size_nm": null,
+        "pdi": null,
+        "zeta_potential_mv": null,
+        "encapsulation_efficiency_percent": null
+      },
+      "targeting": {
+        "strategy": "intrinsic_tropism",
+        "target_receptor": "none",
+        "antibody_clone": null,
+        "conjugation_method": null
+      },
+      "confidence": "HIGH"
+    }
+  ],
+  "experiments": [
+    {
+      "formulation_name": "LNP 67",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "anchored VHH (aVHH)"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 1.0,
+        "route": "IV (tail vein)",
+        "timepoint_hours": 24.0
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "LSK CD48-, LSK CD48+, Lin-Sca1+, Lin-Sca1-, and other HSC subtypes",
+        "editing_efficiency_percent": null,
+        "editing_method": ""
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "paired_hsc_and_liver_data": true
+      },
+      "confidence": "HIGH"
+    },
+    {
+      "formulation_name": "LNP 67",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "anchored VHH (aVHH)"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 1.0,
+        "route": "IV (tail vein)",
+        "timepoint_hours": 24.0
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "Eight HSC subtypes (freeze-thaw comparison)",
+        "editing_efficiency_percent": null,
+        "editing_method": ""
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "paired_hsc_and_liver_data": false
+      },
+      "confidence": "HIGH"
+    },
+    {
+      "formulation_name": "LNP 67",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "anchored nanoluciferase (aNLuc)"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "non-human primate",
+        "strain": "rhesus monkey (Macaca mulatta)"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.25,
+        "route": "IV",
+        "timepoint_hours": 24.0
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "CD34+ immunoselected bone marrow cells",
+        "editing_efficiency_percent": null,
+        "editing_method": ""
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "paired_hsc_and_liver_data": true
+      },
+      "confidence": "HIGH"
+    },
+    {
+      "formulation_name": "LNP 67",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "anchored nanoluciferase (aNLuc)"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "non-human primate",
+        "strain": "rhesus monkey (Macaca mulatta)"
+      },
+      "dosing": {
+        "dose_mg_per_kg": 0.4,
+        "route": "IV",
+        "timepoint_hours": 24.0
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "CD34+ immunoselected bone marrow cells",
+        "editing_efficiency_percent": null,
+        "editing_method": ""
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "paired_hsc_and_liver_data": true
+      },
+      "confidence": "HIGH"
+    },
+    {
+      "formulation_name": "LNP 67",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "anchored VHH (aVHH)"
+      },
+      "model": {
+        "system": "ex_vivo",
+        "species": "human",
+        "strain": ""
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "route": "ex vivo treatment (0.25, 0.5, 1.0, 2.0, 4.0 µg/mL)",
+        "timepoint_hours": 24.0
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "Primary human bone marrow CD34+ cells with subtypes: CD34+CD38-CD45RA-CD90+ (HSC), CD34+CD38-CD45RA-CD90- (MPP), CD34+CD38+CD45RA- (CMP), CD34+CD38+CD45RA+ (other progenitors), and CD34- cells",
+        "editing_efficiency_percent": null,
+        "editing_method": ""
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "paired_hsc_and_liver_data": false
+      },
+      "confidence": "HIGH"
+    },
+    {
+      "formulation_name": "LNP screen (105 LNPs)",
+      "payload": {
+        "type": "mRNA",
+        "specific_cargo": "anchored VHH (aVHH) with DNA barcodes"
+      },
+      "model": {
+        "system": "in_vivo",
+        "species": "mouse",
+        "strain": "C57BL/6J"
+      },
+      "dosing": {
+        "dose_mg_per_kg": null,
+        "route": "IV (tail vein)",
+        "timepoint_hours": null
+      },
+      "efficacy": {
+        "hsc_transfection_percent": null,
+        "hsc_definition": "Murine HSCs in bone marrow",
+        "editing_efficiency_percent": null,
+        "editing_method": ""
+      },
+      "biodistribution": {
+        "bone_marrow_percent": null,
+        "liver_percent": null,
+        "spleen_percent": null,
+        "paired_hsc_and_liver_data": false
+      },
+      "confidence": "MEDIUM"
+    }
+  ],
+  "label_for_ml": {
+    "hsc_efficacy_class": null,
+    "primary_metric_used": "luciferase expression in CD34+ cells (qualitative, dose-dependent)",
+    "primary_metric_value": null
+  }
+}

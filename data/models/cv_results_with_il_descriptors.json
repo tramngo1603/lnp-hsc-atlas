@@ -1,0 +1,76 @@
+{
+  "xgboost": {
+    "balanced_accuracy": 0.3842,
+    "std": 0.2232
+  },
+  "lightgbm": {
+    "balanced_accuracy": 0.4843,
+    "std": 0.087
+  },
+  "shap_top15": [
+    {
+      "feature": "ionizable_mol_pct",
+      "shap": 0.9688
+    },
+    {
+      "feature": "receptor_cd117",
+      "shap": 0.4694
+    },
+    {
+      "feature": "chol_to_helper_ratio",
+      "shap": 0.4168
+    },
+    {
+      "feature": "cholesterol_mol_pct",
+      "shap": 0.3371
+    },
+    {
+      "feature": "dose_mg_per_kg",
+      "shap": 0.2724
+    },
+    {
+      "feature": "assay_editing",
+      "shap": 0.2472
+    },
+    {
+      "feature": "il_molecular_weight",
+      "shap": 0.2444
+    },
+    {
+      "feature": "hl_dotap",
+      "shap": 0.2336
+    },
+    {
+      "feature": "helper_mol_pct",
+      "shap": 0.2055
+    },
+    {
+      "feature": "helper_is_cationic",
+      "shap": 0.1752
+    },
+    {
+      "feature": "hl_epc",
+      "shap": 0.1427
+    },
+    {
+      "feature": "peg_chain_numeric",
+      "shap": 0.1404
+    },
+    {
+      "feature": "il_to_chol_ratio",
+      "shap": 0.0838
+    },
+    {
+      "feature": "hl_dspc",
+      "shap": 0.0772
+    },
+    {
+      "feature": "hl_ddab",
+      "shap": 0.0398
+    }
+  ],
+  "il_in_top15": [
+    "il_molecular_weight"
+  ],
+  "n_features": 37
+}

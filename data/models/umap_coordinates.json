@@ -1,0 +1,916 @@
+{
+  "points": [
+    {
+      "name": "CD117/LNP",
+      "paper": "breda_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -14.034893989562988,
+      "umap_y": 1.8875547647476196
+    },
+    {
+      "name": "CD117/LNP",
+      "paper": "breda_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -14.510794639587402,
+      "umap_y": 1.5979076623916626
+    },
+    {
+      "name": "CD117/LNP",
+      "paper": "breda_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -5.272520542144775,
+      "umap_y": 13.465106964111328
+    },
+    {
+      "name": "CD117/LNP",
+      "paper": "breda_2023",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -4.871428489685059,
+      "umap_y": 13.507588386535645
+    },
+    {
+      "name": "hCD117/LNP (anti-human CD117)",
+      "paper": "breda_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -13.707005500793457,
+      "umap_y": 1.7282741069793701
+    },
+    {
+      "name": "IgG/LNP",
+      "paper": "breda_2023",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -13.257518768310547,
+      "umap_y": 1.9787195920944214
+    },
+    {
+      "name": "IgG/LNP",
+      "paper": "breda_2023",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -13.356019973754883,
+      "umap_y": 1.592193365097046
+    },
+    {
+      "name": "IgG/LNP",
+      "paper": "breda_2023",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -12.917198181152344,
+      "umap_y": 1.38870370388031
+    },
+    {
+      "name": "CD117/LNP",
+      "paper": "breda_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -5.0554962158203125,
+      "umap_y": 12.964229583740234
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -26.082422256469727,
+      "umap_y": 12.76501178741455
+    },
+    {
+      "name": "F2_LNP95",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.1932260990142822,
+      "umap_y": 19.01030731201172
+    },
+    {
+      "name": "F3_LNP108",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -12.75018310546875,
+      "umap_y": 1.6809080839157104
+    },
+    {
+      "name": "F4_LP01",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -12.59257698059082,
+      "umap_y": 1.5254991054534912
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -25.74570655822754,
+      "umap_y": 12.322290420532227
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -26.343334197998047,
+      "umap_y": 12.38938045501709
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -26.610815048217773,
+      "umap_y": 12.019462585449219
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -26.01181983947754,
+      "umap_y": 12.214320182800293
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -25.845073699951172,
+      "umap_y": 12.461063385009766
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -26.194076538085938,
+      "umap_y": 12.09662914276123
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -25.95653533935547,
+      "umap_y": 12.668521881103516
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -25.912019729614258,
+      "umap_y": 11.998291015625
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -26.26202392578125,
+      "umap_y": 12.724531173706055
+    },
+    {
+      "name": "F1_LNP67",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -26.275636672973633,
+      "umap_y": 12.564704895019531
+    },
+    {
+      "name": "F5_ALC0315_C14PEG",
+      "paper": "shi_2023",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -14.59268856048584,
+      "umap_y": 1.8287804126739502
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.517143249511719,
+      "umap_y": 1.854383945465088
+    },
+    {
+      "name": "F5_ALC0315_C14PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -5.195009708404541,
+      "umap_y": 13.182305335998535
+    },
+    {
+      "name": "F6_ALC0315_C16PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -5.044960021972656,
+      "umap_y": 13.302397727966309
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -5.529654502868652,
+      "umap_y": 13.172329902648926
+    },
+    {
+      "name": "PBS_control",
+      "paper": "shi_2023",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.15416431427002,
+      "umap_y": 1.5645686388015747
+    },
+    {
+      "name": "F9_IgG_isotype",
+      "paper": "shi_2023",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.509561538696289,
+      "umap_y": 2.3702855110168457
+    },
+    {
+      "name": "F10_unconjugated",
+      "paper": "shi_2023",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -12.163579940795898,
+      "umap_y": 1.3615518808364868
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -5.645364284515381,
+      "umap_y": 13.32274341583252
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -5.557758808135986,
+      "umap_y": 13.409533500671387
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.502802848815918,
+      "umap_y": 2.5479719638824463
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.201622009277344,
+      "umap_y": 2.3958332538604736
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": -15.417365074157715,
+      "umap_y": 2.7608180046081543
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.232661247253418,
+      "umap_y": 2.1367881298065186
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.40261459350586,
+      "umap_y": 1.935874104499817
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -15.618287086486816,
+      "umap_y": 2.1680543422698975
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.678777694702148,
+      "umap_y": 2.07387638092041
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.868220329284668,
+      "umap_y": 2.4421980381011963
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.080828666687012,
+      "umap_y": 2.4381890296936035
+    },
+    {
+      "name": "F7_ALC0315_C18PEG",
+      "paper": "shi_2023",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -15.781562805175781,
+      "umap_y": 2.2493176460266113
+    },
+    {
+      "name": "PBS_control",
+      "paper": "shi_2023",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.087309837341309,
+      "umap_y": 1.6943471431732178
+    },
+    {
+      "name": "LNP1",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.076857566833496,
+      "umap_y": 31.64194679260254
+    },
+    {
+      "name": "LNP5",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.07884407043457,
+      "umap_y": 31.32680320739746
+    },
+    {
+      "name": "LNP6",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.290359497070312,
+      "umap_y": 31.126033782958984
+    },
+    {
+      "name": "LNP7",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.51137924194336,
+      "umap_y": 31.290781021118164
+    },
+    {
+      "name": "LNP9",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.452680587768555,
+      "umap_y": -6.330255508422852
+    },
+    {
+      "name": "LNP11",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.778504371643066,
+      "umap_y": -5.821853160858154
+    },
+    {
+      "name": "LNP14",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.112271308898926,
+      "umap_y": -6.385189533233643
+    },
+    {
+      "name": "LNP17",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.255776405334473,
+      "umap_y": 30.888612747192383
+    },
+    {
+      "name": "LNP19",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.867862701416016,
+      "umap_y": 31.1888370513916
+    },
+    {
+      "name": "LNP20",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.678892135620117,
+      "umap_y": 31.359989166259766
+    },
+    {
+      "name": "LNP21",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.719998359680176,
+      "umap_y": 31.555782318115234
+    },
+    {
+      "name": "LNP22",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.899563789367676,
+      "umap_y": 30.716352462768555
+    },
+    {
+      "name": "LNP25",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -5.919971466064453,
+      "umap_y": -6.302825450897217
+    },
+    {
+      "name": "LNP27",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.452607154846191,
+      "umap_y": -5.989858627319336
+    },
+    {
+      "name": "LNP30",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.7140092849731445,
+      "umap_y": -5.919914722442627
+    },
+    {
+      "name": "LNP31",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -5.811272621154785,
+      "umap_y": -5.980493068695068
+    },
+    {
+      "name": "LNP33",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.113236427307129,
+      "umap_y": 30.920764923095703
+    },
+    {
+      "name": "LNP35",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.001100540161133,
+      "umap_y": 31.504043579101562
+    },
+    {
+      "name": "LNP38",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.420485496520996,
+      "umap_y": 31.51763916015625
+    },
+    {
+      "name": "LNP39",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.398076057434082,
+      "umap_y": 31.004138946533203
+    },
+    {
+      "name": "LNP42",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.340127468109131,
+      "umap_y": -6.441353797912598
+    },
+    {
+      "name": "LNP44",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.942587375640869,
+      "umap_y": -6.087528705596924
+    },
+    {
+      "name": "LNP47",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.129372596740723,
+      "umap_y": -6.0836005210876465
+    },
+    {
+      "name": "LNP51",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.434427261352539,
+      "umap_y": 30.883056640625
+    },
+    {
+      "name": "LNP53",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -13.672873497009277,
+      "umap_y": 30.85919189453125
+    },
+    {
+      "name": "LNP54",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -14.422138214111328,
+      "umap_y": 30.62335205078125
+    },
+    {
+      "name": "LNP57",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.203011512756348,
+      "umap_y": -5.665031433105469
+    },
+    {
+      "name": "LNP59",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.6695051193237305,
+      "umap_y": -6.4841508865356445
+    },
+    {
+      "name": "LNP60",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -5.977027416229248,
+      "umap_y": -5.683133602142334
+    },
+    {
+      "name": "LNP61",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.557132244110107,
+      "umap_y": -5.632908821105957
+    },
+    {
+      "name": "LNP62",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.8443098068237305,
+      "umap_y": -6.3719258308410645
+    },
+    {
+      "name": "LNP63",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": -6.087152004241943,
+      "umap_y": -6.18647575378418
+    },
+    {
+      "name": "LNP67",
+      "paper": "kim_2024",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": -26.65910530090332,
+      "umap_y": 12.26842212677002
+    },
+    {
+      "name": "LNP68",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.2585325241088867,
+      "umap_y": 20.269943237304688
+    },
+    {
+      "name": "LNP69",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.2797603607177734,
+      "umap_y": 20.47549819946289
+    },
+    {
+      "name": "LNP71",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 1.8541384935379028,
+      "umap_y": 20.351970672607422
+    },
+    {
+      "name": "LNP73",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.3114984035491943,
+      "umap_y": 19.931419372558594
+    },
+    {
+      "name": "LNP76",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 1.9548615217208862,
+      "umap_y": 19.860273361206055
+    },
+    {
+      "name": "LNP77",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.4367527961730957,
+      "umap_y": 19.236154556274414
+    },
+    {
+      "name": "LNP79",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.0855062007904053,
+      "umap_y": 19.133968353271484
+    },
+    {
+      "name": "LNP81",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.557610034942627,
+      "umap_y": 20.332847595214844
+    },
+    {
+      "name": "LNP82",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 1.8682048320770264,
+      "umap_y": 20.189218521118164
+    },
+    {
+      "name": "LNP84",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 1.9075261354446411,
+      "umap_y": 20.737520217895508
+    },
+    {
+      "name": "LNP85",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 2.3406667709350586,
+      "umap_y": 20.54747772216797
+    },
+    {
+      "name": "LNP87",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 2.218278408050537,
+      "umap_y": 20.57122039794922
+    },
+    {
+      "name": "LNP89",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 2.2193593978881836,
+      "umap_y": 19.299226760864258
+    },
+    {
+      "name": "LNP91",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 1.9695788621902466,
+      "umap_y": 19.45677375793457
+    },
+    {
+      "name": "LNP95",
+      "paper": "kim_2024",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": 2.534607410430908,
+      "umap_y": 19.583881378173828
+    },
+    {
+      "name": "LNP98",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 9.721968650817871,
+      "umap_y": 19.847900390625
+    },
+    {
+      "name": "LNP99",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 9.701070785522461,
+      "umap_y": 19.737545013427734
+    },
+    {
+      "name": "LNP101",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 9.96810245513916,
+      "umap_y": 20.446489334106445
+    },
+    {
+      "name": "LNP102",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 9.498923301696777,
+      "umap_y": 20.30755043029785
+    },
+    {
+      "name": "LNP103",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 9.851202964782715,
+      "umap_y": 20.5854434967041
+    },
+    {
+      "name": "LNP105",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 10.13131332397461,
+      "umap_y": 19.936721801757812
+    },
+    {
+      "name": "LNP107",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 10.314887046813965,
+      "umap_y": 19.49671173095703
+    },
+    {
+      "name": "LNP108",
+      "paper": "kim_2024",
+      "efficacy": "high",
+      "type": "existing",
+      "umap_x": 10.67180061340332,
+      "umap_y": 19.186622619628906
+    },
+    {
+      "name": "LNP109",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 10.615344047546387,
+      "umap_y": 19.296253204345703
+    },
+    {
+      "name": "LNP111",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 9.968341827392578,
+      "umap_y": 19.32821273803711
+    },
+    {
+      "name": "LNP113",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 9.54921817779541,
+      "umap_y": 20.61284637451172
+    },
+    {
+      "name": "LNP115",
+      "paper": "kim_2024",
+      "efficacy": "medium",
+      "type": "existing",
+      "umap_x": 9.94389820098877,
+      "umap_y": 20.23239517211914
+    },
+    {
+      "name": "LNP116",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 9.405085563659668,
+      "umap_y": 20.291349411010742
+    },
+    {
+      "name": "LNP118",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 9.696768760681152,
+      "umap_y": 20.718610763549805
+    },
+    {
+      "name": "LNP122",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 9.797904968261719,
+      "umap_y": 19.132251739501953
+    },
+    {
+      "name": "LNP125",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 10.196288108825684,
+      "umap_y": 19.05841827392578
+    },
+    {
+      "name": "LNP126",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 10.406599044799805,
+      "umap_y": 19.597774505615234
+    },
+    {
+      "name": "LNP127",
+      "paper": "kim_2024",
+      "efficacy": "low",
+      "type": "existing",
+      "umap_x": 9.970017433166504,
+      "umap_y": 19.301420211791992
+    },
+    {
+      "name": "Gap #1: CD117/2B8 + DOTAP + C18-PEG",
+      "paper": "gap_prediction",
+      "efficacy": "gap",
+      "type": "gap",
+      "umap_x": -25.723678588867188,
+      "umap_y": 13.10729694366455
+    },
+    {
+      "name": "Gap #2: LNP67 + C18-PEG swap",
+      "paper": "gap_prediction",
+      "efficacy": "gap",
+      "type": "gap",
+      "umap_x": -26.299121856689453,
+      "umap_y": 11.60804271697998
+    },
+    {
+      "name": "Gap #3: Breda + C16GalCer",
+      "paper": "gap_prediction",
+      "efficacy": "gap",
+      "type": "gap",
+      "umap_x": -5.597394943237305,
+      "umap_y": 13.909568786621094
+    },
+    {
+      "name": "Gap #5: Low-dose Ab + high-dose untargeted",
+      "paper": "gap_prediction",
+      "efficacy": "gap",
+      "type": "gap",
+      "umap_x": -14.38657283782959,
+      "umap_y": 0.8086068630218506
+    }
+  ]
+}

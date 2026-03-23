@@ -1,0 +1,117 @@
+erDiagram
+    papers {
+        int id PK
+        string pmid UK
+        string doi UK
+        text title
+        text authors
+        string journal
+        date publication_date
+        enum paper_type
+        text abstract
+        bool full_text_available
+        datetime created_at
+        datetime updated_at
+    }
+
+    formulations {
+        int id PK
+        int paper_id FK
+        string label
+        string molar_ratio_str
+        float molar_ratio_ionizable
+        float molar_ratio_helper
+        float molar_ratio_cholesterol
+        float molar_ratio_peg
+        float np_ratio
+        float particle_size_nm
+        float pdi
+        float zeta_potential_mv
+        float encapsulation_efficiency_pct
+        string manufacturing_method
+        text targeting_strategy
+        string targeting_ligand
+        datetime created_at
+    }
+
+    lipid_components {
+        int id PK
+        int formulation_id FK
+        enum lipid_type
+        string name
+        text smiles
+        float mol_percent
+    }
+
+    experimental_conditions {
+        int id PK
+        int formulation_id FK
+        enum payload_type
+        text payload_cargo
+        string target_cell_tissue
+        string cell_line
+        bool is_in_vivo
+        string animal_model
+        string animal_strain
+        float dose_value
+        string dose_unit
+        string administration_route
+        string timepoint
+    }
+
+    efficacy_metrics {
+        int id PK
+        int formulation_id FK
+        string metric_type
+        float value
+        string unit
+        string timepoint
+        string cell_tissue
+        text notes
+    }
+
+    blood_disorder_data {
+        int id PK
+        int formulation_id FK
+        enum disease_target
+        string genetic_target
+        enum editing_strategy
+        string hsc_subtype
+        float engraftment_pct
+        string engraftment_timepoint
+        float hbf_level_pct
+        float hbf_induction_fold
+        float total_hemoglobin_gdl
+        string conditioning_regimen
+        float off_target_rate_pct
+        text notes
+    }
+
+    confidence_scores {
+        int id PK
+        int formulation_id FK
+        string field_name
+        enum confidence
+        text reason
+    }
+
+    extraction_runs {
+        int id PK
+        int paper_id FK
+        datetime extraction_date
+        string model_used
+        string prompt_version
+        bool success
+        text error_message
+        float duration_seconds
+        int input_tokens
+        int output_tokens
+    }
+
+    papers ||--o{ formulations : "describes"
+    papers ||--o{ extraction_runs : "extracted by"
+    formulations ||--o{ lipid_components : "composed of"
+    formulations ||--o{ experimental_conditions : "tested under"
+    formulations ||--o{ efficacy_metrics : "measured by"
+    formulations ||--o{ blood_disorder_data : "targets"
+    formulations ||--o{ confidence_scores : "scored with"

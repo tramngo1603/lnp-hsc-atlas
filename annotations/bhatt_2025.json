@@ -1,0 +1,100 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "source_quality": "abstract only"
+  },
+  "paper": {
+    "id": "Bhatt_2025_bioRxiv",
+    "title": "In utero lipid nanoparticle delivery achieves robust editing in hematopoietic stem cells",
+    "authors": "Bhatt/Worthington et al.",
+    "journal": "bioRxiv",
+    "year": 2025,
+    "doi_or_id": "10.1101/2025.05.12.652147",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/40463054/",
+    "paper_type": "preprint",
+    "delivery_platform": "LNP",
+    "group": "HSC"
+  },
+  "formulations": [
+    {
+      "id": "F1_LNP67_in_utero",
+      "ionizable_lipid": "PPZ-A10 (Kim's ionizable lipid from LNP67)",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "Per Kim 2024 LNP67 composition",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "Per Kim 2024 LNP67 composition",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Uses Kim's LNP67 formulation for in utero delivery. Dahlman lab collaboration. No additional targeting ligand.",
+      "size_nm": null,
+      "formulation_notes": "Same LNP67 from Kim 2024 Nature Biotech. Applied to in utero context. Collaboration between Dahlman lab (LNP) and Peranteau lab (fetal surgery). PPZ-A10 (CAS 2941268-67-1, SMILES confirmed via Ni et al. 2022 + US Patent 2025/0127727)."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_LNP67_in_utero_HSC_editing",
+      "formulation_ref": "F1_LNP67_in_utero",
+      "payload": "Gene editing cargo (CRISPR-based, details in preprint)",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV (in utero, fetal)",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "Fetal mice",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "Fetal HSCs (in liver at this developmental stage)",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "Check preprint for liver data — in utero context means HSCs are IN the liver",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "bioRxiv preprint",
+      "data_confidence": "LOW",
+      "notes": "Uses Kim's LNP67 in a new context (in utero). Title says 'robust editing' which suggests significant efficacy. Dahlman + Peranteau collaboration. Tag as exclude_from_training (in utero context). Preprint — not yet peer reviewed."
+    }
+  ],
+  "key_findings_for_project": [
+    "Kim's LNP67 works for in utero delivery — validates LNP67 versatility across contexts",
+    "Dahlman + Peranteau collaboration — links two major labs in the field",
+    "Tag as exclude_from_training: in utero context is incomparable to adult IV",
+    "PPZ-A10 SMILES now known (CAS 2941268-67-1, confirmed via Ni et al. 2022 + US Patent 2025/0127727)",
+    "Preprint (May 2025) — not yet peer reviewed"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Different context (in utero vs adult IV).",
+    "vs_shi": "Different context.",
+    "vs_kim": "Uses SAME LNP67 formulation from Kim's screen. Validates the formulation in a new therapeutic context.",
+    "new_pareto_points": "Cannot place on adult Pareto — in utero context.",
+    "therapeutic_window_update": "Demonstrates LNP67 can deliver editing cargo, not just reporter — important for Kim dataset interpretation.",
+    "gap_formulation_relevance": "PPZ-A10 SMILES now known — no longer an island. Same formulation as Kim LNP67."
+  },
+  "limitations_and_caveats": [
+    "In utero — incomparable to adult IV delivery",
+    "Preprint, not peer reviewed",
+    "PPZ-A10 SMILES now confirmed (CAS 2941268-67-1)",
+    "Quantitative data needs extraction from bioRxiv full text",
+    "Tag as exclude_from_training"
+  ]
+}

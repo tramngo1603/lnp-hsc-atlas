@@ -1,0 +1,144 @@
+{
+  "data_type": "percentages",
+  "units": "% cells (editing or protein expression)",
+  "n_lnp_points": 6,
+  "n_comparators": 1,
+  "correlation_note": "Correlation not computed: n=6 LNPs is too few for meaningful statistical testing (%-only Pearson r=0.643, p=0.168, NS; Spearman r=0.486, p=0.329, NS from audit)",
+  "lnp_points": [
+    {
+      "formulation": "LNP67",
+      "bm_percent": 20.9,
+      "liver_percent": 20.1,
+      "bm_liver_ratio": 1.0398,
+      "source": "kim_E2",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LNP95",
+      "bm_percent": 4.4,
+      "liver_percent": 14.7,
+      "bm_liver_ratio": 0.2993,
+      "source": "kim_E2",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP108",
+      "bm_percent": 8.8,
+      "liver_percent": 1.6,
+      "bm_liver_ratio": 5.5,
+      "source": "kim_E2",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LP01",
+      "bm_percent": 5.0,
+      "liver_percent": 42.4,
+      "bm_liver_ratio": 0.1179,
+      "source": "kim_E2",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "none",
+      "is_pareto": false
+    },
+    {
+      "formulation": "CD117/LNP",
+      "bm_percent": 55.0,
+      "liver_percent": 76.0,
+      "bm_liver_ratio": 0.7237,
+      "source": "breda_E6",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "antibody_conjugated",
+      "is_pareto": true
+    },
+    {
+      "formulation": "IgG/LNP",
+      "bm_percent": 19.0,
+      "liver_percent": 78.0,
+      "bm_liver_ratio": 0.2436,
+      "source": "breda_E6",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "antibody_conjugated",
+      "is_pareto": false
+    }
+  ],
+  "lnp_pareto_optimal": [
+    {
+      "formulation": "LNP67",
+      "bm_percent": 20.9,
+      "liver_percent": 20.1,
+      "bm_liver_ratio": 1.0398,
+      "source": "kim_E2",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LNP108",
+      "bm_percent": 8.8,
+      "liver_percent": 1.6,
+      "bm_liver_ratio": 5.5,
+      "source": "kim_E2",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "CD117/LNP",
+      "bm_percent": 55.0,
+      "liver_percent": 76.0,
+      "bm_liver_ratio": 0.7237,
+      "source": "breda_E6",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "antibody_conjugated",
+      "is_pareto": true
+    }
+  ],
+  "comparators": [
+    {
+      "name": "Ensoma BaEVTR VLP",
+      "paper": "Botchkarev 2025 Nat Biotech",
+      "bm_pct": 31.0,
+      "liver_pct": 0.5,
+      "metric": "B2M editing (%)",
+      "targeting": "BaEVTR envelope",
+      "platform": "VLP",
+      "is_comparator": true,
+      "note": "Near-zero hepatocyte transduction in humanized liver mice. Liver set to 0.5% for plotting (actual ~0%)."
+    }
+  ],
+  "quadrants": {
+    "ideal": [
+      "Ensoma BaEVTR VLP"
+    ],
+    "potent": [
+      "CD117/LNP"
+    ],
+    "selective": [
+      "LNP108"
+    ],
+    "poor": [
+      "LNP67",
+      "LNP95",
+      "LP01",
+      "IgG/LNP"
+    ]
+  },
+  "ideal_zone": {
+    "bm_threshold": 30.0,
+    "liver_threshold": 5.0
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "n_points": 29,
+  "n_pareto": 4,
+  "correlation": {
+    "pearson_r": 0.7938,
+    "pearson_p": 0.0,
+    "spearman_r": 0.3734,
+    "spearman_p": 0.046038
+  },
+  "points": [
+    {
+      "formulation": "LNP67",
+      "bm_percent": 20.9,
+      "liver_percent": 20.1,
+      "bm_liver_ratio": 1.0398009950248754,
+      "source": "kim_E2",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LNP95",
+      "bm_percent": 4.4,
+      "liver_percent": 14.7,
+      "bm_liver_ratio": 0.2993197278911565,
+      "source": "kim_E2",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP108",
+      "bm_percent": 8.8,
+      "liver_percent": 1.6,
+      "bm_liver_ratio": 5.5,
+      "source": "kim_E2",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LP01",
+      "bm_percent": 5.0,
+      "liver_percent": 42.4,
+      "bm_liver_ratio": 0.1179245283018868,
+      "source": "kim_E2",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "none",
+      "is_pareto": false
+    },
+    {
+      "formulation": "CD117/LNP",
+      "bm_percent": 55.0,
+      "liver_percent": 76.0,
+      "bm_liver_ratio": 0.7236842105263158,
+      "source": "breda_E6",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "antibody_conjugated",
+      "is_pareto": true
+    },
+    {
+      "formulation": "IgG/LNP",
+      "bm_percent": 19.0,
+      "liver_percent": 78.0,
+      "bm_liver_ratio": 0.24358974358974358,
+      "source": "breda_E6",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "antibody_conjugated",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP44",
+      "bm_percent": 1.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 0.5,
+      "source": "kim_screen",
+      "helper_lipid": "DOTMA",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP68",
+      "bm_percent": 1.0,
+      "liver_percent": 1.0,
+      "bm_liver_ratio": 1.0,
+      "source": "kim_screen",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP84",
+      "bm_percent": 1.5,
+      "liver_percent": 1.0,
+      "bm_liver_ratio": 1.5,
+      "source": "kim_screen",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LNP85",
+      "bm_percent": 6.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 3.0,
+      "source": "kim_screen",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP89",
+      "bm_percent": 5.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 2.5,
+      "source": "kim_screen",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP91",
+      "bm_percent": 3.5,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 1.75,
+      "source": "kim_screen",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP98",
+      "bm_percent": 2.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 1.0,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP99",
+      "bm_percent": 5.5,
+      "liver_percent": 3.0,
+      "bm_liver_ratio": 1.8333333333333333,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP101",
+      "bm_percent": 1.5,
+      "liver_percent": 3.0,
+      "bm_liver_ratio": 0.5,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP102",
+      "bm_percent": 3.0,
+      "liver_percent": 3.0,
+      "bm_liver_ratio": 1.0,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP103",
+      "bm_percent": 1.5,
+      "liver_percent": 3.0,
+      "bm_liver_ratio": 0.5,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP105",
+      "bm_percent": 1.5,
+      "liver_percent": 4.0,
+      "bm_liver_ratio": 0.375,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP107",
+      "bm_percent": 3.0,
+      "liver_percent": 4.0,
+      "bm_liver_ratio": 0.75,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP109",
+      "bm_percent": 2.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 1.0,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP111",
+      "bm_percent": 8.0,
+      "liver_percent": 3.0,
+      "bm_liver_ratio": 2.6666666666666665,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP113",
+      "bm_percent": 3.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 1.5,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP115",
+      "bm_percent": 4.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 2.0,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP116",
+      "bm_percent": 2.5,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 1.25,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP118",
+      "bm_percent": 1.5,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 0.75,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP122",
+      "bm_percent": 2.5,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 1.25,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP125",
+      "bm_percent": 2.0,
+      "liver_percent": 2.0,
+      "bm_liver_ratio": 1.0,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP126",
+      "bm_percent": 2.0,
+      "liver_percent": 3.0,
+      "bm_liver_ratio": 0.6666666666666666,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    },
+    {
+      "formulation": "LNP127",
+      "bm_percent": 1.5,
+      "liver_percent": 6.0,
+      "bm_liver_ratio": 0.25,
+      "source": "kim_screen",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": false
+    }
+  ],
+  "pareto_optimal": [
+    {
+      "formulation": "LNP67",
+      "bm_percent": 20.9,
+      "liver_percent": 20.1,
+      "bm_liver_ratio": 1.0398009950248754,
+      "source": "kim_E2",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LNP108",
+      "bm_percent": 8.8,
+      "liver_percent": 1.6,
+      "bm_liver_ratio": 5.5,
+      "source": "kim_E2",
+      "helper_lipid": "18:1 EPC",
+      "peg_chain": "C18",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    },
+    {
+      "formulation": "CD117/LNP",
+      "bm_percent": 55.0,
+      "liver_percent": 76.0,
+      "bm_liver_ratio": 0.7236842105263158,
+      "source": "breda_E6",
+      "helper_lipid": "DSPC",
+      "peg_chain": "C14",
+      "targeting": "antibody_conjugated",
+      "is_pareto": true
+    },
+    {
+      "formulation": "LNP84",
+      "bm_percent": 1.5,
+      "liver_percent": 1.0,
+      "bm_liver_ratio": 1.5,
+      "source": "kim_screen",
+      "helper_lipid": "DOTAP",
+      "peg_chain": "C14",
+      "targeting": "intrinsic_tropism",
+      "is_pareto": true
+    }
+  ],
+  "deprecated": true,
+  "reason": "Mixed barcode counts and percentages on same axes",
+  "replacement_files": [
+    "pareto_screen_only.json",
+    "pareto_validation_only.json",
+    "pareto_narrative.json"
+  ]
+}

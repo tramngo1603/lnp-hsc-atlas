@@ -1,0 +1,91 @@
+{
+  "analysis_date": "2026-03-09",
+  "data_source": "Kim 2024 screen (128 LNPs) + Radmand 2023 (137 LNPs)",
+  "helpers": {
+    "DOTAP": {
+      "charge": "cationic",
+      "headgroup": "trimethylammonium + glycerol ester",
+      "glycerol_linkage": "ester",
+      "has_glycerol": true,
+      "tail": "C18:1 (oleyl, both tails)",
+      "kim_n": 16,
+      "kim_bm_mean": 5.17,
+      "kim_bm_sd": 11.52,
+      "kim_bm_median": 2.25,
+      "organ_pref": "BM (Kim)"
+    },
+    "DDAB": {
+      "charge": "cationic",
+      "headgroup": "dimethylammonium (no glycerol)",
+      "glycerol_linkage": "none",
+      "has_glycerol": false,
+      "tail": "C18:0 (stearyl, both tails)",
+      "kim_n": 16,
+      "kim_bm_mean": 0.39,
+      "kim_bm_sd": 0.19,
+      "kim_bm_median": 0.35,
+      "organ_pref": "Lung (Radmand 2023)"
+    },
+    "DOTMA": {
+      "charge": "cationic",
+      "headgroup": "trimethylammonium + glycerol ether",
+      "glycerol_linkage": "ether",
+      "has_glycerol": true,
+      "tail": "C18:1 (oleyl, ether-linked)",
+      "kim_n": 16,
+      "kim_bm_mean": 0.71,
+      "kim_bm_sd": 0.26,
+      "organ_pref": "neither"
+    },
+    "18:1 EPC": {
+      "charge": "zwitterionic",
+      "headgroup": "phosphocholine + glycerol ester",
+      "glycerol_linkage": "ester",
+      "has_glycerol": true,
+      "tail": "C18:1/C16:0 (mixed)",
+      "kim_n": 18,
+      "kim_bm_mean": 3.44,
+      "kim_bm_sd": 3.24,
+      "organ_pref": "moderate BM (Kim)"
+    }
+  },
+  "statistics": {
+    "dotap_vs_ddab": {
+      "mann_whitney_U": 207,
+      "p_value": 0.001,
+      "significant": true,
+      "raw_ratio": 13.3,
+      "raw_ratio_note": "5.17/0.39 = 13.3x, driven by 2 outliers (BM=13.0 LNP67 and BM=48.0 LNP85)",
+      "robust_ratio": 4.0,
+      "robust_ratio_note": "Without outliers: DOTAP mean 1.56 / DDAB mean 0.39 = 4.0x (still significant, p=0.004)",
+      "bootstrap_95ci": [0.79, 11.22],
+      "bootstrap_note": "95% CI of DOTAP-DDAB difference excludes zero"
+    },
+    "dotap_vs_epc": {
+      "p_value": 0.984,
+      "significant": false
+    },
+    "dotap_vs_dotma": {
+      "p_value": 0.153,
+      "significant": false
+    },
+    "dotap_vs_all_others": {
+      "p_value": 0.255,
+      "significant": false
+    },
+    "peg_confound": {
+      "dotap_within_c14": {
+        "p_value": 0.0006,
+        "significant": true
+      },
+      "dotap_within_c18": {
+        "p_value": 0.197,
+        "significant": false,
+        "note": "PEG chain may interact with helper lipid effect"
+      }
+    }
+  },
+  "paper_sentence": "DOTAP enables approximately 4-fold higher BM delivery than DDAB (Mann-Whitney U, p=0.001), with individual formulations achieving up to 13-fold enrichment. The robust effect size (4x without outliers, p=0.004) supports DOTAP as a specific enabler of BM tropism, distinct from other cationic helpers (DDAB, DOTMA) despite identical charge.",
+  "paper_sentence_old": "DOTAP achieves 13-fold higher BM delivery than DDAB",
+  "correction_note": "Session 10a audit (Audit 4) identified that the 13x ratio is outlier-driven. The robust ratio is ~4x. Both are reported in the corrected paper sentence."
+}

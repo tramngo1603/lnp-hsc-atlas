@@ -1,0 +1,800 @@
+{
+  "dose_response_fits": {
+    "Kim_LNP67_mouse_iv": {
+      "name": "Kim_LNP67_mouse_iv",
+      "ec50": 3.7671,
+      "hill": 0.953,
+      "top": 100.0,
+      "bottom": 0.0,
+      "r_squared": 0.9939,
+      "ec30": 1.5479,
+      "doses": [
+        0.5,
+        1.0,
+        2.0
+      ],
+      "responses": [
+        12,
+        23,
+        35
+      ],
+      "fixed_top": true,
+      "error": null
+    },
+    "Kim_LNP67_human_exvivo": {
+      "name": "Kim_LNP67_human_exvivo",
+      "ec50": 9.2279,
+      "hill": 0.809,
+      "top": 200.0,
+      "bottom": 0.0,
+      "r_squared": 0.9381,
+      "ec30": 1.0821,
+      "doses": [
+        0.25,
+        0.5,
+        1.0,
+        2.0,
+        4.0
+      ],
+      "responses": [
+        15,
+        22,
+        25,
+        38,
+        72
+      ],
+      "fixed_top": false,
+      "error": null
+    },
+    "Breda_CD117_mouse_iv": {
+      "name": "Breda_CD117_mouse_iv",
+      "ec50": 0.2185,
+      "hill": 1.49,
+      "top": 100.0,
+      "bottom": 0.0,
+      "r_squared": 1.0,
+      "ec30": 0.1237,
+      "doses": [
+        0.05,
+        0.25
+      ],
+      "responses": [
+        10,
+        55
+      ],
+      "fixed_top": true,
+      "error": null
+    },
+    "Shi_CD117_F7_mouse_iv": {
+      "name": "Shi_CD117_F7_mouse_iv",
+      "ec50": 0.09,
+      "hill": 0.912,
+      "top": 100.0,
+      "bottom": 0.0,
+      "r_squared": 1.0,
+      "ec30": 0.0356,
+      "doses": [
+        0.3,
+        1.0
+      ],
+      "responses": [
+        75,
+        90
+      ],
+      "fixed_top": true,
+      "error": null
+    }
+  },
+  "therapeutic_windows": {
+    "Breda_CD117": {
+      "name": "Breda_CD117",
+      "ec30_mg_kg": 0.1237,
+      "liver_at_ec30": 76.0,
+      "hsc_liver_ratio": 0.395,
+      "therapeutic_index": 3.0,
+      "potency_premium": 12.5,
+      "antibody_required": true,
+      "has_nhp": false,
+      "has_human_exvivo": true,
+      "manufacturing_complexity": "high",
+      "dose_response": {
+        "name": "Breda_CD117_mouse_iv",
+        "ec50": 0.2185,
+        "hill": 1.49,
+        "top": 100.0,
+        "bottom": 0.0,
+        "r_squared": 1.0,
+        "ec30": 0.1237,
+        "doses": [
+          0.05,
+          0.25
+        ],
+        "responses": [
+          10,
+          55
+        ],
+        "fixed_top": true,
+        "error": null
+      }
+    },
+    "Shi_CD117_C18": {
+      "name": "Shi_CD117_C18",
+      "ec30_mg_kg": 0.0356,
+      "liver_at_ec30": null,
+      "hsc_liver_ratio": null,
+      "therapeutic_index": null,
+      "potency_premium": 43.5,
+      "antibody_required": true,
+      "has_nhp": false,
+      "has_human_exvivo": false,
+      "manufacturing_complexity": "high",
+      "dose_response": {
+        "name": "Shi_CD117_F7_mouse_iv",
+        "ec50": 0.09,
+        "hill": 0.912,
+        "top": 100.0,
+        "bottom": 0.0,
+        "r_squared": 1.0,
+        "ec30": 0.0356,
+        "doses": [
+          0.3,
+          1.0
+        ],
+        "responses": [
+          75,
+          90
+        ],
+        "fixed_top": true,
+        "error": null
+      }
+    },
+    "Kim_LNP67": {
+      "name": "Kim_LNP67",
+      "ec30_mg_kg": 1.5479,
+      "liver_at_ec30": 25.0,
+      "hsc_liver_ratio": 1.2,
+      "hsc_liver_ratio_measured": 1.04,
+      "hsc_liver_ratio_measured_note": "Measured at 0.5 mg/kg (E2 data): BM=20.9%, liver=20.1%",
+      "hsc_liver_ratio_at_ec30": 1.2,
+      "hsc_liver_ratio_at_ec30_note": "Modeled at EC30 (1.55 mg/kg): HSC=30% by definition, liver=25% extrapolated linearly from E2",
+      "liver_source": "Kim 2024 Supp Fig 7 (0.5 mg/kg in vivo biodistribution, aVHH+ %)",
+      "therapeutic_index": 4.0,
+      "potency_premium": 1.0,
+      "antibody_required": false,
+      "has_nhp": true,
+      "has_human_exvivo": true,
+      "manufacturing_complexity": "low",
+      "dose_response": {
+        "name": "Kim_LNP67_mouse_iv",
+        "ec50": 3.7671,
+        "hill": 0.953,
+        "top": 100.0,
+        "bottom": 0.0,
+        "r_squared": 0.9939,
+        "ec30": 1.5479,
+        "doses": [
+          0.5,
+          1.0,
+          2.0
+        ],
+        "responses": [
+          12,
+          23,
+          35
+        ],
+        "fixed_top": true,
+        "error": null
+      }
+    },
+    "Editas_tLNP_NHP": {
+      "name": "Editas_tLNP_NHP",
+      "platform": "tLNP (proprietary)",
+      "paper": "Gupta 2025 EHA",
+      "species": "NHP",
+      "targeting": "proprietary moiety",
+      "dose_mg_per_kg": 2.0,
+      "hsc_editing_pct": 58,
+      "hsc_metric": "HBG1/2 promoter editing",
+      "hsc_definition": "CD34+CD90+CD45RA-",
+      "timepoint": "5 months",
+      "liver_pct": null,
+      "liver_note": "Qualitative 'minimal in hepatocytes' by ISH/IHC; no quantitative %",
+      "ec30": null,
+      "ec50": null,
+      "hsc_liver_ratio": null,
+      "therapeutic_index": null,
+      "conditioning": "none",
+      "is_lnp": true,
+      "is_comparator": true
+    },
+    "Ensoma_VLP_humanized_mouse": {
+      "name": "Ensoma_VLP_humanized_mouse",
+      "platform": "VLP",
+      "paper": "Botchkarev 2025 Nat Biotech",
+      "species": "humanized_mouse",
+      "targeting": "BaEVTR envelope (ASCT1/2 binding)",
+      "dose_mg_per_kg": null,
+      "dose_note": "VLP dosing in transduction units, not directly comparable to LNP mg/kg",
+      "hsc_editing_pct": 31,
+      "hsc_metric": "B2M editing (HTS)",
+      "hsc_definition": "LT-HSPC (long-term engrafting)",
+      "timepoint": "8 weeks",
+      "liver_pct": 0,
+      "liver_note": "Near-zero hepatocyte transduction demonstrated in humanized liver mice",
+      "ec30": null,
+      "ec50": null,
+      "hsc_liver_ratio": "inf",
+      "therapeutic_index": "inf",
+      "conditioning": "none",
+      "is_lnp": false,
+      "is_comparator": true
+    },
+    "Kim_LNP67_humanized_mouse": {
+      "name": "Kim_LNP67_humanized_mouse",
+      "platform": "LNP",
+      "paper": "Kim 2025 ASH",
+      "species": "humanized_mouse",
+      "targeting": "none (antibody-free)",
+      "dose_mg_per_kg": 2.0,
+      "hsc_delivery_pct": 37,
+      "hsc_metric": "aVHH protein expression",
+      "hsc_definition": "CD34+CD38-CD90+CD45RA-",
+      "timepoint": "16 hours",
+      "liver_pct": null,
+      "liver_note": "Not reported in ASH abstract",
+      "conditioning": "busulfan 12.5 mg/kg (for engraftment only)",
+      "is_lnp": true,
+      "is_comparator": false
+    }
+  },
+  "pareto": {
+    "n_points": 29,
+    "n_pareto": 4,
+    "correlation": {
+      "pearson_r": 0.7938,
+      "pearson_p": 0.0,
+      "spearman_r": 0.3734,
+      "spearman_p": 0.046038
+    },
+    "points": [
+      {
+        "formulation": "LNP67",
+        "bm_percent": 20.9,
+        "liver_percent": 20.1,
+        "bm_liver_ratio": 1.0398009950248754,
+        "source": "kim_E2",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": true
+      },
+      {
+        "formulation": "LNP95",
+        "bm_percent": 4.4,
+        "liver_percent": 14.7,
+        "bm_liver_ratio": 0.2993197278911565,
+        "source": "kim_E2",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP108",
+        "bm_percent": 8.8,
+        "liver_percent": 1.6,
+        "bm_liver_ratio": 5.5,
+        "source": "kim_E2",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": true
+      },
+      {
+        "formulation": "LP01",
+        "bm_percent": 5.0,
+        "liver_percent": 42.4,
+        "bm_liver_ratio": 0.1179245283018868,
+        "source": "kim_E2",
+        "helper_lipid": "DSPC",
+        "peg_chain": "C14",
+        "targeting": "none",
+        "is_pareto": false
+      },
+      {
+        "formulation": "CD117/LNP",
+        "bm_percent": 55.0,
+        "liver_percent": 76.0,
+        "bm_liver_ratio": 0.7236842105263158,
+        "source": "breda_E6",
+        "helper_lipid": "DSPC",
+        "peg_chain": "C14",
+        "targeting": "antibody_conjugated",
+        "is_pareto": true
+      },
+      {
+        "formulation": "IgG/LNP",
+        "bm_percent": 19.0,
+        "liver_percent": 78.0,
+        "bm_liver_ratio": 0.24358974358974358,
+        "source": "breda_E6",
+        "helper_lipid": "DSPC",
+        "peg_chain": "C14",
+        "targeting": "antibody_conjugated",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP44",
+        "bm_percent": 1.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 0.5,
+        "source": "kim_screen",
+        "helper_lipid": "DOTMA",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP68",
+        "bm_percent": 1.0,
+        "liver_percent": 1.0,
+        "bm_liver_ratio": 1.0,
+        "source": "kim_screen",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP84",
+        "bm_percent": 1.5,
+        "liver_percent": 1.0,
+        "bm_liver_ratio": 1.5,
+        "source": "kim_screen",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": true
+      },
+      {
+        "formulation": "LNP85",
+        "bm_percent": 6.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 3.0,
+        "source": "kim_screen",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP89",
+        "bm_percent": 5.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 2.5,
+        "source": "kim_screen",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP91",
+        "bm_percent": 3.5,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 1.75,
+        "source": "kim_screen",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP98",
+        "bm_percent": 2.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 1.0,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP99",
+        "bm_percent": 5.5,
+        "liver_percent": 3.0,
+        "bm_liver_ratio": 1.8333333333333333,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP101",
+        "bm_percent": 1.5,
+        "liver_percent": 3.0,
+        "bm_liver_ratio": 0.5,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP102",
+        "bm_percent": 3.0,
+        "liver_percent": 3.0,
+        "bm_liver_ratio": 1.0,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP103",
+        "bm_percent": 1.5,
+        "liver_percent": 3.0,
+        "bm_liver_ratio": 0.5,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP105",
+        "bm_percent": 1.5,
+        "liver_percent": 4.0,
+        "bm_liver_ratio": 0.375,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP107",
+        "bm_percent": 3.0,
+        "liver_percent": 4.0,
+        "bm_liver_ratio": 0.75,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP109",
+        "bm_percent": 2.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 1.0,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP111",
+        "bm_percent": 8.0,
+        "liver_percent": 3.0,
+        "bm_liver_ratio": 2.6666666666666665,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP113",
+        "bm_percent": 3.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 1.5,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP115",
+        "bm_percent": 4.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 2.0,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP116",
+        "bm_percent": 2.5,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 1.25,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP118",
+        "bm_percent": 1.5,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 0.75,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP122",
+        "bm_percent": 2.5,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 1.25,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP125",
+        "bm_percent": 2.0,
+        "liver_percent": 2.0,
+        "bm_liver_ratio": 1.0,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP126",
+        "bm_percent": 2.0,
+        "liver_percent": 3.0,
+        "bm_liver_ratio": 0.6666666666666666,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      },
+      {
+        "formulation": "LNP127",
+        "bm_percent": 1.5,
+        "liver_percent": 6.0,
+        "bm_liver_ratio": 0.25,
+        "source": "kim_screen",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": false
+      }
+    ],
+    "pareto_optimal": [
+      {
+        "formulation": "LNP67",
+        "bm_percent": 20.9,
+        "liver_percent": 20.1,
+        "bm_liver_ratio": 1.0398009950248754,
+        "source": "kim_E2",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": true
+      },
+      {
+        "formulation": "LNP108",
+        "bm_percent": 8.8,
+        "liver_percent": 1.6,
+        "bm_liver_ratio": 5.5,
+        "source": "kim_E2",
+        "helper_lipid": "18:1 EPC",
+        "peg_chain": "C18",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": true
+      },
+      {
+        "formulation": "CD117/LNP",
+        "bm_percent": 55.0,
+        "liver_percent": 76.0,
+        "bm_liver_ratio": 0.7236842105263158,
+        "source": "breda_E6",
+        "helper_lipid": "DSPC",
+        "peg_chain": "C14",
+        "targeting": "antibody_conjugated",
+        "is_pareto": true
+      },
+      {
+        "formulation": "LNP84",
+        "bm_percent": 1.5,
+        "liver_percent": 1.0,
+        "bm_liver_ratio": 1.5,
+        "source": "kim_screen",
+        "helper_lipid": "DOTAP",
+        "peg_chain": "C14",
+        "targeting": "intrinsic_tropism",
+        "is_pareto": true
+      }
+    ]
+  },
+  "gap_formulations": [
+    {
+      "name": "CD117/2B8 + DOTAP 15% + C18-PEG",
+      "rationale": "Combines Shi's targeting (EC50=0.09) with Kim's DOTAP BM-tropism and C18-PEG optimization. Untested combination.",
+      "components": {
+        "ionizable_lipid": "ALC-0315 (35 mol%)",
+        "helper_lipid": "DOTAP (15 mol%)",
+        "cholesterol": "47.5 mol%",
+        "peg_lipid": "DSG-PEG2000 / C18 (2.5 mol%)",
+        "targeting": "anti-CD117 clone 2B8"
+      },
+      "predicted_hsc_percent": 70.0,
+      "predicted_liver_percent": 40.0,
+      "predicted_hsc_liver_ratio": 1.75,
+      "confidence": "low",
+      "test_experiment": "Mouse IV 0.1 mg/kg Cre mRNA, LSK tdTomato+ and liver EC tdTomato+ at 48h. n=5.",
+      "source_papers": [
+        "Shi 2023",
+        "Kim 2024",
+        "Breda 2023"
+      ]
+    },
+    {
+      "name": "LNP67 + C18-PEG swap",
+      "rationale": "Kim's LNP67 uses C14PEG. Shi showed C18 > C14 for BM delivery (3x). Would C18-PEG improve untargeted BM too?",
+      "components": {
+        "ionizable_lipid": "PPZ-A10 (35 mol%)",
+        "helper_lipid": "DOTAP (15 mol%)",
+        "cholesterol": "47.5 mol%",
+        "peg_lipid": "DSG-PEG2000 / C18 (2.5 mol%)"
+      },
+      "predicted_hsc_percent": 35.0,
+      "predicted_liver_percent": 15.0,
+      "predicted_hsc_liver_ratio": 2.33,
+      "confidence": "medium",
+      "test_experiment": "Mouse IV 0.5 mg/kg DiR-LNP, BM LSK vs liver EC at 24h. Head-to-head with LNP67 (C14).",
+      "source_papers": [
+        "Kim 2024",
+        "Shi 2023"
+      ]
+    },
+    {
+      "name": "Breda formulation + C16GalCer de-targeting",
+      "rationale": "Breda's 76% liver is ApoE-mediated. Replace DSPC with C16GalCer at 10 mol% (Gentry 2025). Conservative substitution to reduce liver, preserve CD117 targeting.",
+      "components": {
+        "ionizable_lipid": "ALC-0315 (50 mol%)",
+        "helper_lipid": "C16GalCer (10 mol%)",
+        "cholesterol": "38 mol%",
+        "peg_lipid": "DMG-PEG2000 / C14 (1.5 mol%)",
+        "targeting": "anti-CD117 clone 2B8 (post-insertion)"
+      },
+      "predicted_hsc_percent": 50.0,
+      "predicted_liver_percent": 50.0,
+      "predicted_hsc_liver_ratio": 1.0,
+      "confidence": "low",
+      "test_experiment": "Mouse IV 0.25 mg/kg Cre mRNA, LSK and liver tdTomato+ at 48h. Compare to standard Breda (DSPC).",
+      "source_papers": [
+        "Breda 2023",
+        "Gentry 2025"
+      ]
+    },
+    {
+      "name": "Any approach + dexamethasone pre-treatment",
+      "rationale": "Loughrey 2025: dex suppresses Kupffer TLR1/TLR6. Less first-pass scavenging means more LNP reaches BM. No new chemistry \u2014 immediately testable.",
+      "components": {
+        "pre_treatment": "Dex 1 mg/kg IP, 4h before LNP",
+        "lnp": "Any existing HSC-LNP"
+      },
+      "predicted_hsc_percent": null,
+      "predicted_liver_percent": null,
+      "predicted_hsc_liver_ratio": null,
+      "confidence": "medium",
+      "test_experiment": "Mouse: dex 1 mg/kg IP at -4h, LNP67 0.5 mg/kg IV. BM LSK and liver EC vs no-dex control.",
+      "source_papers": [
+        "Loughrey 2025",
+        "Kim 2024"
+      ]
+    },
+    {
+      "name": "Low-dose CD117 + high-dose untargeted combo",
+      "rationale": "CD117-LNP at 0.1 mg/kg (below toxicity) + LNP67 at 1.0 mg/kg. Antibody edits a fraction of HSCs; untargeted covers the rest. Lower total liver exposure.",
+      "components": {
+        "component_1": "CD117/LNP 0.1 mg/kg (Breda)",
+        "component_2": "LNP67 1.0 mg/kg (Kim)",
+        "dosing": "Sequential: CD117 first, LNP67 at +1h"
+      },
+      "predicted_hsc_percent": 45.0,
+      "predicted_liver_percent": 50.0,
+      "predicted_hsc_liver_ratio": 0.9,
+      "confidence": "low",
+      "test_experiment": "Mouse IV: CD117/LNP-Cre 0.1 mg/kg, then 1h later LNP67-Cre 1.0 mg/kg. Measure combined LSK editing.",
+      "source_papers": [
+        "Breda 2023",
+        "Kim 2024"
+      ]
+    }
+  ],
+  "interventions": {
+    "dexamethasone": [
+      {
+        "intervention": "Dexamethasone 1 mg/kg pre-treatment",
+        "mechanism": "Suppresses Kupffer TLR1/TLR6, reduces scavenging",
+        "original_ec30": 0.1237,
+        "adjusted_ec30": 0.0884,
+        "original_liver": 76.0,
+        "adjusted_liver": 76.0,
+        "confidence": "medium",
+        "caveats": [
+          "Loughrey measured Kupffer delivery, not BM",
+          "Dex may increase liver editing too",
+          "40% BM boost is conservative estimate"
+        ]
+      },
+      {
+        "intervention": "Dexamethasone 1 mg/kg pre-treatment",
+        "mechanism": "Suppresses Kupffer TLR1/TLR6, reduces scavenging",
+        "original_ec30": 0.0356,
+        "adjusted_ec30": 0.0254,
+        "original_liver": null,
+        "adjusted_liver": null,
+        "confidence": "medium",
+        "caveats": [
+          "Loughrey measured Kupffer delivery, not BM",
+          "Dex may increase liver editing too",
+          "40% BM boost is conservative estimate"
+        ]
+      },
+      {
+        "intervention": "Dexamethasone 1 mg/kg pre-treatment",
+        "mechanism": "Suppresses Kupffer TLR1/TLR6, reduces scavenging",
+        "original_ec30": 1.5479,
+        "adjusted_ec30": 1.1056,
+        "original_liver": 25.0,
+        "adjusted_liver": 25.0,
+        "confidence": "medium",
+        "caveats": [
+          "Loughrey measured Kupffer delivery, not BM",
+          "Dex may increase liver editing too",
+          "40% BM boost is conservative estimate"
+        ]
+      }
+    ],
+    "glycolipid": [
+      {
+        "intervention": "C16GalCer helper (25 mol%)",
+        "mechanism": "Gentry 2025: liver EC 82% to 54% (34% reduction)",
+        "original_ec30": 0.1237,
+        "adjusted_ec30": 0.1237,
+        "original_liver": 76.0,
+        "adjusted_liver": 50.2,
+        "confidence": "low",
+        "caveats": [
+          "Gentry showed spleen tropism, not BM",
+          "Glycolipid may alter HSC delivery mechanism",
+          "Cytokine activation may limit clinical use"
+        ]
+      },
+      {
+        "intervention": "C16GalCer helper (25 mol%)",
+        "mechanism": "Gentry 2025: liver EC 82% to 54% (34% reduction)",
+        "original_ec30": 1.5479,
+        "adjusted_ec30": 1.5479,
+        "original_liver": 25.0,
+        "adjusted_liver": 16.5,
+        "confidence": "low",
+        "caveats": [
+          "Gentry showed spleen tropism, not BM",
+          "Glycolipid may alter HSC delivery mechanism",
+          "Cytokine activation may limit clinical use"
+        ]
+      }
+    ]
+  }
+}

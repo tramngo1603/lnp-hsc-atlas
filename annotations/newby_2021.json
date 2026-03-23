@@ -1,0 +1,186 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-14",
+    "source_quality": "full paper"
+  },
+  "paper": {
+    "id": "Newby_2021_Nature",
+    "title": "Base editing of haematopoietic stem cells rescues sickle cell disease in mice",
+    "authors": "Newby GA et al.",
+    "journal": "Nature",
+    "year": 2021,
+    "doi_or_id": "10.1038/s41586-021-03609-w",
+    "url": "https://www.nature.com/articles/s41586-021-03609-w",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "other",
+    "group": "HSC"
+  },
+  "formulations": [
+    {
+      "id": "F1_electroporation_ex_vivo",
+      "ionizable_lipid": "N/A — ex vivo electroporation",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "N/A",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "N/A",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "none",
+      "targeting_details": "Ex vivo electroporation of ABE8e-NRCH mRNA + sgRNA into CD34+ HSPCs. NOT an LNP delivery paper.",
+      "size_nm": null,
+      "formulation_notes": "This is an EX VIVO paper, not in vivo LNP delivery. Included for establishing therapeutic thresholds, not for formulation data."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_ex_vivo_SCD_patient_HSPCs",
+      "formulation_ref": "F1_electroporation_ex_vivo",
+      "payload": "ABE8e-NRCH mRNA + sgRNA",
+      "dose_mg_per_kg": null,
+      "dose_other_units": "Ex vivo electroporation",
+      "route": "ex vivo",
+      "timepoint_hours": null,
+      "species": "human_ex_vivo",
+      "strain_or_model": "SCD patient CD34+ HSPCs → xenotransplant into immunodeficient mice",
+      "conditioning": "irradiation",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "CD34+ HSPCs from SCD patients",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 80,
+          "off_target_editing_pct": null,
+          "duration_months": 4
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "Base editing avoided p53 activation and large deletions observed with Cas9 nuclease."
+        }
+      },
+      "figure_source": "Main text",
+      "data_confidence": "HIGH",
+      "notes": "80% HBBS-to-HBBG conversion ex vivo in patient HSPCs. 68% HBBG frequency maintained at 16 weeks post-transplant. 5-fold decrease in hypoxia-induced sickling. This establishes the benchmark for ex vivo base editing efficiency."
+    },
+    {
+      "id": "E2_Townes_SCD_mouse_HSPCs",
+      "formulation_ref": "F1_electroporation_ex_vivo",
+      "payload": "ABE8e-NRCH mRNA + sgRNA",
+      "dose_mg_per_kg": null,
+      "dose_other_units": "Ex vivo electroporation",
+      "route": "ex vivo",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "Townes SCD mouse HSPCs → transplant into irradiated recipients",
+      "conditioning": "irradiation",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "Mouse HSPCs from Townes SCD model",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": 4
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": "Near-normal haematological parameters. Reduced splenic pathology."
+        }
+      },
+      "figure_source": "Main text",
+      "data_confidence": "HIGH",
+      "notes": "Makassar beta-globin = 79% of total beta-globin protein at 16 weeks. 3-fold reduction in hypoxia-induced sickling. Near-normal blood parameters."
+    },
+    {
+      "id": "E3_secondary_transplant_threshold",
+      "formulation_ref": "F1_electroporation_ex_vivo",
+      "payload": "ABE8e-NRCH mRNA + sgRNA",
+      "dose_mg_per_kg": null,
+      "dose_other_units": "Mixed edited + unedited BM transplant",
+      "route": "ex vivo",
+      "timepoint_hours": null,
+      "species": "mouse",
+      "strain_or_model": "Townes SCD mouse → secondary transplant with varying edit proportions",
+      "conditioning": "irradiation",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "LT-HSCs confirmed by secondary transplant",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 20,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Main text + supplementary",
+      "data_confidence": "HIGH",
+      "notes": "KEY FINDING: ≥20% HBBS-to-HBBG editing is SUFFICIENT for phenotypic rescue. Established via secondary transplant with mixed edited/unedited BM. This 20% threshold is now THE reference point for all in vivo HSC editing approaches including Tessera, Editas, and your Pareto analysis."
+    }
+  ],
+  "key_findings_for_project": [
+    "ESTABLISHES THE 20% THERAPEUTIC THRESHOLD: ≥20% HBBS→HBBG editing is sufficient for phenotypic rescue of SCD",
+    "80% ex vivo editing efficiency in patient HSPCs — benchmark for what's achievable with optimized base editor",
+    "68% maintained at 16 weeks post-transplant — durable in LT-HSCs",
+    "Makassar (HBBG) is the same edit that Tessera and Lian are targeting in vivo",
+    "Secondary transplant with varying proportions establishes dose-response for therapeutic benefit",
+    "Base editing avoids p53 activation and large deletions vs Cas9 — safety advantage",
+    "Same David Liu + Gregory Newby + Mitchell Weiss team as Lian 2024 LNP paper",
+    "Ex vivo, NOT in vivo — but defines the target for all in vivo approaches"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Breda's ~6% editing is below the 20% threshold established here. Breda needs to improve.",
+    "vs_shi": "Shi's reporter delivery doesn't directly translate to editing %. But 20% editing threshold means Shi's delivery efficiency needs to be substantially higher than 20% to account for reporter-to-editing gap.",
+    "vs_kim": "Kim's barcoded delivery screen measures delivery, not editing. This paper shows that delivery → editing conversion is not 1:1.",
+    "new_pareto_points": "Not applicable — ex vivo, no LNP formulation, no Pareto placement.",
+    "therapeutic_window_update": "DEFINES the therapeutic window: ≥20% edited HSCs = phenotypic rescue. Tessera's 24-40% NHP HBB editing exceeds this. Your Pareto analysis should use 20% as the minimum efficacy threshold line.",
+    "gap_formulation_relevance": "Zero formulation relevance (ex vivo electroporation). Pure therapeutic benchmark."
+  },
+  "limitations_and_caveats": [
+    "Ex vivo electroporation — not in vivo LNP delivery",
+    "Myeloablative conditioning (irradiation) required for transplant — this is what in vivo approaches aim to avoid",
+    "Mouse model (Townes) may not perfectly recapitulate human SCD",
+    "20% threshold established in mouse model — human threshold may differ",
+    "ABE8e-NRCH is a specific base editor; efficiency may differ with other editing modalities",
+    "Makassar (HBBG) is benign but NOT wild-type — unknown if fully equivalent long-term"
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-13",
+    "source_quality": "press release"
+  },
+  "paper": {
+    "id": "Tessera_ASGCT2025_PressRelease",
+    "title": "Tessera Therapeutics Features New Preclinical Data at ASGCT 28th Annual Meeting",
+    "authors": "Tessera Therapeutics",
+    "journal": "GlobeNewswire / Company Press Release",
+    "year": 2025,
+    "doi_or_id": "",
+    "url": "https://www.globenewswire.com/news-release/2025/05/17/3083480/0/en/Tessera-Therapeutics-Features-New-Preclinical-Data-Demonstrating-Progress-Across-its-In-Vivo-Gene-Writing-Programs-and-Delivery-Platform-at-the-American-Society-of-Gene-and-Cell-Th.html",
+    "paper_type": "press_release",
+    "delivery_platform": "tLNP",
+    "group": "HSC"
+  },
+  "formulations": [
+    {
+      "id": "F1_Tessera_HSC_tLNP_ASGCT",
+      "ionizable_lipid": "PROPRIETARY",
+      "ionizable_lipid_mol_pct": null,
+      "helper_lipid": "PROPRIETARY",
+      "helper_lipid_mol_pct": null,
+      "cholesterol_mol_pct": null,
+      "peg_lipid": "PROPRIETARY",
+      "peg_lipid_mol_pct": null,
+      "targeting_moiety": "other",
+      "targeting_details": "PROPRIETARY HSC-targeted LNP. Same platform as ASH 2024/2025 abstracts.",
+      "size_nm": null,
+      "formulation_notes": "Proprietary LNP. ASGCT May 2025 is the intermediate data point between ASH 2024 and ASH 2025."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1_HBB_NHP_repeat_dose_two_species",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ASGCT",
+      "payload": "Gene Writer mRNA + HBB template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "NHP",
+      "strain_or_model": "Cynomolgus AND Rhesus macaques",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": null,
+        "hsc_definition": "LT-HSCs",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "No liver enzyme elevation at 1-2 mg/kg reported",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": null,
+          "off_target_editing_pct": null,
+          "duration_months": 6
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": "No liver enzyme elevation at 1-2 mg/kg",
+          "tolerability_notes": "Tested in TWO NHP species (cynomolgus + rhesus). 6-month durability. Well tolerated."
+        }
+      },
+      "figure_source": "Press release text",
+      "data_confidence": "LOW",
+      "notes": ">20% HBB editing in LT-HSCs with repeat dose in TWO NHP species. 35-50% mono/bi-allelic by single-cell analysis. This is the intermediate timepoint before ASH 2025 (40%/60% numbers). Key new info: rhesus macaque data (previously only cynomolgus reported). No liver enzyme elevation is important safety signal."
+    },
+    {
+      "id": "E2_HBB_humanized_mice_SCD_ASGCT",
+      "formulation_ref": "F1_Tessera_HSC_tLNP_ASGCT",
+      "payload": "Gene Writer mRNA + HBB correction template",
+      "dose_mg_per_kg": null,
+      "dose_other_units": null,
+      "route": "IV",
+      "timepoint_hours": null,
+      "species": "humanized_mouse",
+      "strain_or_model": "NBSGW engrafted with mobilized PBMCs from SCD donors",
+      "conditioning": "none",
+      "results": {
+        "hsc_delivery_pct": 35,
+        "hsc_definition": "LT-HSCs, correction to wild-type HBB",
+        "hsc_metric": "editing_pct",
+        "hsc_n_animals": null,
+        "hsc_range_or_sd": null,
+        "liver_delivery_pct": null,
+        "liver_metric": "",
+        "liver_notes": "",
+        "other_organs": {
+          "spleen_pct": null,
+          "lung_pct": null,
+          "bone_marrow_total_pct": null
+        },
+        "functional_readout": {
+          "hbf_induction": null,
+          "on_target_editing_pct": 35,
+          "off_target_editing_pct": null,
+          "duration_months": null
+        },
+        "safety": {
+          "cytokine_elevation": null,
+          "liver_toxicity": null,
+          "tolerability_notes": ""
+        }
+      },
+      "figure_source": "Press release text",
+      "data_confidence": "LOW",
+      "notes": "~35% HBB correction in SCD donor humanized mice. >50% in healthy donors. Consistent with ASH 2025 numbers."
+    }
+  ],
+  "key_findings_for_project": [
+    "TWO NHP species tested (cynomolgus + rhesus) - strengthens translation case",
+    ">20% HBB editing with repeat dose in both species - above therapeutic threshold",
+    "35-50% mono/bi-allelic editing by single-cell analysis after 2 doses",
+    "6-month durability (intermediate to ASH 2025's 14-15 month data)",
+    "No liver enzyme elevation at 1-2 mg/kg - important safety data",
+    "35% HBB correction in SCD patient-derived cells - consistent across ASGCT and ASH presentations",
+    "Cross-reference: ASGCT data is intermediate between ASH 2024 (24%) and ASH 2025 (40%) NHP numbers"
+  ],
+  "comparison_to_existing_data": {
+    "vs_breda": "Outperforms. Same conclusion as Batch 1 analysis.",
+    "vs_shi": "Outperforms.",
+    "vs_kim": "Not directly comparable (different readout).",
+    "new_pareto_points": "No new Pareto data beyond what's in ASH abstracts.",
+    "therapeutic_window_update": "Adds rhesus data and safety (no liver enzyme elevation). Dose range 1-2 mg/kg is relevant.",
+    "gap_formulation_relevance": "Zero - fully proprietary."
+  },
+  "limitations_and_caveats": [
+    "Press release only - selective data presentation",
+    "Proprietary everything - no ML value",
+    "'>20% HBB editing with repeat dose' is vague - could be 21% or 49%",
+    "Single-cell analysis '35-50% mono/bi-allelic' unclear if this is 1 or 2 doses",
+    "Dose not specified per experiment",
+    "Rhesus vs cynomolgus species differences not broken out"
+  ]
+}

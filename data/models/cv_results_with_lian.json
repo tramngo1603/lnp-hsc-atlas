@@ -1,0 +1,18 @@
+{
+  "xgboost": {
+    "balanced_accuracy_mean": 0.3841822693989877,
+    "balanced_accuracy_std": 0.2232340467258222,
+    "baseline": 0.479,
+    "delta": -0.09481773060101228,
+    "n_rows": 135,
+    "n_papers": 4
+  },
+  "lightgbm": {
+    "balanced_accuracy_mean": 0.47597424934886234,
+    "balanced_accuracy_std": 0.07594105289413744,
+    "baseline": 0.467,
+    "delta": 0.008974249348862318,
+    "n_rows": 135,
+    "n_papers": 4
+  }
+}

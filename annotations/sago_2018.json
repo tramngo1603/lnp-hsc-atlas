@@ -1,0 +1,409 @@
+{
+  "_annotation_meta": {
+    "annotated_by": "Tram Ngo",
+    "annotated_date": "2026-03-21",
+    "source_quality": "full_paper_no_supplement",
+    "notes": "Main text + figures available. Supplement referenced but not uploaded. Some data (e.g., exact library compositions, biodistribution quantification, HSPC indels) is in supplement only."
+  },
+
+  "paper": {
+    "id": "Sago_2018_JACS",
+    "title": "Nanoparticles That Deliver RNA to Bone Marrow Identified by in Vivo Directed Evolution",
+    "authors": "Cory D. Sago, Melissa P. Lokugamage, Fatima Z. Islam, Brandon R. Krupczak, Manaka Sato, James E. Dahlman",
+    "journal": "Journal of the American Chemical Society",
+    "year": 2018,
+    "volume": 140,
+    "issue": 49,
+    "pages": "17095-17105",
+    "doi_or_id": "10.1021/jacs.8b08976",
+    "paper_type": "peer_reviewed",
+    "delivery_platform": "LNP",
+    "group": "BM_ENDOTHELIAL",
+    "lab": "Dahlman_GeorgiaTech",
+    "pmcid": "PMC available 2019 June 09"
+  },
+
+  "formulations": [
+    {
+      "id": "Sago_BM1",
+      "name": "BM1",
+      "description": "Top-performing LNP from library 2, identified by in vivo directed evolution for BMEC delivery",
+
+      "ionizable_lipid": "7C1",
+      "ionizable_lipid_type": "polymer-lipid_hybrid",
+      "ionizable_lipid_class": "lipidoid",
+      "ionizable_lipid_smiles": null,
+      "ionizable_lipid_smiles_note": "7C1 is NOT a single small molecule. It is an oligomeric mixture synthesized by reacting branched PEI600 (polyethyleneimine, Mn ~600 Da, Mw ~800 Da) with C15 epoxide-terminated lipid tails at 90°C for 48-72h. Product is a distribution of species with varying degrees of alkylation. No single canonical SMILES exists. Originally reported in Dahlman et al. 2014 Nat Nano (ref 4). Synthesis confirmed in Huayamares et al. 2023.",
+      "ionizable_lipid_mol_pct": 80,
+      "ionizable_lipid_mol_pct_confidence": "HIGH",
+      "ionizable_lipid_mol_pct_source": "Figure 6A table",
+
+      "helper_lipid": "NONE",
+      "helper_lipid_mol_pct": 0,
+      "helper_lipid_note": "Library 2 enrichment analysis showed 0% DSPC was optimal (Fig 5K). BM1 is a 3-component system: 7C1 + cholesterol + PEG only.",
+      "helper_lipid_confidence": "HIGH",
+
+      "cholesterol_mol_pct": 2.5,
+      "cholesterol_mol_pct_confidence": "HIGH",
+      "cholesterol_mol_pct_source": "Figure 6A table",
+
+      "peg_lipid": "C18-PEG2000",
+      "peg_lipid_mol_pct": 17.5,
+      "peg_lipid_mol_pct_confidence": "HIGH",
+      "peg_lipid_mol_pct_source": "Figure 6A table",
+      "peg_lipid_note": "C18 alkyl tail with PEG MW 2000. Enrichment analysis consistently selected C18PEG2000 over C14PEG2000, C16PEG2000, and PEG3000 variants.",
+
+      "size_nm": 45.2,
+      "size_confidence": "HIGH",
+      "size_source": "Figure 6B table",
+
+      "pdi": 0.19,
+      "pdi_confidence": "HIGH",
+      "pdi_source": "Figure 6B table",
+
+      "pka": 6.55,
+      "pka_confidence": "HIGH",
+      "pka_source": "Figure 6B table, TNS assay",
+
+      "zeta_potential_mv": null,
+      "zeta_note": "Not reported. pKa of 6.55 implies net neutral at blood pH 7.4, cationic in early endosomes.",
+
+      "stability": "Stable >10 days at 4°C (Figure S3C)",
+
+      "target_cell": "BMEC (bone marrow endothelial cells, CD31+CD45-)",
+      "NOT_HSC": true,
+      "target_cell_note": "This is an endothelial cell delivery system. BMECs regulate the BM niche including HSCs, but BM1 does NOT deliver to HSCs/HSPCs. CD34+ HSPCs showed undetectable indels (Figure S3L).",
+
+      "cargo_types_demonstrated": ["siRNA", "sgRNA"],
+      "animal_model": "C57BL/6J mice (5-12 weeks)",
+      "dose_mg_kg": 1.0,
+      "route": "IV (tail vein)"
+    },
+    {
+      "id": "Sago_7C1_original",
+      "name": "Original 7C1 (80:20)",
+      "description": "Parent formulation, known to target lung/heart endothelial cells. Does NOT target BMECs.",
+
+      "ionizable_lipid": "7C1",
+      "ionizable_lipid_mol_pct": 80,
+      "helper_lipid": "NONE",
+      "helper_lipid_mol_pct": 0,
+      "cholesterol_mol_pct": 0,
+      "peg_lipid": "C14-PEG2000",
+      "peg_lipid_mol_pct": 20,
+
+      "size_nm": 48.5,
+      "pdi": 0.17,
+      "pka": 6.45,
+
+      "target_cell": "Lung and heart endothelial cells",
+      "NOT_HSC": true,
+      "bmec_delivery": false,
+      "bmec_note": "Showed no ICAM-2 silencing in BMECs at 1.0 mg/kg (Fig 1C). This negative result motivated the directed evolution screen.",
+
+      "dose_mg_kg": 1.0,
+      "route": "IV",
+      "confidence": "HIGH",
+      "source": "Figure 6A-B tables, Dahlman 2014 Nat Nano"
+    }
+  ],
+
+  "directed_evolution": {
+    "n_rounds": 2,
+    "methodology_name": "Precursor to FIND (Functional Identification of Nanoparticle Delivery)",
+    "methodology_note": "This paper does NOT use the 'FIND' acronym. It describes 'in vivo directed evolution' using barcoded functional screening. The FIND name was formalized in later Dahlman lab publications. This is the first system to quantify FUNCTIONAL cytosolic siRNA delivery (not just biodistribution) via barcoding.",
+
+    "library_1": {
+      "n_formulated": 120,
+      "n_stable_tested": 115,
+      "components": ["7C1", "Cholesterol", "PEG-lipid"],
+      "peg_types_tested": ["C14-PEG2000", "C16-PEG2000", "C18-PEG2000", "C14-PEG3000", "C18-PEG3000"],
+      "n_formulation_ratios": 24,
+      "n_peg_types": 5,
+      "total_dose_mg_kg": 1.5,
+      "negative_controls": "2 naked barcodes (both had lower normalized delivery than all LNPs)",
+      "size_range_nm": "20-200 (inclusion criterion)",
+      "pooled_diameter_nm": 53,
+      "key_findings": [
+        "No correlation between LNP size and BMEC delivery (R²=0.06)",
+        "C16PEG2000 and C18PEG2000 enriched in top 10%",
+        "Low (1-2.5%) and high (15-20%) PEG mol% enriched",
+        "PEG2000 outperformed PEG3000 (paired comparison, p<0.05)"
+      ],
+      "winner_bmec_silencing_pct": 16,
+      "winner_potency_vs_original": "2.2x",
+      "winner_source": "Figure S2D,E"
+    },
+
+    "library_2": {
+      "n_formulated": 40,
+      "n_stable_tested": 31,
+      "components": ["7C1", "Cholesterol", "PEG-lipid", "DSPC (in some)"],
+      "peg_types_tested": ["C16-PEG2000", "C18-PEG2000"],
+      "n_formulation_ratios": 20,
+      "n_peg_types": 2,
+      "total_dose_mg_kg": 1.5,
+      "negative_controls": "2 naked barcodes",
+      "pooled_diameter_nm": 43,
+      "evolved_from": "Library 1 PEG enrichment data",
+      "key_findings": [
+        "~1.5x more robust ICAM-2 silencing than library 1 (Fig 5C)",
+        "No correlation between size and delivery (R²=0.01)",
+        "C18PEG2000 enriched",
+        "80 mol% 7C1 enriched",
+        "0% DSPC enriched (DSPC hurts BMEC delivery)",
+        "0.1-10% cholesterol enriched",
+        "15-20% PEG mol% enriched"
+      ]
+    },
+
+    "n_total_lnps_formulated": 160,
+    "n_total_lnps_tested": 146,
+    "selection_criterion": "Functional cytosolic siRNA delivery to BMECs — LNPs enriched in ICAM-2Low BM endothelial cells (CD31+CD45-) identified by barcode sequencing",
+    "selection_note": "This is FUNCTIONAL delivery screening, not biodistribution. Barcodes are sequenced from ICAM-2Low cells, meaning the siRNA was functionally delivered to the cytoplasm and silenced the target gene.",
+
+    "variables_screened": {
+      "lipid_identities": "7C1 only (constant ionizable lipid)",
+      "peg_identities": "5 PEG-lipids varying tail length (C14/C16/C18) and MW (2000/3000)",
+      "helper_lipids": "DSPC tested in library 2 only (0% or 10%)",
+      "molar_ratios": "24 ratios (lib 1) and 20 ratios (lib 2) varying component mol%",
+      "what_was_constant": "Ionizable lipid identity (always 7C1), cargo (siICAM-2 + barcode), mass ratio nucleic acid 5:1"
+    },
+
+    "barcode_design": {
+      "n_available_barcodes": 156,
+      "barcode_length_nt": 8,
+      "base_distance": 3,
+      "total_possible": 65536,
+      "sequencing_platform": "Illumina MiniSeq",
+      "siRNA_to_barcode_mass_ratio": "10:1",
+      "phosphorothioate_modifications": "3 additional on each end to reduce exonuclease degradation"
+    }
+  },
+
+  "experiments": [
+    {
+      "id": "exp_original_7C1_bmec",
+      "experiment_type": "siRNA_silencing",
+      "formulation": "Sago_7C1_original",
+      "target_gene": "ICAM-2",
+      "readout": "ICAM-2 protein MFI by flow cytometry",
+      "dose_mg_kg": 1.0,
+      "route": "IV",
+      "timepoint_days": 3,
+      "target_cell": "BMEC (CD31+CD45-)",
+      "result": "No silencing in BMECs (ns vs siLuc control)",
+      "result_source": "Figure 1C",
+      "confidence": "HIGH",
+      "lung_ec_result": "Significant silencing (positive control, as expected from Dahlman 2014)",
+      "heart_ec_result": "Significant silencing (positive control)",
+      "NOT_HSC": true
+    },
+    {
+      "id": "exp_BM1_siRNA",
+      "experiment_type": "siRNA_silencing",
+      "formulation": "Sago_BM1",
+      "target_gene": "ICAM-2",
+      "readout": "ICAM-2 protein MFI by flow cytometry",
+      "dose_mg_kg": 1.0,
+      "route": "IV",
+      "timepoint_days": 3,
+      "target_cell": "BMEC (CD31+CD45-)",
+      "result_protein_silencing_pct": 37,
+      "result_source": "Figure 6E",
+      "confidence": "HIGH",
+      "potency_vs_original_7C1": "4.8x",
+      "NOT_HSC": true,
+      "n_mice": "3-5 per group"
+    },
+    {
+      "id": "exp_BM1_lung_heart",
+      "experiment_type": "siRNA_silencing",
+      "formulation": "Sago_BM1",
+      "target_gene": "ICAM-2",
+      "dose_mg_kg": 1.0,
+      "route": "IV",
+      "timepoint_days": 3,
+      "target_cells": ["Lung EC", "Heart EC"],
+      "result": "No difference in potency between BM1 and original 7C1 in lung or heart ECs",
+      "result_source": "Figure 6G",
+      "confidence": "HIGH",
+      "interpretation": "BM1 gained BMEC tropism without increasing delivery to lung/heart. This is BM-specific gain, not general EC enhancement."
+    },
+    {
+      "id": "exp_BM1_sgRNA_Cas9",
+      "experiment_type": "gene_editing",
+      "formulation": "Sago_BM1",
+      "target_gene": "ICAM-2",
+      "cargo": "sgICAM-2 (chemically modified: 3 phosphorothioates each terminus, 2'-O-methyl at select positions)",
+      "dose_mg_kg": 1.0,
+      "route": "IV",
+      "timepoint_days": 5,
+      "animal_model": "Constitutive SpCas9 mice (Jackson #026179)",
+      "results": {
+        "BMEC_indels_pct": 15,
+        "BMEC_indels_source": "Figure 6H, TIDE analysis",
+        "BMEC_indels_confidence": "HIGH",
+        "HSPC_CD34_indels": "Undetectable",
+        "HSPC_source": "Figure S3L",
+        "HSPC_confidence": "HIGH"
+      },
+      "NOT_HSC": true,
+      "critical_note": "15% indels in BMECs but 0% in CD34+ HSPCs. BM1 accesses BM vasculature but does NOT transfect HSCs."
+    },
+    {
+      "id": "exp_BM1_biodistribution",
+      "experiment_type": "biodistribution",
+      "method": "QUANT (ddPCR-based, ref 50 = Sago 2018 Nano Lett)",
+      "formulations_compared": ["Sago_BM1", "Sago_7C1_original"],
+      "dose_mg_kg": 0.5,
+      "timepoint_hours": 4,
+      "results": {
+        "BMEC_fold_increase_BM1_vs_7C1": 4.7,
+        "lung_EC": "No significant difference",
+        "heart_EC": "No significant difference",
+        "CD34_HSPC": "No significant difference"
+      },
+      "result_source": "Figure S3H-J",
+      "confidence": "HIGH",
+      "note": "Biodistribution data corroborates functional silencing data — BM1 specifically increases delivery to BMECs."
+    },
+    {
+      "id": "exp_BM1_endocytosis",
+      "experiment_type": "in_vitro_mechanism",
+      "cell_type": "IMAECs (Immortalized Mouse Aortic Endothelial Cells)",
+      "results": {
+        "BM1_uptake_vs_7C1": "40% less uptake (Alexa647 MFI)",
+        "7C1_inhibited_by": ["genistein (caveolin)", "chlorpromazine (clathrin)"],
+        "BM1_inhibited_by": ["chlorpromazine (clathrin) only"],
+        "BM1_NOT_inhibited_by": ["genistein (caveolin)"]
+      },
+      "result_source": "Figure 6C,D",
+      "confidence": "HIGH",
+      "interpretation": "BM1 has different endocytic pathway preference than parent 7C1 — clathrin-dependent but not caveolin-dependent. Despite lower total uptake in vitro, BM1 achieves better BMEC delivery in vivo, further demonstrating that in vitro uptake does not predict in vivo delivery to endothelial cells."
+    }
+  ],
+
+  "key_findings_for_project": [
+    {
+      "finding": "BM1 composition: 80% 7C1 / 2.5% cholesterol / 17.5% C18-PEG2000 (3-component, no helper lipid, no DSPC)",
+      "relevance": "Establishes that BM-tropic LNPs can be achieved with minimal components. 0% DSPC is OPPOSITE of many standard LNP formulations.",
+      "confidence": "HIGH"
+    },
+    {
+      "finding": "BM1 targets BM endothelial cells (BMECs), NOT HSCs/HSPCs. 15% BMEC editing vs 0% HSPC editing.",
+      "relevance": "CRITICAL: BM1 achieves BM VASCULAR ACCESS but not HSC transfection. This is the 'access layer' without the 'selectivity layer' — demonstrates that reaching BM vasculature is necessary but not sufficient for HSC gene therapy. Kim 2024 later solved the selectivity problem.",
+      "confidence": "HIGH"
+    },
+    {
+      "finding": "BMEC tropism driven by chemical composition (PEG structure, cholesterol), NOT by LNP size.",
+      "relevance": "Supports the SAR finding that composition > size for organ tropism. PEG tail length (C18 > C14) and PEG MW (2000 > 3000) are key drivers — consistent with PEG shedding kinetics hypothesis.",
+      "confidence": "HIGH"
+    },
+    {
+      "finding": "7C1 is a polymer-lipid hybrid (PEI600 + C15 epoxides), NOT a traditional ionizable lipid with defined SMILES.",
+      "relevance": "CRITICAL for feature matrix: 7C1 cannot be represented by a single SMILES string. It's an oligomeric mixture. This makes BM1 incompatible with molecular descriptor features (MW, logP, etc.) used for small-molecule ILs like MC3, 5A2-SC8, or PPZ-A10. Would need polymer-level descriptors instead.",
+      "confidence": "HIGH"
+    },
+    {
+      "finding": "First functional in vivo screen (not just biodistribution) using barcoded LNPs — precursor to FIND methodology.",
+      "relevance": "Methodological ancestor of Kim 2024's barcoded screen that identified HSC-targeting LNPs. The progression Sago 2018 (BMECs) → Kim 2024 (HSCs) demonstrates iterative improvement of both the screening platform and the biological target specificity.",
+      "confidence": "HIGH"
+    },
+    {
+      "finding": "In vitro delivery does not predict in vivo endothelial delivery. BM1 had 40% LESS in vitro uptake than 7C1 but 4.8x MORE in vivo BMEC silencing.",
+      "relevance": "Reinforces the fundamental argument for in vivo screening over in vitro optimization for non-hepatocyte targets.",
+      "confidence": "HIGH"
+    },
+    {
+      "finding": "Evolving for BMEC tropism did NOT increase lung/heart EC delivery — the gain was BM-specific.",
+      "relevance": "Demonstrates that BM-targeting specificity can be achieved without simply increasing pan-endothelial delivery. Tissue-specific organ targeting is achievable through compositional changes.",
+      "confidence": "HIGH"
+    }
+  ],
+
+  "limitations_and_caveats": [
+    {
+      "limitation": "BM1 targets BMECs, NOT HSCs. Zero rows for HSC training set.",
+      "severity": "HIGH",
+      "mitigation": "Useful as BM access layer data point and for the historical narrative. BM1 proves LNPs can reach BM vasculature; Kim 2024 later proved they can also transfect HSCs."
+    },
+    {
+      "limitation": "7C1 is a polymer-lipid hybrid without a single defined SMILES. Cannot compute standard molecular descriptors.",
+      "severity": "HIGH",
+      "mitigation": "Could encode as categorical variable ('7C1') or use polymer-level features (MW range, PEI backbone type, tail length). But this creates a feature island similar to Kim 2024's PPZ-A10 — no overlap with small-molecule IL datasets."
+    },
+    {
+      "limitation": "No liver delivery data for BM1. Cannot compute BM:liver ratio for Pareto analysis.",
+      "severity": "MEDIUM",
+      "mitigation": "Biodistribution data (Figure S3) compared BM1 vs 7C1 in BM/lung/heart ECs and HSPCs, but liver was not included in the quantified organs. The paper's focus was on endothelial tropism shift, not liver de-targeting."
+    },
+    {
+      "limitation": "Supplement not available for this annotation. Some quantitative data (exact library compositions, biodistribution numbers, HSPC indel traces) are in supplementary figures only.",
+      "severity": "MEDIUM",
+      "mitigation": "Main text + figures provide all key compositions, delivery results, and enrichment data. Supplement would add exact molar ratio grids for all 160 LNPs."
+    },
+    {
+      "limitation": "Only 2 rounds of evolution with 160 total LNPs. Authors note that additional rounds could improve BMEC tropism further.",
+      "severity": "LOW",
+      "mitigation": "The directed evolution approach was deliberately simplified as proof of concept. Kim 2024 later used larger libraries with different ionizable lipids."
+    },
+    {
+      "limitation": "Screening used siICAM-2 as the functional readout. ICAM-2 silencing efficiency may not perfectly predict delivery of other cargos (mRNA, different sgRNAs).",
+      "severity": "LOW",
+      "mitigation": "sgRNA delivery confirmed separately (15% indels). siRNA and sgRNA delivery correlated well."
+    },
+    {
+      "limitation": "Only C57BL/6J mice tested. No NHP data. BM tropism may be species-dependent.",
+      "severity": "MEDIUM",
+      "mitigation": "Standard limitation for early-stage LNP discovery papers. Species translation is a known challenge."
+    }
+  ],
+
+  "feature_matrix_implications": {
+    "n_rows_hsc_training": 0,
+    "n_rows_bmec": 1,
+    "bmec_row_description": "BM1: 80% 7C1 / 2.5% chol / 17.5% C18-PEG2000 → 37% BMEC silencing, 15% BMEC indels, 0% HSPC indels. cell_type='BMEC', not_hsc=true",
+    "additional_rows_possible": "Could add original 7C1 as a negative control row (80% 7C1 / 20% C14-PEG2000 → 0% BMEC silencing)",
+    "ionizable_lipid_encoding_challenge": "7C1 is a polymer-lipid hybrid (PEI600 + C15 epoxides). No single SMILES. Cannot compute standard molecular descriptors. Represents a distinct chemical class from all other ILs in the atlas (DLin-type, dendrimer, lipidoid small-molecule). Creates an isolated data island similar to PPZ-A10.",
+    "two_layer_framework_position": "BM1 achieves ACCESS LAYER (reaches BM vasculature, 4.7x biodistribution increase) but NOT SELECTIVITY LAYER (0% HSPC transfection). This is the key distinction from Kim 2024 LNPs which achieve both layers.",
+    "excluded_from_540_dahlman_count": true,
+    "exclusion_reason": "Sago 2018 DID measure BM delivery (endothelial), so it's not part of the '540 Dahlman LNPs without BM data' count. But it's also not HSC data. Unique category: BM-measured but BMEC-targeted."
+  },
+
+  "cross_references": {
+    "7C1_origin": {
+      "paper": "Dahlman et al. 2014 Nat Nanotechnol 9:648-655",
+      "relationship": "7C1 first reported here as lung/heart endothelial delivery vehicle. ED50 = 0.02 mg/kg for lung ECs. Sago 2018 took 7C1 as starting point and evolved it for BM tropism."
+    },
+    "love_2010": {
+      "paper": "Love et al. 2010 PNAS 107(5):1864-9",
+      "relationship": "Original lipidoid library paper. 7C1's naming convention derives from this library (amine #7 + C-type tail). But 7C1 specifically is a PEI600-based compound from Dahlman 2014, not directly from Love 2010's library of small-molecule lipidoids."
+    },
+    "kim_2024": {
+      "paper": "Kim et al. 2024 Nat Biotechnol",
+      "relationship": "Direct methodological descendant. Kim 2024 used evolved barcoded screening (FIND system) with PPZ-A10 ionizable lipid (NOT 7C1) to achieve actual HSC delivery. Progression: Sago 2018 (BMEC access) → Kim 2024 (HSC selectivity). Different ionizable lipid, different PEG, but same lab and methodology lineage.",
+      "key_differences": [
+        "Kim 2024 uses PPZ-A10 (CAS 2941268-67-1, piperazine-based IL), not 7C1 (polymer-lipid)",
+        "Kim 2024 achieves HSC delivery, not just BMEC delivery",
+        "Kim 2024 uses DOTAP as cationic helper lipid (SORT-like), BM1 has no helper lipid",
+        "Kim 2024 screens 128+ LNPs with different component space"
+      ]
+    },
+    "bm1_helper_lipid_vs_kim2024": {
+      "comparison": "BM1 uses NO helper lipid (0% DSPC enriched). Kim 2024 LNPs use DOTAP or other helper lipids. Completely different helper lipid strategy — they share the same lab and screening philosophy but not formulation chemistry."
+    },
+    "radmand_gentry_overlap": {
+      "note": "Radmand 2024 (SORT, 196 LNPs) and Gentry 2025 (glycolipid) are also Dahlman lab. They use 7C1 or other lipids but do NOT report BM data (part of the 540 LNPs without BM data). Sago 2018's BM1 formulation space (7C1/chol/PEG only) does not directly overlap with these later studies which use 4+ component systems with SORT lipids."
+    }
+  },
+
+  "manuscript_value_assessment": {
+    "direct_hsc_ml_training_rows": 0,
+    "bm_endothelial_rows": "1-2 (BM1 + optionally original 7C1 as negative)",
+    "methodological_context_value": "HIGH — establishes the directed evolution / barcoded functional screening paradigm that Kim 2024 builds upon",
+    "7c1_smiles_value": "NULL — 7C1 has no single SMILES (polymer-lipid hybrid), so chemical space mapping with molecular descriptors is not possible for this compound",
+    "manuscript_citation_value": "HIGH — essential for the historical narrative of BM-targeting LNP evolution (Sago 2018 BMECs → Kim 2024 HSCs) in the J Controlled Release submission",
+    "pareto_plot_inclusion": "NO — cannot be placed on HSC Pareto (targets BMECs not HSCs) and no liver data available for BM:liver ratio"
+  }
+}
