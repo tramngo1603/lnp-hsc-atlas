@@ -87,9 +87,9 @@ docs/TESTING_GUIDE.md
 *.db
 data/**/*.pdf
 
-# Node / Explorer (deploy separately)
-explorer/
+# Node
 node_modules/
+explorer/dist/
 
 # Temporary working files
 *.bak
