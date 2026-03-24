@@ -4,6 +4,8 @@ Curated dataset and ML framework comparing every published approach for deliveri
 
 **Key numbers:** 135 records | 37 model features | 0.484 LightGBM balanced accuracy (4-paper LOPOCV) | 5/5 known SARs confirmed by SHAP
 
+**[Interactive Explorer](https://tramngo1603.github.io/lnp-hsc-atlas/)** — browse the Pareto frontier, SHAP feature importance, competitive timeline, and all 21 annotated papers.
+
 ## Key Findings
 
 - **Potency-selectivity tradeoff:** Antibody-conjugated LNPs achieve 12-44x higher potency (EC30 = 0.04-0.12 mg/kg) but deliver 76% of cargo to liver. Untargeted LNPs show better selectivity at higher doses. Confirmed across all four labs.
@@ -16,54 +18,13 @@ Curated dataset and ML framework comparing every published approach for deliveri
 
 | Source | Records | Efficacy Metric | Species |
 |--------|---------|-----------------|---------|
-| Breda et al. (Science, 2023) | 9 | Cre-mediated editing in LSK cells | Mouse |
-| Shi et al. (Nano Letters, 2023) | 21 | DiR uptake / CD45 siRNA knockdown | Mouse |
-| Kim et al. (Nature Biotechnology, 2024) | 80 | Barcode biodistribution / aVHH expression | Mouse, NHP |
-| Lian et al. (Nature Nanotechnology, 2024) | 25 | tdTom reporter / base editing | Mouse |
+| [Breda et al. (Science, 2023)](https://doi.org/10.1126/science.ade6967) | 9 | Cre-mediated editing in LSK cells | Mouse |
+| [Shi et al. (Nano Letters, 2023)](https://doi.org/10.1021/acs.nanolett.3c00304) | 21 | DiR uptake / CD45 siRNA knockdown | Mouse |
+| [Kim et al. (Nature Biotechnology, 2024)](https://doi.org/10.1038/s41587-024-02470-2) | 80 | Barcode biodistribution / aVHH expression | Mouse, NHP |
+| [Lian et al. (Nature Nanotechnology, 2024)](https://doi.org/10.1038/s41565-024-01680-8) | 25 | tdTom reporter / base editing | Mouse |
 | **Total** | **135** | | |
 
 Cross-platform comparators: Editas (58% NHP HSC editing), Tessera (40-60% NHP HBB editing), Ensoma VLP (31% HSC, ~0% liver).
-
-## Repository Structure
-
-```
-hsc-lnp-atlas/
-├── README.md
-├── LICENSE                            # MIT
-├── pyproject.toml
-├── requirements.txt
-│
-├── annotations/                       # Paper annotations (21 papers)
-│   ├── breda_2023.json               # 14 formulations
-│   ├── shi_2023.json                 # 37 formulations
-│   ├── kim_2024.json                 # 80 formulations
-│   ├── lian_2024.json                # 21 formulations (full text + supplement)
-│   ├── paper_annotations.json        # Cross-platform comparators
-│   └── [16 additional paper annotations]
-│
-├── data/
-│   ├── features/
-│   │   └── hsc_features.parquet      # 135 × 37 feature matrix
-│   ├── kim_screen/
-│   │   └── kim_2024_screen_corrected.json  # 128 decoded LNPs
-│   └── models/                       # Analysis outputs
-│       ├── therapeutic_window.json
-│       ├── pareto_validation_only.json
-│       ├── gap_scores.json
-│       ├── headgroup_tropism.json
-│       ├── sar_validation.json
-│       ├── shap_values.parquet
-│       └── cv_results_with_il_descriptors.json
-│
-├── src/
-│   ├── lnp_optimizer/                # ML pipeline, feature engineering, GP scoring
-│   └── shared/                       # Pydantic models and utilities
-│
-├── tests/                            # 295 tests (pytest)
-│
-└── docs/
-    └── EXPLORE.md                    # Exploration notes and paper summaries
-```
 
 ## Installation
 
@@ -81,7 +42,7 @@ pip install -r requirements.txt
 import pandas as pd
 import json
 
-# Load feature matrix (135 formulations × 37 features)
+# Load feature matrix (135 formulations x 37 features)
 df = pd.read_parquet("data/features/hsc_features.parquet")
 
 # Load Kim screen data (128 decoded LNP formulations)
@@ -90,20 +51,6 @@ with open("data/kim_screen/kim_2024_screen_corrected.json") as f:
 
 # Run tests
 # uv run python -m pytest tests/ -v
-```
-
-## Citation
-
-```bibtex
-@article{ngo2026hsc_lnp_atlas,
-  title={The Potency-Selectivity Tradeoff in {HSC}-Targeted Lipid Nanoparticle
-         Delivery: A Cross-Paper Quantitative Analysis with Model-Backed
-         Formulation Recommendations},
-  author={Ngo, Tram},
-  journal={bioRxiv},
-  year={2026},
-  note={Preprint — bioRxiv DOI forthcoming}
-}
 ```
 
 ## License
