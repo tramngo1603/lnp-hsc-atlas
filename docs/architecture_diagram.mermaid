@@ -1,67 +1,56 @@
 graph TB
-    subgraph Dashboard["Streamlit Dashboard"]
-        KB[Knowledge Base Explorer]
-        REC[Recommender UI]
-        CL[Competitive Landscape]
-        DQ[Data Quality]
-        MP[Model Performance]
+    subgraph Explorer["Interactive Explorer — GitHub Pages"]
+        PARETO[Pareto Frontier]
+        SHAP_VIZ[SHAP Feature Importance]
+        TIMELINE[Competitive Timeline]
+        PAPERS[Paper Browser]
     end
 
-    subgraph API["FastAPI Backend"]
-        EP1["POST /recommend"]
-        EP2["GET /papers"]
-        EP3["GET /landscape"]
-        EP4["GET /alerts"]
-    end
-
-    subgraph PubMedAgent["PubMed Agent — Data Engine"]
-        PMC[PubMed Client]
-        PP[Paper Preprocessor]
-        EXT[LLM Extractor]
-        BF[Backfill Orchestrator]
-        AL[Alert System]
-    end
-
-    subgraph LNPOptimizer["LNP Optimizer — Intelligence Layer"]
+    subgraph LNPOptimizer["src/lnp_optimizer — ML Pipeline"]
+        FM[Feature Matrix Builder]
         FE[Feature Engineering]
-        ML[ML Models — XGBoost / LightGBM]
-        RM[Recommender Engine]
+        ML[ML Models — LightGBM / XGBoost]
         SH[SHAP Interpretability]
-        UQ[Uncertainty Quantification]
+        GP[GP Classifier — Gap Scoring]
+        PC[Pareto Analysis]
+        TW[Therapeutic Window — 4PL Fits]
+        TR[Transfer Learning]
+        IL[Lian Integration]
     end
 
-    subgraph Shared["Shared Infrastructure"]
+    subgraph Shared["src/shared — Infrastructure"]
         CFG[Config — .env + Pydantic Settings]
-        DB[(SQLite / Postgres)]
-        LLM[LLM Client — Claude API]
-        SCH[Pydantic Schemas]
+        SCH[Pydantic Models]
     end
 
-    subgraph External["External Services"]
-        PUBMED[(PubMed / PMC OA)]
-        CLAUDE[(Claude API)]
-        CT[(ClinicalTrials.gov)]
+    subgraph Data["data/ — Curated Datasets"]
+        HSC[(hsc_curated.parquet — 156 records)]
+        FEAT[(hsc_features.parquet — 135 × 37)]
+        KIM[(kim_screen — 128 decoded LNPs)]
+        MOD[(models/ — JSON + parquet outputs)]
+        AUD[audit/ — 8 verification scripts]
     end
 
-    Dashboard --> API
-    API --> PubMedAgent
-    API --> LNPOptimizer
+    subgraph Annotations["annotations/ — 21 Papers"]
+        ANN[Ground truth JSONs]
+    end
 
-    PMC -->|fetch papers| PUBMED
-    EXT -->|structured extraction| LLM
-    LLM -->|API calls| CLAUDE
-
-    PMC --> PP
-    PP --> EXT
-    EXT -->|structured data| DB
-    BF --> PMC
-    AL --> PMC
-
-    FE -->|read formulations| DB
-    ML --> FE
-    RM --> ML
+    Explorer -->|reads| MOD
+    FM -->|builds from| HSC
+    FM -->|outputs| FEAT
+    FE --> FM
+    ML -->|trains on| FEAT
     SH --> ML
-    UQ --> ML
+    GP --> ML
+    PC -->|reads| MOD
+    TW -->|reads| ANN
+    IL -->|adds Lian rows| FEAT
+    TR -->|negative result| ML
 
-    PubMedAgent --> Shared
     LNPOptimizer --> Shared
+    ANN -->|curated data| FM
+    KIM -->|screen data| FM
+    ML -->|saves results| MOD
+    GP -->|saves scores| MOD
+    PC -->|saves frontiers| MOD
+    TW -->|saves fits| MOD
