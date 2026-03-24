@@ -1921,14 +1921,14 @@ const ParetoTooltip = ({ active, payload }) => {
   const d = payload[0].payload;
   const c = platformColor(d.platform);
   return (
-    <div style={{ background: "#fff", border: `1.5px solid ${c}`, padding: "12px 16px", maxWidth: 280, fontSize: 12, lineHeight: 1.5 }}>
-      <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 4, color: c }}>{d.name}</div>
+    <div style={{ background: "#fff", border: `1.5px solid ${c}`, padding: "12px 16px", maxWidth: 280, fontSize: 14, lineHeight: 1.5 }}>
+      <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4, color: c }}>{d.name}</div>
       <div style={{ color: "#666", marginBottom: 8 }}>{d.detail}</div>
       <div style={{ display: "flex", gap: 16 }}>
         <span>BM: <strong>{d.bm}%</strong></span>
         <span>Liver: <strong>{d.liver !== null ? `${d.liver}%` : "N/R"}</strong></span>
       </div>
-      <div style={{ color: "#999", marginTop: 4, fontSize: 11 }}>
+      <div style={{ color: "#999", marginTop: 4, fontSize: 13 }}>
         {d.platform} · {d.metric === "editing" ? "Editing" : "Reporter"} · {d.species}{d.n ? ` · n=${d.n}` : ""}
       </div>
     </div>
@@ -1975,7 +1975,7 @@ export default function Explorer() {
   };
 
   const Th = ({col, label, w}) => (
-    <th onClick={() => handleSort(col)} style={{ padding: "6px 8px", fontWeight: 600, fontSize: 10, letterSpacing: 0.5, textTransform: "uppercase", color: "#999", cursor: "pointer", width: w, textAlign: typeof (formulations[0]||{})[col] === "number" ? "right" : "left", userSelect: "none", whiteSpace: "nowrap" }}>
+    <th onClick={() => handleSort(col)} style={{ padding: "6px 8px", fontWeight: 600, fontSize: 12, letterSpacing: 0.5, textTransform: "uppercase", color: "#999", cursor: "pointer", width: w, textAlign: typeof (formulations[0]||{})[col] === "number" ? "right" : "left", userSelect: "none", whiteSpace: "nowrap" }}>
       {label}{sortCol === col ? (sortDir === 1 ? " ▲" : " ▼") : ""}
     </th>
   );
@@ -1984,14 +1984,14 @@ export default function Explorer() {
     <div style={{ background: "#fff", minHeight: "100vh", color: "#000", fontFamily: "'DM Sans', -apple-system, sans-serif" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Space+Mono:wght@400;700&display=swap');*{box-sizing:border-box;margin:0;padding:0;}`}</style>
 
-      <header style={{ padding: "48px 48px 40px", borderBottom: "1px solid #000" }}>
+      <header style={{ padding: "48px 48px 40px", borderBottom: "1px solid #000", background: "#f2f0ec" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "#999", marginBottom: 16, fontFamily: "'DM Mono', monospace" }}>HSC-LNP Atlas</p>
-          <h1 style={{ fontSize: 32, fontWeight: 300, lineHeight: 1.3, letterSpacing: -0.5 }}>
+          <p style={{ fontSize: 13, letterSpacing: 3, textTransform: "uppercase", color: "#999", marginBottom: 16, fontFamily: "'DM Mono', monospace" }}>HSC-LNP Atlas</p>
+          <h1 style={{ fontSize: 34, fontWeight: 300, lineHeight: 1.3, letterSpacing: -0.5 }}>
             Potency–Selectivity Tradeoff in<br /><span style={{ fontWeight: 700 }}>HSC-Targeted LNP Delivery</span>
           </h1>
-          <p style={{ fontSize: 13, color: "#666", marginTop: 16 }}>135 formulations · 4 labs · 21 papers reviewed</p>
-          <p style={{ fontSize: 12, color: "#999", marginTop: 4 }}>Tram Ngo · <a href="https://github.com/tramngo1603/lnp-hsc-atlas" style={{ color: "#000", textDecoration: "underline", textUnderlineOffset: 2 }}>github.com/tramngo1603/lnp-hsc-atlas</a></p>
+          <p style={{ fontSize: 15, color: "#666", marginTop: 16 }}>135 formulations · 4 labs · 21 papers reviewed</p>
+          <p style={{ fontSize: 14, color: "#999", marginTop: 4 }}>Tram Ngo · <a href="https://github.com/tramngo1603/lnp-hsc-atlas" style={{ color: "#000", textDecoration: "underline", textUnderlineOffset: 2 }}>github.com/tramngo1603/lnp-hsc-atlas</a></p>
         </div>
       </header>
 
@@ -2000,7 +2000,7 @@ export default function Explorer() {
           {tabs.map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{
               background: "none", border: "none", cursor: "pointer", whiteSpace: "nowrap",
-              padding: "14px 16px", fontSize: 11, fontWeight: activeTab === tab ? 600 : 400,
+              padding: "14px 16px", fontSize: 13, fontWeight: activeTab === tab ? 600 : 400,
               color: activeTab === tab ? "#000" : "#999",
               borderBottom: activeTab === tab ? "2px solid #000" : "2px solid transparent",
               fontFamily: "'DM Sans', sans-serif", letterSpacing: 0.3,
@@ -2013,27 +2013,27 @@ export default function Explorer() {
 
         {/* PARETO */}
         {activeTab === "Pareto" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>BM Delivery vs Liver Off-Target</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 12, lineHeight: 1.6 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>BM Delivery vs Liver Off-Target</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 12, lineHeight: 1.6 }}>
             <span style={{ color: INK, fontWeight: 600 }}>{"●"} Untargeted LNP</span>{" · "}
             <span style={{ color: RUST, fontWeight: 600 }}>{"▲"} Targeted LNP</span>{" · "}
             <span style={{ color: OCHRE, fontWeight: 600 }}>{"■"} VLP</span>
             {" — Filled = editing. Open = reporter."}
           </p>
-          <p style={{ fontSize: 12, color: "#999", marginBottom: 32 }}>Hover any point for details. Shaded region = ideal zone ({">"}20% BM, {"<"}5% liver).</p>
+          <p style={{ fontSize: 14, color: "#999", marginBottom: 32 }}>Hover any point for details. Shaded region = ideal zone ({">"}20% BM, {"<"}5% liver).</p>
           <div style={{ border: "1px solid #e0e0e0", padding: "24px 12px 12px 4px" }}>
             <ResponsiveContainer width="100%" height={500}>
               <ScatterChart margin={{ top: 20, right: 40, bottom: 32, left: 24 }}>
                 <CartesianGrid stroke="#f0f0f0" />
-                <XAxis type="number" dataKey="liver" domain={[0, 100]} tick={{ fontSize: 11, fill: "#999" }} stroke="#ddd" tickLine={false}>
-                  <Label value="Liver signal (%)" position="bottom" offset={8} style={{ fontSize: 12, fill: "#666" }} />
+                <XAxis type="number" dataKey="liver" domain={[0, 100]} tick={{ fontSize: 13, fill: "#999" }} stroke="#ddd" tickLine={false}>
+                  <Label value="Liver signal (%)" position="bottom" offset={8} style={{ fontSize: 14, fill: "#666" }} />
                 </XAxis>
-                <YAxis type="number" dataKey="bm" domain={[0, 105]} tick={{ fontSize: 11, fill: "#999" }} stroke="#ddd" tickLine={false}>
-                  <Label value="BM / HSC signal (%)" angle={-90} position="insideLeft" offset={8} style={{ fontSize: 12, fill: "#666" }} />
+                <YAxis type="number" dataKey="bm" domain={[0, 105]} tick={{ fontSize: 13, fill: "#999" }} stroke="#ddd" tickLine={false}>
+                  <Label value="BM / HSC signal (%)" angle={-90} position="insideLeft" offset={8} style={{ fontSize: 14, fill: "#666" }} />
                 </YAxis>
                 <ReferenceArea x1={0} x2={5} y1={20} y2={105} fill={`${INK}06`} stroke={`${INK}25`} strokeDasharray="4 4" />
                 <ReferenceLine y={20} stroke="#999" strokeDasharray="6 3" strokeWidth={1}>
-                  <Label value="20% efficacy threshold (Newby 2021)" position="insideTopRight" offset={8} style={{ fontSize: 10, fill: "#999" }} />
+                  <Label value="20% efficacy threshold (Newby 2021)" position="insideTopRight" offset={8} style={{ fontSize: 12, fill: "#999" }} />
                 </ReferenceLine>
                 <Tooltip content={<ParetoTooltip />} />
                 <Scatter data={paretoData.filter(d => d.liver !== null)} shape={<CustomDot />} />
@@ -2047,32 +2047,32 @@ export default function Explorer() {
               { label: "Cargo ≠ delivery", desc: "Tessera 24→40→60%: cargo optimization, then dose escalation", accent: RUST },
             ].map(c => (
               <div key={c.label} style={{ background: "#fff", padding: "20px 24px", borderTop: `3px solid ${c.accent}` }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8, color: c.accent }}>{c.label}</div>
-                <div style={{ fontSize: 12, color: "#666", lineHeight: 1.5 }}>{c.desc}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8, color: c.accent }}>{c.label}</div>
+                <div style={{ fontSize: 14, color: "#666", lineHeight: 1.5 }}>{c.desc}</div>
               </div>
             ))}
           </div>
-          <p style={{ fontSize: 11, color: "#999", marginTop: 16 }}>Tessera liver values estimated from 3:1 BM:liver ratio. Editas 58% NHP omitted — quantitative liver data not disclosed.</p>
+          <p style={{ fontSize: 13, color: "#999", marginTop: 16 }}>Tessera liver values estimated from 3:1 BM:liver ratio. Editas 58% NHP omitted — quantitative liver data not disclosed.</p>
           <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Across all published LNP platforms, higher BM delivery correlates with higher liver exposure. The only data point in the ideal zone ({">"}20% BM, {"<"}5% liver) comes from a VLP, not an LNP. No published LNP formulation has achieved both simultaneously.</p>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Across all published LNP platforms, higher BM delivery correlates with higher liver exposure. The only data point in the ideal zone ({">"}20% BM, {"<"}5% liver) comes from a VLP, not an LNP. No published LNP formulation has achieved both simultaneously.</p>
           </div>
         </div>)}
 
         {/* FORMULATIONS TABLE */}
         {activeTab === "Formulations" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Feature Matrix: 135 Formulations</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>Click any column header to sort. Filter by paper below.</p>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Feature Matrix: 135 Formulations</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>Click any column header to sort. Filter by paper below.</p>
           <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
             {["all","breda '23","shi '23","kim '24","lian '24"].map(p => (
               <button key={p} onClick={() => setFilterPaper(p)} style={{
-                padding: "6px 14px", fontSize: 11, border: filterPaper === p ? "1.5px solid #000" : "1px solid #ddd",
+                padding: "6px 14px", fontSize: 13, border: filterPaper === p ? "1.5px solid #000" : "1px solid #ddd",
                 background: filterPaper === p ? "#000" : "#fff", color: filterPaper === p ? "#fff" : "#666",
                 borderRadius: 2, cursor: "pointer", fontFamily: "'DM Sans', sans-serif",
               }}>{p === "all" ? "All papers" : p}</button>
             ))}
           </div>
           <div style={{ overflowX: "auto", border: "1px solid #e0e0e0" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 11, minWidth: 900 }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, minWidth: 900 }}>
               <thead><tr style={{ borderBottom: "2px solid #000" }}>
                 <Th col="p" label="Paper" w={80} />
                 <Th col="id" label="ID" w={120} />
@@ -2089,18 +2089,18 @@ export default function Explorer() {
               <tbody>
                 {sortedFormulations.map((r, i) => (
                   <tr key={i} style={{ borderBottom: "1px solid #f5f5f5", background: r.cls === "high" ? `${INK}05` : "transparent" }}>
-                    <td style={{ padding: "5px 8px", fontSize: 10, color: "#999" }}>{r.p}</td>
-                    <td style={{ padding: "5px 8px", fontWeight: 500, fontSize: 11 }}>{r.id}</td>
-                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 10 }}>{r.il ?? "—"}</td>
-                    <td style={{ padding: "5px 8px", fontSize: 10 }}>{r.hl}</td>
-                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 10 }}>{r.chol ?? "—"}</td>
-                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 10 }}>{r.peg ?? "—"}</td>
-                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 10, color: r.cv > 0 ? OCHRE : "#ccc" }}>{r.cv || "—"}</td>
-                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 10 }}>{r.dose ?? "—"}</td>
-                    <td style={{ padding: "5px 8px", fontSize: 10, color: r.tgt !== "None" ? RUST : "#ccc" }}>{r.tgt}</td>
-                    <td style={{ padding: "5px 8px", fontSize: 10 }}>{r.mt}</td>
+                    <td style={{ padding: "5px 8px", fontSize: 12, color: "#999" }}>{r.p}</td>
+                    <td style={{ padding: "5px 8px", fontWeight: 500, fontSize: 13 }}>{r.id}</td>
+                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 12 }}>{r.il ?? "—"}</td>
+                    <td style={{ padding: "5px 8px", fontSize: 12 }}>{r.hl}</td>
+                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 12 }}>{r.chol ?? "—"}</td>
+                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 12 }}>{r.peg ?? "—"}</td>
+                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 12, color: r.cv > 0 ? OCHRE : "#ccc" }}>{r.cv || "—"}</td>
+                    <td style={{ padding: "5px 8px", textAlign: "right", fontFamily: NUM, fontSize: 12 }}>{r.dose ?? "—"}</td>
+                    <td style={{ padding: "5px 8px", fontSize: 12, color: r.tgt !== "None" ? RUST : "#ccc" }}>{r.tgt}</td>
+                    <td style={{ padding: "5px 8px", fontSize: 12 }}>{r.mt}</td>
                     <td style={{ padding: "5px 8px" }}>
-                      <span style={{ fontSize: 9, fontWeight: 600, padding: "1px 6px", borderRadius: 2,
+                      <span style={{ fontSize: 11, fontWeight: 600, padding: "1px 6px", borderRadius: 2,
                         background: r.cls === "high" ? `${INK}15` : r.cls === "medium" ? `${OCHRE}15` : "#f5f5f5",
                         color: r.cls === "high" ? INK : r.cls === "medium" ? OCHRE : "#999" }}>{r.cls}</span>
                     </td>
@@ -2109,30 +2109,30 @@ export default function Explorer() {
               </tbody>
             </table>
           </div>
-          <p style={{ fontSize: 11, color: "#999", marginTop: 12 }}>Showing {sortedFormulations.length} of 135 records. HSC Level: high ({">"}30%), medium (10–30%), low ({"<"}10%) BM delivery.</p>
+          <p style={{ fontSize: 13, color: "#999", marginTop: 12 }}>Showing {sortedFormulations.length} of 135 records. HSC Level: high ({">"}30%), medium (10–30%), low ({"<"}10%) BM delivery.</p>
           <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
             {filterPaper === "all" && (
-              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Cholesterol mol% ranges from 38–48% across the dataset. DOTAP-containing formulations are overrepresented in the "high" HSC delivery class. Lian's 25 records are the only ones with a non-zero covalent lipid component, introducing a formulation axis not present in the other three labs.</p>
+              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Cholesterol mol% ranges from 38–48% across the dataset. DOTAP-containing formulations are overrepresented in the "high" HSC delivery class. Lian's 25 records are the only ones with a non-zero covalent lipid component, introducing a formulation axis not present in the other three labs.</p>
             )}
             {filterPaper === "breda '23" && (
-              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Breda 2023 (9 records):</strong> All formulations use the same base LNP (ALC-0315 / DSPC / 38.5% cholesterol) with CD117 antibody conjugation. The variation comes from dose (0.05–0.25 mg/kg) and antibody clone (CD117 vs IgG isotype). Liver editing (~76%) is comparable between CD117 and isotype control — antibody targeting adds BM delivery without subtracting liver.</p>
+              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Breda 2023 (9 records):</strong> All formulations use the same base LNP (ALC-0315 / DSPC / 38.5% cholesterol) with CD117 antibody conjugation. The variation comes from dose (0.05–0.25 mg/kg) and antibody clone (CD117 vs IgG isotype). Liver editing (~76%) is comparable between CD117 and isotype control — antibody targeting adds BM delivery without subtracting liver.</p>
             )}
             {filterPaper === "shi '23" && (
-              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Shi 2023 (21 records):</strong> Systematic optimization of PEG lipid, ionizable lipid, and antibody clone for CD117-targeted delivery. The key finding: switching from C14-PEG to C18-PEG (DSG-PEG2000) improved HSPC uptake ~3×. Multiple ionizable lipids tested (ALC-0315, SM-102, cKK-E12, DLin-MC3-DMA, Lipid 5), demonstrating the system is ionizable-lipid-agnostic.</p>
+              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Shi 2023 (21 records):</strong> Systematic optimization of PEG lipid, ionizable lipid, and antibody clone for CD117-targeted delivery. The key finding: switching from C14-PEG to C18-PEG (DSG-PEG2000) improved HSPC uptake ~3×. Multiple ionizable lipids tested (ALC-0315, SM-102, cKK-E12, DLin-MC3-DMA, Lipid 5), demonstrating the system is ionizable-lipid-agnostic.</p>
             )}
             {filterPaper === "kim '24" && (
-              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Kim 2024 (80 records):</strong> 128-LNP barcoded screen using proprietary PPZ-A10 ionizable lipid (SMILES unknown). 4 helper lipids × 4 IL mol% × 2 PEG types × 4 PEG concentrations. 80 of 128 had classifiable BM delivery. DOTAP + ALC-0159 formulations dominate the "high" class. This is the largest single systematic screen of BM-homing LNPs published to date.</p>
+              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Kim 2024 (80 records):</strong> 128-LNP barcoded screen using proprietary PPZ-A10 ionizable lipid (SMILES unknown). 4 helper lipids × 4 IL mol% × 2 PEG types × 4 PEG concentrations. 80 of 128 had classifiable BM delivery. DOTAP + ALC-0159 formulations dominate the "high" class. This is the largest single systematic screen of BM-homing LNPs published to date.</p>
             )}
             {filterPaper === "lian '24" && (
-              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Lian 2024 (25 records):</strong> 21 covalent lipid/crosslinker formulations at 20 mol% as a 5th component, plus 4 validated leads. All use 5A2-SC8 ionizable lipid (known SMILES — the only bridge to external databases). Cholesterol reduced to 38.1% to accommodate the 5th component. This is the dataset that elevated cholesterol to SHAP rank 3–4.</p>
+              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Lian 2024 (25 records):</strong> 21 covalent lipid/crosslinker formulations at 20 mol% as a 5th component, plus 4 validated leads. All use 5A2-SC8 ionizable lipid (known SMILES — the only bridge to external databases). Cholesterol reduced to 38.1% to accommodate the 5th component. This is the dataset that elevated cholesterol to SHAP rank 3–4.</p>
             )}
           </div>
         </div>)}
 
         {/* PEG ARCHITECTURE */}
         {activeTab === "PEG Architecture" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>PEG Lipid Architecture Determines BM Tropism</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>PEG Lipid Architecture Determines BM Tropism</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
             Within DOTAP formulations from the Kim screen, PEG lipid identity drives a 160-fold divergence in BM delivery.
             Both ALC-0159 and C18PEG2000 have C18 chains — the difference is headgroup and linker architecture.
           </p>
@@ -2140,11 +2140,11 @@ export default function Explorer() {
             <ResponsiveContainer width="100%" height={350}>
               <BarChart data={pegComparison} margin={{ top: 8, right: 30, bottom: 8, left: 20 }}>
                 <CartesianGrid stroke="#f0f0f0" vertical={false} />
-                <XAxis dataKey="peg" tick={{ fontSize: 11, fill: "#333" }} stroke="#ddd" tickLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: "#999" }} stroke="#ddd" tickLine={false}>
-                  <Label value="Mean BM barcode (DOTAP only)" angle={-90} position="insideLeft" offset={5} style={{ fontSize: 12, fill: "#666" }} />
+                <XAxis dataKey="peg" tick={{ fontSize: 13, fill: "#333" }} stroke="#ddd" tickLine={false} />
+                <YAxis tick={{ fontSize: 13, fill: "#999" }} stroke="#ddd" tickLine={false}>
+                  <Label value="Mean BM barcode (DOTAP only)" angle={-90} position="insideLeft" offset={5} style={{ fontSize: 14, fill: "#666" }} />
                 </YAxis>
-                <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ccc", fontSize: 12 }} formatter={(v) => [v.toFixed(1), "Mean BM"]} />
+                <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ccc", fontSize: 14 }} formatter={(v) => [v.toFixed(1), "Mean BM"]} />
                 <Bar dataKey="mean" radius={[2, 2, 0, 0]}>
                   {pegComparison.map((e, i) => <Cell key={i} fill={e.peg === "C18PEG2000" ? "#ddd" : e.peg === "ALC-0159" ? INK : "#999"} />)}
                 </Bar>
@@ -2155,39 +2155,39 @@ export default function Explorer() {
           <div style={{ marginTop: 24, display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 1, background: "#e0e0e0", border: "1px solid #e0e0e0" }}>
             {pegComparison.map(pg => (
               <div key={pg.peg} style={{ background: "#fff", padding: "16px 20px" }}>
-                <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 8, color: pg.peg === "ALC-0159" ? INK : pg.peg === "C18PEG2000" ? "#aaa" : "#666" }}>{pg.peg}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8, color: pg.peg === "ALC-0159" ? INK : pg.peg === "C18PEG2000" ? "#aaa" : "#666" }}>{pg.peg}</div>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {pg.formulations.map(f => (
-                    <span key={f.id} style={{ fontSize: 10, fontFamily: NUM, padding: "2px 6px", background: f.bm > 10 ? `${INK}15` : "#f5f5f5", borderRadius: 2, color: f.bm > 10 ? INK : "#666" }}>
+                    <span key={f.id} style={{ fontSize: 12, fontFamily: NUM, padding: "2px 6px", background: f.bm > 10 ? `${INK}15` : "#f5f5f5", borderRadius: 2, color: f.bm > 10 ? INK : "#666" }}>
                       {f.id}: {f.bm}
                     </span>
                   ))}
                 </div>
-                <div style={{ fontSize: 10, color: "#999", marginTop: 6 }}>n={pg.n}, mean={pg.mean.toFixed(1)}</div>
+                <div style={{ fontSize: 12, color: "#999", marginTop: 6 }}>n={pg.n}, mean={pg.mean.toFixed(1)}</div>
               </div>
             ))}
           </div>
           <div style={{ marginTop: 24, padding: "16px 20px", border: "1px solid #e0e0e0", borderLeft: `3px solid ${INK}` }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}>
               <strong>Key finding:</strong> ALC-0159 (C18 chain) enables 18.8x mean BM delivery vs C18PEG2000 (also C18 chain) at 0.3x.
               The PEG effect is also DOTAP-specific: the helper{"×"}PEG interaction matrix shows C18PEG2000 boosts 18:1 EPC (5.9) but abolishes DOTAP (0.3).
             </p>
           </div>
           <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Two PEG lipids sharing the same C18 chain length produce a 160-fold divergence in BM delivery within the same helper lipid context. The effect is also DOTAP-specific — C18PEG2000 boosts BM delivery for 18:1 EPC (5.9) but abolishes it for DOTAP (0.3). Chain length alone does not explain these patterns.</p>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Two PEG lipids sharing the same C18 chain length produce a 160-fold divergence in BM delivery within the same helper lipid context. The effect is also DOTAP-specific — C18PEG2000 boosts BM delivery for 18:1 EPC (5.9) but abolishes it for DOTAP (0.3). Chain length alone does not explain these patterns.</p>
           </div>
         </div>)}
 
         {/* HEADGROUP */}
         {activeTab === "Headgroup" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Helper Lipid Headgroup Determines Organ Tropism</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Helper Lipid Headgroup Determines Organ Tropism</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
             Kim screen: 66 LNPs with 4 helper lipids (n=16-18 each). DOTAP enables ~13x higher BM delivery than DDAB (p=0.002), despite both being cationic with C18 chains.
           </p>
           <div style={{ border: "1px solid #e0e0e0", padding: "24px" }}>
             {headgroupData.map(h => (
               <div key={h.helper} style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20 }}>
-                <div style={{ width: 80, fontSize: 12, fontWeight: 600, textAlign: "right", color: h.helper === "DOTAP" ? INK : "#666" }}>{h.helper}</div>
+                <div style={{ width: 80, fontSize: 14, fontWeight: 600, textAlign: "right", color: h.helper === "DOTAP" ? INK : "#666" }}>{h.helper}</div>
                 <div style={{ flex: 1, position: "relative", height: 32 }}>
                   {/* Strip plot of individual values */}
                   {h.values.map((v, i) => (
@@ -2201,36 +2201,36 @@ export default function Explorer() {
                   {/* Axis line */}
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "#e0e0e0" }} />
                 </div>
-                <div style={{ width: 100, fontSize: 10, fontFamily: NUM, color: "#999", textAlign: "right" }}>
+                <div style={{ width: 100, fontSize: 12, fontFamily: NUM, color: "#999", textAlign: "right" }}>
                   mean={h.mean.toFixed(1)} max={h.max}
                 </div>
               </div>
             ))}
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 4, marginTop: 8 }}>
               {[0, 10, 20, 30, 40, 50].map(v => (
-                <span key={v} style={{ fontSize: 9, color: "#ccc", width: `${100/6}%`, textAlign: "center" }}>{v}</span>
+                <span key={v} style={{ fontSize: 11, color: "#ccc", width: `${100/6}%`, textAlign: "center" }}>{v}</span>
               ))}
             </div>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, marginTop: 24, background: "#e0e0e0", border: "1px solid #e0e0e0" }}>
             <div style={{ background: "#fff", padding: "16px 20px", borderTop: `3px solid ${INK}` }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: INK, marginBottom: 4 }}>DOTAP {"→"} BM</div>
-              <div style={{ fontSize: 12, color: "#666" }}>Glycerol ester + cationic headgroup. 13.4x fold change over DDAB (Mann-Whitney U=207, p=0.002).</div>
+              <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: INK, marginBottom: 4 }}>DOTAP {"→"} BM</div>
+              <div style={{ fontSize: 14, color: "#666" }}>Glycerol ester + cationic headgroup. 13.4x fold change over DDAB (Mann-Whitney U=207, p=0.002).</div>
             </div>
             <div style={{ background: "#fff", padding: "16px 20px", borderTop: `3px solid ${RUST}` }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: RUST, marginBottom: 4 }}>DDAB {"→"} Lung</div>
-              <div style={{ fontSize: 12, color: "#666" }}>No glycerol, cationic. Independently identified as lung-enriched in Radmand 2023.</div>
+              <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: RUST, marginBottom: 4 }}>DDAB {"→"} Lung</div>
+              <div style={{ fontSize: 14, color: "#666" }}>No glycerol, cationic. Independently identified as lung-enriched in Radmand 2023.</div>
             </div>
           </div>
           <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> DOTAP and DDAB are both cationic with C18 chains, yet diverge 13× in BM delivery (p=0.002). The structural difference is the glycerol ester backbone present in DOTAP but absent in DDAB. Radmand 2023 independently identified DDAB as lung-enriched in a separate screen, consistent with the pattern observed here.</p>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> DOTAP and DDAB are both cationic with C18 chains, yet diverge 13× in BM delivery (p=0.002). The structural difference is the glycerol ester backbone present in DOTAP but absent in DDAB. Radmand 2023 independently identified DDAB as lung-enriched in a separate screen, consistent with the pattern observed here.</p>
           </div>
         </div>)}
 
         {/* DOSE-RESPONSE */}
         {activeTab === "Dose-Response" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Dose-Response: 12{"–"}44{"×"} Potency Gap</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Dose-Response: 12{"–"}44{"×"} Potency Gap</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
             4PL fits where data permits. Antibody-conjugated systems (Shi, Breda) achieve EC30 below patisiran dose (0.3 mg/kg).
             Kim's untargeted LNP67 requires ~40x higher dose. Note: Shi's Y-axis is DiR uptake (%), not editing — different assay from Breda and Kim.
           </p>
@@ -2238,14 +2238,14 @@ export default function Explorer() {
             <ResponsiveContainer width="100%" height={400}>
               <ScatterChart margin={{ top: 16, right: 30, bottom: 24, left: 20 }}>
                 <CartesianGrid stroke="#f0f0f0" />
-                <XAxis type="number" dataKey="d" domain={[0.01, 5]} scale="log" tick={{ fontSize: 11, fill: "#999" }} stroke="#ddd" tickLine={false} ticks={[0.01, 0.1, 1, 5]}>
-                  <Label value="Dose (mg/kg, log scale)" position="bottom" offset={8} style={{ fontSize: 12, fill: "#666" }} />
+                <XAxis type="number" dataKey="d" domain={[0.01, 5]} scale="log" tick={{ fontSize: 13, fill: "#999" }} stroke="#ddd" tickLine={false} ticks={[0.01, 0.1, 1, 5]}>
+                  <Label value="Dose (mg/kg, log scale)" position="bottom" offset={8} style={{ fontSize: 14, fill: "#666" }} />
                 </XAxis>
-                <YAxis type="number" dataKey="r" domain={[0, 100]} tick={{ fontSize: 11, fill: "#999" }} stroke="#ddd" tickLine={false}>
-                  <Label value="HSC efficacy (%)" angle={-90} position="insideLeft" offset={8} style={{ fontSize: 12, fill: "#666" }} />
+                <YAxis type="number" dataKey="r" domain={[0, 100]} tick={{ fontSize: 13, fill: "#999" }} stroke="#ddd" tickLine={false}>
+                  <Label value="HSC efficacy (%)" angle={-90} position="insideLeft" offset={8} style={{ fontSize: 14, fill: "#666" }} />
                 </YAxis>
                 <ReferenceLine x={0.3} stroke="#999" strokeDasharray="4 4" strokeWidth={0.75}>
-                  <Label value="Patisiran dose" position="top" style={{ fontSize: 9, fill: "#999" }} />
+                  <Label value="Patisiran dose" position="top" style={{ fontSize: 11, fill: "#999" }} />
                 </ReferenceLine>
                 <ReferenceLine y={30} stroke="#999" strokeDasharray="4 4" strokeWidth={0.75} />
                 {doseResponse.map((sys, i) => (
@@ -2258,13 +2258,13 @@ export default function Explorer() {
               </ScatterChart>
             </ResponsiveContainer>
           </div>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12, marginTop: 24 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14, marginTop: 24 }}>
             <thead><tr style={{ borderBottom: "2px solid #000" }}>
-              <th style={{ padding: "8px 12px 8px 0", textAlign: "left", fontSize: 11, color: "#999", textTransform: "uppercase", letterSpacing: 0.5 }}>System</th>
-              <th style={{ padding: "8px 12px", textAlign: "right", fontSize: 11, color: "#999" }}>EC30</th>
-              <th style={{ padding: "8px 12px", textAlign: "right", fontSize: 11, color: "#999" }}>EC50</th>
-              <th style={{ padding: "8px 12px", textAlign: "left", fontSize: 11, color: "#999" }}>Species</th>
-              <th style={{ padding: "8px 12px", textAlign: "left", fontSize: 11, color: "#999" }}>Platform</th>
+              <th style={{ padding: "8px 12px 8px 0", textAlign: "left", fontSize: 13, color: "#999", textTransform: "uppercase", letterSpacing: 0.5 }}>System</th>
+              <th style={{ padding: "8px 12px", textAlign: "right", fontSize: 13, color: "#999" }}>EC30</th>
+              <th style={{ padding: "8px 12px", textAlign: "right", fontSize: 13, color: "#999" }}>EC50</th>
+              <th style={{ padding: "8px 12px", textAlign: "left", fontSize: 13, color: "#999" }}>Species</th>
+              <th style={{ padding: "8px 12px", textAlign: "left", fontSize: 13, color: "#999" }}>Platform</th>
             </tr></thead>
             <tbody>
               {doseResponse.map((sys, i) => (
@@ -2273,28 +2273,28 @@ export default function Explorer() {
                   <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: NUM }}>{sys.ec30 ? `${sys.ec30} mg/kg` : "—"}</td>
                   <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: NUM }}>{sys.ec50 ? `${sys.ec50} mg/kg` : "—"}</td>
                   <td style={{ padding: "8px 12px", color: "#666" }}>{sys.species}</td>
-                  <td style={{ padding: "8px 12px" }}><span style={{ color: sys.platform === "tLNP" ? RUST : INK, fontWeight: 600, fontSize: 11 }}>{sys.platform}</span></td>
+                  <td style={{ padding: "8px 12px" }}><span style={{ color: sys.platform === "tLNP" ? RUST : INK, fontWeight: 600, fontSize: 13 }}>{sys.platform}</span></td>
                 </tr>
               ))}
             </tbody>
           </table>
           <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Antibody-conjugated systems (Shi, Breda) achieve EC30 values 12–44× lower than untargeted LNP67. Shi's EC30 of 0.036 mg/kg falls below the patisiran clinical dose (0.3 mg/kg). Lian's single data point at 0.6 mg/kg → 5.2% editing sits well below the fitted curves for the other systems.</p>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Antibody-conjugated systems (Shi, Breda) achieve EC30 values 12–44× lower than untargeted LNP67. Shi's EC30 of 0.036 mg/kg falls below the patisiran clinical dose (0.3 mg/kg). Lian's single data point at 0.6 mg/kg → 5.2% editing sits well below the fitted curves for the other systems.</p>
           </div>
         </div>)}
 
         {/* LIAN HEATMAP */}
         {activeTab === "Lian Heatmap" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Lian 2024: 21 Covalent Lipid Formulations {"×"} 14 BM Cell Types</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 24, lineHeight: 1.6 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Lian 2024: 21 Covalent Lipid Formulations {"×"} 14 BM Cell Types</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 24, lineHeight: 1.6 }}>
             tdTomato expression (%) at 0.6 mg/kg Cre mRNA, n=1 screen. Red border = n=3 validated. Sorted by LT-HSC delivery.
           </p>
           <div style={{ overflowX: "auto", border: "1px solid #e0e0e0" }}>
-            <table style={{ borderCollapse: "collapse", fontSize: 10, minWidth: 800 }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 12, minWidth: 800 }}>
               <thead><tr>
-                <th style={{ padding: "4px 8px", fontSize: 9, color: "#999", textAlign: "left", borderBottom: "2px solid #000", position: "sticky", left: 0, background: "#fff", zIndex: 1 }}>ID</th>
+                <th style={{ padding: "4px 8px", fontSize: 11, color: "#999", textAlign: "left", borderBottom: "2px solid #000", position: "sticky", left: 0, background: "#fff", zIndex: 1 }}>ID</th>
                 {lianCellTypes.map(ct => (
-                  <th key={ct} style={{ padding: "4px 6px", fontSize: 8, color: "#999", textTransform: "uppercase", letterSpacing: 0.3, borderBottom: "2px solid #000", whiteSpace: "nowrap", textAlign: "center", minWidth: 42 }}>
+                  <th key={ct} style={{ padding: "4px 6px", fontSize: 10, color: "#999", textTransform: "uppercase", letterSpacing: 0.3, borderBottom: "2px solid #000", whiteSpace: "nowrap", textAlign: "center", minWidth: 42 }}>
                     {ct.replace("_"," ")}
                   </th>
                 ))}
@@ -2302,16 +2302,16 @@ export default function Explorer() {
               <tbody>
                 {lianFormulations.map((f, fi) => (
                   <tr key={f.id} style={{ borderBottom: "1px solid #f5f5f5" }}>
-                    <td style={{ padding: "4px 8px", fontWeight: 600, fontSize: 11, whiteSpace: "nowrap", position: "sticky", left: 0, background: "#fff", zIndex: 1, borderRight: "1px solid #e0e0e0" }}>
+                    <td style={{ padding: "4px 8px", fontWeight: 600, fontSize: 13, whiteSpace: "nowrap", position: "sticky", left: 0, background: "#fff", zIndex: 1, borderRight: "1px solid #e0e0e0" }}>
                       <span style={{ color: f.validated ? RUST : "#333" }}>{f.id}</span>
-                      {f.validated && <span style={{ fontSize: 8, color: RUST, marginLeft: 4 }}>{"✓"}</span>}
+                      {f.validated && <span style={{ fontSize: 10, color: RUST, marginLeft: 4 }}>{"✓"}</span>}
                     </td>
                     {f.cells.map((v, ci) => {
                       const intensity = Math.min(v / 66, 1);
                       const bg = v > 40 ? `rgba(43,65,98,${0.15 + intensity * 0.55})` : v > 20 ? `rgba(43,65,98,${intensity * 0.3})` : v > 10 ? `rgba(43,65,98,${intensity * 0.15})` : "#fafafa";
                       const fg = v > 35 ? "#fff" : "#333";
                       return (
-                        <td key={ci} style={{ padding: "3px 4px", textAlign: "center", fontFamily: NUM, fontSize: 9, background: bg, color: fg, fontWeight: v > 40 ? 700 : 400 }}>
+                        <td key={ci} style={{ padding: "3px 4px", textAlign: "center", fontFamily: NUM, fontSize: 11, background: bg, color: fg, fontWeight: v > 40 ? 700 : 400 }}>
                           {v}
                         </td>
                       );
@@ -2321,97 +2321,97 @@ export default function Explorer() {
               </tbody>
             </table>
           </div>
-          <div style={{ display: "flex", gap: 24, marginTop: 16, fontSize: 11, color: "#666" }}>
+          <div style={{ display: "flex", gap: 24, marginTop: 16, fontSize: 13, color: "#666" }}>
             <span><span style={{ color: RUST, fontWeight: 600 }}>{"✓"}</span> Validated (n=3): AA11, A8, C6, A13</span>
             <span>Scale: 0% (white) {"→"} 66% (deep blue)</span>
           </div>
           <div style={{ marginTop: 20, padding: "16px 20px", border: "1px solid #e0e0e0", borderLeft: `3px solid ${INK}` }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}>
               MPP and CMP show the highest delivery across most formulations (up to 66%). LT-HSC delivery ranges from 13{"–"}40%.
               B cells and monocytes consistently show lowest uptake ({"<"}10%), suggesting corona-mediated selectivity within BM.
             </p>
           </div>
           <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Delivery varies substantially across cell types — MPP and CMP reach up to 66%, while B cells and monocytes stay below 10% across nearly all formulations. The validated lead AA11 shows 45% LT-HSC delivery by tdTomato reporter but 5.2% by Cas9 editing, a pattern consistent with the reporter-to-editing gap observed in other systems.</p>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Delivery varies substantially across cell types — MPP and CMP reach up to 66%, while B cells and monocytes stay below 10% across nearly all formulations. The validated lead AA11 shows 45% LT-HSC delivery by tdTomato reporter but 5.2% by Cas9 editing, a pattern consistent with the reporter-to-editing gap observed in other systems.</p>
           </div>
         </div>)}
 
         {/* FEATURES */}
         {activeTab === "Features" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Feature Importance</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>LightGBM, leave-one-paper-out CV, balanced accuracy 0.484. All five known SARs recovered in the top 9 features with expected directional effects.</p>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Feature Importance</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>LightGBM, leave-one-paper-out CV, balanced accuracy 0.484. All five known SARs recovered in the top 9 features with expected directional effects.</p>
           <div style={{ border: "1px solid #e0e0e0", padding: "24px 12px 12px 4px" }}>
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={shapData} layout="vertical" margin={{ top: 8, right: 40, bottom: 8, left: 130 }}>
                 <CartesianGrid stroke="#f0f0f0" horizontal={false} />
-                <XAxis type="number" domain={[0, 1.1]} tick={{ fontSize: 11, fill: "#999" }} stroke="#ddd" tickLine={false}>
-                  <Label value="Mean |SHAP value|" position="bottom" offset={0} style={{ fontSize: 12, fill: "#666" }} />
+                <XAxis type="number" domain={[0, 1.1]} tick={{ fontSize: 13, fill: "#999" }} stroke="#ddd" tickLine={false}>
+                  <Label value="Mean |SHAP value|" position="bottom" offset={0} style={{ fontSize: 14, fill: "#666" }} />
                 </XAxis>
-                <YAxis type="category" dataKey="feature" tick={{ fontSize: 12, fill: "#333" }} stroke="none" width={130} />
-                <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ccc", fontSize: 12 }} formatter={(val) => [val.toFixed(3), "|SHAP|"]} />
+                <YAxis type="category" dataKey="feature" tick={{ fontSize: 14, fill: "#333" }} stroke="none" width={130} />
+                <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ccc", fontSize: 14 }} formatter={(val) => [val.toFixed(3), "|SHAP|"]} />
                 <Bar dataKey="shap" radius={[0, 2, 2, 0]}>
                   {shapData.map((entry, i) => (<Cell key={i} fill={entry.type === "known" ? INK : entry.type === "new" ? OCHRE : "#d4d4d4"} />))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <div style={{ display: "flex", gap: 32, marginTop: 24, fontSize: 12, color: "#666" }}>
+          <div style={{ display: "flex", gap: 32, marginTop: 24, fontSize: 14, color: "#666" }}>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}><span style={{ display: "inline-block", width: 12, height: 12, background: INK, borderRadius: 1 }} /> Known SAR</span>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}><span style={{ display: "inline-block", width: 12, height: 12, background: OCHRE, borderRadius: 1 }} /> Newly significant</span>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}><span style={{ display: "inline-block", width: 12, height: 12, background: "#d4d4d4", borderRadius: 1 }} /> Other</span>
           </div>
           <div style={{ marginTop: 32, border: `1px solid ${OCHRE}40`, borderLeft: `3px solid ${OCHRE}`, padding: "20px 24px", background: `${OCHRE}06` }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8, color: OCHRE }}>Why cholesterol ranks 3rd{"–"}4th</div>
-            <p style={{ fontSize: 13, color: "#444", lineHeight: 1.7 }}>Cholesterol mol% varies from 38{"–"}48% across formulations. Formulations at the lower end use a 5th lipid component that proportionally displaces cholesterol, creating variation the model can learn from. Three independent wet-lab studies confirm the mechanism through the cholesterol axis.</p>
+            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8, color: OCHRE }}>Why cholesterol ranks 3rd{"–"}4th</div>
+            <p style={{ fontSize: 15, color: "#444", lineHeight: 1.7 }}>Cholesterol mol% varies from 38{"–"}48% across formulations. Formulations at the lower end use a 5th lipid component that proportionally displaces cholesterol, creating variation the model can learn from. Three independent wet-lab studies confirm the mechanism through the cholesterol axis.</p>
           </div>
           {/* LOPOCV breakdown */}
           <div style={{ marginTop: 32 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Leave-one-paper-out CV</div>
+            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Leave-one-paper-out CV</div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 1, background: "#e0e0e0", border: "1px solid #e0e0e0" }}>
               {lopocvFolds.map(f => (
                 <div key={f.paper} style={{ background: "#fff", padding: "16px 20px", textAlign: "center" }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, marginBottom: 4 }}>{f.paper}</div>
-                  <div style={{ fontSize: 20, fontWeight: 700, fontFamily: NUM, color: f.lgbm >= 0.5 ? INK : "#999" }}>{f.lgbm.toFixed(2)}</div>
-                  <div style={{ fontSize: 10, color: "#999" }}>n={f.n}</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>{f.paper}</div>
+                  <div style={{ fontSize: 22, fontWeight: 700, fontFamily: NUM, color: f.lgbm >= 0.5 ? INK : "#999" }}>{f.lgbm.toFixed(2)}</div>
+                  <div style={{ fontSize: 12, color: "#999" }}>n={f.n}</div>
                 </div>
               ))}
             </div>
-            <p style={{ fontSize: 11, color: "#999", marginTop: 8 }}>LightGBM balanced accuracy per fold. XGBoost collapses on the 9-row Breda fold (BA=0.0).</p>
+            <p style={{ fontSize: 13, color: "#999", marginTop: 8 }}>LightGBM balanced accuracy per fold. XGBoost collapses on the 9-row Breda fold (BA=0.0).</p>
           </div>
           <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> All 5 previously identified structure-activity relationships appear in the top 9 features with expected directional effects. Cholesterol-related features rank 3rd–4th, consistent with independent wet-lab findings from three other groups. Per-fold accuracy ranges from 0.35 (Shi) to 0.59 (Kim), reflecting variation in fold size and class balance. Note: the model predicts the "high" delivery class most accurately; "medium" and "low" classifications are less reliable and should be interpreted with caution.</p>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> All 5 previously identified structure-activity relationships appear in the top 9 features with expected directional effects. Cholesterol-related features rank 3rd–4th, consistent with independent wet-lab findings from three other groups. Per-fold accuracy ranges from 0.35 (Shi) to 0.59 (Kim), reflecting variation in fold size and class balance. Note: the model predicts the "high" delivery class most accurately; "medium" and "low" classifications are less reliable and should be interpreted with caution.</p>
           </div>
         </div>)}
 
         {/* PAPERS */}
         {activeTab === "Papers" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Annotated Papers</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 12, lineHeight: 1.6 }}>21 papers curated for the atlas. Click any title to view the source.</p>
-          <div style={{ display: "flex", gap: 20, marginBottom: 32, fontSize: 12 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Annotated Papers</h2>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 12, lineHeight: 1.6 }}>21 papers curated for the atlas. Click any title to view the source.</p>
+          <div style={{ display: "flex", gap: 20, marginBottom: 32, fontSize: 14 }}>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}><span style={{ width: 10, height: 10, background: INK, display: "inline-block", borderRadius: 1 }} /> ML training</span>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}><span style={{ width: 10, height: 10, background: RUST, display: "inline-block", borderRadius: 1 }} /> Pareto comparator</span>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}><span style={{ width: 10, height: 10, background: OCHRE, display: "inline-block", borderRadius: 1 }} /> Threshold reference</span>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}><span style={{ width: 10, height: 10, background: "#d4d4d4", display: "inline-block", borderRadius: 1 }} /> Landscape</span>
           </div>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
             <thead><tr style={{ borderBottom: "2px solid #000", textAlign: "left" }}>
-              <th style={{ padding: "8px 12px 8px 0", fontWeight: 600, fontSize: 11, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Reference</th>
-              <th style={{ padding: "8px 12px", fontWeight: 600, fontSize: 11, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Journal</th>
-              <th style={{ padding: "8px 12px", fontWeight: 600, fontSize: 11, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Title</th>
-              <th style={{ padding: "8px 12px", fontWeight: 600, fontSize: 11, letterSpacing: 0.5, textTransform: "uppercase", color: "#999", textAlign: "right" }}>LNPs</th>
-              <th style={{ padding: "8px 0 8px 12px", fontWeight: 600, fontSize: 11, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Role</th>
+              <th style={{ padding: "8px 12px 8px 0", fontWeight: 600, fontSize: 13, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Reference</th>
+              <th style={{ padding: "8px 12px", fontWeight: 600, fontSize: 13, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Journal</th>
+              <th style={{ padding: "8px 12px", fontWeight: 600, fontSize: 13, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Title</th>
+              <th style={{ padding: "8px 12px", fontWeight: 600, fontSize: 13, letterSpacing: 0.5, textTransform: "uppercase", color: "#999", textAlign: "right" }}>LNPs</th>
+              <th style={{ padding: "8px 0 8px 12px", fontWeight: 600, fontSize: 13, letterSpacing: 0.5, textTransform: "uppercase", color: "#999" }}>Role</th>
             </tr></thead>
             <tbody>
               {papers.map((p, i) => (
                 <tr key={i} style={{ borderBottom: "1px solid #f0f0f0" }}>
-                  <td style={{ padding: "10px 12px 10px 0", fontWeight: 600, whiteSpace: "nowrap", fontSize: 12 }}>{p.id}</td>
+                  <td style={{ padding: "10px 12px 10px 0", fontWeight: 600, whiteSpace: "nowrap", fontSize: 14 }}>{p.id}</td>
                   <td style={{ padding: "10px 12px", color: "#666", whiteSpace: "nowrap" }}>{p.journal}</td>
                   <td style={{ padding: "10px 12px", lineHeight: 1.4 }}>
                     {p.url ? (<a href={p.url} target="_blank" rel="noopener noreferrer" style={{ color: "#333", textDecoration: "underline", textUnderlineOffset: 2, textDecorationColor: "#ccc" }}>{p.title}</a>) : (<span style={{ color: "#666" }}>{p.title}</span>)}
                   </td>
                   <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: NUM, color: p.lnps ? "#000" : "#ccc" }}>{p.lnps || "—"}</td>
                   <td style={{ padding: "10px 0 10px 12px" }}>
-                    <span style={{ display: "inline-block", fontSize: 10, fontWeight: 600, letterSpacing: 0.5, padding: "2px 8px", borderRadius: 2,
+                    <span style={{ display: "inline-block", fontSize: 12, fontWeight: 600, letterSpacing: 0.5, padding: "2px 8px", borderRadius: 2,
                       background: `${roleColor(p.role)}10`, color: roleColor(p.role), border: `1px solid ${roleColor(p.role)}30` }}>{p.role}</span>
                   </td>
                 </tr>
@@ -2422,14 +2422,14 @@ export default function Explorer() {
 
         {/* FINDINGS */}
         {activeTab === "Findings" && (<div>
-          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 32 }}>Key Findings</h2>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 32 }}>Key Findings</h2>
           {findings.map((f, i) => (
             <div key={i} style={{ marginBottom: 32, paddingBottom: 32, borderBottom: i < findings.length - 1 ? "1px solid #f0f0f0" : "none" }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 8 }}>
-                <span style={{ fontSize: 13, fontFamily: NUM, fontWeight: 700, color: "#000", minWidth: 24 }}>{String(i + 1).padStart(2, "0")}</span>
-                <h3 style={{ fontSize: 15, fontWeight: 600 }}>{f.title}</h3>
+                <span style={{ fontSize: 15, fontFamily: NUM, fontWeight: 700, color: "#000", minWidth: 24 }}>{String(i + 1).padStart(2, "0")}</span>
+                <h3 style={{ fontSize: 17, fontWeight: 600 }}>{f.title}</h3>
               </div>
-              <p style={{ fontSize: 13, color: "#555", lineHeight: 1.7, marginLeft: 36 }}>{f.text}</p>
+              <p style={{ fontSize: 15, color: "#555", lineHeight: 1.7, marginLeft: 36 }}>{f.text}</p>
             </div>
           ))}
           <div style={{ marginTop: 48, padding: "32px 0", borderTop: "1px solid #000", display: "flex", justifyContent: "space-between" }}>
@@ -2440,25 +2440,25 @@ export default function Explorer() {
               { n: "37", label: "Model features" },
             ].map(s => (
               <div key={s.label} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 28, fontWeight: 700, fontFamily: NUM, letterSpacing: -1 }}>{s.n}</div>
-                <div style={{ fontSize: 11, color: "#999", marginTop: 4 }}>{s.label}</div>
+                <div style={{ fontSize: 30, fontWeight: 700, fontFamily: NUM, letterSpacing: -1 }}>{s.n}</div>
+                <div style={{ fontSize: 13, color: "#999", marginTop: 4 }}>{s.label}</div>
               </div>
             ))}
           </div>
           <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What's next:</strong> The atlas updates as new data becomes available. Archived BM measurements from existing screens would be the single highest-impact addition — several hundred LNPs have been screened without BM in the organ panel. All code, data, and models are open source at the GitHub link above.</p>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>What's next:</strong> The atlas updates as new data becomes available. Archived BM measurements from existing screens would be the single highest-impact addition — several hundred LNPs have been screened without BM in the organ panel. All code, data, and models are open source at the GitHub link above.</p>
             <div style={{ marginTop: 16, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 1, background: "#e0e0e0", border: "1px solid #e0e0e0" }}>
               <div style={{ background: "#fff", padding: "16px 20px" }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: INK }}>In progress</div>
-                <div style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>Automated update pipeline: new paper annotation → model retrain → figures → explorer update in one command</div>
+                <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: INK }}>In progress</div>
+                <div style={{ fontSize: 13, color: "#666", lineHeight: 1.5 }}>Automated update pipeline: new paper annotation → model retrain → figures → explorer update in one command</div>
               </div>
               <div style={{ background: "#fff", padding: "16px 20px" }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: OCHRE }}>Coming soon</div>
-                <div style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>Additional paper annotations (targeting 200+ rows) and nearest-neighbor lookup tool for comparing candidate formulations against the dataset</div>
+                <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: OCHRE }}>Coming soon</div>
+                <div style={{ fontSize: 13, color: "#666", lineHeight: 1.5 }}>Additional paper annotations (targeting 200+ rows) and nearest-neighbor lookup tool for comparing candidate formulations against the dataset</div>
               </div>
               <div style={{ background: "#fff", padding: "16px 20px" }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: "#999" }}>Investigating</div>
-                <div style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>Whether molecular descriptors and external LNP datasets can improve the model beyond feature-importance analysis — depends on resolving ionizable lipid structures</div>
+                <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: "#999" }}>Investigating</div>
+                <div style={{ fontSize: 13, color: "#666", lineHeight: 1.5 }}>Whether molecular descriptors and external LNP datasets can improve the model beyond feature-importance analysis — depends on resolving ionizable lipid structures</div>
               </div>
             </div>
           </div>
@@ -2467,8 +2467,8 @@ export default function Explorer() {
 
       <footer style={{ borderTop: "1px solid #e0e0e0", padding: "24px 48px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between" }}>
-          <span style={{ fontSize: 11, color: "#999" }}>HSC-LNP Atlas {"·"} Open source</span>
-          <a href="https://github.com/tramngo1603/lnp-hsc-atlas" style={{ fontSize: 11, color: "#000", textDecoration: "none", fontFamily: "'DM Mono', monospace" }}>GitHub {"→"}</a>
+          <span style={{ fontSize: 13, color: "#999" }}>HSC-LNP Atlas {"·"} Open source</span>
+          <a href="https://github.com/tramngo1603/lnp-hsc-atlas" style={{ fontSize: 13, color: "#000", textDecoration: "none", fontFamily: "'DM Mono', monospace" }}>GitHub {"→"}</a>
         </div>
       </footer>
     </div>
