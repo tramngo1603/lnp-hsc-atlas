@@ -53,6 +53,34 @@ with open("data/kim_screen/kim_2024_screen_corrected.json") as f:
 # uv run python -m pytest tests/ -v
 ```
 
+## Roadmap
+
+The atlas is an active project, not a static dataset.
+
+**Now**
+- 135 formulation records from 4 labs (Breda, Shi, Kim, Lian)
+- 21 papers reviewed and annotated
+- LightGBM model recovering all 5 known SARs via SHAP (balanced accuracy 0.484, 4-paper LOPOCV)
+- Interactive explorer with 9 analysis tabs
+
+**In progress**
+- Automated update pipeline: new annotation → model retrain → figures → explorer update in one command
+- Additional paper annotations targeting 200+ rows (Sago 2018, Lian bioluminescence screen)
+- Ionizable lipid structure resolution to expand molecular descriptor coverage
+
+**Investigating**
+- Whether molecular descriptors and external LNP databases (LNPDB, LANCE, AGILE) can improve the model beyond feature-importance analysis
+- Nearest-neighbor lookup tool for comparing candidate formulations against the dataset
+
+**Contributing**
+
+The atlas grows with every new publication. If your lab has published or unpublished HSC delivery data, contributions are welcome:
+- Submit an annotation JSON via pull request (see `annotations/` for schema examples)
+- Report data corrections via GitHub Issues
+- Suggest papers for annotation
+
+All contributors are acknowledged in the explorer and in any resulting publications.
+
 ## License
 
 [MIT](LICENSE)
