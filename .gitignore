@@ -111,3 +111,4 @@ data/models/shap_values.csv
 tmp/
 tmp.md
 .tmux.conf
+docs/architecture_diagram.mermaid
