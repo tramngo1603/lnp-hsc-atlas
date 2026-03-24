@@ -1,6 +1,6 @@
 # HSC-LNP Atlas
 
-Curated dataset and ML framework comparing every published approach for delivering gene editing cargo to hematopoietic stem cells (HSCs) in bone marrow. 135 formulation records from 4 independent laboratories, 21 papers reviewed.
+Curated dataset and ML framework comparing published approach for delivering gene editing cargo to hematopoietic stem cells (HSCs) in bone marrow. 135 formulation records from 4 independent laboratories, 21 papers reviewed.
 
 **Key numbers:** 135 records | 37 model features | 0.484 LightGBM balanced accuracy (4-paper LOPOCV) | 5/5 known SARs confirmed by SHAP
 
