@@ -63,7 +63,7 @@ const bmGapData = [
 ];
 
 const findings = [
-  { title: "The potency-selectivity tradeoff", text: "Antibody-conjugated LNPs achieve 12–44× higher potency but deliver 76% of cargo to liver. Untargeted LNPs show better selectivity at lower absolute potency. Confirmed across all four labs in the dataset." },
+  { title: "The potency-selectivity tradeoff", text: "Antibody-conjugated LNPs achieve 12–44× higher potency but deliver 76% of cargo to liver. Untargeted LNPs show better selectivity at lower absolute potency. Observed across all four labs in the dataset." },
   { title: "Cholesterol as a liver predictor", text: "Cholesterol mol% varies from 38–48% across formulations in the dataset. The model identifies this variation as the 3rd–4th most important feature driving organ tropism. Three independent wet-lab studies confirm the mechanism: glycolipid substitution (Gentry 2025), cholesterol removal (Su 2024), and bile acid replacement (Patel 2024) each de-target liver through the cholesterol axis." },
   { title: "PEG architecture, not chain length", text: "C18PEG2000 abolishes BM delivery (0.3 barcode counts). ALC-0159, also C18 chain but different architecture, enables the highest BM delivery in the screen (barcode 48). A 160-fold divergence formally disproving the chain-length hypothesis." },
   { title: "Cargo optimization matters equally", text: "Tessera’s NHP HBB editing improved 24% → 40% through Gene Writer optimization alone — same LNP. A second dose pushed to 60%. The therapeutic outcome is the product of delivery efficiency × editing efficiency." },
@@ -1875,7 +1875,7 @@ const headgroupData = [
 const headgroupStats = { u: 207, p: 0.0024, fold: 13.4 };
 
 const doseResponse = [
-  { system: "Shi CD117/C18", points: [{d:0.3,r:75},{d:1.0,r:90}], ec30: 0.036, ec50: 0.09, species: "Mouse", platform: "tLNP" },
+  { system: "Shi CD117/C18 (uptake)", points: [{d:0.3,r:75},{d:1.0,r:90}], ec30: 0.036, ec50: 0.09, species: "Mouse", platform: "tLNP", note: "DiR uptake %, not editing" },
   { system: "Breda CD117", points: [{d:0.05,r:10},{d:0.25,r:55}], ec30: 0.124, ec50: 0.218, species: "Mouse", platform: "tLNP" },
   { system: "Kim LNP67 (mouse)", points: [{d:0.5,r:12},{d:1.0,r:23},{d:2.0,r:35}], ec30: 1.548, ec50: 3.77, species: "Mouse", platform: "LNP" },
   { system: "Kim LNP67 (human ex vivo)", points: [{d:0.25,r:15},{d:0.5,r:22},{d:1.0,r:25},{d:2.0,r:38},{d:4.0,r:72}], ec30: 1.548, ec50: 3.77, species: "Human", platform: "LNP" },
@@ -2053,6 +2053,9 @@ export default function Explorer() {
             ))}
           </div>
           <p style={{ fontSize: 11, color: "#999", marginTop: 16 }}>Tessera liver values estimated from 3:1 BM:liver ratio. Editas 58% NHP omitted — quantitative liver data not disclosed.</p>
+          <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Across all published LNP platforms, higher BM delivery correlates with higher liver exposure. The only data point in the ideal zone ({">"}20% BM, {"<"}5% liver) comes from a VLP, not an LNP. No published LNP formulation has achieved both simultaneously.</p>
+          </div>
         </div>)}
 
         {/* FORMULATIONS TABLE */}
@@ -2107,6 +2110,23 @@ export default function Explorer() {
             </table>
           </div>
           <p style={{ fontSize: 11, color: "#999", marginTop: 12 }}>Showing {sortedFormulations.length} of 135 records. HSC Level: high ({">"}30%), medium (10–30%), low ({"<"}10%) BM delivery.</p>
+          <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            {filterPaper === "all" && (
+              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Cholesterol mol% ranges from 38–48% across the dataset. DOTAP-containing formulations are overrepresented in the "high" HSC delivery class. Lian's 25 records are the only ones with a non-zero covalent lipid component, introducing a formulation axis not present in the other three labs.</p>
+            )}
+            {filterPaper === "breda '23" && (
+              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Breda 2023 (9 records):</strong> All formulations use the same base LNP (ALC-0315 / DSPC / 38.5% cholesterol) with CD117 antibody conjugation. The variation comes from dose (0.05–0.25 mg/kg) and antibody clone (CD117 vs IgG isotype). Liver editing (~76%) is comparable between CD117 and isotype control — antibody targeting adds BM delivery without subtracting liver.</p>
+            )}
+            {filterPaper === "shi '23" && (
+              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Shi 2023 (21 records):</strong> Systematic optimization of PEG lipid, ionizable lipid, and antibody clone for CD117-targeted delivery. The key finding: switching from C14-PEG to C18-PEG (DSG-PEG2000) improved HSPC uptake ~3×. Multiple ionizable lipids tested (ALC-0315, SM-102, cKK-E12, DLin-MC3-DMA, Lipid 5), demonstrating the system is ionizable-lipid-agnostic.</p>
+            )}
+            {filterPaper === "kim '24" && (
+              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Kim 2024 (80 records):</strong> 128-LNP barcoded screen using proprietary PPZ-A10 ionizable lipid (SMILES unknown). 4 helper lipids × 4 IL mol% × 2 PEG types × 4 PEG concentrations. 80 of 128 had classifiable BM delivery. DOTAP + ALC-0159 formulations dominate the "high" class. This is the largest single systematic screen of BM-homing LNPs published to date.</p>
+            )}
+            {filterPaper === "lian '24" && (
+              <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>Lian 2024 (25 records):</strong> 21 covalent lipid/crosslinker formulations at 20 mol% as a 5th component, plus 4 validated leads. All use 5A2-SC8 ionizable lipid (known SMILES — the only bridge to external databases). Cholesterol reduced to 38.1% to accommodate the 5th component. This is the dataset that elevated cholesterol to SHAP rank 3–4.</p>
+            )}
+          </div>
         </div>)}
 
         {/* PEG ARCHITECTURE */}
@@ -2153,6 +2173,9 @@ export default function Explorer() {
               The PEG effect is also DOTAP-specific: the helper{"×"}PEG interaction matrix shows C18PEG2000 boosts 18:1 EPC (5.9) but abolishes DOTAP (0.3).
             </p>
           </div>
+          <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Two PEG lipids sharing the same C18 chain length produce a 160-fold divergence in BM delivery within the same helper lipid context. The effect is also DOTAP-specific — C18PEG2000 boosts BM delivery for 18:1 EPC (5.9) but abolishes it for DOTAP (0.3). Chain length alone does not explain these patterns.</p>
+          </div>
         </div>)}
 
         {/* HEADGROUP */}
@@ -2196,8 +2219,11 @@ export default function Explorer() {
             </div>
             <div style={{ background: "#fff", padding: "16px 20px", borderTop: `3px solid ${RUST}` }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: RUST, marginBottom: 4 }}>DDAB {"→"} Lung</div>
-              <div style={{ fontSize: 12, color: "#666" }}>No glycerol, cationic. Confirmed as lung-enriched by Radmand 2023 cross-validation.</div>
+              <div style={{ fontSize: 12, color: "#666" }}>No glycerol, cationic. Independently identified as lung-enriched in Radmand 2023.</div>
             </div>
+          </div>
+          <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> DOTAP and DDAB are both cationic with C18 chains, yet diverge 13× in BM delivery (p=0.002). The structural difference is the glycerol ester backbone present in DOTAP but absent in DDAB. Radmand 2023 independently identified DDAB as lung-enriched in a separate screen, consistent with the pattern observed here.</p>
           </div>
         </div>)}
 
@@ -2206,7 +2232,7 @@ export default function Explorer() {
           <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Dose-Response: 12{"–"}44{"×"} Potency Gap</h2>
           <p style={{ fontSize: 13, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
             4PL fits where data permits. Antibody-conjugated systems (Shi, Breda) achieve EC30 below patisiran dose (0.3 mg/kg).
-            Kim's untargeted LNP67 requires ~40x higher dose.
+            Kim's untargeted LNP67 requires ~40x higher dose. Note: Shi's Y-axis is DiR uptake (%), not editing — different assay from Breda and Kim.
           </p>
           <div style={{ border: "1px solid #e0e0e0", padding: "24px 12px 12px 4px" }}>
             <ResponsiveContainer width="100%" height={400}>
@@ -2252,6 +2278,9 @@ export default function Explorer() {
               ))}
             </tbody>
           </table>
+          <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Antibody-conjugated systems (Shi, Breda) achieve EC30 values 12–44× lower than untargeted LNP67. Shi's EC30 of 0.036 mg/kg falls below the patisiran clinical dose (0.3 mg/kg). Lian's single data point at 0.6 mg/kg → 5.2% editing sits well below the fitted curves for the other systems.</p>
+          </div>
         </div>)}
 
         {/* LIAN HEATMAP */}
@@ -2302,12 +2331,15 @@ export default function Explorer() {
               B cells and monocytes consistently show lowest uptake ({"<"}10%), suggesting corona-mediated selectivity within BM.
             </p>
           </div>
+          <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> Delivery varies substantially across cell types — MPP and CMP reach up to 66%, while B cells and monocytes stay below 10% across nearly all formulations. The validated lead AA11 shows 45% LT-HSC delivery by tdTomato reporter but 5.2% by Cas9 editing, a pattern consistent with the reporter-to-editing gap observed in other systems.</p>
+          </div>
         </div>)}
 
         {/* FEATURES */}
         {activeTab === "Features" && (<div>
           <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Feature Importance</h2>
-          <p style={{ fontSize: 13, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>LightGBM, leave-one-paper-out CV, balanced accuracy 0.484. All five known SARs confirmed in the top 9.</p>
+          <p style={{ fontSize: 13, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>LightGBM, leave-one-paper-out CV, balanced accuracy 0.484. All five known SARs recovered in the top 9 features with expected directional effects.</p>
           <div style={{ border: "1px solid #e0e0e0", padding: "24px 12px 12px 4px" }}>
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={shapData} layout="vertical" margin={{ top: 8, right: 40, bottom: 8, left: 130 }}>
@@ -2345,6 +2377,9 @@ export default function Explorer() {
               ))}
             </div>
             <p style={{ fontSize: 11, color: "#999", marginTop: 8 }}>LightGBM balanced accuracy per fold. XGBoost collapses on the 9-row Breda fold (BA=0.0).</p>
+          </div>
+          <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What the data shows:</strong> All 5 previously identified structure-activity relationships appear in the top 9 features with expected directional effects. Cholesterol-related features rank 3rd–4th, consistent with independent wet-lab findings from three other groups. Per-fold accuracy ranges from 0.35 (Shi) to 0.59 (Kim), reflecting variation in fold size and class balance. Note: the model predicts the "high" delivery class most accurately; "medium" and "low" classifications are less reliable and should be interpreted with caution.</p>
           </div>
         </div>)}
 
@@ -2409,6 +2444,23 @@ export default function Explorer() {
                 <div style={{ fontSize: 11, color: "#999", marginTop: 4 }}>{s.label}</div>
               </div>
             ))}
+          </div>
+          <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
+            <p style={{ fontSize: 12, color: "#444", lineHeight: 1.6 }}><strong>What's next:</strong> The atlas updates as new data becomes available. Archived BM measurements from existing screens would be the single highest-impact addition — several hundred LNPs have been screened without BM in the organ panel. All code, data, and models are open source at the GitHub link above.</p>
+            <div style={{ marginTop: 16, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 1, background: "#e0e0e0", border: "1px solid #e0e0e0" }}>
+              <div style={{ background: "#fff", padding: "16px 20px" }}>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: INK }}>In progress</div>
+                <div style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>Automated update pipeline: new paper annotation → model retrain → figures → explorer update in one command</div>
+              </div>
+              <div style={{ background: "#fff", padding: "16px 20px" }}>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: OCHRE }}>Coming soon</div>
+                <div style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>Additional paper annotations (targeting 200+ rows) and nearest-neighbor lookup tool for comparing candidate formulations against the dataset</div>
+              </div>
+              <div style={{ background: "#fff", padding: "16px 20px" }}>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: "#999" }}>Investigating</div>
+                <div style={{ fontSize: 11, color: "#666", lineHeight: 1.5 }}>Whether molecular descriptors and external LNP datasets can improve the model beyond feature-importance analysis — depends on resolving ionizable lipid structures</div>
+              </div>
+            </div>
           </div>
         </div>)}
       </main>
