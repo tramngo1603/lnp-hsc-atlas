@@ -46,6 +46,9 @@ app/
 # External datasets (transfer learning — negative result, not needed)
 data/external/
 
+# LLM extractions (pubmed_agent pipeline output — not part of published analysis)
+data/extractions/
+
 # Exploration scripts + generated figures (regenerable)
 data/explore/
 
