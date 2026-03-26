@@ -8,10 +8,10 @@
     "n_papers": 4
   },
   "lightgbm": {
-    "balanced_accuracy_mean": 0.47597424934886234,
-    "balanced_accuracy_std": 0.07594105289413744,
+    "balanced_accuracy_mean": 0.4678817140891445,
+    "balanced_accuracy_std": 0.07011633334635826,
     "baseline": 0.467,
-    "delta": 0.008974249348862318,
+    "delta": 0.0008817140891444475,
     "n_rows": 135,
     "n_papers": 4
   }

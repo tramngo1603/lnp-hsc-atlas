@@ -6,34 +6,187 @@ const RUST = "#A63D40";
 const OCHRE = "#B08836";
 const platformColor = (p) => p === "VLP" ? OCHRE : p === "tLNP" ? RUST : INK;
 
+// DATA:paretoData
 const paretoData = [
-  { name: "Breda CD117", bm: 55, liver: 76, metric: "editing", platform: "tLNP", species: "Mouse", detail: "Cre editing in LSK, CD117 antibody, 0.25 mg/kg", n: 3 },
-  { name: "Kim LNP67", bm: 20.9, liver: 20.1, metric: "reporter", platform: "LNP", species: "Mouse", detail: "aVHH protein expression, 0.5 mg/kg", n: 3 },
-  { name: "Kim LNP108", bm: 8.8, liver: 1.6, metric: "reporter", platform: "LNP", species: "Mouse", detail: "Best selectivity in Kim screen (BM:liver = 5.5)", n: 3 },
-  { name: "Lian AA11 Cas9", bm: 5.2, liver: 7.5, metric: "editing", platform: "LNP", species: "Mouse", detail: "BCL11A editing, covalent lipid approach, Townes mice", n: 3 },
-  { name: "Lian AA11 ABE", bm: 2.4, liver: 3.0, metric: "editing", platform: "LNP", species: "Mouse", detail: "Sickle to Makassar base editing, Townes mice", n: 3 },
-  { name: "Ensoma VLP", bm: 31, liver: 0.5, metric: "editing", platform: "VLP", species: "Hum. mouse", detail: "B2M editing, 8 wk, near-zero liver transduction", n: 3 },
-  { name: "Tessera 24%", bm: 24, liver: 8, metric: "editing", platform: "tLNP", species: "NHP", detail: "HBB Makassar, single dose, liver estimated", n: null },
-  { name: "Tessera 40%", bm: 40, liver: 13.3, metric: "editing", platform: "tLNP", species: "NHP", detail: "Optimized Gene Writer cargo, same LNP platform", n: null },
-  { name: "Tessera 60%", bm: 60, liver: 20, metric: "editing", platform: "tLNP", species: "NHP", detail: "Two doses, liver estimated from 3:1 BM:liver ratio", n: null },
-  { name: "Kim LNP95", bm: 48, liver: 18.8, metric: "reporter", platform: "LNP", species: "Mouse", detail: "ALC-0159 PEG lipid, highest barcode in screen (30% DOTAP)", n: 1 },
-  { name: "Breda IgG control", bm: 19, liver: 78, metric: "editing", platform: "tLNP", species: "Mouse", detail: "Isotype control, liver comparable to CD117 LNP", n: 3 },
-  { name: "Kim E2 avg", bm: 5.2, liver: 44, metric: "reporter", platform: "LNP", species: "Mouse", detail: "4-LNP validation average, 0.5 mg/kg", n: 4 },
+  {
+    "name": "Breda CD117",
+    "bm": 55,
+    "liver": 76,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "Mouse",
+    "detail": "Cre editing in LSK, CD117 antibody, 0.25 mg/kg",
+    "n": 3
+  },
+  {
+    "name": "Kim LNP67",
+    "bm": 20.9,
+    "liver": 20.1,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "aVHH protein expression, 0.5 mg/kg",
+    "n": 3
+  },
+  {
+    "name": "Kim LNP108",
+    "bm": 8.8,
+    "liver": 1.6,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "Best selectivity in Kim screen (BM:liver = 5.5)",
+    "n": 3
+  },
+  {
+    "name": "Lian AA11 Cas9",
+    "bm": 5.2,
+    "liver": 7.5,
+    "metric": "editing",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "BCL11A editing, covalent lipid approach, Townes mice",
+    "n": 3
+  },
+  {
+    "name": "Lian AA11 ABE",
+    "bm": 2.4,
+    "liver": 3.0,
+    "metric": "editing",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "Sickle to Makassar base editing, Townes mice",
+    "n": 3
+  },
+  {
+    "name": "Ensoma VLP",
+    "bm": 31,
+    "liver": 0.5,
+    "metric": "editing",
+    "platform": "VLP",
+    "species": "Hum. mouse",
+    "detail": "B2M editing, 8 wk, near-zero liver transduction",
+    "n": 3
+  },
+  {
+    "name": "Tessera 24%",
+    "bm": 24,
+    "liver": 8,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "NHP",
+    "detail": "HBB Makassar, single dose, liver estimated",
+    "n": null
+  },
+  {
+    "name": "Tessera 40%",
+    "bm": 40,
+    "liver": 13.3,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "NHP",
+    "detail": "Optimized Gene Writer cargo, same LNP platform",
+    "n": null
+  },
+  {
+    "name": "Tessera 60%",
+    "bm": 60,
+    "liver": 20,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "NHP",
+    "detail": "Two doses, liver estimated from 3:1 BM:liver ratio",
+    "n": null
+  },
+  {
+    "name": "Kim LNP95",
+    "bm": 48,
+    "liver": 18.8,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "ALC-0159 PEG lipid, highest barcode in screen (30% DOTAP)",
+    "n": 1
+  },
+  {
+    "name": "Breda IgG control",
+    "bm": 19,
+    "liver": 78,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "Mouse",
+    "detail": "Isotype control, liver comparable to CD117 LNP",
+    "n": 3
+  },
+  {
+    "name": "Kim E2 avg",
+    "bm": 5.2,
+    "liver": 44,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "4-LNP validation average, 0.5 mg/kg",
+    "n": 4
+  }
 ];
+// END:paretoData
 
+// DATA:shapData
 const shapData = [
-  { feature: "Ionizable lipid %", shap: 0.97, type: "known" },
-  { feature: "CD117 targeting", shap: 0.47, type: "known" },
-  { feature: "Chol:helper ratio", shap: 0.42, type: "new" },
-  { feature: "Cholesterol %", shap: 0.34, type: "new" },
-  { feature: "Dose (mg/kg)", shap: 0.27, type: "known" },
-  { feature: "Editing assay", shap: 0.25, type: "other" },
-  { feature: "IL molecular weight", shap: 0.24, type: "new" },
-  { feature: "DOTAP helper", shap: 0.23, type: "known" },
-  { feature: "Helper lipid %", shap: 0.21, type: "known" },
-  { feature: "Cationic helper", shap: 0.18, type: "other" },
+  {
+    "feature": "Ionizable lipid %",
+    "shap": 0.97,
+    "type": "known"
+  },
+  {
+    "feature": "CD117 targeting",
+    "shap": 0.46,
+    "type": "known"
+  },
+  {
+    "feature": "Chol:helper ratio",
+    "shap": 0.44,
+    "type": "new"
+  },
+  {
+    "feature": "Cholesterol %",
+    "shap": 0.33,
+    "type": "new"
+  },
+  {
+    "feature": "Dose (mg/kg)",
+    "shap": 0.28,
+    "type": "known"
+  },
+  {
+    "feature": "IL molecular weight",
+    "shap": 0.25,
+    "type": "new"
+  },
+  {
+    "feature": "Editing assay",
+    "shap": 0.25,
+    "type": "other"
+  },
+  {
+    "feature": "DOTAP helper",
+    "shap": 0.23,
+    "type": "known"
+  },
+  {
+    "feature": "Helper lipid %",
+    "shap": 0.21,
+    "type": "known"
+  },
+  {
+    "feature": "Cationic helper",
+    "shap": 0.17,
+    "type": "other"
+  }
 ];
+// END:shapData
 
+// DATA:timelineData
 const timelineData = [
   { year: "2018", label: "Sago BM1", detail: "First BM-targeting LNP, endothelial cells not HSCs", platform: "LNP" },
   { year: "2020", label: "SORT", detail: "Charge-dependent organ targeting framework established", platform: "LNP" },
@@ -47,21 +200,69 @@ const timelineData = [
   { year: "2025", label: "Tessera", detail: "40% HBB (1-dose) / 60% (2-dose) NHP, 15-month durability", platform: "tLNP" },
   { year: "2025", label: "Kim ASH", detail: "37% human HSPC delivery in humanized mice at 2 mg/kg", platform: "LNP" },
 ];
+// END:timelineData
 
+// DATA:bmGapData
 const bmGapData = [
-  { study: "Radmand 2024", lnps: 196, measured: false },
-  { study: "Radmand 2023", lnps: 137, measured: false },
-  { study: "Kim 2024", lnps: 128, measured: true },
-  { study: "Gentry 2025", lnps: 109, measured: false },
-  { study: "Sago 2018", lnps: 160, measured: true },
-  { study: "Da Silva Sanchez 2022", lnps: 98, measured: false },
-  { study: "Shi 2023", lnps: 37, measured: true },
-  { study: "Lian 2024", lnps: 21, measured: true },
-  { study: "SORT 2020", lnps: 20, measured: false },
-  { study: "Breda 2023", lnps: 14, measured: true },
-  { study: "Cullis 2025", lnps: 10, measured: true },
+  {
+    "study": "Radmand 2024",
+    "lnps": 196,
+    "measured": false
+  },
+  {
+    "study": "Radmand 2023",
+    "lnps": 137,
+    "measured": false
+  },
+  {
+    "study": "Kim 2024",
+    "lnps": 128,
+    "measured": true
+  },
+  {
+    "study": "Gentry 2025",
+    "lnps": 109,
+    "measured": false
+  },
+  {
+    "study": "Sago 2018",
+    "lnps": 160,
+    "measured": true
+  },
+  {
+    "study": "Da Silva Sanchez 2022",
+    "lnps": 98,
+    "measured": false
+  },
+  {
+    "study": "Shi 2023",
+    "lnps": 37,
+    "measured": true
+  },
+  {
+    "study": "Lian 2024",
+    "lnps": 21,
+    "measured": true
+  },
+  {
+    "study": "SORT 2020",
+    "lnps": 20,
+    "measured": false
+  },
+  {
+    "study": "Breda 2023",
+    "lnps": 14,
+    "measured": true
+  },
+  {
+    "study": "Cullis 2025",
+    "lnps": 10,
+    "measured": true
+  }
 ];
+// END:bmGapData
 
+// DATA:findings
 const findings = [
   { title: "The potency-selectivity tradeoff", text: "Antibody-conjugated LNPs achieve 12–44× higher potency but deliver 76% of cargo to liver. Untargeted LNPs show better selectivity at lower absolute potency. Observed across all four labs in the dataset." },
   { title: "Cholesterol as a liver predictor", text: "Cholesterol mol% varies from 38–48% across formulations in the dataset. The model identifies this variation as the 3rd–4th most important feature driving organ tropism. Three independent wet-lab studies confirm the mechanism: glycolipid substitution (Gentry 2025), cholesterol removal (Su 2024), and bile acid replacement (Patel 2024) each de-target liver through the cholesterol axis." },
@@ -70,7 +271,9 @@ const findings = [
   { title: "The 20% therapeutic threshold", text: "Newby et al. (2021) established via secondary transplant that ≥20% sickle-to-Makassar editing rescues SCD in mice. This threshold defines what therapeutically relevant means for the field." },
   { title: "No LNP in the ideal zone", text: "Only Ensoma’s VLP platform (31% editing, ~0% liver) occupies the ideal zone. Whether LNPs can match VLP-level selectivity while retaining manufacturing simplicity remains the central open question." },
 ];
+// END:findings
 
+// DATA:papers
 const papers = [
   { id: "Breda 2023", journal: "Science", title: "In vivo hematopoietic stem cell modification by mRNA delivery", role: "ML training", lnps: 14, url: "https://doi.org/10.1126/science.ade6967" },
   { id: "Shi 2023", journal: "Nano Letters", title: "In vivo RNA delivery to hematopoietic stem and progenitor cells via targeted lipid nanoparticles", role: "ML training", lnps: 37, url: "https://doi.org/10.1021/acs.nanolett.3c00304" },
@@ -94,6 +297,7 @@ const papers = [
   { id: "Loughrey 2025", journal: "Chem. Commun.", title: "The time course of in vivo cellular responses to LNPs", role: "Landscape", lnps: null, url: "https://doi.org/10.1039/D4CC06659F" },
   { id: "Cullis 2025", journal: "Nature Communications", title: "Liposomal lipid nanoparticles for extrahepatic delivery of mRNA", role: "Landscape", lnps: 10, url: "https://doi.org/10.1038/s41467-025-58523-w" },
 ];
+// END:papers
 const formulations = [
   {
     "p": "breda '23",
@@ -2121,7 +2325,7 @@ export default function Explorer() {
               <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Shi 2023 (21 records):</strong> Systematic optimization of PEG lipid, ionizable lipid, and antibody clone for CD117-targeted delivery. The key finding: switching from C14-PEG to C18-PEG (DSG-PEG2000) improved HSPC uptake ~3×. Multiple ionizable lipids tested (ALC-0315, SM-102, cKK-E12, DLin-MC3-DMA, Lipid 5), demonstrating the system is ionizable-lipid-agnostic.</p>
             )}
             {filterPaper === "kim '24" && (
-              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Kim 2024 (80 records):</strong> 128-LNP barcoded screen using proprietary PPZ-A10 ionizable lipid (SMILES unknown). 4 helper lipids × 4 IL mol% × 2 PEG types × 4 PEG concentrations. 80 of 128 had classifiable BM delivery. DOTAP + ALC-0159 formulations dominate the "high" class. This is the largest single systematic screen of BM-homing LNPs published to date.</p>
+              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Kim 2024 (80 records):</strong> 128-LNP barcoded screen using PPZ-A10 ionizable lipid (CAS 2941268-67-1, SMILES confirmed via Dahlman patent US 2025/0127727). 4 helper lipids × 4 IL mol% × 2 PEG types × 4 PEG concentrations. 80 of 128 had classifiable BM delivery. DOTAP + ALC-0159 formulations dominate the "high" class. This is the largest single systematic screen of BM-homing LNPs published to date.</p>
             )}
             {filterPaper === "lian '24" && (
               <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Lian 2024 (25 records):</strong> 21 covalent lipid/crosslinker formulations at 20 mol% as a 5th component, plus 4 validated leads. All use 5A2-SC8 ionizable lipid (known SMILES — the only bridge to external databases). Cholesterol reduced to 38.1% to accommodate the 5th component. This is the dataset that elevated cholesterol to SHAP rank 3–4.</p>
@@ -2339,7 +2543,7 @@ export default function Explorer() {
         {/* FEATURES */}
         {activeTab === "Features" && (<div>
           <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Feature Importance</h2>
-          <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>LightGBM, leave-one-paper-out CV, balanced accuracy 0.484. All five known SARs recovered in the top 9 features with expected directional effects.</p>
+          <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>LightGBM, 4-paper leave-one-paper-out CV (135 rows), balanced accuracy 0.468. All five known SARs recovered in the top 9 features with expected directional effects.</p>
           <div style={{ border: "1px solid #e0e0e0", padding: "24px 12px 12px 4px" }}>
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={shapData} layout="vertical" margin={{ top: 8, right: 40, bottom: 8, left: 130 }}>
