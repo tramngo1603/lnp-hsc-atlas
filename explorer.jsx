@@ -8,33 +8,181 @@ const platformColor = (p) => p === "VLP" ? OCHRE : p === "tLNP" ? RUST : INK;
 
 // DATA:paretoData
 const paretoData = [
-  { name: "Breda CD117", bm: 55, liver: 76, metric: "editing", platform: "tLNP", species: "Mouse", detail: "Cre editing in LSK, CD117 antibody, 0.25 mg/kg", n: 3 },
-  { name: "Kim LNP67", bm: 20.9, liver: 20.1, metric: "reporter", platform: "LNP", species: "Mouse", detail: "aVHH protein expression, 0.5 mg/kg", n: 3 },
-  { name: "Kim LNP108", bm: 8.8, liver: 1.6, metric: "reporter", platform: "LNP", species: "Mouse", detail: "Best selectivity in Kim screen (BM:liver = 5.5)", n: 3 },
-  { name: "Lian AA11 Cas9", bm: 5.2, liver: 7.5, metric: "editing", platform: "LNP", species: "Mouse", detail: "BCL11A editing, covalent lipid approach, Townes mice", n: 3 },
-  { name: "Lian AA11 ABE", bm: 2.4, liver: 3.0, metric: "editing", platform: "LNP", species: "Mouse", detail: "Sickle to Makassar base editing, Townes mice", n: 3 },
-  { name: "Ensoma VLP", bm: 31, liver: 0.5, metric: "editing", platform: "VLP", species: "Hum. mouse", detail: "B2M editing, 8 wk, near-zero liver transduction", n: 3 },
-  { name: "Tessera 24%", bm: 24, liver: 8, metric: "editing", platform: "tLNP", species: "NHP", detail: "HBB Makassar, single dose, liver estimated", n: null },
-  { name: "Tessera 40%", bm: 40, liver: 13.3, metric: "editing", platform: "tLNP", species: "NHP", detail: "Optimized Gene Writer cargo, same LNP platform", n: null },
-  { name: "Tessera 60%", bm: 60, liver: 20, metric: "editing", platform: "tLNP", species: "NHP", detail: "Two doses, liver estimated from 3:1 BM:liver ratio", n: null },
-  { name: "Kim LNP95", bm: 48, liver: 18.8, metric: "reporter", platform: "LNP", species: "Mouse", detail: "ALC-0159 PEG lipid, highest barcode in screen (30% DOTAP)", n: 1 },
-  { name: "Breda IgG control", bm: 19, liver: 78, metric: "editing", platform: "tLNP", species: "Mouse", detail: "Isotype control, liver comparable to CD117 LNP", n: 3 },
-  { name: "Kim E2 avg", bm: 5.2, liver: 44, metric: "reporter", platform: "LNP", species: "Mouse", detail: "4-LNP validation average, 0.5 mg/kg", n: 4 },
+  {
+    "name": "Breda CD117",
+    "bm": 55,
+    "liver": 76,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "Mouse",
+    "detail": "Cre editing in LSK, CD117 antibody, 0.25 mg/kg",
+    "n": 3
+  },
+  {
+    "name": "Kim LNP67",
+    "bm": 20.9,
+    "liver": 20.1,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "aVHH protein expression, 0.5 mg/kg",
+    "n": 3
+  },
+  {
+    "name": "Kim LNP108",
+    "bm": 8.8,
+    "liver": 1.6,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "Best selectivity in Kim screen (BM:liver = 5.5)",
+    "n": 3
+  },
+  {
+    "name": "Lian AA11 Cas9",
+    "bm": 5.2,
+    "liver": 7.5,
+    "metric": "editing",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "BCL11A editing, covalent lipid approach, Townes mice",
+    "n": 3
+  },
+  {
+    "name": "Lian AA11 ABE",
+    "bm": 2.4,
+    "liver": 3.0,
+    "metric": "editing",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "Sickle to Makassar base editing, Townes mice",
+    "n": 3
+  },
+  {
+    "name": "Ensoma VLP",
+    "bm": 31,
+    "liver": 0.5,
+    "metric": "editing",
+    "platform": "VLP",
+    "species": "Hum. mouse",
+    "detail": "B2M editing, 8 wk, near-zero liver transduction",
+    "n": 3
+  },
+  {
+    "name": "Tessera 24%",
+    "bm": 24,
+    "liver": 8,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "NHP",
+    "detail": "HBB Makassar, single dose, liver estimated",
+    "n": null
+  },
+  {
+    "name": "Tessera 40%",
+    "bm": 40,
+    "liver": 13.3,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "NHP",
+    "detail": "Optimized Gene Writer cargo, same LNP platform",
+    "n": null
+  },
+  {
+    "name": "Tessera 60%",
+    "bm": 60,
+    "liver": 20,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "NHP",
+    "detail": "Two doses, liver estimated from 3:1 BM:liver ratio",
+    "n": null
+  },
+  {
+    "name": "Kim LNP95",
+    "bm": 48,
+    "liver": 18.8,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "ALC-0159 PEG lipid, highest barcode in screen (30% DOTAP)",
+    "n": 1
+  },
+  {
+    "name": "Breda IgG control",
+    "bm": 19,
+    "liver": 78,
+    "metric": "editing",
+    "platform": "tLNP",
+    "species": "Mouse",
+    "detail": "Isotype control, liver comparable to CD117 LNP",
+    "n": 3
+  },
+  {
+    "name": "Kim E2 avg",
+    "bm": 5.2,
+    "liver": 44,
+    "metric": "reporter",
+    "platform": "LNP",
+    "species": "Mouse",
+    "detail": "4-LNP validation average, 0.5 mg/kg",
+    "n": 4
+  }
 ];
 // END:paretoData
 
 // DATA:shapData
 const shapData = [
-  { feature: "Ionizable lipid %", shap: 0.97, type: "known" },
-  { feature: "CD117 targeting", shap: 0.46, type: "known" },
-  { feature: "Chol:helper ratio", shap: 0.44, type: "new" },
-  { feature: "Cholesterol %", shap: 0.33, type: "new" },
-  { feature: "Dose (mg/kg)", shap: 0.28, type: "known" },
-  { feature: "IL molecular weight", shap: 0.25, type: "new" },
-  { feature: "Editing assay", shap: 0.25, type: "other" },
-  { feature: "DOTAP helper", shap: 0.23, type: "known" },
-  { feature: "Helper lipid %", shap: 0.21, type: "known" },
-  { feature: "Cationic helper", shap: 0.17, type: "other" },
+  {
+    "feature": "Ionizable lipid %",
+    "shap": 0.97,
+    "type": "known"
+  },
+  {
+    "feature": "CD117 targeting",
+    "shap": 0.46,
+    "type": "known"
+  },
+  {
+    "feature": "Chol:helper ratio",
+    "shap": 0.44,
+    "type": "new"
+  },
+  {
+    "feature": "Cholesterol %",
+    "shap": 0.33,
+    "type": "new"
+  },
+  {
+    "feature": "Dose (mg/kg)",
+    "shap": 0.28,
+    "type": "known"
+  },
+  {
+    "feature": "IL molecular weight",
+    "shap": 0.25,
+    "type": "new"
+  },
+  {
+    "feature": "Editing assay",
+    "shap": 0.25,
+    "type": "other"
+  },
+  {
+    "feature": "DOTAP helper",
+    "shap": 0.23,
+    "type": "known"
+  },
+  {
+    "feature": "Helper lipid %",
+    "shap": 0.21,
+    "type": "known"
+  },
+  {
+    "feature": "Cationic helper",
+    "shap": 0.17,
+    "type": "other"
+  }
 ];
 // END:shapData
 
@@ -56,17 +204,61 @@ const timelineData = [
 
 // DATA:bmGapData
 const bmGapData = [
-  { study: "Radmand 2024", lnps: 196, measured: false },
-  { study: "Radmand 2023", lnps: 137, measured: false },
-  { study: "Kim 2024", lnps: 128, measured: true },
-  { study: "Gentry 2025", lnps: 109, measured: false },
-  { study: "Sago 2018", lnps: 160, measured: true },
-  { study: "Da Silva Sanchez 2022", lnps: 98, measured: false },
-  { study: "Shi 2023", lnps: 37, measured: true },
-  { study: "Lian 2024", lnps: 21, measured: true },
-  { study: "SORT 2020", lnps: 20, measured: false },
-  { study: "Breda 2023", lnps: 14, measured: true },
-  { study: "Cullis 2025", lnps: 10, measured: true },
+  {
+    "study": "Radmand 2024",
+    "lnps": 196,
+    "measured": false
+  },
+  {
+    "study": "Radmand 2023",
+    "lnps": 137,
+    "measured": false
+  },
+  {
+    "study": "Kim 2024",
+    "lnps": 128,
+    "measured": true
+  },
+  {
+    "study": "Gentry 2025",
+    "lnps": 109,
+    "measured": false
+  },
+  {
+    "study": "Sago 2018",
+    "lnps": 160,
+    "measured": true
+  },
+  {
+    "study": "Da Silva Sanchez 2022",
+    "lnps": 98,
+    "measured": false
+  },
+  {
+    "study": "Shi 2023",
+    "lnps": 37,
+    "measured": true
+  },
+  {
+    "study": "Lian 2024",
+    "lnps": 21,
+    "measured": true
+  },
+  {
+    "study": "SORT 2020",
+    "lnps": 20,
+    "measured": false
+  },
+  {
+    "study": "Breda 2023",
+    "lnps": 14,
+    "measured": true
+  },
+  {
+    "study": "Cullis 2025",
+    "lnps": 10,
+    "measured": true
+  }
 ];
 // END:bmGapData
 
@@ -1958,7 +2150,17 @@ const CustomDot = (props) => {
   return <circle cx={cx} cy={cy} r={size} fill={filled?c:"#fff"} stroke={c} strokeWidth={2} />;
 };
 
-const tabs = ["Pareto","Formulations","PEG Architecture","Headgroup","Dose-Response","Lian Heatmap","Features","Papers","Findings"];
+const tabs = ["Pareto","Compare (beta)","Formulations","PEG Architecture","Headgroup","Dose-Response","Lian Heatmap","Features","Papers","Findings"];
+
+const shapContext = {
+  il: { rank: 1, shap: 0.97, direction: "Lower ionizable lipid mol% associated with higher BM delivery in the dataset" },
+  cd117: { rank: 2, shap: 0.46, direction: "CD117 targeting associated with higher BM delivery" },
+  chol: { rank: 4, shap: 0.33, direction: "Higher cholesterol mol% associated with liver accumulation" },
+  dose: { rank: 5, shap: 0.28, direction: "Higher dose associated with higher delivery (all organs)" },
+  il_mw: { rank: 6, shap: 0.25, direction: "Ionizable lipid molecular weight varies across papers (678-903 Da)" },
+  dotap: { rank: 8, shap: 0.23, direction: "DOTAP helper associated with higher BM delivery vs DDAB" },
+  helper_pct: { rank: 9, shap: 0.21, direction: "Helper lipid mol% contributes to delivery but direction varies by context" },
+};
 const NUM = "'Space Mono', 'Courier New', monospace";
 
 export default function Explorer() {
@@ -1966,6 +2168,52 @@ export default function Explorer() {
   const [sortCol, setSortCol] = useState("p");
   const [sortDir, setSortDir] = useState(1);
   const [filterPaper, setFilterPaper] = useState("all");
+
+  // Compare tab state
+  const [cmpIl, setCmpIl] = useState(35);
+  const [cmpHl, setCmpHl] = useState("DOTAP");
+  const [cmpHlPct, setCmpHlPct] = useState(15);
+  const [cmpChol, setCmpChol] = useState(47);
+  const [cmpPeg, setCmpPeg] = useState(1.5);
+  const [cmpCv, setCmpCv] = useState(0);
+  const [cmpDose, setCmpDose] = useState(0.5);
+  const [cmpTgt, setCmpTgt] = useState("None");
+
+  // Precompute feature stats for distance calculation
+  const featureStats = useMemo(() => {
+    const cols = ["il", "chol", "peg", "cv", "dose"];
+    const stats = {};
+    for (const col of cols) {
+      const vals = formulations.map(f => f[col]).filter(v => v != null);
+      const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+      const std = Math.sqrt(vals.reduce((a, b) => a + (b - mean) ** 2, 0) / vals.length) || 1;
+      stats[col] = { mean, std };
+    }
+    return stats;
+  }, []);
+
+  // Find nearest neighbors
+  const neighbors = useMemo(() => {
+    const stdVal = (v, col) => v != null ? (v - featureStats[col].mean) / featureStats[col].std : 0;
+
+    return formulations
+      .map(f => {
+        let dist = 0;
+        dist += (stdVal(cmpIl, "il") - stdVal(f.il, "il")) ** 2;
+        dist += (stdVal(cmpChol, "chol") - stdVal(f.chol, "chol")) ** 2;
+        dist += (stdVal(cmpPeg, "peg") - stdVal(f.peg, "peg")) ** 2;
+        dist += (stdVal(cmpCv, "cv") - stdVal(f.cv, "cv")) ** 2;
+        dist += (stdVal(cmpDose, "dose") - stdVal(f.dose, "dose")) ** 2;
+        // Categorical: helper lipid match
+        dist += f.hl === cmpHl ? 0 : 1;
+        // Categorical: targeting match
+        const fTgt = f.tgt === "CD117" ? "CD117" : "None";
+        dist += fTgt === cmpTgt ? 0 : 1;
+        return { ...f, dist: Math.sqrt(dist) };
+      })
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, 5);
+  }, [cmpIl, cmpHl, cmpHlPct, cmpChol, cmpPeg, cmpCv, cmpDose, cmpTgt, featureStats]);
 
   const sortedFormulations = useMemo(() => {
     let data = [...formulations];
@@ -2070,6 +2318,148 @@ export default function Explorer() {
           </div>
         </div>)}
 
+        {/* COMPARE TAB */}
+        {activeTab === "Compare (beta)" && (<div>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Compare: How does your candidate relate to tested formulations?</h2>
+          <p style={{ fontSize: 13, color: "#666", marginBottom: 24, lineHeight: 1.6, borderLeft: `3px solid ${OCHRE}`, paddingLeft: 16, background: `${OCHRE}08`, padding: "12px 16px" }}>
+            This tool finds the closest tested formulations to your candidate and shows what the model learned about the features you{"'"}re varying. It does not predict delivery outcomes — it provides context from the existing dataset.
+          </p>
+
+          {/* Section A: Input Form */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, marginBottom: 32 }}>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 16, color: "#999" }}>Candidate composition</div>
+              {[
+                { label: "Ionizable lipid mol%", value: cmpIl, set: setCmpIl, min: 15, max: 60, step: 1 },
+                { label: "Helper lipid mol%", value: cmpHlPct, set: setCmpHlPct, min: 5, max: 45, step: 1 },
+                { label: "Cholesterol mol%", value: cmpChol, set: setCmpChol, min: 15, max: 55, step: 0.5 },
+                { label: "PEG mol%", value: cmpPeg, set: setCmpPeg, min: 0.5, max: 5, step: 0.5 },
+                { label: "Covalent lipid mol%", value: cmpCv, set: setCmpCv, min: 0, max: 25, step: 1 },
+                { label: "Dose (mg/kg)", value: cmpDose, set: setCmpDose, min: 0.1, max: 5, step: 0.1 },
+              ].map(s => (
+                <div key={s.label} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                  <div style={{ width: 150, fontSize: 12, color: "#333", textAlign: "right" }}>{s.label}</div>
+                  <input type="range" min={s.min} max={s.max} step={s.step} value={s.value}
+                    onChange={e => s.set(Number(e.target.value))}
+                    style={{ flex: 1, accentColor: INK }} />
+                  <div style={{ width: 45, fontSize: 12, fontFamily: NUM, fontWeight: 700, textAlign: "right" }}>{s.value}</div>
+                </div>
+              ))}
+
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                <div style={{ width: 150, fontSize: 12, color: "#333", textAlign: "right" }}>Helper lipid</div>
+                <select value={cmpHl} onChange={e => setCmpHl(e.target.value)}
+                  style={{ flex: 1, padding: "4px 8px", fontSize: 12, border: "1px solid #ddd", borderRadius: 3 }}>
+                  {["DOTAP","DDAB","DOTMA","EPC","DSPC","DOPE"].map(h => <option key={h} value={h}>{h}</option>)}
+                </select>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                <div style={{ width: 150, fontSize: 12, color: "#333", textAlign: "right" }}>Targeting</div>
+                <select value={cmpTgt} onChange={e => setCmpTgt(e.target.value)}
+                  style={{ flex: 1, padding: "4px 8px", fontSize: 12, border: "1px solid #ddd", borderRadius: 3 }}>
+                  {["None","CD117"].map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
+              </div>
+
+              {/* Mol% sum indicator */}
+              {(() => {
+                const sum = cmpIl + cmpHlPct + cmpChol + cmpPeg + cmpCv;
+                const ok = sum >= 90 && sum <= 110;
+                return (
+                  <div style={{ marginTop: 12, padding: "8px 12px", fontSize: 12, borderRadius: 3,
+                    background: ok ? "#f0fdf4" : "#fef2f2", color: ok ? "#166534" : "#991b1b",
+                    border: `1px solid ${ok ? "#bbf7d0" : "#fecaca"}` }}>
+                    Mol% sum: <strong>{sum.toFixed(1)}%</strong> {ok ? "" : " — should be ~100%"}
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* Section B: Nearest Neighbors */}
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 16, color: "#999" }}>
+                5 nearest tested formulations
+              </div>
+
+              {neighbors[0]?.dist > 2.0 && (
+                <div style={{ padding: "8px 12px", fontSize: 12, background: "#fef2f2", color: "#991b1b",
+                  border: "1px solid #fecaca", borderRadius: 3, marginBottom: 12 }}>
+                  Your candidate is far from any tested formulation (distance {neighbors[0]?.dist.toFixed(1)} SD) — comparisons may not be informative.
+                </div>
+              )}
+
+              {neighbors.map((n, i) => (
+                <div key={i} style={{ padding: "12px 16px", marginBottom: 8, border: "1px solid #e0e0e0", borderRadius: 4,
+                  borderLeft: `3px solid ${n.cls === "high" ? INK : n.cls === "medium" ? OCHRE : "#ccc"}` }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <div>
+                      <span style={{ fontSize: 13, fontWeight: 600 }}>{n.id}</span>
+                      <span style={{ fontSize: 11, color: "#999", marginLeft: 8 }}>{n.p}</span>
+                    </div>
+                    <span style={{ fontSize: 11, fontFamily: NUM, color: "#999" }}>d={n.dist.toFixed(2)}</span>
+                  </div>
+                  <div style={{ fontSize: 11, color: "#666", marginTop: 4 }}>
+                    {n.hl} {n.il != null ? `${n.il}% IL` : ""} {n.chol != null ? `· ${n.chol}% chol` : ""} {n.tgt !== "None" && n.tgt ? `· ${n.tgt}` : ""}
+                    {n.dose != null ? ` · ${n.dose} mg/kg` : ""}
+                  </div>
+                  <div style={{ display: "flex", gap: 16, marginTop: 4, fontSize: 11 }}>
+                    <span style={{ fontWeight: 600, color: n.cls === "high" ? INK : n.cls === "medium" ? OCHRE : "#999" }}>
+                      {n.cls.toUpperCase()}
+                    </span>
+                    <span style={{ color: "#999" }}>{n.mt}</span>
+                  </div>
+                  {/* Differences */}
+                  {(() => {
+                    const diffs = [];
+                    if (n.il != null && Math.abs(n.il - cmpIl) > 1) diffs.push(`IL ${cmpIl}% vs ${n.il}%`);
+                    if (n.hl !== cmpHl) diffs.push(`${cmpHl} vs ${n.hl}`);
+                    if (n.chol != null && Math.abs(n.chol - cmpChol) > 1) diffs.push(`Chol ${cmpChol}% vs ${n.chol}%`);
+                    if (n.dose != null && Math.abs(n.dose - cmpDose) > 0.2) diffs.push(`Dose ${cmpDose} vs ${n.dose}`);
+                    if (diffs.length === 0) return null;
+                    return <div style={{ fontSize: 10, color: RUST, marginTop: 4 }}>Differs: {diffs.join(" · ")}</div>;
+                  })()}
+                </div>
+              ))}
+
+              {/* Neighbor class summary */}
+              <div style={{ marginTop: 12, padding: "8px 12px", fontSize: 12, background: "#f8f8f8", borderRadius: 3 }}>
+                Of 5 nearest: <strong>{neighbors.filter(n => n.cls === "high").length} high</strong>,{" "}
+                <strong>{neighbors.filter(n => n.cls === "medium").length} medium</strong>,{" "}
+                <strong>{neighbors.filter(n => n.cls === "low").length} low</strong>
+              </div>
+            </div>
+          </div>
+
+          {/* Section C: Feature Context */}
+          <div style={{ marginBottom: 32 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 16, color: "#999" }}>
+              What the model learned about these features
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              {[
+                { key: "il", label: `Ionizable lipid at ${cmpIl}%`, ctx: shapContext.il },
+                { key: "chol", label: `Cholesterol at ${cmpChol}%`, ctx: shapContext.chol },
+                { key: "dose", label: `Dose at ${cmpDose} mg/kg`, ctx: shapContext.dose },
+                ...(cmpHl === "DOTAP" ? [{ key: "dotap", label: "DOTAP helper", ctx: shapContext.dotap }] : []),
+                ...(cmpTgt === "CD117" ? [{ key: "cd117", label: "CD117 targeting", ctx: shapContext.cd117 }] : []),
+                { key: "helper_pct", label: `Helper at ${cmpHlPct}%`, ctx: shapContext.helper_pct },
+              ].map(item => (
+                <div key={item.key} style={{ padding: "10px 14px", border: "1px solid #e8e8e8", borderRadius: 4, fontSize: 12 }}>
+                  <div style={{ fontWeight: 600, marginBottom: 4 }}>{item.label}
+                    <span style={{ fontWeight: 400, color: "#999", marginLeft: 8 }}>SHAP rank {item.ctx.rank} ({item.ctx.shap})</span>
+                  </div>
+                  <div style={{ color: "#666", lineHeight: 1.5 }}>{item.ctx.direction}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Takeaway */}
+          <div style={{ padding: "20px 24px", borderTop: "1px solid #e0e0e0", fontSize: 12, color: "#666", lineHeight: 1.6 }}>
+            <strong>What the data shows:</strong> The 5 nearest formulations provide empirical context for your candidate, not a prediction. The model{"'"}s SHAP analysis indicates which features most influence organ tropism across the 135 tested formulations, but outcomes for untested compositions remain uncertain.
+          </div>
+        </div>)}
+
         {/* FORMULATIONS TABLE */}
         {activeTab === "Formulations" && (<div>
           <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Feature Matrix: 135 Formulations</h2>
@@ -2133,7 +2523,7 @@ export default function Explorer() {
               <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Shi 2023 (21 records):</strong> Systematic optimization of PEG lipid, ionizable lipid, and antibody clone for CD117-targeted delivery. The key finding: switching from C14-PEG to C18-PEG (DSG-PEG2000) improved HSPC uptake ~3×. Multiple ionizable lipids tested (ALC-0315, SM-102, cKK-E12, DLin-MC3-DMA, Lipid 5), demonstrating the system is ionizable-lipid-agnostic.</p>
             )}
             {filterPaper === "kim '24" && (
-              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Kim 2024 (80 records):</strong> 128-LNP barcoded screen using PPZ-A10 ionizable lipid (CAS 2941268-67-1, SMILES confirmed via Dahlman patent US 2025/0127727). 4 helper lipids × 4 IL mol% × 2 PEG types × 4 PEG concentrations. 80 of 128 had classifiable BM delivery. DOTAP + ALC-0159 formulations dominate the "high" class. This is the largest single systematic screen of BM-homing LNPs published to date.</p>
+              <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Kim 2024 (80 records):</strong> 128-LNP barcoded screen using PPZ-A10 ionizable lipid (SMILES identified from Dahlman lab patent literature). 4 helper lipids × 4 IL mol% × 2 PEG types × 4 PEG concentrations. 80 of 128 had classifiable BM delivery. DOTAP + ALC-0159 formulations dominate the "high" class. This is the largest single systematic screen of BM-homing LNPs published to date.</p>
             )}
             {filterPaper === "lian '24" && (
               <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Lian 2024 (25 records):</strong> 21 covalent lipid/crosslinker formulations at 20 mol% as a 5th component, plus 4 validated leads. All use 5A2-SC8 ionizable lipid (known SMILES — the only bridge to external databases). Cholesterol reduced to 38.1% to accommodate the 5th component. This is the dataset that elevated cholesterol to SHAP rank 3–4.</p>
