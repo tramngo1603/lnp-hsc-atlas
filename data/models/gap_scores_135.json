@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Gap #1: CD117/2B8 + DOTAP + C18",
+    "p_high": 0.437,
+    "distance_sd": 3.25,
+    "confidence": "LOW",
+    "nearest": "F2_LNP95 (kim_2024)"
+  },
+  {
+    "name": "Gap #5: AA11 + DOTAP swap",
+    "p_high": 0.314,
+    "distance_sd": 2.15,
+    "confidence": "LOW",
+    "nearest": "LNP68 (kim_2024)"
+  },
+  {
+    "name": "Gap #6: LNP95 + reduced chol",
+    "p_high": 0.475,
+    "distance_sd": 5.55,
+    "confidence": "LOW",
+    "nearest": "LNP73 (kim_2024)"
+  },
+  {
+    "name": "Gap #7: CD117 + covalent lipid",
+    "p_high": 0.565,
+    "distance_sd": 2.16,
+    "confidence": "LOW",
+    "nearest": "F5_ALC0315_C14PEG (shi_2023)"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "n_rows": 135,
+  "n_features": 8,
+  "loo_accuracy": 0.867,
+  "brier_score": 0.114,
+  "base_rate": 0.311,
+  "confusion_matrix": {
+    "tp": 36,
+    "fp": 12,
+    "fn": 6,
+    "tn": 81
+  },
+  "seed_stability": {
+    "seeds_tested": [
+      0,
+      7,
+      42,
+      123,
+      999
+    ],
+    "max_std": 0.0,
+    "stable": true
+  }
+}
