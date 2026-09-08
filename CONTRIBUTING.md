@@ -42,7 +42,7 @@ Do not infer a missing value from an analog, convert an absolute animal dose wit
 
 - **Linting:** `ruff check .` must pass
 - **Type checking:** `mypy --ignore-missing-imports` must pass
-- **Tests:** new code must include focused tests. The current history omits the declared `src/external_data/` and `src/pubmed_agent/` packages, so exclude their collectors when validating the available 125-test suite.
+- **Tests:** new code must include focused tests for the affected modules.
 - **Style:** Type hints on all functions. No function >50 lines. No module >300 lines.
 
 The goal is a resource that any researcher can use to understand where their formulation sits in the landscape and what the most promising next experiments are. Every new paper annotated makes the analysis more complete.

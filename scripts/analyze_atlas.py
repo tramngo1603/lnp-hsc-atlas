@@ -1,4 +1,4 @@
-"""Rerun Pareto analysis and quantify correlation shifts for Pass 3."""
+"""Run Pareto and descriptive feature-correlation analyses for the atlas."""
 
 from __future__ import annotations
 
@@ -19,9 +19,8 @@ from lnp_optimizer.pareto_corrected import (
 
 _ROOT = Path(__file__).resolve().parent.parent
 _FEATURES = _ROOT / "data" / "features" / "hsc_features.parquet"
-_NEW_RECORDS = _ROOT / "data" / "new_records_pass1.json"
-_OUTPUT = _ROOT / "data" / "models" / "pass3_analysis.json"
-_OLD_ROWS = 135
+_LITERATURE_RECORDS = _ROOT / "data" / "literature_records.json"
+_OUTPUT = _ROOT / "data" / "models" / "atlas_analysis.json"
 
 
 def _native(value: Any) -> float | None:
@@ -74,8 +73,6 @@ def _feature_correlations(df: pd.DataFrame) -> dict[str, Any]:
         if "label_boundary_case" in df.columns
         else df
     )
-    old = analysis_df.loc[analysis_df.index < _OLD_ROWS]
-    new = analysis_df.loc[analysis_df.index >= _OLD_ROWS]
     numeric_features = [
         column
         for column in analysis_df.select_dtypes(include="number").columns
@@ -84,68 +81,34 @@ def _feature_correlations(df: pd.DataFrame) -> dict[str, Any]:
 
     correlations: dict[str, dict[str, Any]] = {}
     for column in numeric_features:
-        old_result = _spearman_feature(old, column)
-        new_result = _spearman_feature(new, column)
-        combined_result = _spearman_feature(analysis_df, column)
-        old_rho = old_result["rho"]
-        combined_rho = combined_result["rho"]
-        delta = None
-        if old_rho is not None and combined_rho is not None:
-            delta = round(combined_rho - old_rho, 6)
-        correlations[column] = {
-            "old_135": old_result,
-            "new_198": new_result,
-            "combined_333": combined_result,
-            "delta_combined_minus_old": delta,
-        }
+        correlations[column] = _spearman_feature(analysis_df, column)
 
-    def top(scope: str) -> list[dict[str, Any]]:
+    def top() -> list[dict[str, Any]]:
         ranked: list[tuple[float, str, dict[str, Any]]] = []
         for column, result in correlations.items():
-            value = result[scope]["rho"]
+            value = result["rho"]
             if value is not None:
-                ranked.append((abs(value), column, result[scope]))
+                ranked.append((abs(value), column, result))
         ranked.sort(key=lambda item: (-item[0], item[1]))
-        return [
-            {"feature": column, **result}
-            for _, column, result in ranked[:10]
-        ]
-
-    comparable = [
-        (abs(result["delta_combined_minus_old"]), column, result)
-        for column, result in correlations.items()
-        if result["delta_combined_minus_old"] is not None
-    ]
-    comparable.sort(key=lambda item: (-item[0], item[1]))
-    largest_shifts = [
-        {
-            "feature": column,
-            "old_rho": result["old_135"]["rho"],
-            "combined_rho": result["combined_333"]["rho"],
-            "delta": result["delta_combined_minus_old"],
-        }
-        for _, column, result in comparable[:10]
-    ]
+        return [{"feature": column, **result} for _, column, result in ranked[:10]]
 
     return {
         "method": (
             "Unadjusted Spearman correlation between each numeric matrix feature and the "
             "ordinal target (low=0, medium=1, high=2), using pairwise complete labeled rows. "
-            "The four marked legacy Lian rows at the exact 30% label boundary are excluded."
+            "The four marked Lian rows at the exact 30% label boundary are excluded."
         ),
         "caveat": (
             "These are descriptive sensitivity checks, not causal effects. Rows are clustered "
             "by paper and formulation, assays differ, and no multiple-testing correction is "
             "applied. Use paper-grouped validation for model claims."
         ),
-        "top_absolute_old_135": top("old_135"),
-        "top_absolute_combined_333": top("combined_333"),
-        "largest_absolute_shifts": largest_shifts,
+        "top_absolute": top(),
         "all_features": correlations,
     }
 
 
-def _new_standardized_paired_records(records: list[dict[str, Any]]) -> list[str]:
+def _standardized_paired_records(records: list[dict[str, Any]]) -> list[str]:
     paired: list[str] = []
     for record in records:
         efficacy = record.get("efficacy") or {}
@@ -178,25 +141,21 @@ def _validation_correlation(validation: dict[str, Any]) -> dict[str, Any]:
 
 def build_report() -> dict[str, Any]:
     df = pd.read_parquet(_FEATURES)
-    records = json.loads(_NEW_RECORDS.read_text())["records"]
+    records = json.loads(_LITERATURE_RECORDS.read_text())["records"]
     if df.shape != (333, 48):
         raise ValueError(f"expected 333 x 48 matrix, observed {df.shape}")
 
     screen = compute_screen_pareto()
     validation = compute_validation_pareto()
-    new_pairs = _new_standardized_paired_records(records)
+    paired_records = _standardized_paired_records(records)
     return {
-        "analysis": "pass3_combined_pareto_and_correlations",
+        "analysis": "atlas_pareto_and_correlations",
         "date": date.today().isoformat(),
         "matrix": {
             "rows": len(df),
             "columns": len(df.columns),
             "papers": int(df["paper"].nunique()),
-            "target_distribution": {
-                "old_135": _target_distribution(df.iloc[:_OLD_ROWS]),
-                "new_198": _target_distribution(df.iloc[_OLD_ROWS:]),
-                "combined_333": _target_distribution(df),
-            },
+            "target_distribution": _target_distribution(df),
         },
         "pareto_and_bm_liver_correlation": {
             "screen_barcode_counts": {
@@ -212,38 +171,32 @@ def build_report() -> dict[str, Any]:
                 ],
                 "ideal_zone": validation["quadrants"]["ideal"],
             },
-            "new_standardized_absolute_bm_liver_pairs": {
-                "count": len(new_pairs),
-                "record_ids": new_pairs,
+            "standardized_absolute_bm_liver_pairs": {
+                "count": len(paired_records),
+                "record_ids": paired_records,
                 "eligibility": (
                     "same-record numeric bone_marrow_percent and liver_percent values with "
                     "comparable units"
                 ),
             },
-            "shift_vs_135": (
-                "No shift. None of the 198 additions supplies a standardized, same-record "
-                "absolute BM and liver percentage pair. Relative fold changes, qualitative "
-                "organ statements, and mismatched constructs were not converted or mixed into "
-                "the Pareto axes. The established screen and validation frontiers are unchanged."
+            "scope_note": (
+                "Relative fold changes, qualitative organ statements, and mismatched constructs "
+                "are not converted or mixed into the Pareto axes."
             ),
         },
         "feature_target_correlations": _feature_correlations(df),
-        "interpretive_shifts": [
+        "interpretation": [
             (
-                "The class balance shifts toward low efficacy: low rows increase from "
-                "62/135 (45.9%) to 184/315 labeled rows (58.4%), driven mainly by the Xu screen."
+                "Low efficacy accounts for 184/315 labeled rows (58.4%), with the Xu screen "
+                "contributing a large repeated-assay block."
             ),
             (
-                "After excluding the four marked boundary rows, dose correlation changes from "
-                "rho=0.079 in the old block to rho=-0.476 combined. This reflects the many "
-                "2 mg/kg low-efficacy Xu screen rows and must not be read as a causal dose effect."
+                "After excluding the four marked boundary rows, the dose correlation is "
+                "rho=-0.476. This reflects the many 2 mg/kg low-efficacy Xu screen rows and "
+                "must not be read as a causal dose effect."
             ),
             (
-                "The old assay_barcode_delivery association weakens from rho=-0.705 to "
-                "rho=-0.223 combined as editing screens become the dominant assay block."
-            ),
-            (
-                "The strongest combined correlations remain partly paper-identity proxies, "
+                "The strongest correlations remain partly paper-identity proxies, "
                 "especially ionizable-lipid descriptors represented by few chemical families."
             ),
         ],
@@ -251,8 +204,7 @@ def build_report() -> dict[str, Any]:
 
 
 def main() -> int:
-    # Rewrite the established outputs first. They are expected to remain
-    # byte-identical because no new record meets the paired-data criterion.
+    # Rewrite the established Pareto outputs before the atlas summary.
     run_corrected_pareto()
     report = build_report()
     _OUTPUT.write_text(json.dumps(report, indent=2) + "\n")

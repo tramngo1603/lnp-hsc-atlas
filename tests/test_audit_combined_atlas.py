@@ -1,4 +1,4 @@
-"""Tests for the Pass 3 combined-data audit."""
+"""Tests for the consolidated atlas audit."""
 
 from __future__ import annotations
 
@@ -7,37 +7,36 @@ from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent
 _SPEC = importlib.util.spec_from_file_location(
-    "audit_combined_pass3", _ROOT / "scripts" / "audit_combined_pass3.py"
+    "audit_combined_atlas", _ROOT / "scripts" / "audit_combined_atlas.py"
 )
 assert _SPEC is not None and _SPEC.loader is not None
 _AUDIT = importlib.util.module_from_spec(_SPEC)
 _SPEC.loader.exec_module(_AUDIT)
 
 
-def test_release_audit_has_no_blocking_errors() -> None:
+def test_atlas_audit_has_no_blocking_errors() -> None:
     report = _AUDIT.build_report()
     assert report["dataset"] == {
-        "old_rows": 135,
-        "new_rows": 198,
-        "combined_rows": 333,
+        "rows": 333,
+        "curated_rows": 135,
+        "literature_rows": 198,
         "columns": 48,
         "papers": 19,
         "paper_row_counts": report["dataset"]["paper_row_counts"],
     }
     assert report["logical_contradiction_scan"]["errors"] == []
-    assert report["invariants"]["original_135_value_identical_to_77c8b7d"] is True
-    assert report["invariants"]["all_v2_values_identical_before_marker"] is True
-    assert report["invariants"]["legacy_lian_values_and_labels_match_v2"] is True
-    assert report["invariants"]["data_hsc_matches_77c8b7d"] is True
+    assert report["invariants"]["curated_matrix_values_match"] is True
+    assert report["invariants"]["lian_boundary_values_match"] is True
+    assert report["invariants"]["curated_source_matches"] is True
 
 
-def test_legacy_lian_boundary_is_marked_and_not_an_error() -> None:
+def test_lian_boundary_is_marked_and_not_an_error() -> None:
     report = _AUDIT.build_report()
     scan = report["logical_contradiction_scan"]
     boundary = next(
         item
         for item in scan["informational"]
-        if item["id"] == "legacy_lian_30_percent_boundary"
+        if item["id"] == "lian_30_percent_boundary"
     )
     assert boundary["status"] == "documented_boundary_convention"
     assert len(boundary["records"]) == 4

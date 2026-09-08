@@ -729,7 +729,7 @@
     "knockdown_percent_LT_HSC": 5.7,
     "hsc_definition": "LSK; LT-HSC gated as in Supp Fig 4",
     "timepoint": "6 days after first administration",
-    "value_basis_LT_HSC": "recomputed from MOESM6 Fig. 3g normalized gMFI block: siCtrl aNP72 mean 1.000 (1.1, 1.17, 1.04, 1.0, 0.69), siLAMP1 aNP72 mean 0.943 (0.75, 0.91, 1.15, 0.86, 1.45, 0.54); (1 - 0.943/1.000) x 100 = 5.7%. Corrected in Pass 2 from an initial -2.4 that omitted the 6th siLAMP1 replicate."
+    "value_basis_LT_HSC": "recomputed from MOESM6 Fig. 3g normalized gMFI block: siCtrl aNP72 mean 1.000 (1.1, 1.17, 1.04, 1.0, 0.69), siLAMP1 aNP72 mean 0.943 (0.75, 0.91, 1.15, 0.86, 1.45, 0.54); (1 - 0.943/1.000) x 100 = 5.7%. Corrected in source review from an initial -2.4 that omitted the 6th siLAMP1 replicate."
    },
    "evidence_strength": "empirically_measured",
    "extraction_method": "extracted_from_table",
@@ -751,7 +751,7 @@
       "knockdown_percent_LSK",
       "knockdown_percent_LT_HSC"
      ],
-     "cite": "Fig. 3g source data (MOESM6 xlsx), normalized gMFI block; recomputed Pass 2 as (1 - mean normalized siLAMP1/mean normalized siCtrl) x 100 with n=6 siLAMP1, n=5 siCtrl"
+     "cite": "Fig. 3g source data (MOESM6 xlsx), normalized gMFI block; recomputed source review as (1 - mean normalized siLAMP1/mean normalized siCtrl) x 100 with n=6 siLAMP1, n=5 siCtrl"
     },
     {
      "fields": [
@@ -3814,7 +3814,7 @@
    "confidence": "LOW",
    "confidence_notes": "Conference abstract only; no methods, no figure/table provenance available; full paper pending",
    "coordinate_note": "Human B2M locus targeted but no coordinates stated; anchors.py check not applicable at abstract level",
-   "notes": "Same Tessera platform lineage as existing tessera_* annotation files; cross-check against those records in Pass 2 to avoid duplication."
+   "notes": "Same Tessera platform lineage as existing tessera_* annotation files; cross-check against those records in source review to avoid duplication."
   },
   {
    "record_id": "palchaudhuri_2025_HSCLNP_Makassar_editing",
@@ -5004,7 +5004,7 @@
     "pka": "not_reported"
    },
    "confidence": "MEDIUM",
-   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for Pass 2 validation",
+   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for source review validation",
    "notes": "Top performers (second-dose >= 15%) of the 50-formulation secondary screen of Library A."
   },
   {
@@ -5090,7 +5090,7 @@
     "pka": "not_reported"
    },
    "confidence": "MEDIUM",
-   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for Pass 2 validation",
+   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for source review validation",
    "notes": "Top performers (second-dose >= 15%) of the 50-formulation secondary screen of Library A."
   },
   {
@@ -5176,7 +5176,7 @@
     "pka": "not_reported"
    },
    "confidence": "MEDIUM",
-   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for Pass 2 validation",
+   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for source review validation",
    "notes": "Top performers (second-dose >= 15%) of the 50-formulation secondary screen of Library A."
   },
   {
@@ -5262,7 +5262,7 @@
     "pka": "not_reported"
    },
    "confidence": "MEDIUM",
-   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for Pass 2 validation",
+   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for source review validation",
    "notes": "Top performers (second-dose >= 15%) of the 50-formulation secondary screen of Library A."
   },
   {
@@ -5348,7 +5348,7 @@
     "pka": "not_reported"
    },
    "confidence": "MEDIUM",
-   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for Pass 2 validation",
+   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for source review validation",
    "notes": "Top performers (second-dose >= 15%) of the 50-formulation secondary screen of Library A."
   },
   {
@@ -5434,7 +5434,7 @@
     "pka": "not_reported"
    },
    "confidence": "MEDIUM",
-   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for Pass 2 validation",
+   "confidence_notes": "bar-vs-replicate-mean mismatch noted in source data; flagged for source review validation",
    "notes": "Top performers (second-dose >= 15%) of the 50-formulation secondary screen of Library A."
   },
   {
@@ -15977,7 +15977,7 @@
     "ionizable_lipid_smiles": "patent_referenced",
     "zeta_potential_mv": "not_reported",
     "pka": "not_reported",
-    "data_anomaly": "source data contains >100% replicate value (excluded from interpretation); flagged for Pass 2"
+    "data_anomaly": "source data contains >100% replicate value (excluded from interpretation); flagged for source review"
    },
    "confidence": "MEDIUM",
    "confidence_notes": "screening context (n=3-4); bar vs replicate-mean mismatches noted in source data",

@@ -1,15 +1,15 @@
-"""Pass 2 audit: validate data/new_records_pass1.json (198 flat records).
+"""Validate data/literature_records.json (198 flat records).
 
 Applies the repo's existing validation semantics (scripts/validate_annotations.py,
 docs/annotation_template.json vocabularies, label_for_ml thresholds) to the
-flat per-record schema produced by Pass 1, plus the Pass 2 unit rules:
+flat per-record schema, plus the atlas unit rules:
 sizes in nm, doses in mg/kg, percentages within 0-100.
 
 Exit code 0 if no errors (warnings are non-blocking), mirroring
 validate_annotations.py. Writes a machine-readable report to
-data/audit/pass2_new_records_audit.json.
+data/audit/literature_records_audit.json.
 
-Documented audit exceptions (Pass 2 user decisions, 2026-09-06):
+Documented audit exceptions:
 - Computed knockdown may be negative (formulation had no effect). Clamping
   to 0 would falsify low-efficacy records needed for label balance.
   Affected: hofstraat_2025_aNP72_invivo_siLAMP1 (LT-HSC -2.4%).
@@ -27,9 +27,9 @@ import sys
 from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent
-_RECORDS = _ROOT / "data" / "new_records_pass1.json"
+_RECORDS = _ROOT / "data" / "literature_records.json"
 _ANNOTATIONS = _ROOT / "annotations" / "new_paper_annotations.json"
-_REPORT = _ROOT / "data" / "audit" / "pass2_new_records_audit.json"
+_REPORT = _ROOT / "data" / "audit" / "literature_records_audit.json"
 _XU_SRC = _ROOT / "data" / "audit" / "xu_2026_screen_replicates_source.json"
 
 _XU_CACHE: dict | None = None
@@ -40,13 +40,10 @@ def _xu_source_arrays() -> dict:
     (Extended Data Fig. 3/4/5 and Fig. 4a). Empty dict if unavailable."""
     global _XU_CACHE
     if _XU_CACHE is None:
-        if _XU_SRC.exists():
-            _XU_CACHE = json.loads(_XU_SRC.read_text())
-        else:
-            _XU_CACHE = {}
+        _XU_CACHE = json.loads(_XU_SRC.read_text()) if _XU_SRC.exists() else {}
     return _XU_CACHE
 
-# --- vocabularies (docs/annotation_template.json + HANDOFF schema) ----------
+# --- vocabularies (docs/annotation_template.json + flat-record schema) ------
 
 _REQUIRED_KEYS = [
     "record_id", "source_paper", "tier", "status", "formulation_id",
@@ -76,7 +73,7 @@ _PCT_RE = re.compile(r"(mol_pct|percent|efficiency|knockdown|transfection)",
 _PCT_EXEMPT = {"np_ratio", "protein_expression", "bm_radiance_mean_estimated"}
 
 # Documented exception: computed negative knockdown (no-effect formulation).
-# (aNP72 was corrected to +5.7% in Pass 2 on 2026-09-06; the exception policy
+# (aNP72 was corrected to +5.7% after source review; the exception policy
 # remains in place as a rule for any future genuinely-negative computed value.)
 _NEGATIVE_KD_EXCEPTION = {"hofstraat_2025_aNP72_invivo_siLAMP1"}
 
@@ -117,10 +114,10 @@ def _null_covered(path: str, null_fields: dict) -> bool:
     dotted path, or underscore-joined path."""
     leaf = path.split(".")[-1]
     us_path = path.replace(".", "_")
-    for k in null_fields:
-        if k == leaf or k == us_path or path.endswith(k) or us_path.endswith(k):
-            return True
-    return False
+    return any(
+        k in (leaf, us_path) or path.endswith(k) or us_path.endswith(k)
+        for k in null_fields
+    )
 
 
 def _classify(value: float) -> str:
@@ -207,7 +204,7 @@ def audit_record(r: dict) -> tuple[list[str], list[str], list[str]]:
                         f"{rid}: replicate {arm} value {v} outside 0-100 "
                         f"(source-data anomaly; flagged, not altered)")
 
-    # 4b. Xu screen replicate completeness (Pass 2 finding 2026-09-06):
+    # 4b. Xu screen replicate completeness (source review finding 2026-09-06):
     # compare stored replicate arrays against the source-data arrays embedded
     # in data/audit/xu_2026_screen_replicates_source.json. Incomplete = error;
     # complete = info (bar-vs-replicate-mean is a documented source property).
@@ -248,7 +245,7 @@ def audit_record(r: dict) -> tuple[list[str], list[str], list[str]]:
             errors.append(f"{rid}: dose_mg_per_kg null without null_fields reason")
         elif dl.get("dose_absolute"):
             info.append(f"{rid}: absolute dose kept ({dl['dose_absolute']}); "
-                        f"mg/kg null per Pass 2 decision (no assumed weight)")
+                        f"mg/kg null per source review decision (no assumed weight)")
 
     # 6. null_reason completeness --------------------------------------------
     nf = r.get("null_fields") or {}
@@ -352,7 +349,7 @@ def main() -> int:
         total_warnings.append(f"{orphan}: not listed in new_paper_annotations.json")
 
     report = {
-        "audit": "pass2_new_records",
+        "audit": "literature_records",
         "date": "2026-09-06",
         "records_audited": len(records),
         "errors": total_errors,
@@ -366,7 +363,7 @@ def main() -> int:
     }
     _REPORT.write_text(json.dumps(report, indent=2) + "\n")
 
-    print(f"Audited {len(records)} new records (Pass 2)")
+    print(f"Audited {len(records)} literature records")
     if total_info:
         print(f"\n{len(total_info)} info (documented, non-blocking):")
         for i in total_info:
@@ -380,7 +377,7 @@ def main() -> int:
         for e in total_errors:
             print(f"  {e}")
         return 1
-    print("\nAll Pass 2 record audits passed")
+    print("\nAll source review record audits passed")
     return 0
 
 

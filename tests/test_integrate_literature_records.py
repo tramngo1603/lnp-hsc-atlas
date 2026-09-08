@@ -1,4 +1,4 @@
-"""Regression tests for projecting Pass 1 records onto the feature matrix."""
+"""Regression tests for projecting literature records onto the feature matrix."""
 
 from __future__ import annotations
 
@@ -7,14 +7,14 @@ from pathlib import Path
 
 import pandas as pd
 
-from lnp_optimizer.integrate_new_records_pass2 import (
+from lnp_optimizer.integrate_literature_records import (
     _make_row,
     add_label_boundary_marker,
 )
 
 _ROOT = Path(__file__).resolve().parent.parent
 _RECORDS = json.loads(
-    (_ROOT / "data" / "new_records_pass1.json").read_text()
+    (_ROOT / "data" / "literature_records.json").read_text()
 )["records"]
 _BY_ID = {record["record_id"]: record for record in _RECORDS}
 
@@ -23,7 +23,7 @@ def _row(record_id: str) -> dict:
     return _make_row(_BY_ID[record_id], label=None)
 
 
-def test_targeting_uses_legacy_ordinal_encoding() -> None:
+def test_targeting_uses_established_ordinal_encoding() -> None:
     assert _row("xu_2026_LNP168_Cre_miR122T_Ai14")["targeting_encoded"] == 1
     assert _row("chappell_2024_mRNACre_LNPCD117_exvivo_deletion")[
         "targeting_encoded"
@@ -51,7 +51,7 @@ def test_covalent_feature_keeps_functionalized_lipid_mol_percent() -> None:
     assert _row("swart_2023_LDV_LNP")["covalent_lipid_mol_pct"] == 0.1
 
 
-def test_only_four_legacy_lian_rows_receive_boundary_marker() -> None:
+def test_only_four_lian_rows_receive_boundary_marker() -> None:
     rows = pd.DataFrame(
         {
             "paper": ["lian_2024"] * 5 + ["xu_2026"],

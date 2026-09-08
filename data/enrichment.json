@@ -1,8 +1,8 @@
 {
   "pass": 2,
   "date": "2026-09-06",
-  "scope": "Original 135 records (annotation layer: annotations/shi_2023.json, annotations/kim_2024.json). hsc_curated.parquet and existing feature-matrix rows are regenerated unchanged by scripts/build_feature_matrix.py; no original numeric values were altered.",
-  "generated_by": "Pass 2 enrichment; every structure verified by RDKit against PubChem and, where present, against the existing feature-matrix descriptor block",
+  "scope": "Annotation-layer enrichment for annotations/shi_2023.json and annotations/kim_2024.json. hsc_curated.parquet and existing feature-matrix values remain unchanged.",
+  "generated_by": "source review enrichment; every structure verified by RDKit against PubChem and, where present, against the existing feature-matrix descriptor block",
   "enrichments": [
     {
       "paper": "shi_2023",
@@ -247,7 +247,7 @@
       "paper": "breda_2023",
       "formulation": "all 5",
       "field": "ionizable_lipid.smiles",
-      "reason": "Acuitas proprietary lipid (annotation: likely ALC-0307 per Tombacz 2021; ALC-0315 also possible). Identity is not confirmed, so no SMILES is attached. Note: existing matrix rows carry SM-102-matching descriptors (exact MW 710.18) under an assumed identity; pre-existing, unchanged by Pass 2."
+      "reason": "Acuitas proprietary lipid (annotation: likely ALC-0307 per Tombacz 2021; ALC-0315 also possible). Identity is not confirmed, so no SMILES is attached. Note: existing matrix rows carry SM-102-matching descriptors (exact MW 710.18) under an assumed identity; pre-existing, unchanged by source review."
     },
     {
       "paper": "lian_2024",
@@ -258,7 +258,7 @@
     {
       "paper": "all original",
       "field": "physicochemical block / toxicity",
-      "reason": "The 15 new sources describe different formulations; none supply physicochemical or toxicity measurements for the original 135 formulations. Xu 2026 lead physicochemicals (Supp Tables 7-9) now exist in the NEW records, closing that gap at the new-record layer rather than in the original records."
+      "reason": "The literature sources describe different formulations and do not supply physicochemical or toxicity measurements for these formulations. Xu 2026 lead physicochemicals from Supplementary Tables 7-9 are retained with the corresponding literature records."
     }
   ],
   "verification": {

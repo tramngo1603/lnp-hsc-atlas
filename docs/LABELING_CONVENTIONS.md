@@ -9,11 +9,11 @@ The canonical feature matrix stores the harmonized efficacy class in `target`:
 | High | 2 | Greater than 30%, strictly |
 | Unlabeled | null | No defensible numeric label |
 
-The high rule is `>30%`, not `>=30%`, for every new record.
+The current high rule is `>30%`, not `>=30%`.
 
-## Protected Lian boundary cases
+## Lian boundary cases
 
-Four original `lian_2024` rows report exactly 30% LT-HSC delivery and retain the `high` labels assigned in version 1:
+Four `lian_2024` rows report exactly 30% LT-HSC delivery and retain their established `high` labels:
 
 | Formulation | Experiment | Stored target | Boundary marker |
 | --- | --- | ---: | ---: |
@@ -22,7 +22,7 @@ Four original `lian_2024` rows report exactly 30% LT-HSC delivery and retain the
 | `Lian_C6` | `Lian_C6_validated_n3` | 2 | 1 |
 | `Lian_C9` | `Lian_C9_screen_n1` | 2 | 1 |
 
-These are boundary cases, not errors. Their source values and labels remain untouched. The metadata column `label_boundary_case` is 1 for these four rows and 0 for all other rows, so consumers can query either historical labels or the strict current convention.
+These are boundary cases, not errors. Their source values and labels remain untouched. The metadata column `label_boundary_case` is 1 for these four rows and 0 for all other rows, so consumers can apply the strict current convention when needed.
 
 ## Model handling
 

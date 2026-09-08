@@ -1,7 +1,7 @@
 # LNP-HSC Atlas Makefile
 # Run `make update` to rebuild everything from annotations → explorer
 
-.PHONY: help validate build pass3 train figures extract patch update test lint check clean
+.PHONY: help validate build release train figures extract patch update test lint check clean
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -14,11 +14,11 @@ validate: ## Validate annotation JSONs
 build: validate ## Build feature matrix from annotations
 	uv run python scripts/build_feature_matrix.py
 
-pass3: build ## Rebuild and audit the Pass 3 release outputs
-	uv run python scripts/audit_new_records_pass2.py
-	uv run python scripts/audit_combined_pass3.py
-	uv run python scripts/generate_coverage_report_pass3.py
-	uv run python scripts/analyze_pass3.py
+release: build ## Rebuild and audit the release outputs
+	uv run python scripts/audit_literature_records.py
+	uv run python scripts/audit_combined_atlas.py
+	uv run python scripts/generate_coverage_report.py
+	uv run python scripts/analyze_atlas.py
 
 train: build ## Train LightGBM + compute SHAP
 	uv run python scripts/train_model.py

@@ -1,4 +1,4 @@
-"""Regression tests for the combined-data explorer pipeline."""
+"""Regression tests for the atlas explorer pipeline."""
 
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ def _embedded_block(jsx: str, key: str) -> object:
     return json.loads(match.group(1))
 
 
-def test_extracted_data_matches_combined_release() -> None:
+def test_extracted_data_matches_atlas() -> None:
     data = _EXTRACT.build_data()
 
     assert data["stats"] == {
@@ -39,8 +39,6 @@ def test_extracted_data_matches_combined_release() -> None:
         "sources": 19,
         "columns": 48,
         "labeled": 315,
-        "addedRows": 198,
-        "addedSources": 15,
         "modelFeatures": 37,
         "descriptorRows": 154,
     }
@@ -53,8 +51,7 @@ def test_extracted_data_matches_combined_release() -> None:
 
     assert data["coverageStats"]["completeColumns"] == 30
     assert data["coverageStats"]["totalColumns"] == 48
-    assert data["labelDistribution"]["baseline"]["lowShare"] == 45.9
-    assert data["labelDistribution"]["combined"]["lowShare"] == 58.4
+    assert data["labelDistribution"]["lowShare"] == 58.4
     assert data["validationSummary"]["formulationGrouped"][
         "formulationDisjoint"
     ] is True
@@ -65,9 +62,8 @@ def test_extracted_data_matches_combined_release() -> None:
     assert {row["cls"] for row in boundary_rows} == {"high"}
     record_types = Counter(row["recordType"] for row in data["formulations"])
     assert record_types == {
-        "baseline": 135,
         "screen": 142,
-        "detailed": 51,
+        "detailed": 186,
         "abstract-only": 3,
         "partial": 2,
     }
@@ -88,7 +84,7 @@ def test_patcher_replaces_every_required_block() -> None:
     assert "const validationSummary = {" in patched
 
 
-def test_deployed_explorer_embeds_v2_data_and_matches_root_copy() -> None:
+def test_deployed_explorer_embeds_atlas_data_and_matches_root_copy() -> None:
     deployed = (_ROOT / "explorer" / "src" / "App.jsx").read_text()
     root_copy = (_ROOT / "explorer.jsx").read_text()
 

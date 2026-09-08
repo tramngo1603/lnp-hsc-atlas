@@ -1,16 +1,15 @@
-"""Integrate the 198 Pass 1 records into the consolidated feature matrix.
+"""Integrate literature records into the atlas feature matrix.
 
-Reads data/new_records_pass1.json (flat per-record schema) and projects each
-record onto the existing 47-column feature matrix schema used for the 135
-original rows (breda_2023, kim_2024, shi_2023, lian_2024). The matrix is a
-projection, not the source of truth; per-record notes, null_fields, replicate
-arrays, and other rich fields stay in new_records_pass1.json.
+Reads data/literature_records.json (flat per-record schema) and projects each
+record onto the established feature schema. The matrix is a projection, not
+the source of truth; per-record notes, null_fields, replicate arrays, and other
+rich fields stay in literature_records.json.
 
 Column conventions follow src/lnp_optimizer/integrate_lian.py:
 - mol% from composition (ionizable/helper/cholesterol/peg)
 - ratio features il_to_helper, il_to_chol, chol_to_helper
 - peg_chain_numeric from PEG-lipid chain length (C14 -> 14)
-- targeting_encoded (legacy ordinal: 0 none, 1 intrinsic, 2 active targeting)
+- targeting_encoded (established ordinal: 0 none, 1 intrinsic, 2 active targeting)
 - helper_is_cationic (DOTAP/DDAB/DOTMA -> 1)
 - species one-hot (mouse/nhp/human)
 - assay one-hot (barcode_delivery/depletion/editing/knockdown/protein_expression)
@@ -20,7 +19,7 @@ Column conventions follow src/lnp_optimizer/integrate_lian.py:
 - covalent_lipid_mol_pct (0 unless a 5th covalent lipid is present)
 - metric_type from assay_category (barcode_normalized/editing_pct/reporter_pct)
 - target from label_for_ml (high=2, medium=1, low=0, NaN if unlabeled)
-- label_boundary_case (1 for four retained legacy 30% Lian labels, else 0)
+- label_boundary_case (1 for four retained 30% Lian labels, else 0)
 """
 
 from __future__ import annotations
@@ -36,7 +35,7 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 _ROOT = Path(__file__).resolve().parent.parent.parent
-_RECORDS = _ROOT / "data" / "new_records_pass1.json"
+_RECORDS = _ROOT / "data" / "literature_records.json"
 _ANNOTATIONS = _ROOT / "annotations" / "new_paper_annotations.json"
 _FEATURES_PATH = _ROOT / "data" / "features" / "hsc_features.parquet"
 
@@ -53,7 +52,7 @@ _TARGETING_ENCODING = {
     "other": 2,
 }
 
-# Only functionalized/conjugated lipids belong in the legacy
+# Only functionalized/conjugated lipids belong in the established
 # covalent_lipid_mol_pct feature. The rich record schema also stores numeric
 # non-covalent components under composition.other_components, including
 # tricaprylin, apoA1 mol%, and apoA1 mass. Summing the whole mapping would mix
@@ -66,7 +65,7 @@ _COVALENT_COMPONENT_MARKERS = (
     "maleimide",
 )
 
-_LEGACY_30_PERCENT_BOUNDARY_EXPERIMENTS = frozenset(
+_LIAN_30_PERCENT_BOUNDARY_EXPERIMENTS = frozenset(
     {
         "Lian_A7_screen_n1",
         "Lian_A13_validated_n3",
@@ -76,7 +75,7 @@ _LEGACY_30_PERCENT_BOUNDARY_EXPERIMENTS = frozenset(
 )
 
 # IL molecular descriptors computed with RDKit from verified PubChem SMILES
-# (see data/enrichment_pass2.json). Applied to new records whose ionizable
+# (see data/enrichment.json). Applied to literature records whose ionizable
 # lipid is known and non-proprietary.
 _IL_DESCRIPTORS = {
     "mc3": {"il_molecular_weight": 641.61, "il_logp": 13.647,
@@ -217,7 +216,7 @@ def _peg_chain(peg_name) -> float:
 
 
 def _targeting_encoded(strategy: object) -> int:
-    """Project targeting strategy onto the matrix's legacy ordinal scale."""
+    """Project targeting strategy onto the matrix's established ordinal scale."""
     return _TARGETING_ENCODING.get(str(strategy or "").lower(), 0)
 
 
@@ -239,16 +238,16 @@ def _covalent_lipid_mol_pct(other_components: object) -> float:
 
 
 def add_label_boundary_marker(df: pd.DataFrame) -> pd.DataFrame:
-    """Mark retained v1 labels at the strict 30% decision boundary.
+    """Mark retained labels at the strict 30% decision boundary.
 
     The four Lian target values remain unchanged. This metadata marker lets
-    threshold-sensitive model evaluation exclude the legacy convention while
+    threshold-sensitive model evaluation exclude the boundary cases while
     preserving the released evidence rows.
     """
     marked = df.copy()
     is_boundary = (
         marked["paper"].eq("lian_2024")
-        & marked["experiment_id"].isin(_LEGACY_30_PERCENT_BOUNDARY_EXPERIMENTS)
+        & marked["experiment_id"].isin(_LIAN_30_PERCENT_BOUNDARY_EXPERIMENTS)
     )
     marked["label_boundary_case"] = is_boundary.astype("int8")
     return marked
@@ -337,7 +336,7 @@ def _make_row(record: dict, label: str | None) -> dict:
     return row
 
 
-def build_new_rows() -> pd.DataFrame:
+def build_literature_rows() -> pd.DataFrame:
     records = json.loads(_RECORDS.read_text())["records"]
     annotations = json.loads(_ANNOTATIONS.read_text())
     paper_labels = {p["paper_id"]: (p.get("label_for_ml") or {})
@@ -352,7 +351,7 @@ def build_new_rows() -> pd.DataFrame:
         rows.append(_make_row(r, label))
         if label in _LABEL_MAP:
             n_labeled += 1
-    logger.info("Built %d new rows (%d labeled)", len(rows), n_labeled)
+    logger.info("Built %d literature rows (%d labeled)", len(rows), n_labeled)
     return pd.DataFrame(rows)
 
 
@@ -360,19 +359,23 @@ def integrate(save: bool = True) -> pd.DataFrame:
     existing = pd.read_parquet(_FEATURES_PATH)
     logger.info("Existing feature matrix: %d rows x %d cols", *existing.shape)
 
-    new_df = build_new_rows()
+    literature_df = build_literature_rows()
 
     for col in existing.columns:
-        if col not in new_df.columns:
-            new_df[col] = np.nan
-    for col in new_df.columns:
+        if col not in literature_df.columns:
+            literature_df[col] = np.nan
+    for col in literature_df.columns:
         if col not in existing.columns:
             existing[col] = 0.0 if col == "covalent_lipid_mol_pct" else np.nan
-    new_df = new_df[existing.columns]
+    literature_df = literature_df[existing.columns]
 
-    combined = pd.concat([existing, new_df], ignore_index=True)
+    combined = pd.concat([existing, literature_df], ignore_index=True)
     combined = add_label_boundary_marker(combined)
-    logger.info("Combined: %d rows (added %d new)", len(combined), len(new_df))
+    logger.info(
+        "Integrated %d literature rows; matrix contains %d rows",
+        len(literature_df),
+        len(combined),
+    )
 
     if save:
         combined.to_parquet(_FEATURES_PATH, index=False)

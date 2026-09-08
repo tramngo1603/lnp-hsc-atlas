@@ -11,7 +11,6 @@
     "evaluated_papers": 12,
     "formulation_tokens": 265
   },
-  "formulation_token_rule": "Source-qualified normalized formulation identity. Numbered LNP identities use the LNP number and discard cargo or study-role suffixes.",
   "row_random_5fold": {
     "model": "lightgbm",
     "n_folds": 5,

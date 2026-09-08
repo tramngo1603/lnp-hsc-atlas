@@ -43,12 +43,14 @@ def _check_paper(data: dict, path: str) -> tuple[list[str], list[str]]:
         warnings.append(f"{pid}: unusual DOI format: {paper['doi_or_id']}")
 
     # Check formulations
-    formulations = data.get("formulations", data.get("formulations_screen", {}).get("formulations", []))
-    if not formulations:
-        # Extraction-log entries store records in data/new_records_pass1.json
-        # and link them via record_ids; that is a valid container format.
-        if not data.get("record_ids"):
-            warnings.append(f"{pid}: no formulations array")
+    formulations = data.get(
+        "formulations",
+        data.get("formulations_screen", {}).get("formulations", []),
+    )
+    # Extraction-log entries store records in data/literature_records.json
+    # and link them via record_ids; that is a valid container format.
+    if not formulations and not data.get("record_ids"):
+        warnings.append(f"{pid}: no formulations array")
 
     seen_ids: set[str] = set()
     for i, form in enumerate(formulations):

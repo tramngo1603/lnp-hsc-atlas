@@ -15,8 +15,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from lnp_optimizer.feature_matrix import build_feature_matrix  # noqa: E402
 from lnp_optimizer.integrate_lian import integrate  # noqa: E402
-from lnp_optimizer.integrate_new_records_pass2 import (  # noqa: E402
-    integrate as integrate_pass2,
+from lnp_optimizer.integrate_literature_records import (  # noqa: E402
+    integrate as integrate_literature,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -75,8 +75,8 @@ def main() -> int:
     df.to_csv(_OUT_PATH.with_suffix(".csv"), index=False)
 
     # Step 4: Integrate 198 records onto the 47 released columns, then add label metadata
-    print("\n4. Integrating 198 Pass 1 records (new_records_pass1.json)...")
-    df = integrate_pass2(save=True)
+    print("\n4. Integrating 198 literature extraction records (literature_records.json)...")
+    df = integrate_literature(save=True)
 
     il_coverage = df["il_molecular_weight"].notna().sum()
     print(f"   IL descriptor coverage: {il_coverage}/{len(df)} ({il_coverage/len(df)*100:.0f}%)")

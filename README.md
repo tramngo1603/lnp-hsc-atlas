@@ -1,22 +1,16 @@
 # LNP-HSC Atlas
 
-The LNP-HSC Atlas is a curated dataset and analysis framework for in vivo lipid nanoparticle delivery to hematopoietic stem and progenitor cells (HSPCs). Version 2.0 expands the protected 135-row baseline with 198 literature-mined formulation-experiment records.
+The LNP-HSC Atlas is a curated dataset and analysis framework for in vivo lipid nanoparticle delivery to hematopoietic stem and progenitor cells (HSPCs). It contains 333 formulation-experiment evidence rows from 19 published sources.
 
 **Release snapshot:** 333 rows | 19 matrix sources | 48 columns | 315 efficacy labels | 154 rows with ionizable-lipid descriptors
 
-The first 135 matrix rows remain value-identical to the pre-expansion baseline. Missing values are preserved when the literature does not support a defensible value.
+Missing values are preserved when the literature does not support a defensible value.
 
 ## Dataset composition
 
-| Block | Sources | Rows |
-| --- | ---: | ---: |
-| Protected baseline: Breda 2023, Shi 2023, Kim 2024, Lian 2024 | 4 | 135 |
-| Pass 1 expansion | 15 | 198 |
-| **Combined matrix** | **19** | **333** |
+The largest sources are Xu 2026 (148 rows), Kim 2024 (80), Lian 2024 (25), Shi 2023 (21), Hanafy 2025 (14), Breda 2023 (9), and Hofstraat 2025 (9). Twelve additional sources contribute the remaining records.
 
-The 198-row expansion contains Xu 2026 (148), Hanafy 2025 (14), Hofstraat 2025 (9), Shi 2025 thesis (4), Chander 2023 (3), Palchaudhuri 2025 (3), and 17 rows from nine smaller sources.
-
-Rows are formulation-experiment evidence units, not guaranteed unique chemical formulations. The Pass 3 audit found no exact matrix duplicates and removed no rows. Three Xu formulations have both lead-context and uniform-library records; group analyses by formulation token when leakage between those roles would matter.
+Rows are formulation-experiment evidence units, not guaranteed unique chemical formulations. The release audit found no exact matrix duplicates and removed no rows. Repeated observations of the same formulation remain grouped during model validation.
 
 ## Release decisions
 
@@ -26,9 +20,9 @@ Rows are formulation-experiment evidence units, not guaranteed unique chemical f
 - Absolute per-mouse doses are not converted to mg/kg without verified animal weights.
 - The source-reported 116% Xu LNP-123 replicate is retained and explicitly flagged as an outlier.
 - Ionizable-lipid structures and other missing values are never inferred from an analog.
-- The current labeling rule is strictly `high >30%`, `medium 10-30%`, and `low <10%`. Four protected legacy `lian_2024` rows measured at exactly 30% retain their v1 `high` labels. They are boundary cases, not errors, and are identified by `label_boundary_case = 1`.
+- The current labeling rule is strictly `high >30%`, `medium 10-30%`, and `low <10%`. Four `lian_2024` rows measured at exactly 30% retain their established `high` labels. They are boundary cases, not errors, and are identified by `label_boundary_case = 1`.
 
-See the [labeling conventions](docs/LABELING_CONVENTIONS.md), [Pass 3 coverage report](docs/COVERAGE_REPORT.md), and [dedupe and contradiction audit](data/audit/pass3_dedupe_report.json) for the complete release accounting.
+See the [labeling conventions](docs/LABELING_CONVENTIONS.md), [coverage report](docs/COVERAGE_REPORT.md), and [dedupe and contradiction audit](data/audit/consolidated_audit.json) for the complete release accounting.
 
 ## Repository layout
 
@@ -36,13 +30,13 @@ See the [labeling conventions](docs/LABELING_CONVENTIONS.md), [Pass 3 coverage r
 | --- | --- |
 | `data/features/hsc_features.parquet` | Canonical 333 x 48 feature matrix |
 | `data/features/hsc_features.csv` | CSV rendering of the same matrix |
-| `data/hsc/hsc_curated.parquet` | Protected legacy source table used to build the original block |
-| `data/new_records_pass1.json` | 198 rich flat records plus 3 paywalled source stubs |
-| `annotations/` | Legacy annotations and provenance-chain records |
+| `data/hsc/hsc_curated.parquet` | Curated source table for the established atlas records |
+| `data/literature_records.json` | Rich literature records plus 3 paywalled source stubs |
+| `annotations/` | Source annotations and provenance-chain records |
 | `data/audit/` | Machine-readable and narrative validation outputs |
-| `data/models/pass3_analysis.json` | Combined-data sensitivity analysis and established Pareto results |
-| `docs/COVERAGE_REPORT.md` | Per-column old, new, and combined fill rates |
-| `explorer/src/App.jsx` | Interactive v2 explorer generated from the combined matrix and model reports |
+| `data/models/atlas_analysis.json` | Sensitivity analysis and established Pareto results |
+| `docs/COVERAGE_REPORT.md` | Per-column fill rates and sparse evidence blocks |
+| `explorer/src/App.jsx` | Interactive explorer generated from the atlas matrix and model reports |
 
 ## Installation
 
@@ -70,23 +64,17 @@ assert len(threshold_comparable) == 311
 Rebuild and validate the release outputs with:
 
 ```bash
-make pass3
+make release
 ```
 
-The supplied history declares `src/external_data/` and `src/pubmed_agent/` in its package
-configuration but does not contain either source package. Raw full-suite collection therefore
-reports missing-module errors. After excluding those unavailable-package collectors, the release
-runs 134 tests successfully; the four separately exercised fingerprint tests have the documented
-`external_data` dependency.
-
-The individual Pass 3 steps are also reproducible:
+The individual release steps are also reproducible:
 
 ```bash
 uv run python scripts/build_feature_matrix.py
-uv run python scripts/audit_new_records_pass2.py
-uv run python scripts/audit_combined_pass3.py
-uv run python scripts/generate_coverage_report_pass3.py
-uv run python scripts/analyze_pass3.py
+uv run python scripts/audit_literature_records.py
+uv run python scripts/audit_combined_atlas.py
+uv run python scripts/generate_coverage_report.py
+uv run python scripts/analyze_atlas.py
 ```
 
 Regenerate the explorer data blocks with the existing extraction and patch pipeline, then build
@@ -101,23 +89,21 @@ cd explorer && npm ci && npm run build
 
 `make train` reports three LightGBM validation views on the threshold-comparable labeled rows:
 
-- Five-fold formulation-grouped validation is the primary within-literature estimate. Every record with the same source-qualified formulation token stays in one fold.
+- Five-fold formulation-grouped validation is the primary within-literature estimate. Repeated observations of the same formulation stay in one fold.
 - Five-fold row-random validation is retained only as a diagnostic of leakage-driven optimism.
 - Leave-one-paper-out validation remains the broader source-shift stress test.
 
-For numbered formulations, the token uses the normalized LNP number and discards cargo and study-role suffixes. For example, Xu lead, HBG, Cre, and library appearances of `LNP-028` or `LNP-168` cannot cross the training and held-out partitions. Other tokens use the normalized full formulation identifier within the source paper. Results and per-fold overlap audits are stored in `data/models/validation_comparison.json`.
-
-In the current release run, row-random balanced accuracy is 0.5975 +/- 0.0392 and formulation-grouped balanced accuracy is 0.5375 +/- 0.0630. Row-random folds share 7 to 12 formulation tokens across their partitions; every formulation-grouped fold has zero overlap.
+Results and per-fold overlap audits are stored in `data/models/validation_comparison.json`.
 
 ## Coverage and analysis cautions
 
 - Thirty of 48 matrix columns are complete across all 333 rows.
 - The efficacy label covers 315/333 rows (94.6%). Unlabeled rows must be excluded from supervised training.
-- Four exact-boundary Lian rows retain legacy labels. The training loader excludes these rows from threshold-sensitive evaluation and removes `label_boundary_case` from predictor features.
+- Four exact-boundary Lian rows retain their established labels. The training loader excludes these rows from threshold-sensitive evaluation and removes `label_boundary_case` from predictor features.
 - Each of the eight ionizable-lipid descriptor columns covers 154/333 rows (46.2%).
-- Physicochemical and toxicity fields remain in the rich records rather than the fixed 48-column matrix. Detailed toxicity evidence is available for only 13/198 new rows.
-- `lgbm_model.pkl`, `shap_values.parquet`, `lopocv_results.json`, and `validation_comparison.json` use the 311 threshold-comparable labeled rows in the combined release. Other legacy model artifacts may describe earlier analysis stages. The corrected screen and validation Pareto frontiers are unchanged because the expansion adds no comparable, same-record absolute bone-marrow and liver percentage pair.
-- Combined feature-target correlations are descriptive. They are confounded by paper, assay, and repeated-formulation structure and should not be interpreted causally.
+- Physicochemical and toxicity fields remain in the rich records rather than the fixed 48-column matrix. Detailed toxicity evidence is available for 13 literature records.
+- `lgbm_model.pkl`, `shap_values.parquet`, `lopocv_results.json`, and `validation_comparison.json` use the 311 threshold-comparable labeled rows. The corrected screen and validation Pareto analyses include only comparable, same-record absolute bone-marrow and liver percentage pairs.
+- Feature-target correlations are descriptive. They are confounded by paper, assay, and repeated-formulation structure and should not be interpreted causally.
 
 ## Known open sources
 

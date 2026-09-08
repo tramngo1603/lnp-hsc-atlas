@@ -36,7 +36,11 @@ _MODELS_DIR = _ROOT / "data" / "models"
 
 _KNOWN_SARS = {"ionizable_mol_pct", "receptor_cd117", "dose_mg_per_kg",
                "hl_dotap", "helper_mol_pct"}
-_NEW_FINDINGS = {"chol_to_helper_ratio", "cholesterol_mol_pct", "il_molecular_weight"}
+_LITERATURE_FINDINGS = {
+    "chol_to_helper_ratio",
+    "cholesterol_mol_pct",
+    "il_molecular_weight",
+}
 
 _EXTRA_DROP = ["metric_type", "covalent_lipid_mol_pct"]
 
@@ -126,10 +130,6 @@ def main() -> int:
             "evaluated_papers": len(set(paper_groups)),
             "formulation_tokens": len(set(formulation_groups)),
         },
-        "formulation_token_rule": (
-            "Source-qualified normalized formulation identity. Numbered LNP identities use "
-            "the LNP number and discard cargo or study-role suffixes."
-        ),
         "row_random_5fold": row_random,
         "formulation_grouped_5fold": formulation_grouped,
         "leave_one_paper_out": cv,
@@ -167,8 +167,8 @@ def main() -> int:
     for rank, (feat, val) in enumerate(ranked, 1):
         if feat in _KNOWN_SARS:
             ftype = "known"
-        elif feat in _NEW_FINDINGS:
-            ftype = "new"
+        elif feat in _LITERATURE_FINDINGS:
+            ftype = "literature"
         else:
             ftype = "other"
         shap_rows.append({"rank": rank, "feature": feat,
@@ -186,7 +186,7 @@ def main() -> int:
     print("\nTop 10 SHAP features:")
     for row in shap_rows[:10]:
         marker = " ← SAR" if row["type"] == "known" else (
-            " ← NEW" if row["type"] == "new" else "")
+            " <- LITERATURE" if row["type"] == "literature" else "")
         print(f"  {row['rank']:2d}. {row['feature']:30s} {row['mean_abs_shap']:.4f}{marker}")
 
     return 0

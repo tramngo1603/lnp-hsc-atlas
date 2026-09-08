@@ -24,10 +24,10 @@ _SHAP_PATH = _ROOT / "data" / "models" / "shap_values.csv"
 _SHAP_PARQUET_PATH = _ROOT / "data" / "models" / "shap_values.parquet"
 _LOPOCV_PATH = _ROOT / "data" / "models" / "lopocv_results.json"
 _VALIDATION_PATH = _ROOT / "data" / "models" / "validation_comparison.json"
-_NEW_RECORDS_PATH = _ROOT / "data" / "new_records_pass1.json"
-_NEW_ANNOTATIONS_PATH = _ROOT / "annotations" / "new_paper_annotations.json"
+_LITERATURE_RECORDS_PATH = _ROOT / "data" / "literature_records.json"
+_LITERATURE_ANNOTATIONS_PATH = _ROOT / "annotations" / "new_paper_annotations.json"
 _OUT_PATH = _ROOT / "explorer_data.json"
-_BASELINE_ROWS = 135
+_CURATED_ROWS = 135
 
 _LEGACY_ANNOTATIONS = {
     "breda_2023": _ROOT / "annotations" / "breda_2023.json",
@@ -42,7 +42,7 @@ _KNOWN_SARS = {
     "hl_dotap",
     "helper_mol_pct",
 }
-_NEW_FINDINGS = {
+_LITERATURE_FINDINGS = {
     "chol_to_helper_ratio",
     "cholesterol_mol_pct",
     "il_molecular_weight",
@@ -107,8 +107,8 @@ def _shap_ranking() -> list[dict[str, Any]]:
             "type": (
                 "known"
                 if feature in _KNOWN_SARS
-                else "new"
-                if feature in _NEW_FINDINGS
+                else "literature"
+                if feature in _LITERATURE_FINDINGS
                 else "other"
             ),
         }
@@ -117,7 +117,7 @@ def _shap_ranking() -> list[dict[str, Any]]:
 
 
 def _shap_data(ranking: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Convert the combined-data SHAP ranking to explorer labels."""
+    """Convert the atlas SHAP ranking to explorer labels."""
     label_map = {
         "ionizable_mol_pct": "Ionizable lipid %",
         "receptor_cd117": "CD117 targeting",
@@ -160,7 +160,7 @@ def _shap_context(ranking: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
             "rank": int(row["rank"]),
             "shap": round(float(row["mean_abs_shap"]), 2),
             "direction": (
-                "Combined-data feature importance is descriptive; paper, assay, and repeated "
+                "Atlas-wide feature importance is descriptive; paper, assay, and repeated "
                 "formulations can contribute to this rank."
             ),
         }
@@ -260,7 +260,7 @@ def _lian_data() -> tuple[list[str], list[dict]]:
 
 
 def _lopocv_data() -> list[dict[str, Any]]:
-    """Load the combined-data leave-one-paper-out folds."""
+    """Load the atlas leave-one-paper-out folds."""
     if _LOPOCV_PATH.exists():
         with open(_LOPOCV_PATH) as f:
             report = json.load(f)
@@ -327,7 +327,7 @@ def _targeting_name(row: pd.Series, record: dict[str, Any] | None) -> str:
 
 def _record_type(record: dict[str, Any] | None) -> str:
     if record is None:
-        return "baseline"
+        return "detailed"
     status = record.get("status")
     if status == "extracted_abstract_only":
         return "abstract-only"
@@ -357,7 +357,7 @@ def _formulations(
     rows: list[dict[str, Any]] = []
     for index, row in df.iterrows():
         record = None
-        if index >= _BASELINE_ROWS:
+        if index >= _CURATED_ROWS:
             key = (
                 row["paper"],
                 row["formulation_id"],
@@ -366,7 +366,7 @@ def _formulations(
             )
             record = record_index.get(key)
             if record is None:
-                raise ValueError(f"new matrix row has no rich record: {key}")
+                raise ValueError(f"matrix row has no matching rich record: {key}")
         target = _number(row["target"])
         rows.append(
             {
@@ -386,7 +386,7 @@ def _formulations(
                 "cls": labels.get(target),
                 "boundary": bool(row["label_boundary_case"]),
                 "recordType": _record_type(record),
-                "status": str(record.get("status")) if record else "curated_baseline",
+                "status": str(record.get("status")) if record else "curated",
                 "confidence": str(row["composition_confidence"]),
             }
         )
@@ -398,7 +398,7 @@ def _paper_metadata() -> dict[str, dict[str, Any]]:
     for paper_id, path in _LEGACY_ANNOTATIONS.items():
         document = json.loads(path.read_text())
         metadata[paper_id] = document.get("paper_metadata") or document.get("paper") or {}
-    document = json.loads(_NEW_ANNOTATIONS_PATH.read_text())
+    document = json.loads(_LITERATURE_ANNOTATIONS_PATH.read_text())
     for paper in document["papers"]:
         metadata[paper["paper_id"]] = paper.get("paper_metadata") or {}
     return metadata
@@ -442,11 +442,7 @@ def _papers(
                     or "N/R"
                 ),
                 "title": str(paper_meta.get("title") or paper_id),
-                "role": (
-                    "Protected baseline"
-                    if str(paper_id) in _LEGACY_ANNOTATIONS
-                    else "Pass 1 expansion"
-                ),
+                "role": "Atlas source",
                 "records": int(df["paper"].eq(paper_id).sum()),
                 "status": ", ".join(sorted(statuses.get(str(paper_id), {"curated"}))),
                 "paperType": str(paper_meta.get("paper_type") or "N/R"),
@@ -501,7 +497,7 @@ def _coverage_stats(
                 "Detailed toxicity",
                 detailed_toxicity,
                 len(records),
-                "new rich records only",
+                "normalized rich records",
             ),
         ],
     }
@@ -523,35 +519,22 @@ def _target_distribution(frame: pd.DataFrame) -> dict[str, Any]:
 
 
 def _label_distribution(df: pd.DataFrame) -> dict[str, Any]:
-    baseline = _target_distribution(df.iloc[:_BASELINE_ROWS])
-    combined = _target_distribution(df)
-    return {
-        "baseline": baseline,
-        "combined": combined,
-        "lowShareShift": round(combined["lowShare"] - baseline["lowShare"], 1),
-    }
+    return _target_distribution(df)
 
 
 def _source_summary(df: pd.DataFrame, records: list[dict[str, Any]]) -> dict[str, Any]:
-    new = df.iloc[_BASELINE_ROWS:]
     type_counts = Counter(_record_type(record) for record in records)
+    type_counts["detailed"] += _CURATED_ROWS
     return {
-        "baselineRows": _BASELINE_ROWS,
-        "newRows": len(new),
-        "baselineSources": int(df.iloc[:_BASELINE_ROWS]["paper"].nunique()),
-        "addedSources": int(new["paper"].nunique()),
-        "added": [
+        "sources": [
             {
                 "id": str(paper_id),
                 "label": _paper_label(str(paper_id)),
                 "rows": int(count),
             }
-            for paper_id, count in new["paper"].value_counts().items()
+            for paper_id, count in df["paper"].value_counts().items()
         ],
-        "recordTypes": {
-            "baseline": _BASELINE_ROWS,
-            **{key: int(value) for key, value in sorted(type_counts.items())},
-        },
+        "recordTypes": {key: int(value) for key, value in sorted(type_counts.items())},
     }
 
 
@@ -584,14 +567,12 @@ def _validation_summary() -> dict[str, Any]:
 
 
 def _stats(df: pd.DataFrame) -> dict[str, int]:
-    """Compute release header stats."""
+    """Compute explorer header stats."""
     return {
         "rows": len(df),
         "sources": int(df["paper"].nunique()),
         "columns": len(df.columns),
         "labeled": int(df["target"].notna().sum()),
-        "addedRows": len(df) - _BASELINE_ROWS,
-        "addedSources": int(df.iloc[_BASELINE_ROWS:]["paper"].nunique()),
         "modelFeatures": 37,
         "descriptorRows": int(df["il_molecular_weight"].notna().sum()),
     }
@@ -604,19 +585,18 @@ def _findings(
 ) -> list[dict[str, str]]:
     return [
         {
-            "title": "Atlas expansion",
+            "title": "Atlas scope",
             "text": (
-                "Version 2 expands the protected 135-row baseline to 333 evidence rows from "
-                "19 matrix sources. The 198-row addition spans 15 sources, led by Xu 2026 "
-                "(148), Hanafy 2025 (14), and Hofstraat 2025 (9)."
+                "The atlas contains 333 evidence rows from 19 matrix sources. The largest "
+                "sources are Xu 2026 (148), Kim 2024 (80), and Lian 2024 (25)."
             ),
         },
         {
-            "title": "Label distribution shift",
+            "title": "Label distribution",
             "text": (
-                f"The low-efficacy share rises from {labels['baseline']['lowShare']}% in the "
-                f"baseline to {labels['combined']['lowShare']}% across labeled combined rows. "
-                "The large Xu screen contributes most of this shift."
+                f"Low efficacy accounts for {labels['low']}/{labels['labeled']} labeled rows "
+                f"({labels['lowShare']}%). The large Xu screen contributes many repeated-assay "
+                "observations, so formulation-grouped validation is primary."
             ),
         },
         {
@@ -624,7 +604,7 @@ def _findings(
             "text": (
                 f"{coverage['completeColumns']} of {coverage['totalColumns']} matrix columns "
                 "are complete. Ionizable-lipid descriptors cover 154/333 rows, while detailed "
-                "toxicity evidence covers 13/198 new rich records. Missing values are not inferred."
+                "toxicity evidence covers 13/198 rich records. Missing values are not inferred."
             ),
         },
         {
@@ -639,17 +619,17 @@ def _findings(
         {
             "title": "The 30% boundary is explicit",
             "text": (
-                "New rows use high >30% strictly. Four protected Lian 2024 rows at exactly 30% "
-                "retain their version 1 high labels and carry the boundary marker. They are "
+                "The current rule uses high >30% strictly. Four Lian 2024 rows at exactly 30% "
+                "retain their established high labels and carry the boundary marker. They are "
                 "boundary cases, not errors."
             ),
         },
         {
-            "title": "Pareto frontier is unchanged",
+            "title": "Pareto scope",
             "text": (
-                "The expansion adds no standardized same-record absolute bone-marrow and liver "
-                "percentage pair, so the corrected Pareto screen and validation frontiers do "
-                "not change."
+                "The corrected Pareto analysis includes only standardized same-record absolute "
+                "bone-marrow and liver percentage pairs. Relative and qualitative values are "
+                "not converted into the Pareto axes."
             ),
         },
     ]
@@ -658,11 +638,11 @@ def _findings(
 def build_data() -> dict[str, Any]:
     """Build every generated explorer data block."""
     df = pd.read_parquet(_FEAT_PATH)
-    records = json.loads(_NEW_RECORDS_PATH.read_text())["records"]
+    records = json.loads(_LITERATURE_RECORDS_PATH.read_text())["records"]
     if df.shape != (333, 48):
         raise ValueError(f"expected 333 x 48 feature matrix, observed {df.shape}")
     if len(records) != 198:
-        raise ValueError(f"expected 198 new rich records, observed {len(records)}")
+        raise ValueError(f"expected 198 rich literature records, observed {len(records)}")
 
     ranking = _shap_ranking()
     peg_comp, interaction, headgroup, headgroup_stats = _kim_screen_analysis()

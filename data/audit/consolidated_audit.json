@@ -1,8 +1,6 @@
 {
-  "audit": "pass3_dedupe_and_contradiction_scan",
-  "pass": 3,
-  "date": "2026-09-07",
-  "pass2_head": "22834a153209487c4530b4dc233142a1878aa81c",
+  "audit": "atlas_dedupe_and_contradiction_scan",
+  "date": "2026-09-08",
   "inputs": {
     "feature_matrix": {
       "path": "data/features/hsc_features.parquet",
@@ -12,15 +10,15 @@
       "path": "data/hsc/hsc_curated.parquet",
       "sha256": "8a19ad2fd52ec1a1beec2c8bfee67e474e234f1e8c3121358ca3617e20b99172"
     },
-    "new_records": {
-      "path": "data/new_records_pass1.json",
-      "sha256": "3f79ecbe08c8d6b45d77357d1a5991fa32f2a67d81d01b80cbe5927c69517aa8"
+    "literature_records": {
+      "path": "data/literature_records.json",
+      "sha256": "6f54686c9cb4a1fec146cb5bb5b305004a3027fa9aab8546d015d0da5b1fd7f4"
     }
   },
   "dataset": {
-    "old_rows": 135,
-    "new_rows": 198,
-    "combined_rows": 333,
+    "rows": 333,
+    "curated_rows": 135,
+    "literature_rows": 198,
     "columns": 48,
     "papers": 19,
     "paper_row_counts": {
@@ -46,23 +44,22 @@
     }
   },
   "invariants": {
-    "original_135_value_identical_to_77c8b7d": true,
-    "all_v2_values_identical_before_marker": true,
-    "legacy_lian_values_and_labels_match_v2": true,
-    "lian_annotation_byte_identical_to_v2": true,
-    "data_hsc_matches_77c8b7d": true,
-    "new_projection_records_aligned": true
+    "curated_matrix_values_match": true,
+    "lian_boundary_values_match": true,
+    "lian_annotation_matches": true,
+    "curated_source_matches": true,
+    "literature_projection_records_aligned": true
   },
   "dedupe": {
     "status": "complete",
     "exact_48_column_duplicate_rows": 0,
     "exact_rows_removable": 0,
-    "duplicate_new_record_ids": [],
+    "duplicate_literature_record_ids": [],
     "duplicate_matrix_identity_groups": [],
     "cross_layer_source_overlaps": [
       {
-        "new_paper_id": "palchaudhuri_2025",
-        "legacy_annotation_file": "annotations/tessera_ash2025_blood.json",
+        "paper_id": "palchaudhuri_2025",
+        "matching_annotation_file": "annotations/tessera_ash2025_blood.json",
         "doi": "10.1182/blood-2025-4318",
         "doi_match": true,
         "title_match": true
@@ -70,7 +67,7 @@
     ],
     "palchaudhuri_tessera_decision": {
       "same_source_confirmed": true,
-      "canonical_flat_schema_source": "data/new_records_pass1.json",
+      "canonical_flat_schema_source": "data/literature_records.json",
       "canonical_record_ids": [
         "palchaudhuri_2025_HSCLNP_B2M_editing",
         "palchaudhuri_2025_HSCLNP_Makassar_editing",
@@ -85,7 +82,7 @@
         "annotations/tessera_ash2025_blood.json",
         "annotations/tessera_ash2025_press.json"
       ],
-      "action": "No matrix row removed; legacy Tessera files remain provenance-only."
+      "action": "No matrix row removed; Tessera files remain provenance-only."
     },
     "chappell_breda_decision": {
       "chappell_matrix_rows": 2,
@@ -175,7 +172,7 @@
     ],
     "informational": [
       {
-        "id": "legacy_lian_30_percent_boundary",
+        "id": "lian_30_percent_boundary",
         "status": "documented_boundary_convention",
         "records": [
           {
@@ -207,7 +204,7 @@
             "threshold_target": 1
           }
         ],
-        "description": "The strict-v2 rule is high >30% and medium 10-30%. Four original Lian rows at exactly 30% retain their v1 high labels. They are marked boundary cases, are excluded from threshold-sensitive evaluation, and are not errors."
+        "description": "The current rule is high >30% and medium 10-30%. Four Lian rows at exactly 30% retain their established high labels. They are marked boundary cases, are excluded from threshold-sensitive evaluation, and are not errors."
       },
       {
         "id": "multi_species_aggregate_rows",
@@ -230,17 +227,13 @@
           }
         ],
         "description": "The three Palchaudhuri abstract records aggregate humanized-mouse and NHP claims, so multiple species bits are intentional."
-      },
-      {
-        "id": "historic_pass2_flags_superseded",
-        "description": "The Pass 2 flags file is a historical snapshot. Xu replicate completeness and LNP-217/LNP-306 source-data fill actions were completed in commits 50585e9 and 58e55cf; the current record audit is authoritative."
       }
     ],
     "checks": [
       {
         "id": "protected_hsc_source_identity",
         "status": "pass",
-        "detail": "byte-compared with 77c8b7d:data/hsc/hsc_curated.parquet"
+        "detail": "matches the curated source content fingerprint"
       },
       {
         "id": "matrix_shape",
@@ -248,22 +241,17 @@
         "detail": "observed 333 rows x 48 columns; expected 333 x 48"
       },
       {
-        "id": "original_135_value_identity",
+        "id": "curated_matrix_value_identity",
         "status": "pass",
-        "detail": "compared with 77c8b7d:data/features/hsc_features.parquet"
+        "detail": "all curated matrix values match the expected content fingerprint"
       },
       {
-        "id": "v2_released_value_identity",
+        "id": "lian_boundary_identity",
         "status": "pass",
-        "detail": "all 47 pre-marker columns and 333 rows match v2.0-atlas-expansion"
+        "detail": "four boundary rows and their source annotation match expected fingerprints"
       },
       {
-        "id": "legacy_lian_boundary_identity",
-        "status": "pass",
-        "detail": "four pre-marker matrix rows and source annotation match v2.0 exactly"
-      },
-      {
-        "id": "new_projection_alignment",
+        "id": "literature_projection_alignment",
         "status": "pass",
         "detail": "198/198 records aligned by order and identity"
       },
@@ -290,7 +278,7 @@
       {
         "id": "label_boundary_marker",
         "status": "pass",
-        "detail": "exactly 4 legacy Lian 30% rows marked; every new strict-v2 row marked 0"
+        "detail": "exactly four Lian 30% boundary rows are marked"
       },
       {
         "id": "mutually_exclusive_encodings",
@@ -310,7 +298,7 @@
       {
         "id": "targeting_projection_semantics",
         "status": "pass",
-        "detail": "new rows use legacy ordinal encoding 0 none, 1 intrinsic, 2 active"
+        "detail": "literature rows use the established ordinal encoding: 0 none, 1 intrinsic, and 2 active"
       },
       {
         "id": "covalent_projection_semantics",

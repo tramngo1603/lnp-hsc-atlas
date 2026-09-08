@@ -1,4 +1,4 @@
-"""Generate the Pass 3 old/new/combined coverage report."""
+"""Generate the atlas coverage report."""
 
 from __future__ import annotations
 
@@ -11,10 +11,10 @@ import pandas as pd
 
 _ROOT = Path(__file__).resolve().parent.parent
 _FEATURES = _ROOT / "data" / "features" / "hsc_features.parquet"
-_NEW_RECORDS = _ROOT / "data" / "new_records_pass1.json"
+_LITERATURE_RECORDS_PATH = _ROOT / "data" / "literature_records.json"
 _OUTPUT = _ROOT / "docs" / "COVERAGE_REPORT.md"
-_OLD_ROWS = 135
-_NEW_ROWS = 198
+_ATLAS_ROWS = 333
+_LITERATURE_RECORD_COUNT = 198
 
 _METADATA = {
     "source",
@@ -156,62 +156,54 @@ def _rich_record_coverage(records: list[dict[str, Any]]) -> list[tuple[str, int]
 
 def build_report() -> str:
     df = pd.read_parquet(_FEATURES)
-    records = json.loads(_NEW_RECORDS.read_text())["records"]
-    if df.shape != (_OLD_ROWS + _NEW_ROWS, 48):
+    records = json.loads(_LITERATURE_RECORDS_PATH.read_text())["records"]
+    if df.shape != (_ATLAS_ROWS, 48):
         raise ValueError(f"expected 333 x 48 matrix, observed {df.shape}")
-    if len(records) != _NEW_ROWS:
-        raise ValueError(f"expected 198 new records, observed {len(records)}")
+    if len(records) != _LITERATURE_RECORD_COUNT:
+        raise ValueError(f"expected 198 literature records, observed {len(records)}")
 
-    old = df.iloc[:_OLD_ROWS]
-    new = df.iloc[_OLD_ROWS:]
-    complete_combined = sum(df[column].notna().all() for column in df.columns)
+    complete_columns = sum(df[column].notna().all() for column in df.columns)
     descriptor_count = int(df["il_molecular_weight"].notna().sum())
-    old_descriptor_count = int(old["il_molecular_weight"].notna().sum())
-    new_descriptor_count = int(new["il_molecular_weight"].notna().sum())
     target_count = int(df["target"].notna().sum())
 
     lines = [
-        "# Pass 3 Coverage Report",
+        "# Atlas Coverage Report",
         "",
-        "Generated from `data/features/hsc_features.parquet` after Pass 3 consolidation. "
-        "The matrix contains 135 protected baseline rows followed by 198 new rows, for "
-        "333 rows across 19 papers and 48 columns.",
+        "Generated from `data/features/hsc_features.parquet`. The matrix contains 333 rows "
+        "across 19 papers and 48 columns.",
         "",
         "## Method",
         "",
         "Coverage is the count of non-null cells. Numeric zero and boolean-style zero are "
         "valid populated values, especially in one-hot encodings. Coverage therefore measures "
-        "availability, not feature prevalence. The split boundary and value identity of the "
-        "original 135 rows are verified by `scripts/audit_combined_pass3.py`.",
+        "availability, not feature prevalence. Data integrity and logical consistency are "
+        "verified by `scripts/audit_combined_atlas.py`.",
         "",
         "## Summary",
         "",
-        f"- {complete_combined}/48 columns are complete across all 333 rows.",
-        "- `label_boundary_case` marks four protected Lian 2024 rows whose exact 30% "
-        "measurements retain v1 `high` labels. New rows use the strict `high >30%` rule.",
+        f"- {complete_columns}/48 columns are complete across all 333 rows.",
+        "- `label_boundary_case` marks four Lian 2024 rows whose exact 30% measurements "
+        "retain their established `high` labels. The current rule is strictly `high >30%`.",
         f"- The supervised target is populated for {target_count}/333 rows "
         f"({target_count / len(df) * 100:.1f}%). The 18 unlabeled rows remain in the atlas "
         "but must be excluded from supervised training.",
-        "- Core molar composition coverage rises from 63/135 (46.7%) in the old block to "
-        "187/198 (94.4%) in the new block. Combined ionizable/helper/cholesterol coverage is "
-        "250/333 (75.1%).",
-        "- Dose coverage rises from 59/135 (43.7%) to 187/198 (94.4%), yielding 246/333 "
-        "(73.9%) combined. Absolute per-mouse doses are intentionally not converted to mg/kg.",
+        "- Core ionizable/helper/cholesterol composition is available for 250/333 rows "
+        "(75.1%).",
+        "- Dose is available for 246/333 rows (73.9%). Absolute per-mouse doses are "
+        "intentionally not converted to mg/kg.",
         f"- All eight ionizable-lipid descriptor columns cover {descriptor_count}/333 "
-        f"({descriptor_count / len(df) * 100:.1f}%): {old_descriptor_count}/135 old and "
-        f"{new_descriptor_count}/198 new. The low new-record rate reflects proprietary or "
-        "unverified lipid identities, not a failed calculation.",
+        f"({descriptor_count / len(df) * 100:.1f}%). Missing descriptors reflect proprietary "
+        "or unverified lipid identities, not a failed calculation.",
         "",
         "## Coverage by matrix column",
         "",
-        "| Column | Group | Old 135 | New 198 | Combined 333 |",
-        "| --- | --- | ---: | ---: | ---: |",
+        "| Column | Group | Coverage |",
+        "| --- | --- | ---: |",
     ]
 
     for column in df.columns:
         lines.append(
-            f"| `{column}` | {_group(column)} | {_cell(old[column])} | "
-            f"{_cell(new[column])} | {_cell(df[column])} |"
+            f"| `{column}` | {_group(column)} | {_cell(df[column])} |"
         )
 
     lines.extend(
@@ -221,11 +213,10 @@ def build_report() -> str:
             "",
             "Physicochemical and toxicity fields are retained in the rich flat records but are "
             "not projected into the current 48-column matrix. Adding them to the matrix would be "
-            "a schema change, so this release reports their new-record coverage separately. A "
-            "row-level old-versus-new comparison is not claimed because the original annotation "
-            "layer is not normalized one-to-one with the 135 feature rows.",
+            "a schema change, so their coverage is reported for the normalized rich-record "
+            "collection separately.",
             "",
-            "| Rich-record field | New-record coverage |",
+            "| Rich-record field | Coverage |",
             "| --- | ---: |",
         ]
     )
@@ -235,12 +226,12 @@ def build_report() -> str:
     lines.extend(
         [
             "",
-            "Particle size, PDI, and encapsulation efficiency are well represented in the new "
+            "Particle size, PDI, and encapsulation efficiency are well represented in the rich "
             "records because the Xu screen includes per-formulation characterization. The "
             "remaining physicochemical block is sparse: zeta potential and apparent pKa each "
-            "cover only 3/198 new records, while morphology and stability each cover 2/198. "
+            "cover only 3/198 records, while morphology and stability each cover 2/198. "
             "Toxicity is the largest evidence gap, with any detailed toxicity information in "
-            "13/198 new records (6.6%). Missing values were not inferred.",
+            "13/198 records (6.6%). Missing values were not inferred.",
             "",
             "## Coverage limitations and open sources",
             "",

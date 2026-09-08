@@ -1,5 +1,5 @@
 {
- "_instructions": "Pass 1 expansion annotations. One entry per newly mined paper. Mirrors the structure of existing per-paper annotation JSONs (paper_metadata plus extraction log). Full formulation/experiment records live in data/new_records_pass1.json.",
+ "_instructions": "Literature source annotations. One entry per paper. Mirrors the structure of existing per-paper annotation JSONs (paper_metadata plus extraction log). Full formulation/experiment records live in data/literature_records.json.",
  "papers": [
   {
    "paper_id": "hofstraat_2025",
@@ -76,7 +76,7 @@
     "12.5% base editing at A6 in Lin- CD117+ cells, 2.5 mg/kg, ABE8e-NRCH + sgCD45-2 1:1 mass, from Ch 4 Results (Fig. 4-7) and Ch 4.3/5.1",
     "EC-LNP siKit1 0.4 mg/kg, 95% CD117 knockdown on lung endothelium (4.96% vs 79.1% CD117+), vascular leakage mitigation, from Ch 3 Results (Fig. 3-2 to 3-5)",
     "20 mol% DSPC molar ratio 44.5:20:33.5:1.5:0.5 from Ch 4.4 Methods",
-    "Overlap note: Chapters 2 and parts of 3 overlap with shi_2023 (Science Advances), already in atlas; only new Chapter 3/4 content recorded here"
+    "Overlap note: Chapters 2 and parts of 3 overlap with shi_2023 (Science Advances) and are not duplicated; Chapters 3 and 4 provide the represented thesis content"
    ],
    "label_for_ml": {
     "hsc_efficacy_class": {
@@ -141,7 +141,7 @@
     "Compositions from Fig. 1 and Fig. 3 captions (molar ratios)",
     "EE >95% for 10-40 mol% helper formulations from Results text (Table S1)",
     "In vivo BM expression outcomes are qualitative in text (Fig. 5, Fig. 8); magnitudes are figure-only and left null with null_reason",
-    "Table S1 (sizes/PDI) is an image-only table in the supplementary PDF; not transcribed in Pass 1, flagged for Pass 2 figure extraction if needed"
+    "Table S1 (sizes/PDI) is an image-only table in the supplementary PDF and was not transcribed"
    ],
    "label_for_ml": {
     "hsc_efficacy_class": {
@@ -649,7 +649,7 @@
     "Supp Table 8 + Fig 4a source data: 50-formulation secondary screen of Library A; 6 top performers added as records (LNP-151/163/164/165/167/169, second-dose bars 17-27%)",
     "sgRNA-25 = AGGCAAGGCTGGCCAACCCA (Supp Table 4); GRCh38 verified: chr11:5,249,976-5,249,995 (HBG2) and chr11:5,254,900-5,254,919 (HBG1), 4,924 bp spacing, PASS",
     "Protein corona: Supp Tables 11-13 (LNP-168-Luc vs MC3-Luc; albumin 29.7%, fibronectin 7.9%, fibrinogen gamma 7.3% top on LNP-168)",
-    "Source-data anomalies flagged for Pass 2: Fig 4a LNP-123 single-dose replicate '116.0' (impossible >100% value); plotted bars vs replicate means mismatch for several LNPs (e.g. LNP-167 bar 27 vs mean 33.2); text 48.5% vs Fig 4a bar 46% for LNP-168",
+    "Source-data anomalies reviewed: Fig 4a LNP-123 single-dose replicate '116.0' (impossible >100% value); plotted bars vs replicate means mismatch for several LNPs (e.g. LNP-167 bar 27 vs mean 33.2); text 48.5% vs Fig 4a bar 46% for LNP-168",
     "Not imported: full 92-lipid library screen values (ED Figs 3-5 source data parsed and available; import pending user decision on dataset shape)",
     "FULL IMPORT: all 92 primary library screen formulations (A: 35, B: 32, C: 25; ED Figs 3-5 source data) and all 50 secondary-screen formulations (Fig 4a source data) imported as individual records, minus 10 already curated = 134 added",
     "Per-record label_for_ml assigned from second-dose bar with atlas thresholds (>30 high, 10-30 medium, <10 low): 110 low, 24 medium among screen records; directly addresses gap 28 label imbalance",

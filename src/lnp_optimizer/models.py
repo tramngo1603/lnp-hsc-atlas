@@ -1,4 +1,4 @@
-"""Baseline ML models and leakage-aware validation for HSC efficacy."""
+"""Classification models and leakage-aware validation for HSC efficacy."""
 
 from __future__ import annotations
 
@@ -51,12 +51,12 @@ def load_feature_matrix(
     Args:
         path: Path to feature matrix parquet.
         group_by: Metadata grouping returned with the model inputs. Paper
-            groups support legacy leave-one-paper-out evaluation. Formulation
+            groups support leave-one-paper-out evaluation. Formulation
             groups support leakage-safe held-out evaluation.
 
     Returns:
         (X features, y target, requested groups). Unlabeled rows and rows marked
-        as legacy label-boundary cases are excluded. The marker is metadata
+        as label-boundary cases are excluded. The marker is metadata
         and is never returned as a predictor.
     """
     df = pd.read_parquet(path)
@@ -65,7 +65,7 @@ def load_feature_matrix(
         boundary_count = int(df["label_boundary_case"].eq(1).sum())
         if boundary_count:
             logger.info(
-                "Excluding %d legacy label-boundary rows from evaluation",
+                "Excluding %d label-boundary rows from evaluation",
                 boundary_count,
             )
         df = df[df["label_boundary_case"].ne(1)].copy()
@@ -94,13 +94,7 @@ def load_feature_matrix(
 
 
 def formulation_token(paper: object, formulation_id: object) -> str:
-    """Return a source-qualified formulation identity for validation groups.
-
-    A numbered LNP identifier is the stable ionizable-lipid token in screens
-    such as Xu 2026. Cargo and role suffixes are intentionally discarded, so
-    lead, follow-up, and library records for LNP-028 share one token. Other
-    formulations use their normalized full identifier within the source paper.
-    """
+    """Return a source-qualified formulation identity for validation groups."""
     paper_part = re.sub(r"[^a-z0-9]+", "-", str(paper).strip().lower()).strip("-")
     identity = str(formulation_id).strip().lower()
     numbered_lnp = re.search(r"(?<![a-z0-9])lnp[-_\s]*0*(\d+)", identity)

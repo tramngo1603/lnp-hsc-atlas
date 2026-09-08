@@ -326,7 +326,7 @@
         "confidence": "HIGH for lipid class (piperazine/PPZ); MEDIUM for exact variant (PPZ-A10 is the patent's lead compound, and the molar ratio 35:46.5:2.5:16 closely matches LNP67's 35:47.5:2.5:15, but the Kim paper doesn't explicitly state which PPZ variant was used)",
         "source": "Patent US 2025/0127727 A1 Fig 1, Fig 3A, paragraphs [0026]-[0027], [0054], [0062], [0073]. Cross-referenced with Kim 2024 Nature Biotech which cites US provisional 63/632,354 — this may be a continuation or related filing.",
         "_note_for_ml": "The PPZ scaffold has a piperazine core with amide bonds — this is structurally distinct from the ester-linked lipids used in Breda/Shi (ALC-0315, ALC-0307) and from standard lipids like MC3 and SM-102. The amide bonds may confer different pH-dependent behavior and metabolic stability. With the scaffold identified, we can now compute molecular descriptors even without the exact SMILES — the PPZ-A series shares a common core, and tail length (C10 vs C11 vs C12 vs C18) is the primary variable.",
-        "_patent_note": "The patent describes PPZ lipids as preferentially targeting liver and splenic immune cells — the bone marrow targeting in Kim 2024 comes from reformulating with DOTAP helper lipid instead of DOPE. The ionizable lipid alone doesn't drive BM tropism; the full 4-component composition does.",
+        "_patent_note": "The patent describes PPZ lipids as preferentially targeting liver and splenic immune cells; the bone marrow targeting in Kim 2024 comes from reformulating with DOTAP helper lipid instead of DOPE. The ionizable lipid alone doesn't drive BM tropism; the full 4-component composition does.",
         "canonical_smiles": "CCCCCCCCCCN(CCCCCCCCCC)CCC(=O)NCCCN1CCN(CCCNC(=O)CCN(CCCCCCCCCC)CCCCCCCCCC)CC1",
         "pubchem_cid": 166594009,
         "smiles_provenance": "structure from PubChem CID 166594009 (CAS 2941268-67-1, noted in original gap list); RDKit descriptors computed from this SMILES match the existing feature-matrix descriptor block exactly (exact MW 902.90, logP 13.564, TPSA 71.16, HBD 2, HBA 6, rotatable 50, rings 1, heavy atoms 64) (2026-09-06)"
@@ -461,13 +461,13 @@
             "name": "Apolipoprotein B-100",
             "log2_fc": 1.5,
             "abundance_pct": 1.5,
-            "_significance": "ApoB-100 binds LDL receptor family — different pathway from ApoE-mediated liver uptake."
+            "_significance": "ApoB-100 binds LDL receptor family, a different pathway from ApoE-mediated liver uptake."
           },
           "H": {
             "name": "Clusterin",
             "log2_fc": 1,
             "abundance_pct": 1.2,
-            "_significance": "Known dysopsonin — reduces macrophage clearance, extends circulation time."
+            "_significance": "Known dysopsonin that reduces macrophage clearance and extends circulation time."
           },
           "I": {
             "name": "UDP-glucuronosyltransferase 1-1",
@@ -501,7 +501,7 @@
         "mol_percent": 30,
         "type": "permanently cationic lipid",
         "mw": 698.542,
-        "_note": "30% DOTAP is very high cationic content — this drove the LNP to lung, not BM"
+        "_note": "30% DOTAP is very high cationic content; this drove the LNP to lung, not BM"
       },
       "cholesterol": {
         "included": true,
@@ -542,7 +542,7 @@
         "mol_percent": 15,
         "type": "zwitterionic phospholipid (oleoyl egg PC)",
         "mw": 850.628,
-        "_note": "Only non-cationic helper lipid among the 3 leads. Interesting that it still achieves some BM tropism — different mechanism than DOTAP?"
+        "_note": "Only non-cationic helper lipid among the 3 leads. Interesting that it still achieves some BM tropism, perhaps through a different mechanism than DOTAP?"
       },
       "cholesterol": {
         "included": true,
@@ -553,7 +553,7 @@
         "mol_percent": 2.5,
         "alkyl_chain": "C18",
         "mw": 2805.497,
-        "_note": "C18 PEG — same long-chain PEG that Shi 2023 found optimal for BM delivery. Coincidence or convergent finding?"
+        "_note": "C18 PEG is the same long-chain PEG that Shi 2023 found optimal for BM delivery. Coincidence or convergent finding?"
       },
       "molar_ratios": {
         "ratio_string": "45:37.5:2.5:15 (ionizable:chol:C18PEG2000:18:1 EPC)",
@@ -579,7 +579,7 @@
         "name": "DSPC",
         "mol_percent": 9,
         "type": "zwitterionic phospholipid",
-        "_note": "Standard DSPC at only 9 mol% — lower than the 10% used in Breda/Shi/vaccines"
+        "_note": "Standard DSPC at only 9 mol%, lower than the 10% used in Breda/Shi/vaccines"
       },
       "cholesterol": {
         "included": true,
@@ -1153,7 +1153,6 @@
     ]
   },
   "annotation_metadata": {
-    "annotator": "Claude (AI-assisted annotation)",
     "annotation_date": "2026-03-04",
     "last_updated": "2026-03-06",
     "version": "v2",

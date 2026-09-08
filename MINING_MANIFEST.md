@@ -1,7 +1,6 @@
-# MINING_MANIFEST.md
+# Literature Source Manifest
 
-Pass 1 mining manifest for the LNP-HSC Atlas expansion (135 -> 200+ records).
-Generated: 2026-09-05. Scope: 18 sources from the mining report (Mining Public Lite).
+Curation manifest for the LNP-HSC Atlas literature sources reviewed on 2026-09-05.
 
 ## Summary
 
@@ -9,16 +8,15 @@ Generated: 2026-09-05. Scope: 18 sources from the mining report (Mining Public L
 | --- | --- |
 | Sources mined (full or partial text accessible) | 15 |
 | Sources stubbed (paywall) | 3 |
-| New formulation-experiment records extracted | 198 (196 full + 2 partial pending Xue main text) |
+| Formulation-experiment records | 198 (196 full + 2 partial pending Xue main text) |
 | Records from Tier 1 sources | 174 |
 | Records from Tier 2 sources | 6 |
 | Records from Tier 3 sources | 10 |
 
-Deliverables: `data/new_records_pass1.json` (198 records + 3 stubs),
+Deliverables: `data/literature_records.json` (198 records + 3 stubs),
 `annotations/new_paper_annotations.json` (per-paper metadata and extraction logs).
-Existing 135 records were not modified. No audit suite run yet (that is Pass 2).
 
-## Mined sources (9)
+## Source details
 
 | # | Source | Access route | Records |
 | --- | --- | --- | --- |
@@ -38,20 +36,19 @@ Existing 135 records were not modified. No audit suite run yet (that is Pass 2).
 - Hofstraat 2025: compositions from Supplementary Table 1 (image table, transcribed at
   200 dpi), in vivo LAMP1 knockdown computed from Fig. 3 source data spreadsheets
   ((1 - mean normalized siLAMP1 gMFI) x 100, per formulation, LSK and LT-HSC subsets).
-  aNP18 physicochemicals from Fig. 4 source data. This is the deepest extraction of
-  Pass 1 and includes 3 low/medium efficacy records for label balance (gap 28).
-- Shi 2025 thesis: only Chapters 3 and 4 content new relative to shi_2023 was recorded.
-  Chapter 2 overlaps with the Science Advances paper already in the atlas.
+  aNP18 physicochemicals from Fig. 4 source data. This source includes 3 low/medium
+  efficacy records that improve label balance.
+- Shi 2025 thesis: Chapters 3 and 4 are represented. Chapter 2 overlaps with the
+  Science Advances paper and is not duplicated.
 - Chander 2023, Peng 2026, Zhao 2026, Jyotsana 2019: several efficacy magnitudes exist
   only in figures. Those values are null with null_reason "figure_only" rather than
-  estimated, per the no-fabrication rule. They are candidates for figure extraction in
-  Pass 2 if desired.
+  estimated, per the no-fabrication rule.
 - Chappell 2024: LNP use is ex vivo Cre deletion in lin- HSCs, not in vivo editing (mining
   report mischaracterized the title). Composition analog-supported by breda_2023.
 - Palchaudhuri 2025: abstract-only, all records confidence LOW; quantitative claims
   recorded from abstract text with explicit value_basis.
 - Xue 2022: composition/protocol mined from SI; efficacy pending main paper.
-- Hanafy 2025 (PRELIVE): added post-hoc from user-provided PDFs. 14 DoE-selected LNPs
+- Hanafy 2025 (PRELIVE): curated from user-provided PDFs. 14 DoE-selected LNPs
   with full Fig 2A compositions and physicochemicals. BM efficacy recorded at two levels:
   Fig S19 good/poor class (good = LNP 6, 10, 11, 14) and Fig 2B mean radiance estimates
   (estimated_from_figure, flagged for user confirmation). Text vs Fig S19 discrepancy on
@@ -61,7 +58,7 @@ Existing 135 records were not modified. No audit suite run yet (that is Pass 2).
 - Dahlman 2014 is endothelial (lung), not bone marrow. Retained as the 7C1 ancestor of
   the Sago 2018 HSC line, flagged low BM relevance.
 
-## Stubbed sources (9), status: pending_paywall
+## Stubbed sources, status: pending_paywall
 
 | # | Source | Why skipped | Unblock path |
 | --- | --- | --- | --- |
@@ -69,12 +66,12 @@ Existing 135 records were not modified. No audit suite run yet (that is Pass 2).
 | T3-6 | Zhu et al., J Control Release (PMID 41905408) | Elsevier paywall, very recent | Institutional access |
 | T3-8 | Dacoba et al., ACS Nano (PMID 40080677) | ACS paywall | Institutional access or author manuscript |
 
-All 5 remaining stubs were verified to exist (PubMed/Crossref checks) and carry full citation
-metadata in `data/new_records_pass1.json`. Remaining stubs: T3-2 (Ramishetti), T3-6 (Zhu), T3-8 (Dacoba), all Tier 3. Iida mined from user-provided file (note: in vitro only, no in vivo data). T1 is now fully mined (Xu unblocked by user-provided main text; Supp Tables 1-15 still pending). Xue awaits its main text.
+All 3 remaining stubs were verified to exist (PubMed/Crossref checks) and carry full citation
+metadata in `data/literature_records.json`. Remaining stubs: T3-2 (Ramishetti), T3-6 (Zhu), T3-8 (Dacoba), all Tier 3. Iida mined from user-provided file (note: in vitro only, no in vivo data). T1 is now fully mined (Xu unblocked by user-provided main text; Supp Tables 1-15 still pending). Xue awaits its main text.
 
 ## Verification and integrity notes
 
-- Every numeric value in the 27 records traces to a named table, figure, source-data
+- Every numeric value in the curated records traces to a named table, figure, source-data
   spreadsheet, or text passage (see per-record `provenance` and per-paper
   `extraction_log`). No value was invented. Figure-only magnitudes are null with
   explicit `null_reason`, not estimated.
@@ -84,20 +81,19 @@ metadata in `data/new_records_pass1.json`. Remaining stubs: T3-2 (Ramishetti), T
   ratio and is marked confidence MEDIUM.
 - Existence check results: all 18 sources verified via Europe PMC / PubMed / Crossref.
   No phantom citations in the mining report. Note: Xu et al. is indexed as 2026
-  (online 2025); Hanafy et al. is 2025 (Crossref 2025-11-26), not 2026 as the mining
-  report stated.
+  (online 2025); Hanafy et al. is 2025 (Crossref 2025-11-26).
 - External databases (LNPDB, AGILE, LANCE, LiON) deliberately not imported, per scope.
 
-## Human gates for review (Pass 2 input)
+## Open review items
 
 1. Xu et al.: fully mined, 148 records. Full 92-lipid primary screen and 50-formulation
    secondary screen imported per user decision (2026-09-05). Screen records carry
    bar-vs-replicate-mean caveat and per-record labels (110 low, 24 medium).
-   Xue main text: requested from user.
-   Remaining purchases pending user decision: Ramishetti, Zhu, Dacoba.
-2. Figure-value extraction policy: mine figure-only magnitudes (Chander Fig. 8, Peng
-   Fig. 1H, Zhao Fig. 4g-h) with extraction_method "estimated_from_figure", or leave null?
+   Xue main text remains pending.
+   Ramishetti, Zhu, and Dacoba remain paywalled.
+2. Figure-only magnitudes in Chander Fig. 8, Peng Fig. 1H, and Zhao Fig. 4g-h remain
+   null under the source-value policy.
 3. Shi thesis strain ambiguity for the base editing experiment (null, unclear_in_source).
-4. Chander Table S1 (image-only) size/PDI transcription, deferred from Pass 1.
+4. Chander Table S1 (image-only) size/PDI transcription remains deferred.
 5. Palchaudhuri abstract values: replace with figure/table-provenanced values when the
    full paper is published.

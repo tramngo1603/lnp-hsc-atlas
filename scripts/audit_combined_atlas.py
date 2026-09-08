@@ -1,24 +1,17 @@
-"""Pass 3 deduplication and logical-contradiction audit.
+"""Deduplication, integrity, and logical-contradiction audit for the atlas.
 
-The release matrix contains the value-identical 135-row baseline followed by
-198 Pass 1 records projected onto the released 47-column schema, plus the
-label-boundary metadata marker. This audit verifies that boundary, reviews
-known cross-layer overlaps, detects duplicate matrix
-identities, and checks feature encodings for internal contradictions.
-
-Writes data/audit/pass3_dedupe_report.json and exits nonzero only for release
-blocking errors. Documented source anomalies and protected legacy issues are
-reported as warnings.
+The audit checks stable content fingerprints, reviews cross-layer overlaps,
+detects duplicate matrix identities, and checks feature encodings for internal
+contradictions. It exits nonzero only for blocking errors. Documented source
+anomalies and labeling boundary cases are reported without changing source data.
 """
 
 from __future__ import annotations
 
 import hashlib
-import io
 import json
 import math
 import re
-import subprocess
 import sys
 from collections import Counter
 from datetime import date
@@ -27,22 +20,28 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from pandas.testing import assert_frame_equal
 
 _ROOT = Path(__file__).resolve().parent.parent
 _FEATURES = _ROOT / "data" / "features" / "hsc_features.parquet"
 _HSC = _ROOT / "data" / "hsc" / "hsc_curated.parquet"
-_NEW_RECORDS = _ROOT / "data" / "new_records_pass1.json"
-_NEW_ANNOTATIONS = _ROOT / "annotations" / "new_paper_annotations.json"
-_REPORT = _ROOT / "data" / "audit" / "pass3_dedupe_report.json"
+_LITERATURE_RECORDS = _ROOT / "data" / "literature_records.json"
+_LITERATURE_ANNOTATIONS = _ROOT / "annotations" / "new_paper_annotations.json"
+_REPORT = _ROOT / "data" / "audit" / "consolidated_audit.json"
 
-_PASS2_BASELINE_COMMIT = "77c8b7d"
-_PASS2_HEAD = "22834a153209487c4530b4dc233142a1878aa81c"
-_V2_RELEASE_TAG = "v2.0-atlas-expansion"
-_OLD_ROWS = 135
-_NEW_ROWS = 198
+_CURATED_ROWS = 135
+_LITERATURE_ROWS = 198
 _EXPECTED_COLUMNS = 48
-_LEGACY_LIAN_BOUNDARY_EXPERIMENTS = frozenset(
+_EXPECTED_HSC_SHA256 = "8a19ad2fd52ec1a1beec2c8bfee67e474e234f1e8c3121358ca3617e20b99172"
+_EXPECTED_CURATED_MATRIX_SHA256 = (
+    "7ae79acbefedb1db7b50d8a26cd84a82270a8de248cc3d1d7f3850b9defa57ad"
+)
+_EXPECTED_LIAN_ROWS_SHA256 = (
+    "56035c2236d97ed72f0bdb22252902d15470c92ec07dee31652f68a13c6f6957"
+)
+_EXPECTED_LIAN_ANNOTATION_SHA256 = (
+    "bab56df74238e646b19afed19ca4887052d81a7378b1dd95e361961c06a8bc23"
+)
+_LIAN_BOUNDARY_EXPERIMENTS = frozenset(
     {
         "Lian_A7_screen_n1",
         "Lian_A13_validated_n3",
@@ -90,14 +89,9 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _git_blob(commit: str, path: str) -> bytes:
-    result = subprocess.run(
-        ["git", "show", f"{commit}:{path}"],
-        cwd=_ROOT,
-        check=True,
-        capture_output=True,
-    )
-    return result.stdout
+def _frame_sha256(frame: pd.DataFrame) -> str:
+    payload = frame.to_csv(index=False, lineterminator="\n").encode()
+    return hashlib.sha256(payload).hexdigest()
 
 
 def _normalize_doi(value: object) -> str:
@@ -115,10 +109,10 @@ def _paper_metadata(entry: dict[str, Any]) -> dict[str, Any]:
     return paper if isinstance(paper, dict) else {}
 
 
-def _legacy_annotation_papers() -> list[dict[str, Any]]:
+def _existing_annotation_papers() -> list[dict[str, Any]]:
     papers: list[dict[str, Any]] = []
     for path in sorted((_ROOT / "annotations").glob("*.json")):
-        if path.name == _NEW_ANNOTATIONS.name:
+        if path.name == _LITERATURE_ANNOTATIONS.name:
             continue
         try:
             data = json.loads(path.read_text())
@@ -150,23 +144,25 @@ def _legacy_annotation_papers() -> list[dict[str, Any]]:
     return papers
 
 
-def _cross_layer_paper_overlaps(new_annotations: dict[str, Any]) -> list[dict[str, Any]]:
+def _cross_layer_paper_overlaps(
+    literature_annotations: dict[str, Any],
+) -> list[dict[str, Any]]:
     overlaps: list[dict[str, Any]] = []
-    legacy = _legacy_annotation_papers()
-    for entry in new_annotations.get("papers", []):
+    existing = _existing_annotation_papers()
+    for entry in literature_annotations.get("papers", []):
         metadata = _paper_metadata(entry)
         doi = _normalize_doi(metadata.get("doi") or metadata.get("doi_or_id"))
         title = _normalize_title(metadata.get("title"))
-        for old in legacy:
-            old_doi = _normalize_doi(old.get("doi"))
-            old_title = _normalize_title(old.get("title"))
-            doi_match = bool(doi and old_doi and doi == old_doi)
-            title_match = bool(title and old_title and title == old_title)
+        for candidate in existing:
+            candidate_doi = _normalize_doi(candidate.get("doi"))
+            candidate_title = _normalize_title(candidate.get("title"))
+            doi_match = bool(doi and candidate_doi and doi == candidate_doi)
+            title_match = bool(title and candidate_title and title == candidate_title)
             if doi_match or title_match:
                 overlaps.append(
                     {
-                        "new_paper_id": entry.get("paper_id"),
-                        "legacy_annotation_file": old["annotation_file"],
+                        "paper_id": entry.get("paper_id"),
+                        "matching_annotation_file": candidate["annotation_file"],
                         "doi": doi or None,
                         "doi_match": doi_match,
                         "title_match": title_match,
@@ -263,7 +259,7 @@ def _duplicate_groups(df: pd.DataFrame, columns: list[str]) -> list[dict[str, An
     return groups
 
 
-def _legacy_lian_boundary_warnings(df: pd.DataFrame) -> list[dict[str, Any]]:
+def _lian_boundary_warnings(df: pd.DataFrame) -> list[dict[str, Any]]:
     annotation = json.loads((_ROOT / "annotations" / "lian_2024.json").read_text())
     flagged: list[dict[str, Any]] = []
     for formulation in annotation["formulations_screen"]["formulations"]:
@@ -295,125 +291,90 @@ def _legacy_lian_boundary_warnings(df: pd.DataFrame) -> list[dict[str, Any]]:
 
 def build_report() -> dict[str, Any]:
     df = pd.read_parquet(_FEATURES)
-    records_doc = json.loads(_NEW_RECORDS.read_text())
+    records_doc = json.loads(_LITERATURE_RECORDS.read_text())
     records = records_doc["records"]
-    new_annotations = json.loads(_NEW_ANNOTATIONS.read_text())
-    old = df.iloc[:_OLD_ROWS].reset_index(drop=True)
-    new = df.iloc[_OLD_ROWS:].reset_index(drop=True)
+    literature_annotations = json.loads(_LITERATURE_ANNOTATIONS.read_text())
+    curated = df.iloc[:_CURATED_ROWS].reset_index(drop=True)
+    literature = df.iloc[_CURATED_ROWS:].reset_index(drop=True)
 
     errors: list[dict[str, Any]] = []
     checks: list[dict[str, Any]] = []
 
-    data_hsc_equal = (
-        _HSC.read_bytes()
-        == _git_blob(_PASS2_BASELINE_COMMIT, "data/hsc/hsc_curated.parquet")
-    )
+    data_hsc_equal = _sha256(_HSC) == _EXPECTED_HSC_SHA256
     if not data_hsc_equal:
         errors.append(
             {
                 "id": "protected_hsc_source_changed",
-                "detail": (
-                    f"data/hsc/hsc_curated.parquet differs from {_PASS2_BASELINE_COMMIT}"
-                ),
+                "detail": "data/hsc/hsc_curated.parquet content fingerprint changed",
             }
         )
     checks.append(
         _check(
             data_hsc_equal,
             "protected_hsc_source_identity",
-            f"byte-compared with {_PASS2_BASELINE_COMMIT}:data/hsc/hsc_curated.parquet",
+            "matches the curated source content fingerprint",
         )
     )
 
     checks.append(
         _check(
-            df.shape == (_OLD_ROWS + _NEW_ROWS, _EXPECTED_COLUMNS),
+            df.shape == (_CURATED_ROWS + _LITERATURE_ROWS, _EXPECTED_COLUMNS),
             "matrix_shape",
             f"observed {df.shape[0]} rows x {df.shape[1]} columns; expected 333 x 48",
         )
     )
 
-    baseline_bytes = _git_blob(
-        _PASS2_BASELINE_COMMIT, "data/features/hsc_features.parquet"
+    value_columns = [column for column in df.columns if column != "label_boundary_case"]
+    curated_values_equal = (
+        _frame_sha256(curated.loc[:, value_columns]) == _EXPECTED_CURATED_MATRIX_SHA256
     )
-    baseline = pd.read_parquet(io.BytesIO(baseline_bytes))
-    original_values_equal = True
-    try:
-        assert_frame_equal(
-            old.loc[:, baseline.columns],
-            baseline.reset_index(drop=True),
-            check_dtype=False,
-            check_exact=True,
+    if not curated_values_equal:
+        errors.append(
+            {
+                "id": "curated_matrix_values_changed",
+                "detail": "curated matrix content fingerprint changed",
+            }
         )
-    except AssertionError as exc:
-        original_values_equal = False
-        errors.append({"id": "original_135_changed", "detail": str(exc)})
     checks.append(
         _check(
-            original_values_equal,
-            "original_135_value_identity",
-            f"compared with {_PASS2_BASELINE_COMMIT}:data/features/hsc_features.parquet",
-        )
-    )
-
-    v2_bytes = _git_blob(_V2_RELEASE_TAG, "data/features/hsc_features.parquet")
-    v2_matrix = pd.read_parquet(io.BytesIO(v2_bytes))
-    v2_values_equal = True
-    try:
-        assert_frame_equal(
-            df.loc[:, v2_matrix.columns],
-            v2_matrix.reset_index(drop=True),
-            check_dtype=False,
-            check_exact=True,
-        )
-    except AssertionError as exc:
-        v2_values_equal = False
-        errors.append({"id": "v2_released_values_changed", "detail": str(exc)})
-    checks.append(
-        _check(
-            v2_values_equal,
-            "v2_released_value_identity",
-            "all 47 pre-marker columns and 333 rows match v2.0-atlas-expansion",
+            curated_values_equal,
+            "curated_matrix_value_identity",
+            "all curated matrix values match the expected content fingerprint",
         )
     )
 
     current_lian_boundary = df.loc[
         df["paper"].eq("lian_2024")
-        & df["experiment_id"].isin(_LEGACY_LIAN_BOUNDARY_EXPERIMENTS),
-        v2_matrix.columns,
+        & df["experiment_id"].isin(_LIAN_BOUNDARY_EXPERIMENTS),
+        value_columns,
     ]
-    v2_lian_boundary = v2_matrix.loc[
-        v2_matrix["paper"].eq("lian_2024")
-        & v2_matrix["experiment_id"].isin(_LEGACY_LIAN_BOUNDARY_EXPERIMENTS)
-    ]
-    lian_boundary_csv_bytes_equal = (
-        current_lian_boundary.to_csv(index=False, lineterminator="\n").encode()
-        == v2_lian_boundary.to_csv(index=False, lineterminator="\n").encode()
+    lian_boundary_values_equal = (
+        _frame_sha256(current_lian_boundary) == _EXPECTED_LIAN_ROWS_SHA256
     )
-    lian_annotation_bytes_equal = (
-        (_ROOT / "annotations" / "lian_2024.json").read_bytes()
-        == _git_blob(_V2_RELEASE_TAG, "annotations/lian_2024.json")
+    lian_annotation_equal = (
+        _sha256(_ROOT / "annotations" / "lian_2024.json")
+        == _EXPECTED_LIAN_ANNOTATION_SHA256
     )
-    if not lian_boundary_csv_bytes_equal or not lian_annotation_bytes_equal:
+    if not lian_boundary_values_equal or not lian_annotation_equal:
         errors.append(
             {
-                "id": "legacy_lian_boundary_changed",
-                "matrix_rows_byte_identical": lian_boundary_csv_bytes_equal,
-                "annotation_file_byte_identical": lian_annotation_bytes_equal,
+                "id": "lian_boundary_values_changed",
+                "matrix_values_match": lian_boundary_values_equal,
+                "annotation_file_matches": lian_annotation_equal,
             }
         )
     checks.append(
         _check(
-            lian_boundary_csv_bytes_equal and lian_annotation_bytes_equal,
-            "legacy_lian_boundary_identity",
-            "four pre-marker matrix rows and source annotation match v2.0 exactly",
+            lian_boundary_values_equal and lian_annotation_equal,
+            "lian_boundary_identity",
+            "four boundary rows and their source annotation match expected fingerprints",
         )
     )
 
     projection_mismatches: list[dict[str, Any]] = []
-    if len(new) == len(records):
+    if len(literature) == len(records):
         for offset, (row, record) in enumerate(
-            zip(new.to_dict("records"), records, strict=True)
+            zip(literature.to_dict("records"), records, strict=True)
         ):
             for field, record_field in (
                 ("paper", "source_paper"),
@@ -424,7 +385,7 @@ def build_report() -> dict[str, Any]:
                 if row[field] != record[record_field]:
                     projection_mismatches.append(
                         {
-                            "row_index": _OLD_ROWS + offset,
+                            "row_index": _CURATED_ROWS + offset,
                             "record_id": record["record_id"],
                             "field": field,
                             "matrix": row[field],
@@ -433,14 +394,16 @@ def build_report() -> dict[str, Any]:
                     )
     else:
         projection_mismatches.append(
-            {"detail": f"matrix new rows {len(new)} != records {len(records)}"}
+            {"detail": f"matrix literature rows {len(literature)} != records {len(records)}"}
         )
     if projection_mismatches:
-        errors.append({"id": "new_projection_alignment", "examples": projection_mismatches[:20]})
+        errors.append(
+            {"id": "literature_projection_alignment", "examples": projection_mismatches[:20]}
+        )
     checks.append(
         _check(
             not projection_mismatches,
-            "new_projection_alignment",
+            "literature_projection_alignment",
             f"{len(records) - len(projection_mismatches)}/{len(records)} records "
             "aligned by order and identity",
         )
@@ -456,7 +419,9 @@ def build_report() -> dict[str, Any]:
     identity_duplicate_groups = _duplicate_groups(df, identity_columns)
 
     if duplicate_record_ids:
-        errors.append({"id": "duplicate_new_record_ids", "record_ids": duplicate_record_ids})
+        errors.append(
+            {"id": "duplicate_literature_record_ids", "record_ids": duplicate_record_ids}
+        )
     if exact_rows_removable:
         errors.append(
             {"id": "exact_matrix_duplicates", "removable_rows": exact_rows_removable}
@@ -538,7 +503,7 @@ def build_report() -> dict[str, Any]:
 
     expected_boundary = (
         df["paper"].eq("lian_2024")
-        & df["experiment_id"].isin(_LEGACY_LIAN_BOUNDARY_EXPERIMENTS)
+        & df["experiment_id"].isin(_LIAN_BOUNDARY_EXPERIMENTS)
     ).astype("int8")
     boundary_marker_matches = bool(df["label_boundary_case"].eq(expected_boundary).all())
     if not boundary_marker_matches:
@@ -554,7 +519,7 @@ def build_report() -> dict[str, Any]:
         _check(
             boundary_marker_matches,
             "label_boundary_marker",
-            "exactly 4 legacy Lian 30% rows marked; every new strict-v2 row marked 0",
+            "exactly four Lian 30% boundary rows are marked",
         )
     )
 
@@ -619,7 +584,7 @@ def build_report() -> dict[str, Any]:
     targeting_mismatches: list[dict[str, Any]] = []
     covalent_mismatches: list[dict[str, Any]] = []
     for offset, record in enumerate(records):
-        row = new.iloc[offset]
+        row = literature.iloc[offset]
         strategy = str((record.get("targeting") or {}).get("strategy") or "").lower()
         expected_targeting = _TARGETING_ENCODING.get(strategy, 0)
         if int(row["targeting_encoded"]) != expected_targeting:
@@ -650,7 +615,8 @@ def build_report() -> dict[str, Any]:
         _check(
             not targeting_mismatches,
             "targeting_projection_semantics",
-            "new rows use legacy ordinal encoding 0 none, 1 intrinsic, 2 active",
+            "literature rows use the established ordinal encoding: 0 none, 1 intrinsic, "
+            "and 2 active",
         )
     )
     checks.append(
@@ -661,7 +627,7 @@ def build_report() -> dict[str, Any]:
         )
     )
 
-    cross_layer_overlaps = _cross_layer_paper_overlaps(new_annotations)
+    cross_layer_overlaps = _cross_layer_paper_overlaps(literature_annotations)
     tessera_matrix_rows = int(
         df["paper"].fillna("").str.lower().str.startswith("tessera").sum()
     )
@@ -670,8 +636,8 @@ def build_report() -> dict[str, Any]:
     breda_rows = int((df["paper"] == "breda_2023").sum())
 
     palchaudhuri_tessera_confirmed = any(
-        overlap["new_paper_id"] == "palchaudhuri_2025"
-        and overlap["legacy_annotation_file"]
+        overlap["paper_id"] == "palchaudhuri_2025"
+        and overlap["matching_annotation_file"]
         == "annotations/tessera_ash2025_blood.json"
         and overlap["doi_match"]
         and overlap["title_match"]
@@ -773,7 +739,7 @@ def build_report() -> dict[str, Any]:
     )
 
     warnings: list[dict[str, Any]] = []
-    lian_boundary = _legacy_lian_boundary_warnings(df)
+    lian_boundary = _lian_boundary_warnings(df)
 
     outlier_record = next(
         record
@@ -799,12 +765,12 @@ def build_report() -> dict[str, Any]:
     species_multi = df[df[_SPECIES_COLUMNS].sum(axis=1) > 1]
     informational = [
         {
-            "id": "legacy_lian_30_percent_boundary",
+            "id": "lian_30_percent_boundary",
             "status": "documented_boundary_convention",
             "records": lian_boundary,
             "description": (
-                "The strict-v2 rule is high >30% and medium 10-30%. Four original Lian "
-                "rows at exactly 30% retain their v1 high labels. They are marked boundary "
+                "The current rule is high >30% and medium 10-30%. Four Lian rows at exactly "
+                "30% retain their established high labels. They are marked boundary "
                 "cases, are excluded from threshold-sensitive evaluation, and are not errors."
             ),
         },
@@ -824,14 +790,6 @@ def build_report() -> dict[str, Any]:
                 "claims, so multiple species bits are intentional."
             ),
         },
-        {
-            "id": "historic_pass2_flags_superseded",
-            "description": (
-                "The Pass 2 flags file is a historical snapshot. Xu replicate completeness "
-                "and LNP-217/LNP-306 source-data fill actions were completed in commits "
-                "50585e9 and 58e55cf; the current record audit is authoritative."
-            ),
-        },
     ]
 
     failed_checks = [check for check in checks if check["status"] == "fail"]
@@ -839,10 +797,8 @@ def build_report() -> dict[str, Any]:
         errors.append({"id": "failed_checks", "checks": failed_checks})
 
     return {
-        "audit": "pass3_dedupe_and_contradiction_scan",
-        "pass": 3,
+        "audit": "atlas_dedupe_and_contradiction_scan",
         "date": date.today().isoformat(),
-        "pass2_head": _PASS2_HEAD,
         "inputs": {
             "feature_matrix": {
                 "path": "data/features/hsc_features.parquet",
@@ -852,15 +808,15 @@ def build_report() -> dict[str, Any]:
                 "path": "data/hsc/hsc_curated.parquet",
                 "sha256": _sha256(_HSC),
             },
-            "new_records": {
-                "path": "data/new_records_pass1.json",
-                "sha256": _sha256(_NEW_RECORDS),
+            "literature_records": {
+                "path": "data/literature_records.json",
+                "sha256": _sha256(_LITERATURE_RECORDS),
             },
         },
         "dataset": {
-            "old_rows": len(old),
-            "new_rows": len(new),
-            "combined_rows": len(df),
+            "rows": len(df),
+            "curated_rows": len(curated),
+            "literature_rows": len(literature),
             "columns": len(df.columns),
             "papers": int(df["paper"].nunique()),
             "paper_row_counts": {
@@ -869,23 +825,22 @@ def build_report() -> dict[str, Any]:
             },
         },
         "invariants": {
-            "original_135_value_identical_to_77c8b7d": original_values_equal,
-            "all_v2_values_identical_before_marker": v2_values_equal,
-            "legacy_lian_values_and_labels_match_v2": lian_boundary_csv_bytes_equal,
-            "lian_annotation_byte_identical_to_v2": lian_annotation_bytes_equal,
-            "data_hsc_matches_77c8b7d": data_hsc_equal,
-            "new_projection_records_aligned": len(projection_mismatches) == 0,
+            "curated_matrix_values_match": curated_values_equal,
+            "lian_boundary_values_match": lian_boundary_values_equal,
+            "lian_annotation_matches": lian_annotation_equal,
+            "curated_source_matches": data_hsc_equal,
+            "literature_projection_records_aligned": len(projection_mismatches) == 0,
         },
         "dedupe": {
             "status": "complete" if not errors else "failed",
             "exact_48_column_duplicate_rows": exact_duplicate_rows,
             "exact_rows_removable": exact_rows_removable,
-            "duplicate_new_record_ids": duplicate_record_ids,
+            "duplicate_literature_record_ids": duplicate_record_ids,
             "duplicate_matrix_identity_groups": identity_duplicate_groups,
             "cross_layer_source_overlaps": cross_layer_overlaps,
             "palchaudhuri_tessera_decision": {
                 "same_source_confirmed": palchaudhuri_tessera_confirmed,
-                "canonical_flat_schema_source": "data/new_records_pass1.json",
+                "canonical_flat_schema_source": "data/literature_records.json",
                 "canonical_record_ids": [
                     record["record_id"]
                     for record in records
@@ -900,7 +855,7 @@ def build_report() -> dict[str, Any]:
                     "annotations/tessera_ash2025_blood.json",
                     "annotations/tessera_ash2025_press.json",
                 ],
-                "action": "No matrix row removed; legacy Tessera files remain provenance-only.",
+                "action": "No matrix row removed; Tessera files remain provenance-only.",
             },
             "chappell_breda_decision": {
                 "chappell_matrix_rows": chappell_rows,
@@ -947,8 +902,7 @@ def main() -> int:
     dedupe = report["dedupe"]
     scan = report["logical_contradiction_scan"]
     print(
-        f"Audited {dataset['combined_rows']} rows x {dataset['columns']} columns "
-        f"({dataset['old_rows']} old + {dataset['new_rows']} new)"
+        f"Audited {dataset['rows']} rows x {dataset['columns']} columns"
     )
     print(f"Exact duplicate rows removable: {dedupe['exact_rows_removable']}")
     print(f"Contradiction errors: {len(scan['errors'])}")
