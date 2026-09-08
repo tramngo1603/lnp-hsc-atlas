@@ -1,0 +1,269 @@
+{
+  "pass": 2,
+  "date": "2026-09-06",
+  "scope": "Original 135 records (annotation layer: annotations/shi_2023.json, annotations/kim_2024.json). hsc_curated.parquet and existing feature-matrix rows are regenerated unchanged by scripts/build_feature_matrix.py; no original numeric values were altered.",
+  "generated_by": "Pass 2 enrichment; every structure verified by RDKit against PubChem and, where present, against the existing feature-matrix descriptor block",
+  "enrichments": [
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(2B8)/LNP-MC3-DMG-PEG",
+      "lipid": "DLin-MC3-DMA",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 49785164,
+      "inchikey": "NRLNQCOGCKAESA-KWXKLSQISA-N",
+      "exact_mw": 641.61,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 49785164 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(2B8)/LNP-cKKE12-DMG-PEG",
+      "lipid": "cKK-E12",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 71555845,
+      "inchikey": "ZISVTYVLWSZJAL-UHFFFAOYSA-N",
+      "exact_mw": 992.92,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 71555845 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(2B8)/LNP-SM102-DMG-PEG",
+      "lipid": "SM-102",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 126697616,
+      "inchikey": "BGNVBNJYBVCBJH-UHFFFAOYSA-N",
+      "exact_mw": 709.66,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 126697616 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(2B8)/LNP-ALC0315-DMG-PEG(C14)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(2B8)/LNP-ALC0315-DPG-PEG(C16)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(2B8)/LNP-ALC0315-DSG-PEG(C18)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(ACK2)/LNP-ALC0315-DSG-PEG(C18)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "IgG-isotype/LNP-ALC0315-DSG-PEG(C18)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "Unconjugated/LNP-ALC0315-DSG-PEG(C18)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD44/LNP-ALC0315-DSG-PEG(C18)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD49d/LNP-ALC0315-DSG-PEG(C18)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-IL-6R/LNP-ALC0315-DSG-PEG(C18)",
+      "lipid": "ALC-0315",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 122666778,
+      "inchikey": "QGWBEETXHOVFQS-UHFFFAOYSA-N",
+      "exact_mw": 765.72,
+      "justification": "lipid identity stated in source paper; structure from PubChem CID 122666778 (2026-09-06)"
+    },
+    {
+      "paper": "kim_2024",
+      "formulation": "LNP67",
+      "lipid": "PPZ-A10",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 166594009,
+      "inchikey": "PXNLDSAGMDIEAT-UHFFFAOYSA-N",
+      "exact_mw": 902.9,
+      "justification": "structure from PubChem CID 166594009 (CAS 2941268-67-1, noted in original gap list); RDKit descriptors computed from this SMILES match the existing feature-matrix descriptor block exactly (exact MW 902.90, logP 13.564, TPSA 71.16, HBD 2, HBA 6, rotatable 50, rings 1, heavy atoms 64) (2026-09-06)"
+    },
+    {
+      "paper": "kim_2024",
+      "formulation": "LNP95",
+      "lipid": "PPZ-A10",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 166594009,
+      "inchikey": "PXNLDSAGMDIEAT-UHFFFAOYSA-N",
+      "exact_mw": 902.9,
+      "justification": "annotation states 'same as LNP67'; PPZ-A10 structure from PubChem CID 166594009 (CAS 2941268-67-1), descriptor-verified (2026-09-06)"
+    },
+    {
+      "paper": "kim_2024",
+      "formulation": "LNP108",
+      "lipid": "PPZ-A10",
+      "fields_added": [
+        "ionizable_lipid.smiles",
+        "ionizable_lipid.canonical_smiles",
+        "ionizable_lipid.pubchem_cid",
+        "ionizable_lipid.smiles_provenance"
+      ],
+      "pubchem_cid": 166594009,
+      "inchikey": "PXNLDSAGMDIEAT-UHFFFAOYSA-N",
+      "exact_mw": 902.9,
+      "justification": "annotation states 'same as LNP67'; PPZ-A10 structure from PubChem CID 166594009 (CAS 2941268-67-1), descriptor-verified (2026-09-06)"
+    }
+  ],
+  "not_enriched": [
+    {
+      "paper": "shi_2023",
+      "formulation": "anti-CD117(2B8)/LNP-Lipid5-DMG-PEG",
+      "field": "ionizable_lipid.smiles",
+      "reason": "Lipid 5 (Moderna) has no resolvable PubChem entry by name; patent structure not imported to avoid misassignment. Remains null."
+    },
+    {
+      "paper": "kim_2024",
+      "formulation": "LP01 LNP (liver-targeting control)",
+      "field": "ionizable_lipid.smiles",
+      "reason": "LP01 has no resolvable PubChem entry by name. Remains null."
+    },
+    {
+      "paper": "breda_2023",
+      "formulation": "all 5",
+      "field": "ionizable_lipid.smiles",
+      "reason": "Acuitas proprietary lipid (annotation: likely ALC-0307 per Tombacz 2021; ALC-0315 also possible). Identity is not confirmed, so no SMILES is attached. Note: existing matrix rows carry SM-102-matching descriptors (exact MW 710.18) under an assumed identity; pre-existing, unchanged by Pass 2."
+    },
+    {
+      "paper": "lian_2024",
+      "formulation": "all 21",
+      "field": "ionizable_lipid.smiles",
+      "reason": "Base ionizable is 5A2-SC8. PubChem CID 129092701 (exact MW 1840.13, 123 heavy atoms) does NOT match the existing matrix descriptor block (MW 677.56, 48 heavy atoms, 0 rings), which resembles a single monomer arm. Not enriched; see validation flag lian_5a2sc8_descriptor_mismatch."
+    },
+    {
+      "paper": "all original",
+      "field": "physicochemical block / toxicity",
+      "reason": "The 15 new sources describe different formulations; none supply physicochemical or toxicity measurements for the original 135 formulations. Xu 2026 lead physicochemicals (Supp Tables 7-9) now exist in the NEW records, closing that gap at the new-record layer rather than in the original records."
+    }
+  ],
+  "verification": {
+    "ppz_a10_descriptor_match": "RDKit descriptors from PubChem CID 166594009 SMILES equal the hardcoded kim_2024 descriptor block in scripts/build_feature_matrix.py exactly (8/8 fields)",
+    "alc0315_existing_smiles": "shi_2023 ALC-0315 il_smiles verified by InChIKey equality with PubChem CID 122666778; exact MW 765.72 matches matrix descriptor",
+    "method": "PubChem PUG REST name/CAS lookup, RDKit 2026.03.6 descriptor computation, InChIKey comparison"
+  }
+}

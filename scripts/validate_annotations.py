@@ -45,7 +45,10 @@ def _check_paper(data: dict, path: str) -> tuple[list[str], list[str]]:
     # Check formulations
     formulations = data.get("formulations", data.get("formulations_screen", {}).get("formulations", []))
     if not formulations:
-        warnings.append(f"{pid}: no formulations array")
+        # Extraction-log entries store records in data/new_records_pass1.json
+        # and link them via record_ids; that is a valid container format.
+        if not data.get("record_ids"):
+            warnings.append(f"{pid}: no formulations array")
 
     seen_ids: set[str] = set()
     for i, form in enumerate(formulations):
@@ -98,14 +101,16 @@ def main() -> int:
 
         n_files += 1
 
-        # Handle both single-paper and multi-paper formats
+        # Handle single-paper, list, and {"papers": [...]} container formats
         if isinstance(data, list):
-            for entry in data:
-                errs, warns = _check_paper(entry, f.name)
-                total_errors.extend(errs)
-                total_warnings.extend(warns)
+            entries = data
+        elif isinstance(data, dict) and isinstance(data.get("papers"), list):
+            entries = data["papers"]
         else:
-            errs, warns = _check_paper(data, f.name)
+            entries = [data]
+
+        for entry in entries:
+            errs, warns = _check_paper(entry, f.name)
             total_errors.extend(errs)
             total_warnings.extend(warns)
 

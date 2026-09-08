@@ -208,13 +208,23 @@ def build_molecular_features(
     Returns:
         DataFrame with descriptor + optional FP columns.
     """
-    from external_data.descriptors import compute_morgan_fp
+    # external_data was never committed to the repo; fingerprints need it.
+    # Import lazily so descriptor-only builds (include_fp=False) still run.
+    fp_fn = None
+    if include_fp:
+        try:
+            from external_data.descriptors import compute_morgan_fp
+            fp_fn = compute_morgan_fp
+        except ModuleNotFoundError:
+            logger.warning(
+                "external_data package absent; skipping Morgan fingerprints")
+            include_fp = False
 
     out = pd.DataFrame(index=df.index)
     _add_descriptors(df, out)
 
     if include_fp:
-        _add_fingerprints(df, out, smiles_col, fp_nbits, compute_morgan_fp)
+        _add_fingerprints(df, out, smiles_col, fp_nbits, fp_fn)
 
     return out
 

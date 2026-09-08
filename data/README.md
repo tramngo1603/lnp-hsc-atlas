@@ -1,30 +1,37 @@
 # Data
 
 ## `features/`
-ML feature matrix. `hsc_features.parquet` contains 135 rows x 47 columns (37 model features + metadata + target). One row per formulation-experiment pair across 4 papers (Breda, Shi, Kim, Lian).
 
-## `kim_screen/`
-Decoded Kim 2024 barcoded screen. `kim_2024_screen_corrected.json` contains 128 LNP formulations with helper lipid, PEG lipid, and molar ratio assignments. 66 have BM barcode delivery data.
+The canonical machine-learning feature matrix. `hsc_features.parquet` and `hsc_features.csv` contain 333 formulation-experiment rows across 19 papers and 48 columns. The first 135 rows are the protected baseline and the following 198 rows are the Pass 1 expansion. The `target` column is populated for 315 rows.
 
-## `models/`
-Analysis outputs — JSON and parquet files from the ML pipeline:
-- `therapeutic_window.json` — 4PL dose-response fits, EC30/EC50 values
-- `pareto_validation_only.json` — 6 LNP + 1 VLP Pareto data points (% units)
-- `pareto_screen_only.json` — 26 Kim screen Pareto points (barcode units)
-- `gap_scores.json` — GP-scored gap formulations with confidence bands
-- `headgroup_tropism.json` — DOTAP vs DDAB analysis (~4x, p=0.001)
-- `sar_validation.json` — 4/8 confirmed, 2 supported, 2 inconclusive
-- `shap_values.parquet` — SHAP feature importance matrix
-- `cv_results*.json` — cross-validation results
+`label_boundary_case` is labeling metadata, not a predictor. It is 1 for four protected `lian_2024` rows measured at exactly 30% that retain their v1 `high` labels, and 0 otherwise. The current convention for new rows is strictly `high >30%`, `medium 10-30%`, and `low <10%`. Threshold-sensitive training and evaluation exclude rows where the marker is 1.
 
 ## `hsc/`
-Curated HSC-LNP records. `hsc_curated.parquet` contains the raw 156 records before feature engineering and filtering.
+
+The protected legacy source table. `hsc_curated.parquet` contains 131 rich records that project to 110 of the original feature rows. Together with 25 Lian integration rows, they form the original 135-row matrix block. Pass 3 does not modify this file.
+
+## `new_records_pass1.json`
+
+The rich flat-schema expansion: 198 records from 15 sources plus 3 paywalled source stubs. This file retains provenance, source confidence, physicochemical measurements, toxicity observations, and open-action status that do not all fit into the fixed feature matrix.
+
+## `kim_screen/`
+
+Decoded Kim 2024 barcoded screen data. `kim_2024_screen_corrected.json` contains 128 LNP formulations with helper lipid, PEG lipid, and molar-ratio assignments. Sixty-six have bone-marrow barcode delivery data.
 
 ## `audit/`
-Post-hoc verification scripts. Each script validates a specific claim (Pareto mixed units, headgroup statistics, dose-response sensitivity, etc.). `AUDIT_REPORT.md` summarizes findings.
+
+Validation outputs and post-hoc claim checks. `pass2_new_records_audit.json` records the 198-row source audit. `pass3_dedupe_report.json` records consolidation, dedupe decisions, contradiction checks, protected-baseline invariants, and unresolved items. The older `AUDIT_REPORT.md` and supporting scripts document baseline analyses.
+
+## `models/`
+
+Analysis outputs and serialized baseline models. `pass3_analysis.json` records the combined 333-row class balance, descriptive feature-target correlations, and the refreshed corrected Pareto analysis. `validation_comparison.json` reports row-random, formulation-grouped, and leave-one-paper-out LightGBM evaluation on the combined release, after excluding unlabeled and marked boundary rows. `lgbm_model.pkl`, `shap_values.parquet`, and `lopocv_results.json` use those same 311 threshold-comparable rows. Other legacy artifacts may describe earlier analysis stages and should not be assumed to use the combined release.
 
 ## `extractions/`
-LLM-extracted paper data indexed by PMID. Used for evaluating extraction accuracy against ground truth annotations.
+
+LLM-extracted paper data indexed by PMID and used to evaluate extraction accuracy against ground-truth annotations.
 
 ## `unified/`
-Combined training data parquet merging HSC records with external dataset features.
+
+Earlier combined training data that merges HSC records with external dataset features. It is not the canonical Pass 3 matrix.
+
+Coverage details for every feature-matrix column are in [`docs/COVERAGE_REPORT.md`](../docs/COVERAGE_REPORT.md). Label semantics are in [`docs/LABELING_CONVENTIONS.md`](../docs/LABELING_CONVENTIONS.md).

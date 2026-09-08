@@ -1,0 +1,703 @@
+{
+ "_instructions": "Pass 1 expansion annotations. One entry per newly mined paper. Mirrors the structure of existing per-paper annotation JSONs (paper_metadata plus extraction log). Full formulation/experiment records live in data/new_records_pass1.json.",
+ "papers": [
+  {
+   "paper_id": "hofstraat_2025",
+   "tier": "T1-2",
+   "paper_metadata": {
+    "pmid": "39900620",
+    "pmcid": "PMC12014499",
+    "doi": "10.1038/s41565-024-01847-3",
+    "title": "Nature-inspired platform nanotechnology for RNA delivery to myeloid cells and their bone marrow progenitors",
+    "journal": "Nature Nanotechnology",
+    "publication_year": 2025,
+    "paper_type": "research",
+    "license": "CC BY (open access)",
+    "authors": "Hofstraat SRJ, Anbergen T, Zwolsman R, Deckers J, van Elsas Y, Trines MM, Versteeg I, Hoorn D, Ros GWB, Bartelet BM, Hendrikx MMA, Darwish YB, Kleuskens T, Borges F, Maas RJF, Verhalle LM, Tielemans W, Vader P, de Jong OG, Tabaglio T, Wee DKB, Teunissen AJP, Brechbühl E, Janssen HM, Fransen PM, de Dreu A, Schrijver DP, Priem B, Toner YC, Beldman TJ, Netea MG, Mulder WJM, Kluza E, van der Meel R"
+   },
+   "access": "full text via PMC OA + supplementary package (source data xlsx, supplementary PDF)",
+   "record_ids": [
+    "hofstraat_2025_aNP8_invivo_siLAMP1",
+    "hofstraat_2025_aNP15_invivo_siLAMP1",
+    "hofstraat_2025_aNP18_invivo_siLAMP1",
+    "hofstraat_2025_aNP27_invivo_siLAMP1",
+    "hofstraat_2025_aNP29_invivo_siLAMP1",
+    "hofstraat_2025_aNP42_invivo_siLAMP1",
+    "hofstraat_2025_aNP67_invivo_siLAMP1",
+    "hofstraat_2025_aNP72_invivo_siLAMP1",
+    "hofstraat_2025_LNP_control_invivo_siLAMP1"
+   ],
+   "extraction_log": [
+    "72-member aNP-siRNA library compositions from Supplementary Table 1 (image table, read at 200 dpi)",
+    "8 in vivo formulations identified from Fig. 3a source data column headers (aNP8/15/18/27/29/42/67/72), consistent with text ('three POPC-based, five DMPC-based, including prototype aNP72')",
+    "In vivo LAMP1 knockdown computed from Fig. 3e-g source data (MOESM6 sheet g, normalized gMFI block) as (1 - mean normalized siLAMP1 gMFI) x 100 per formulation, per subset (LSK, LT-HSC)",
+    "Cryo-EM diameters from Supplementary Table 2 (image table)",
+    "aNP18 DLS size (50.7 nm number mean, n=10), PDI (0.165), zeta (-20.0 mV, n=6) from Fig. 4d,e source data (MOESM7)",
+    "Dose regimen 4 x 0.5 mg/kg siRNA IV at 36 h intervals from Fig. 3b caption"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "aNP18": "high",
+     "aNP8": "high",
+     "aNP67": "high",
+     "aNP15": "medium",
+     "aNP42": "medium",
+     "aNP29": "low",
+     "aNP27": "low",
+     "aNP72": "low"
+    },
+    "_thresholds": "atlas convention: high >30%, medium 10-30%, low <10% (applied to LSK knockdown)",
+    "primary_metric_used": "LAMP1 knockdown % in LSK, in vivo",
+    "_note": "Adds 3 low/medium-class records, partially addressing label imbalance (gap 28)"
+   }
+  },
+  {
+   "paper_id": "shi_2025_thesis",
+   "tier": "T1-6",
+   "paper_metadata": {
+    "title": "Development of a targeted lipid nanoparticle platform for in vivo RNA delivery to hematopoietic stem and progenitor cells",
+    "authors": [
+     "Shi, Dennis"
+    ],
+    "institution": "MIT (PhD thesis, Anderson lab)",
+    "publication_year": 2025,
+    "url": "https://dspace.mit.edu/handle/1721.1/165136",
+    "paper_type": "phd_thesis"
+   },
+   "access": "full PDF via MIT DSpace (open)",
+   "record_ids": [
+    "shi_2025_thesis_FLS_20DSPC_aCD117_ABE_invivo",
+    "shi_2025_thesis_ALC0315_10DSPC_2B8_mCherry_screenA",
+    "shi_2025_thesis_ALC0315_20DSPC_QA19A91_mCherry_screenD",
+    "shi_2025_thesis_ECLNP_siKit1_lung_endothelium"
+   ],
+   "extraction_log": [
+    "Chapter 4 formulation optimization (10 vs 20 mol% DSPC, clones 2B8 vs QA19A91, FL-S/FL-T/Lipid 5 vs ALC-0315) from Results text, Tables 4-2/4-3, Fig. 4-6 captions",
+    "12.5% base editing at A6 in Lin- CD117+ cells, 2.5 mg/kg, ABE8e-NRCH + sgCD45-2 1:1 mass, from Ch 4 Results (Fig. 4-7) and Ch 4.3/5.1",
+    "EC-LNP siKit1 0.4 mg/kg, 95% CD117 knockdown on lung endothelium (4.96% vs 79.1% CD117+), vascular leakage mitigation, from Ch 3 Results (Fig. 3-2 to 3-5)",
+    "20 mol% DSPC molar ratio 44.5:20:33.5:1.5:0.5 from Ch 4.4 Methods",
+    "Overlap note: Chapters 2 and parts of 3 overlap with shi_2023 (Science Advances), already in atlas; only new Chapter 3/4 content recorded here"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "FLS_20DSPC_ABE": "medium"
+    },
+    "primary_metric_used": "base editing % in Lin- CD117+ BM cells",
+    "_note": "12.5% editing lands in medium class; thesis itself notes sorted population is not pure LT-HSC"
+   }
+  },
+  {
+   "paper_id": "swart_2023",
+   "tier": "T2-1",
+   "paper_metadata": {
+    "pmid": "37376052",
+    "pmcid": "PMC10304323",
+    "title": "Increased Bone Marrow Uptake and Accumulation of Very-Late Antigen-4 Targeted Lipid Nanoparticles",
+    "journal": "Pharmaceutics",
+    "publication_year": 2023,
+    "paper_type": "research",
+    "license": "CC BY (MDPI open access)",
+    "authors": "Swart LE, Fens MHAM, van Oort A, Waranecki P, Mata Casimiro LD, Tuk D, Hendriksen M, van den Brink L, Schweighart E, Seinen C, Nelson R, Krippner-Heidenreich A, O'Toole T, Schiffelers RM, Kooijmans S, Heidenreich O"
+   },
+   "access": "full text via PMC OA (Europe PMC fullTextXML incl. Table 1)",
+   "record_ids": [
+    "swart_2023_LNP_untargeted",
+    "swart_2023_LDV_LNP"
+   ],
+   "extraction_log": [
+    "Compositions and physicochemicals (size/PDI/zeta/EE) from Table 1",
+    "54% vs 29% LNP+ immature HSPCs (CD45+/VLA-4+/CD34+) at 4 and 24 h from Results 3.5",
+    "Dose 50 ug per mouse tail vein from Methods; mg/kg not derivable (per-animal weights not stated)"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "LDV_LNP": "high",
+     "LNP_untargeted": "medium"
+    },
+    "primary_metric_used": "% LNP+ immature HSPCs (uptake, not expression)",
+    "_note": "Uptake assay, not functional delivery; class labels should be treated as assay-specific"
+   }
+  },
+  {
+   "paper_id": "chander_2023",
+   "tier": "T2-3",
+   "paper_metadata": {
+    "pmid": "37564393",
+    "pmcid": "PMC10410000",
+    "title": "Lipid nanoparticle mRNA systems containing high levels of sphingomyelin engender higher protein expression in hepatic and extra-hepatic tissues",
+    "journal": "Molecular Therapy Methods & Clinical Development",
+    "publication_year": 2023,
+    "paper_type": "research",
+    "license": "CC BY (open access)",
+    "authors": "Chander N, Basha G, Yan Cheng MH, Witzigmann D, Cullis PR"
+   },
+   "access": "full text via PMC OA + supplementary PDF",
+   "record_ids": [
+    "chander_2023_LNP_10DSPC_GFP",
+    "chander_2023_lcLNP_40ESM_GFP",
+    "chander_2023_LNP_10ESM_GFP"
+   ],
+   "extraction_log": [
+    "Compositions from Fig. 1 and Fig. 3 captions (molar ratios)",
+    "EE >95% for 10-40 mol% helper formulations from Results text (Table S1)",
+    "In vivo BM expression outcomes are qualitative in text (Fig. 5, Fig. 8); magnitudes are figure-only and left null with null_reason",
+    "Table S1 (sizes/PDI) is an image-only table in the supplementary PDF; not transcribed in Pass 1, flagged for Pass 2 figure extraction if needed"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "lcLNP_40ESM": "unlabeled (figure-only magnitude)"
+    }
+   }
+  },
+  {
+   "paper_id": "tarab_ravski_2023",
+   "tier": "T3-1",
+   "paper_metadata": {
+    "pmcid": "PMC10375190",
+    "title": "Delivery of Therapeutic RNA to the Bone Marrow in Multiple Myeloma Using CD38-Targeted Lipid Nanoparticles",
+    "journal": "Advanced Science",
+    "publication_year": 2023,
+    "paper_type": "research",
+    "license": "CC BY (open access)",
+    "authors": "Tarab-Ravski D, Hazan-Halevy I, Goldsmith M, Stotsky-Oterin L, Breier D, Naidu GS, Aitha A, Diesendruck Y, Ng BD, Barsheshet H, Berger T, Vaxman I, Raanani P, Peer D",
+    "pmid": "37171801"
+   },
+   "access": "full text via PMC OA",
+   "record_ids": [
+    "tarab_ravski_2023_aCD38_L10_tLNP_siCKAP5",
+    "tarab_ravski_2023_aCD38_L10_tLNP_siNC"
+   ],
+   "extraction_log": [
+    "Composition 50:38.5:10:1.5 (ionizable:Chol:DSPC:PEG-DMG), N/P 6, NanoAssemblr from Methods",
+    "BM MM occupancy 6.99% (siCKAP5) vs 16.96% (siNC) vs 18.09% (mock) from Results (Fig. 6) text",
+    "Regimen 1 mg/kg at days 7/11/14/17/21 in R2G2 CAG-Luc model from Methods"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "aCD38_L10_siCKAP5": "unlabeled (disease-cell metric, not HSC)"
+    }
+   }
+  },
+  {
+   "paper_id": "peng_2026",
+   "tier": "T3-5",
+   "paper_metadata": {
+    "pmid": "41917970",
+    "pmcid": "PMC13041086",
+    "doi": "10.1186/s13045-026-01785-8",
+    "title": "CXCR4-antagonistic peptide-decorated lipid nanoparticles for co-delivery of AML1-ETO siRNA to enhance chemotherapy",
+    "journal": "Journal of Hematology & Oncology",
+    "publication_year": 2026,
+    "paper_type": "correspondence",
+    "license": "CC BY (open access)",
+    "authors": "Peng X, Gu R, Wang T, Jiang C, Xing H, Meng J, Wen T, Liu J, Wang J, Xu H"
+   },
+   "access": "full text via PMC OA + supplementary docx",
+   "record_ids": [
+    "peng_2026_E5_LNP_siAE",
+    "peng_2026_LNP_siAE"
+   ],
+   "extraction_log": [
+    "Composition MC3:DSPC:chol:DMG-PEG2000 50:10:38.5:1.5, MC3:siRNA 10:1 wt, DSPE-PEG-E5 0.5:100 post-insertion, from Supp Methods",
+    "EE 96.92% (Supp Table S2), TEM 121.8 nm, DLS 170.54 nm from main text",
+    "Dose 0.6 mg/kg siRNA IP daily x4 in AML1-ETO/c-KIT D816V C57BL/6 model from Supp Methods",
+    "Efficacy magnitudes figure-only (Fig. 1E-H)"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "E5_LNP_siAE": "unlabeled (figure-only magnitude)"
+    }
+   }
+  },
+  {
+   "paper_id": "zhao_2026",
+   "tier": "T3-7",
+   "paper_metadata": {
+    "pmid": "42026076",
+    "pmcid": "PMC13315708",
+    "title": "CAR-CD34+ hematopoietic stem/progenitor cells produced in vivo protect against aortic aneurysm",
+    "journal": "Nature Communications",
+    "publication_year": 2026,
+    "paper_type": "research",
+    "license": "CC BY (open access)",
+    "authors": "Zhao K, He Y, Yao R, Li S, Kong L, Niu J, Zeng Z, Du P, Zhu H, Zhao R, Liang T, Jing Z, Zhou J"
+   },
+   "access": "full text via PMC OA",
+   "record_ids": [
+    "zhao_2026_CD34_LNP_CARmRNA",
+    "zhao_2026_LNP_CARmRNA_untargeted"
+   ],
+   "extraction_log": [
+    "Composition MC3:chol:DSPC:DMPE-PEG2000 50:38.5:10:1.5 with anti-CD34 from Results (Fig. 1) text",
+    "Dose 10 ug mRNA per mouse IV from Methods",
+    "CAR-CD34+ generation qualitative in text (Fig. 4g,h); percentages figure-only",
+    "Disease context is aortic aneurysm (TAAD), not blood disorder; HSPC-targeting formulation retained per mining report"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "CD34_LNP_CAR": "unlabeled (figure-only magnitude)",
+     "LNP_CAR_untargeted": "low (no circulating CAR expression detected)"
+    }
+   }
+  },
+  {
+   "paper_id": "jyotsana_2019",
+   "tier": "T3-3",
+   "paper_metadata": {
+    "pmid": "31104089",
+    "pmcid": "PMC7116733",
+    "title": "Lipid nanoparticle-mediated siRNA delivery for safe targeting of human CML in vivo",
+    "journal": "Annals of Hematology",
+    "publication_year": 2019,
+    "paper_type": "research",
+    "authors": "Jyotsana N, Sharma A, Chaturvedi A, Budida R, Scherr M, Kuchenbauer F, Lindner R, Noyan F, Sühs KW, Stangel M, Grote-Koska D, Brand K, Vornlocher HP, Eder M, Thol F, Ganser A, Humphries RK, Ramsay E, Cullis P, Heuser M"
+   },
+   "access": "full text via PMC (BioC API)",
+   "record_ids": [
+    "jyotsana_2019_LNP_siBCRABL",
+    "jyotsana_2019_LNP_CTRL_siRNA"
+   ],
+   "extraction_log": [
+    "Proprietary SUB9KITS composition, 1.5% PEG-DMG, 55 nm, EE >90%, lipid:siRNA 10:1, from Results text",
+    "5 mg/kg x3 IV (0, 8, 24 h) in intrafemoral K562L.GFP NSG model; ~100% BM leukemic cell uptake from Results text",
+    "100% PB cell uptake at cumulative 10 mg/kg in healthy NSG from Results text"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "LNP_siBCRABL": "unlabeled (disease-cell metric)"
+    }
+   }
+  },
+  {
+   "paper_id": "dahlman_2014",
+   "tier": "T2-4",
+   "paper_metadata": {
+    "pmid": "24813696",
+    "pmcid": "PMC4207430",
+    "title": "In vivo endothelial siRNA delivery using polymeric nanoparticles with low molecular weight",
+    "journal": "Nature Nanotechnology",
+    "publication_year": 2014,
+    "paper_type": "research",
+    "authors": "Dahlman JE, Barnes C, Khan O, Thiriot A, Jhunjunwala S, Shaw TE, Xing Y, Sager HB, Sahay G, Speciner L, Bader A, Bogorad RL, Yin H, Racie T, Dong Y, Jiang S, Seedorf D, Dave A, Sandu KS, Webber MJ, Novobrantseva T, Ruda VM, Lytton-Jean AKR, Levins CG, Kalish B, Mudge DK, Perez M, Abezgauz L, Dutta P, Smith L, Charisse K, Kieran MW, Fitzgerald K, Nahrendorf M, Danino D, Tuder RM, von Andrian UH, Akinc A, Schroeder A, Panigrahy D, Kotelianski V, Langer R, Anderson DG"
+   },
+   "access": "full text via PMC (BioC API)",
+   "record_ids": [
+    "dahlman_2014_7C1_siICAM2"
+   ],
+   "extraction_log": [
+    "7C1 = C15 epoxide + PEI600 at 14:1, formulated with C14PEG2000, 35-60 nm, from main text",
+    ">90% endothelial KD at 0.10 mg/kg, 50% at 0.02 mg/kg, 92% ICAM-2 decrease at 0.6 mg/kg sustained 73-85% over 21 days, from main text",
+    "Lung endothelial, not bone marrow; retained as Sago 2018 ancestor per mining report with low BM relevance flagged"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "7C1": "unlabeled (endothelial, off-target organ for this atlas)"
+    }
+   }
+  },
+  {
+   "paper_id": "hanafy_2025",
+   "tier": "T1-3",
+   "paper_metadata": {
+    "doi": "10.1002/adfm.202525076",
+    "title": "PRELIVE: A Framework for Predicting Lipid Nanoparticles In Vivo Efficacy and Reducing Reliance on Animal Testing",
+    "authors": [
+     "Hanafy, Belal I.",
+     "Lu, Chuan-En",
+     "Liu, Kai",
+     "Gallud, Audrey"
+    ],
+    "journal": "Advanced Functional Materials",
+    "publication_year": 2025,
+    "publisher_date": "2025-11-26 (published online)",
+    "affiliation": "AstraZeneca (Cambridge UK, Gothenburg SE)",
+    "paper_type": "research",
+    "license": "CC BY (Wiley open access)"
+   },
+   "access": "user-provided PDFs: main text (scanned, OCR at 300 dpi), Supporting Information (Figures S1-S20), interactive model file",
+   "record_ids": [
+    "hanafy_2025_LNP1_invivo_luciferase",
+    "hanafy_2025_LNP2_invivo_luciferase",
+    "hanafy_2025_LNP3_invivo_luciferase",
+    "hanafy_2025_LNP4_invivo_luciferase",
+    "hanafy_2025_LNP5_invivo_luciferase",
+    "hanafy_2025_LNP6_invivo_luciferase",
+    "hanafy_2025_LNP7_invivo_luciferase",
+    "hanafy_2025_LNP8_invivo_luciferase",
+    "hanafy_2025_LNP9_invivo_luciferase",
+    "hanafy_2025_LNP10_invivo_luciferase",
+    "hanafy_2025_LNP11_invivo_luciferase",
+    "hanafy_2025_LNP12_invivo_luciferase",
+    "hanafy_2025_LNP13_invivo_luciferase",
+    "hanafy_2025_LNP14_invivo_luciferase"
+   ],
+   "extraction_log": [
+    "All 14 LNP compositions, N:P, %EE, size, PDI transcribed from Figure 2A table (300 dpi render of scanned page 4)",
+    "Bone marrow good/poor classification read from Figure S19 color strip (good = LNP 6, 10, 11, 14)",
+    "Bone marrow mean radiance estimated from Figure 2B BM panel box midlines (estimated_from_figure, flagged needs_user_confirmation for LNP 6, 8, 10, 11, 14)",
+    "In vivo protocol (albino C57BL/6 male, 0.3 mg/kg IV, 6 h, ex vivo femoral BM IVIS, n=3) from Experimental Section",
+    "DoE selection workflow (176 -> 56 -> 14) from Figure S1 and Experimental Section",
+    "ICL structures: proprietary; parent structure only (Fig S2), so all SMILES null",
+    "Discrepancy flagged: main text says LNPs 8, 10, 14 surpassed standard (LNP 11) in BM; Fig S19 classifies 6, 10, 11, 14 as good and 8 as poor. LNP 6 BM mean (~1.05M) visually exceeds LNP 11 (~850k). Recorded as-is from both sources, user to adjudicate"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "LNP6": "high",
+     "LNP10": "high",
+     "LNP11": "medium",
+     "LNP14": "high",
+     "others": "low-to-medium (poor BM class)"
+    },
+    "primary_metric_used": "femoral BM luciferase radiance (functional delivery, whole-tissue, not HSC-specific)",
+    "_note": "Metric is whole-BM-tissue expression, not HSPC-specific; class mapping approximate"
+   }
+  },
+  {
+   "paper_id": "chappell_2024",
+   "tier": "T1-4",
+   "paper_metadata": {
+    "pmid": "38949981",
+    "pmcid": "PMC11487647",
+    "doi": "10.1182/blood.2023023349",
+    "title": "Use of HSC-targeted LNP to generate a mouse model of lethal alpha-thalassemia and treatment via lentiviral gene therapy",
+    "authors": [
+     "Chappell, Maxwell E.",
+     "Breda, Laura",
+     "Tricoli, Lucas",
+     "et al."
+    ],
+    "journal": "Blood",
+    "publication_year": 2024,
+    "paper_type": "research",
+    "_title_correction": "mining report said 'treatment via in vivo HSC genome editing'; actual title is 'treatment via lentiviral gene therapy'. LNP use is ex vivo Cre deletion, not in vivo editing."
+   },
+   "access": "user-provided main text PDF (PMC author manuscript) + supplementary PDF",
+   "record_ids": [
+    "chappell_2024_mRNACre_LNPCD117_exvivo_deletion",
+    "chappell_2024_mRNACre_LNPCD117_posttransplant_ddPCR"
+   ],
+   "extraction_log": [
+    "LNP = mRNACre-LNP-CD117, anti-mCD117 conjugated, Cre mRNA, used ex vivo on lin- Hba-a1Fl/Fl/Hba-a2KO/KO cells (~18 h), then transplant into lethally irradiated CD45.1 recipients",
+    "Deletion readouts: 496 bp gel band days 1/3/7 (Fig. 1B), ddPCR residual ~0% in AG-KO recipients (Fig. 1C)",
+    "Composition not stated; platform referenced to ref 42 (Parhiz/Breda CD117-LNP), composition analog-supported by existing breda_2023 annotation",
+    "Rescue arm: ALS20alphaI LV (VCN 3.4), residual HbH 22.2% +/- 14.0%; not an LNP record",
+    "Mouse locus (Hba-a1/Hba-a2); GRCh38 anchors check not applicable"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "mRNACre_LNPCD117": "high (near-total deletion)"
+    },
+    "primary_metric_used": "alpha-globin gene deletion (ex vivo, then transplant)"
+   }
+  },
+  {
+   "paper_id": "palchaudhuri_2025",
+   "tier": "T1-5",
+   "paper_metadata": {
+    "title": "In Vivo RNA delivery by targeted lipid nanoparticles enable gene editing in hematopoietic stem cells and T cells",
+    "authors": [
+     "Palchaudhuri, Rahul",
+     "Monte, Michael",
+     "Gupta, Mohit",
+     "et al."
+    ],
+    "journal": "Blood 146 (Supplement 1): 4318",
+    "publication_year": 2025,
+    "doi": "10.1182/blood-2025-4318",
+    "paper_type": "conference_abstract",
+    "affiliation": "Tessera Therapeutics"
+   },
+   "access": "user-provided abstract PDF (1 page)",
+   "record_ids": [
+    "palchaudhuri_2025_HSCLNP_B2M_editing",
+    "palchaudhuri_2025_HSCLNP_Makassar_editing",
+    "palchaudhuri_2025_HSCLNP_GFP_delivery"
+   ],
+   "extraction_log": [
+    "All values from abstract text only: ~75% B2M editing in LT-HSCs (humanized mice + cyno), 50%/24% Makassar installation (humanized mouse/NHP), >90% GFP+ LT-HSCs, 11-fold liver reduction, 55-fold BM increase, 3-fold BM>liver in NHP",
+    "No composition, dose, or physicochemical data in abstract; all such fields null with reasons",
+    "All records confidence LOW pending full paper"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "B2M_editing": "high",
+     "Makassar_humanized": "high",
+     "Makassar_NHP": "high",
+     "GFP_delivery": "high"
+    },
+    "primary_metric_used": "Gene Writer editing % in LT-HSCs"
+   }
+  },
+  {
+   "paper_id": "xue_2022",
+   "tier": "T2-2",
+   "paper_metadata": {
+    "pmid": "35616998",
+    "doi": "10.1021/jacs.2c02706",
+    "title": "Rational Design of Bisphosphonate Lipid-like Materials for mRNA Delivery to the Bone Microenvironment",
+    "authors": [
+     "Xue, Lulu",
+     "Gong, Ningqiang",
+     "Shepherd, Sarah J.",
+     "et al."
+    ],
+    "journal": "Journal of the American Chemical Society",
+    "publication_year": 2022,
+    "paper_type": "research"
+   },
+   "access": "user-provided Supporting Information PDF; main paper pending",
+   "record_ids": [
+    "xue_2022_490BP_C14_LNP",
+    "xue_2022_490_C14_LNP_control"
+   ],
+   "extraction_log": [
+    "Composition (35:16:46.5:2.5 ionizable/DOPE/chol/C14-PEG2000), microfluidic method, in vivo protocol (0.5 mg/kg IV, C57BL/6J female) from SI sections 4a/4e",
+    "490BP-C14 structure confirmed (Fig S10), 21-day stability (Fig S14), ALT/AST at 12 h protocol (SI 4h)",
+    "Efficacy magnitudes are in main paper figures; records marked partial_pending_main_text"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "490BP_C14": "pending main text"
+    }
+   }
+  },
+  {
+   "paper_id": "xu_2026",
+   "tier": "T1-1",
+   "paper_metadata": {
+    "pmid": "40796944",
+    "doi": "10.1038/s41551-025-01480-y",
+    "title": "In vivo genome editing of human haematopoietic stem cells for treatment of blood disorders using mRNA delivery",
+    "authors": [
+     "Xu, Saijuan",
+     "Liang, Dan",
+     "Wang, Qiudao",
+     "et al."
+    ],
+    "journal": "Nature Biomedical Engineering",
+    "publication_year": 2026,
+    "volume_pages": "Vol 10, 473-489 (March 2026)",
+    "affiliation": "YolTech Therapeutics / ECNU",
+    "paper_type": "research"
+   },
+   "access": "user-provided main text PDF + Supplementary Tables 1-15 (xlsx) + full figure source data (xlsx)",
+   "record_ids": [
+    "xu_2026_LNP028_ABE8e_PCSK9_invivo",
+    "xu_2026_LNP217_ABE8e_PCSK9_invivo",
+    "xu_2026_LNP306_ABE8e_PCSK9_invivo",
+    "xu_2026_LNP168_ABE8e_PCSK9_invivo",
+    "xu_2026_LNP028_ABE8e_HBG_humanized",
+    "xu_2026_LNP168_ABE8e_HBG_TDT_model",
+    "xu_2026_LNP168_Cre_miR122T_Ai14",
+    "xu_2026_LNP_MC3_Cre_miR122T_control",
+    "xu_2026_LNP151_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP163_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP164_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP165_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP167_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP169_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP001_ABE8e_PCSK9_library",
+    "xu_2026_LNP002_ABE8e_PCSK9_library",
+    "xu_2026_LNP003_ABE8e_PCSK9_library",
+    "xu_2026_LNP004_ABE8e_PCSK9_library",
+    "xu_2026_LNP005_ABE8e_PCSK9_library",
+    "xu_2026_LNP006_ABE8e_PCSK9_library",
+    "xu_2026_LNP007_ABE8e_PCSK9_library",
+    "xu_2026_LNP008_ABE8e_PCSK9_library",
+    "xu_2026_LNP009_ABE8e_PCSK9_library",
+    "xu_2026_LNP010_ABE8e_PCSK9_library",
+    "xu_2026_LNP011_ABE8e_PCSK9_library",
+    "xu_2026_LNP012_ABE8e_PCSK9_library",
+    "xu_2026_LNP013_ABE8e_PCSK9_library",
+    "xu_2026_LNP014_ABE8e_PCSK9_library",
+    "xu_2026_LNP015_ABE8e_PCSK9_library",
+    "xu_2026_LNP016_ABE8e_PCSK9_library",
+    "xu_2026_LNP017_ABE8e_PCSK9_library",
+    "xu_2026_LNP018_ABE8e_PCSK9_library",
+    "xu_2026_LNP019_ABE8e_PCSK9_library",
+    "xu_2026_LNP020_ABE8e_PCSK9_library",
+    "xu_2026_LNP021_ABE8e_PCSK9_library",
+    "xu_2026_LNP022_ABE8e_PCSK9_library",
+    "xu_2026_LNP023_ABE8e_PCSK9_library",
+    "xu_2026_LNP024_ABE8e_PCSK9_library",
+    "xu_2026_LNP025_ABE8e_PCSK9_library",
+    "xu_2026_LNP026_ABE8e_PCSK9_library",
+    "xu_2026_LNP027_ABE8e_PCSK9_library",
+    "xu_2026_LNP028_ABE8e_PCSK9_library",
+    "xu_2026_LNP029_ABE8e_PCSK9_library",
+    "xu_2026_LNP030_ABE8e_PCSK9_library",
+    "xu_2026_LNP031_ABE8e_PCSK9_library",
+    "xu_2026_LNP032_ABE8e_PCSK9_library",
+    "xu_2026_LNP033_ABE8e_PCSK9_library",
+    "xu_2026_LNP034_ABE8e_PCSK9_library",
+    "xu_2026_LNP035_ABE8e_PCSK9_library",
+    "xu_2026_LNP200_ABE8e_PCSK9_library",
+    "xu_2026_LNP201_ABE8e_PCSK9_library",
+    "xu_2026_LNP202_ABE8e_PCSK9_library",
+    "xu_2026_LNP203_ABE8e_PCSK9_library",
+    "xu_2026_LNP204_ABE8e_PCSK9_library",
+    "xu_2026_LNP205_ABE8e_PCSK9_library",
+    "xu_2026_LNP206_ABE8e_PCSK9_library",
+    "xu_2026_LNP207_ABE8e_PCSK9_library",
+    "xu_2026_LNP208_ABE8e_PCSK9_library",
+    "xu_2026_LNP209_ABE8e_PCSK9_library",
+    "xu_2026_LNP210_ABE8e_PCSK9_library",
+    "xu_2026_LNP211_ABE8e_PCSK9_library",
+    "xu_2026_LNP212_ABE8e_PCSK9_library",
+    "xu_2026_LNP213_ABE8e_PCSK9_library",
+    "xu_2026_LNP214_ABE8e_PCSK9_library",
+    "xu_2026_LNP215_ABE8e_PCSK9_library",
+    "xu_2026_LNP216_ABE8e_PCSK9_library",
+    "xu_2026_LNP217_ABE8e_PCSK9_library",
+    "xu_2026_LNP218_ABE8e_PCSK9_library",
+    "xu_2026_LNP219_ABE8e_PCSK9_library",
+    "xu_2026_LNP220_ABE8e_PCSK9_library",
+    "xu_2026_LNP221_ABE8e_PCSK9_library",
+    "xu_2026_LNP222_ABE8e_PCSK9_library",
+    "xu_2026_LNP223_ABE8e_PCSK9_library",
+    "xu_2026_LNP224_ABE8e_PCSK9_library",
+    "xu_2026_LNP225_ABE8e_PCSK9_library",
+    "xu_2026_LNP226_ABE8e_PCSK9_library",
+    "xu_2026_LNP227_ABE8e_PCSK9_library",
+    "xu_2026_LNP228_ABE8e_PCSK9_library",
+    "xu_2026_LNP229_ABE8e_PCSK9_library",
+    "xu_2026_LNP230_ABE8e_PCSK9_library",
+    "xu_2026_LNP231_ABE8e_PCSK9_library",
+    "xu_2026_LNP300_ABE8e_PCSK9_library",
+    "xu_2026_LNP301_ABE8e_PCSK9_library",
+    "xu_2026_LNP302_ABE8e_PCSK9_library",
+    "xu_2026_LNP303_ABE8e_PCSK9_library",
+    "xu_2026_LNP304_ABE8e_PCSK9_library",
+    "xu_2026_LNP305_ABE8e_PCSK9_library",
+    "xu_2026_LNP306_ABE8e_PCSK9_library",
+    "xu_2026_LNP307_ABE8e_PCSK9_library",
+    "xu_2026_LNP308_ABE8e_PCSK9_library",
+    "xu_2026_LNP309_ABE8e_PCSK9_library",
+    "xu_2026_LNP310_ABE8e_PCSK9_library",
+    "xu_2026_LNP311_ABE8e_PCSK9_library",
+    "xu_2026_LNP312_ABE8e_PCSK9_library",
+    "xu_2026_LNP313_ABE8e_PCSK9_library",
+    "xu_2026_LNP314_ABE8e_PCSK9_library",
+    "xu_2026_LNP315_ABE8e_PCSK9_library",
+    "xu_2026_LNP316_ABE8e_PCSK9_library",
+    "xu_2026_LNP317_ABE8e_PCSK9_library",
+    "xu_2026_LNP318_ABE8e_PCSK9_library",
+    "xu_2026_LNP319_ABE8e_PCSK9_library",
+    "xu_2026_LNP320_ABE8e_PCSK9_library",
+    "xu_2026_LNP321_ABE8e_PCSK9_library",
+    "xu_2026_LNP322_ABE8e_PCSK9_library",
+    "xu_2026_LNP323_ABE8e_PCSK9_library",
+    "xu_2026_LNP324_ABE8e_PCSK9_library",
+    "xu_2026_LNP121_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP122_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP123_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP124_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP125_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP126_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP127_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP128_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP129_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP140_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP141_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP142_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP143_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP144_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP145_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP146_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP147_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP148_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP149_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP150_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP152_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP153_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP154_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP155_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP156_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP157_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP158_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP159_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP160_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP161_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP162_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP166_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP180_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP181_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP182_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP183_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP184_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP185_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP186_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP187_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP188_ABE8e_PCSK9_secondary_screen",
+    "xu_2026_LNP189_ABE8e_PCSK9_secondary_screen"
+   ],
+   "extraction_log": [
+    "Three ionizable lipid libraries (A: 35 lipids, alpha-acylamino acyl amide linker; B: 32, 2-(aminomethyl)propane-1,3-diol; C: 25, carbamothioic S-acid linker) screened in vivo at 2 mg/kg, two doses, BM PCSK9 editing",
+    "Leads: LNP-028 (A), LNP-217 (B), LNP-306 (C); LNP-028 markedly higher than B/C leads (Fig. 3b values figure-only)",
+    "LNP-168 (optimized from Library A): 48.5% BM PCSK9 editing vs 19.7% for LNP-028, second dose (Fig. 4a, text)",
+    "miR-122T 3'-UTR detargeting: liver editing 71.0% -> 19.0%, BM editing retained (Fig. 4d, text)",
+    "LNP-028-ABE8e-HBG humanized NCG-X (healthy donors): 11.0% A5 / 8.4% A6 single 2.0 mg/kg dose, gamma-globin 22.2%; mobilization not beneficial; repeat dosing q2w x5 increased editing (Fig. 3i,j figure-only)",
+    "LNP-168-ABE8e-HBG TDT patient HSPCs in NCG-X: 42.6% HBG promoter editing, two doses of 1.0 mg/kg; gamma-globin 0.14 -> 0.60 vs alpha-globin; restored erythroid morphology; no engraftment harm",
+    "LNP-168-Cre-miR-122T in Ai14: >80% MPP3 tdTomato+, higher than MC3 control across LSK/MPP/HSC (Fig. 4f-h)",
+    "Formulation (all LNPs): 50:38.5:10:1.5 ionizable:chol:DSPC:DMG-PEG2000, N:P 4.5, NanoAssemblr, 69-90 nm, EE >90% (Methods; per-formulation values in Supp Tables 7-9, not provided)",
+    "Safety (Fig. 6): transient ALT/AST resolved by 2 weeks; IP-10/TNF/IL-6/IL-1beta resolved within 48 h; no anti-PEG/anti-Cas9 IgG on second dose; Lipid-168 plasma t1/2 ~2.5 h; mRNA/sgRNA undetectable after 72 h",
+    "Off-target: 38 candidate sites by NGS, nearly undetectable (Extended Data Fig. 10a)",
+    "Not extracted: RNP electroporation ex vivo data (not LNP); per-lipid library values for all 92 formulations (Extended Data Figs. 3-5, image tables)",
+    "anchors.py: sgRNA-25 targets HBG1/2 promoter (GRCh38 chr11); exact sequence in Supp Table 3 (not provided), coordinate verification pending",
+    "Supp Table 9: exact size/PDI/EE/pKa for LNP-028-ABE8e-sg25 (70.6 nm, 0.01, 96.5%, pKa 7.28), LNP-168-ABE8e-sg25 (73.6, 0.04, 92.6%, 7.32), LNP-168-Cre-miR-122 (69.1, 0.02, 89.9%, 7.43), plus LNP-168-Luc variants",
+    "Supp Table 7: LNP-028/217/306 PCSK9 characterization (79.0/72.1/73.0 nm, PDI 0.02-0.03, EE 91.5-94.5%)",
+    "Supp Table 8 + Fig 4a source data: 50-formulation secondary screen of Library A; 6 top performers added as records (LNP-151/163/164/165/167/169, second-dose bars 17-27%)",
+    "sgRNA-25 = AGGCAAGGCTGGCCAACCCA (Supp Table 4); GRCh38 verified: chr11:5,249,976-5,249,995 (HBG2) and chr11:5,254,900-5,254,919 (HBG1), 4,924 bp spacing, PASS",
+    "Protein corona: Supp Tables 11-13 (LNP-168-Luc vs MC3-Luc; albumin 29.7%, fibronectin 7.9%, fibrinogen gamma 7.3% top on LNP-168)",
+    "Source-data anomalies flagged for Pass 2: Fig 4a LNP-123 single-dose replicate '116.0' (impossible >100% value); plotted bars vs replicate means mismatch for several LNPs (e.g. LNP-167 bar 27 vs mean 33.2); text 48.5% vs Fig 4a bar 46% for LNP-168",
+    "Not imported: full 92-lipid library screen values (ED Figs 3-5 source data parsed and available; import pending user decision on dataset shape)",
+    "FULL IMPORT: all 92 primary library screen formulations (A: 35, B: 32, C: 25; ED Figs 3-5 source data) and all 50 secondary-screen formulations (Fig 4a source data) imported as individual records, minus 10 already curated = 134 added",
+    "Per-record label_for_ml assigned from second-dose bar with atlas thresholds (>30 high, 10-30 medium, <10 low): 110 low, 24 medium among screen records; directly addresses gap 28 label imbalance",
+    "LNP-123 116% outlier replicate flagged in-record (null_fields.data_anomaly)"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": {
+     "LNP168_HBG_TDT": "high",
+     "LNP028_HBG_humanized": "medium",
+     "LNP168_PCSK9": "high",
+     "LNP028_PCSK9": "medium"
+    },
+    "primary_metric_used": "base editing % at HBG promoter (A5/A6) or PCSK9 (A6) in BM cells / human HSPCs",
+    "_note": "adds medium-class records (LNP-028 arms, MC3 control), helping label balance (gap 28)"
+   }
+  },
+  {
+   "paper_id": "iida_2022",
+   "tier": "T3-4",
+   "paper_metadata": {
+    "pmid": "35644277",
+    "doi": "10.1016/j.exphem.2022.05.001",
+    "title": "RUNX1 Inhibition Using Lipid Nanoparticle-Mediated Silencing RNA Delivery as an Effective Treatment for Acute Leukemias",
+    "authors": [
+     "Iida, Kohei",
+     "Tsuchiya, Akiho",
+     "Tamura, Moe",
+     "et al."
+    ],
+    "journal": "Experimental Hematology",
+    "publication_year": 2022,
+    "paper_type": "brief_communication"
+   },
+   "access": "user-provided main text PDF. Supplement (Iida_supp.docx) arrived empty/corrupt (1.5 KB document.xml, no media); siRNA sequences (Supp Table E2) and supp figures E1-E8 not available.",
+   "record_ids": [
+    "iida_2022_LNP43_siRUNX1",
+    "iida_2022_LNP79_siRUNX1"
+   ],
+   "extraction_log": [
+    "LNP-43 and LNP-79, tumor-tropic formulations from Bayesian optimization (refs 16-17), components DOTAP/DOPE/chol/DMG-PEG2000 with peptide-condensed RNA",
+    "In vitro only: leukemia cell panel + patient-derived AML + normal CB CD34+ sparing (Fig. 2C, Fig. 3)",
+    "No in vivo experiments; paper states systemic in vivo testing as future work",
+    "Exact molar ratios in Saito et al. Blood 2020 (ref 17), not printed here"
+   ],
+   "label_for_ml": {
+    "hsc_efficacy_class": "unlabeled (in vitro, disease-cell metric)",
+    "_note": "value to atlas: cationic (DOTAP) helper class representation + tumor-vs-normal HSPC selectivity data"
+   }
+  }
+ ]
+}

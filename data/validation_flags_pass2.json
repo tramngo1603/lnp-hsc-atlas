@@ -1,0 +1,329 @@
+{
+  "pass": 2,
+  "date": "2026-09-06",
+  "scope": "198 new records in data/new_records_pass1.json (135 original records untouched)",
+  "generated_by": "Pass 2 review: scripts/audit_new_records_pass2.py + manual cross-referencing against source texts and supplementary source data (user-provided PDFs/xlsx + PMC OA + MIT DSpace + PubMed)",
+  "policy_decisions_applied": [
+    {
+      "id": "decision_negative_computed_knockdown",
+      "decision": "Computed knockdown may be negative (formulation had no measurable effect). Values are kept as computed; clamping to 0 would falsify low-efficacy records needed for label balance.",
+      "implementation": "scripts/audit_new_records_pass2.py carries a documented exception for hofstraat_2025_aNP72_invivo_siLAMP1; see flag hofstraat_aNP72_lthsc_recompute_mismatch for a related open issue.",
+      "decided_by": "user, 2026-09-06"
+    },
+    {
+      "id": "decision_absolute_doses",
+      "decision": "Swart 2023 (50 ug siRNA per mouse) and Zhao 2026 (10 ug mRNA per mouse) doses are kept as absolute per-mouse doses with dose_mg_per_kg = null and an explicit null_reason. No assumed mouse weight is introduced; converting would add an estimate the sources never stated.",
+      "implementation": "delivery.dose_absolute carries the per-mouse dose string; dose_mg_per_kg stays null with reason; matrix projection leaves dose_mg_per_kg NaN for these 4 records.",
+      "decided_by": "user, 2026-09-06"
+    },
+    {
+      "id": "decision_hanafy_evidence_strength",
+      "decision": "Hanafy record-level evidence_strength stays empirically_measured. Field-level field_extraction_methods marks bm_radiance_mean_estimated as estimated_from_figure, and the Fig 2B readings were visually confirmed by the user, making them stronger than pure figure estimates.",
+      "implementation": "no record change; audit accepts the field-level annotation as sufficient.",
+      "decided_by": "user, 2026-09-06"
+    }
+  ],
+  "flags": [
+    {
+      "id": "xu_screen_replicates_missing_first_value",
+      "severity": "high",
+      "status": "open",
+      "category": "extraction_completeness",
+      "affected_records": "139 of 139 xu_2026 screen records (92 library: Extended Data Fig. 3/4/5; 47 secondary: Fig. 4a)",
+      "field": "efficacy.replicates",
+      "description": "Every stored replicate array is missing the FIRST value listed in the source-data sheet for that arm. Verified against the user-provided source-data xlsx (41551_2025_1480_MOESM3_ESM): 92/92 library and 47/47 secondary records drop the first replicate of both single_dose and second_dose arrays. Example LNP-001: source single [5,4,4,3,3], recorded [4,4,3,3]; source second [4,5,6,5,4], recorded [5,6,5,4]. The stored arrays are systematically incomplete.",
+      "evidence": "41551_2025_1480_MOESM3_ESM.xlsx (user-provided), sheets Extended Data Fig. 3 (35 formulations), Extended Data Fig. 4 (32), Extended Data Fig. 5 (25), Figure 4 (49). Recomputed all 139 against data/audit/xu_2026_screen_replicates_source.json (captured source arrays).",
+      "impact": "The incomplete arrays affect any replicate-level statistic. The primary bar values are NOT affected (see xu_screen_bar_vs_replicate_mean).",
+      "recommendation": "Re-import efficacy.replicates from data/audit/xu_2026_screen_replicates_source.json (mechanical, source-anchored). This is auto-fixable once the user confirms; left flagged per the no-silent-repair rule because it touches 139 records.",
+      "not_auto_fixed_because": "bulk data change across 139 records; user confirmation requested before repair"
+    },
+    {
+      "id": "xu_screen_bar_vs_replicate_mean",
+      "severity": "medium",
+      "status": "documented",
+      "category": "source_data_inconsistency",
+      "affected_records": "139 xu_2026 screen records (bar = editing_efficiency_percent / single_dose_percent)",
+      "description": "In the Xu source-data files, the plotted bar values do not always equal the means of the listed replicates. Against the COMPLETE replicate arrays: bars agree with the replicate mean within 0.5 pp for 47 of 139 records (library median |delta| 0.80 pp, secondary median 1.25 pp, max 5.8 pp). The bars are the authors' own plotted summary; the replicate spread is real (n=3-5, small-group in vivo editing). Records keep the plotted bar as primary (extracted_from_table) and preserve replicates; the caveat is in efficacy.value_basis.",
+      "evidence": "Pass 2 recomputed replicate means from the complete source arrays for all 139 screen records.",
+      "recommendation": "None required for the primary values (bars are the authors' summary). For Pass 3 ML use: treat screen bars within ~2 pp of class cutoffs as uncertain; the label_for_ml classes (high>30, medium 10-30, low<10) are robust to these deltas except for borderline records.",
+      "not_auto_fixed_because": "both representations (bar and replicates) are source data; the record preserves both"
+    },
+    {
+      "id": "xu_LNP123_outlier_replicate",
+      "severity": "medium",
+      "status": "documented",
+      "category": "source_data_anomaly",
+      "affected_records": [
+        "xu_2026_LNP123_ABE8e_PCSK9_secondary_screen"
+      ],
+      "field": "efficacy.replicates.single_dose",
+      "description": "Source data (Fig. 4a) lists single-dose replicates [7, 8, 116, 9]; 116% is physically impossible for this assay. The recorded primary value is the plotted bar (editing_efficiency_percent 10.0 second dose, single_dose_percent 7.0). The 116.0 replicate is preserved verbatim for provenance but excluded from interpretation. Record null_fields.data_anomaly documents this. (Note: recorded array also missing the first replicate 7 per the xu_screen_replicates_missing_first_value flag.)",
+      "recommendation": "None required. If replicate-level analysis is ever run, treat 116.0 as a data-entry error (plausibly 11.6 or 16) but do not substitute without the authors' correction.",
+      "not_auto_fixed_because": "hard rule: no guessing at intended values"
+    },
+    {
+      "id": "xu_LNP168_text_vs_figure",
+      "severity": "low",
+      "status": "documented",
+      "category": "text_figure_discrepancy",
+      "affected_records": [
+        "xu_2026_LNP168_ABE8e_PCSK9_invivo"
+      ],
+      "field": "efficacy.editing_efficiency_percent",
+      "description": "Results text states 48.5% BM editing for LNP-168 with second-dose injections (kept as primary, extraction_method extracted_from_text). Pass 2 verified against the user-provided Fig. 4a source data: LNP-168 replicates are single [15,21,22,21] (mean 19.8) and second [46,36,44,39,29] (mean 38.8). The plotted bar (46%) matches neither the text (48.5) nor the replicate mean (38.8). The record's source_data_check preserves the text value as primary and documents the figure bar. LNP-028 comparator (19.7% text) verified against Ext Data Fig. 3 replicates [20,17,21,23] (mean 20.3).",
+      "evidence": "s41551-025-01480-y.pdf Results text (48.5%, 19.7%); 41551_2025_1480_MOESM3_ESM.xlsx Figure 4a sheet (LNP-168, LNP-028 columns)",
+      "recommendation": "Keep text value as primary (matches how the original atlas treats text-stated values). The 48.5 (text) vs 46 (bar) vs 38.8 (replicate mean) spread is a source-data quality note for the Xu secondary screen; for the lead formulation the discrepancy is worth noting in any downstream potency claim.",
+      "not_auto_fixed_because": "multiple conflicting source representations; text is the authors' stated value"
+    },
+    {
+      "id": "hofstraat_aNP72_lthsc_recompute_mismatch",
+      "severity": "high",
+      "status": "resolved",
+      "category": "computed_value_mismatch",
+      "affected_records": [
+        "hofstraat_2025_aNP18_invivo_siLAMP1",
+        "hofstraat_2025_aNP72_invivo_siLAMP1"
+      ],
+      "field": "efficacy.knockdown_percent_LT_HSC",
+      "recorded_value": -2.4,
+      "verified_value": 5.7,
+      "description": "Pass 2 recomputed all 16 Hofstraat in vivo knockdown values from the publisher source-data file (MOESM6, Fig. 3g sheet, normalized gMFI block) using the documented formula (1 - mean normalized siLAMP1 gMFI) x 100. 15 of 16 reproduce exactly (within 0.05). The single mismatch is aNP72 LT-HSC: recorded -2.4 vs verified +5.7 (n=6 normalized replicates: 0.75, 0.91, 1.15, 0.86, 1.45, 0.54). The recorded -2.4 is exactly reproduced only when the 6th replicate (0.54) is dropped (mean of remaining 5 = 1.024). Pass 1 apparently used 5 of 6 replicates for this one cell subset.",
+      "evidence": "41565_2024_1847_MOESM6_ESM.xlsx sheet g (Europe PMC supplementary package for PMC12014499), normalized gMFI block, recomputed 2026-09-06",
+      "impact": "Both values round to the same conclusion (no LT-HSC effect) and label_for_ml stays low. The negative value was the basis for the audit-exception decision; the exception policy remains correct as a rule, but this specific value does not reproduce from source data.",
+      "recommendation": "Correct efficacy.knockdown_percent_LT_HSC to 5.7 with provenance updated to n=6, or document a justified replicate exclusion. Needs user decision because it reverses a value covered by a prior user decision.",
+      "not_auto_fixed_because": "hard rule: values that conflict with a user decision are flagged, not silently repaired",
+      "resolution": "Corrected on 2026-09-06 with user verification. aNP72 siCtrl (aNP72-) normalized gMFI is 1.1, 1.17, 1.04, 1.0, 0.69 (mean 1.000); siLAMP1 (aNP72+) is 0.75, 0.91, 1.15, 0.86, 1.45, 0.54 (mean 0.943). KD = (1 - 0.943/1.000) x 100 = 5.7%. Record efficacy.knockdown_percent_LT_HSC updated -2.4 -> 5.7 with value_basis_LT_HSC documenting the computation. Record stays low class. The negative-knockdown audit exception remains as a general rule for genuinely negative computed values."
+    },
+    {
+      "id": "figure_only_efficacy_nulls",
+      "severity": "medium",
+      "status": "open",
+      "category": "policy_pending_user",
+      "affected_records": [
+        "chander_2023_lcLNP_40ESM (Fig. 8)",
+        "peng_2026_LNP_siAE and peng_2026_E5_LNP_siAE (Fig. 1H)",
+        "zhao_2026_CD34_LNP_CARmRNA (Fig. 4g-h)",
+        "iida_2022_LNP43_siRUNX1 and iida_2022_LNP79_siRUNX1 (Figs. 3C-D, western/growth)",
+        "xu_2026_LNP217_ABE8e_PCSK9_invivo and xu_2026_LNP306_ABE8e_PCSK9_invivo (Fig. 3b, library B/C leads)"
+      ],
+      "description": "Efficacy magnitudes exist only in figures. Values are null with null_reason figure_only per the no-fabrication rule. HANDOFF open decision 3: leave null or extract with extraction_method estimated_from_figure (as was done for Hanafy with user confirmation). Note: the Xu library B/C lead source data (Fig. 3b) IS now available in the user-provided xlsx. User clarified the Fig. 3b layout (2026-09-06): row 1 = single-dose replicates, the second block = re-dose (second-dose) replicates, with no explicit 'replicates' header text. LNP-217 single [1,12,2,4,7], re-dose [9,10,8]; LNP-306 single [3,6,5,7,4], re-dose [10,9,11,8]. These two could be filled as extracted_from_table.",
+      "recommendation": "User decision needed for the figure-only set. For Xu LNP-217/306 specifically, recommend filling from the Fig. 3b source data (extracted_from_table) since the xlsx is now in hand, which is stronger than figure estimation.",
+      "not_auto_fixed_because": "policy decision reserved for user; Xu leads are a special case (source data now available)"
+    },
+    {
+      "id": "palchaudhuri_tessera_duplication",
+      "severity": "medium",
+      "status": "deferred_pass3",
+      "category": "duplication",
+      "affected_records": [
+        "palchaudhuri_2025_HSCLNP_B2M_editing",
+        "palchaudhuri_2025_HSCLNP_Makassar_editing",
+        "palchaudhuri_2025_HSCLNP_GFP_delivery"
+      ],
+      "description": "palchaudhuri_2025 is the same source as the pre-existing annotation annotations/tessera_ash2025_blood.json (Blood 146 Supplement 1: 4318, DOI 10.1182/blood-2025-4318, Palchaudhuri et al.). Pass 2 verified the abstract text verbatim against the user-provided PDF: >90% GFP LT-HSC, approximately 75% B2M editing, 50% Makassar humanized mouse, 24% NHP, 11-fold liver reduction, 55-fold BM increase. All match the records exactly. Related tessera_* annotations (ASH 2024: 95% GFP, 76% B2M; ESGCT 2024 press: 52% HBB; ASGCT 2025 press) are earlier/evolving reports of the same platform with different values. None of the tessera_* annotations contribute rows to the 135-row feature matrix, so there is no matrix-level duplication; the overlap is at the annotation layer.",
+      "evidence": "Palchaudhuri.pdf (user-provided ASH abstract) read verbatim; value-by-value comparison against tessera_ash2025_blood.json (2026-09-06)",
+      "recommendation": "Pass 3 dedupe: treat palchaudhuri_2025 records as the canonical flat-schema representation of the ASH 2025 abstract; keep tessera_* annotations as the conference-series provenance chain. All palchaudhuri records stay confidence LOW until the full paper is published (abstract-only).",
+      "not_auto_fixed_because": "dedupe across annotation layers is a Pass 3 task per protocol"
+    },
+    {
+      "id": "chappell_composition_analog_supported",
+      "severity": "low",
+      "status": "documented",
+      "category": "indirect_evidence",
+      "affected_records": [
+        "chappell_2024_mRNACre_LNPCD117_exvivo_deletion",
+        "chappell_2024_mRNACre_LNPCD117_posttransplant_ddPCR"
+      ],
+      "description": "Chappell 2024 does not state the LNP composition; it references the prior platform (ref 42, the Parhiz/Breda CD117-LNP line represented in the atlas by breda_2023). composition.ionizable_lipid is null with reason full_composition not_reported_in_this_paper. The assay is ex vivo Cre deletion in lin- HSCs (plus post-transplant ddPCR), not in vivo delivery; the mining report's in vivo framing was corrected in Pass 1.",
+      "recommendation": "If composition is ever backfilled from breda_2023, mark composition_confidence MEDIUM with analog provenance; do not import silently.",
+      "not_auto_fixed_because": "composition is not stated in the source paper"
+    },
+    {
+      "id": "shi_thesis_strain_ambiguity",
+      "severity": "low",
+      "status": "documented",
+      "category": "unclear_in_source",
+      "affected_records": [
+        "shi_2025_thesis_FLS_20DSPC_aCD117_ABE_invivo"
+      ],
+      "field": "delivery.strain",
+      "description": "Mouse strain is not restated for the Chapter 4 base-editing experiment (Fig. 4-7). Pass 2 verified against the thesis text: the in vivo formulation screens in the same chapter used CD-1 mice (0.3 mg/kg), while Chapter 3 work used C57BL/6. The record keeps strain null with null_reason unclear_in_source, which is accurate.",
+      "evidence": "MIT DSpace thesis 1721.1/165136 full text, Ch. 4 methods and Fig. 4-7 caption (2026-09-06)",
+      "recommendation": "None. If the user wants, CD-1 could be recorded as inferred_from_same_chapter with confidence LOW; current conservative null is preferred.",
+      "not_auto_fixed_because": "not stated in source"
+    },
+    {
+      "id": "xue_2022_partial_records",
+      "severity": "medium",
+      "status": "open",
+      "category": "pending_source",
+      "affected_records": [
+        "xue_2022_490BP_C14_LNP",
+        "xue_2022_490_C14_LNP_control"
+      ],
+      "description": "Composition and protocol mined from the SI; efficacy and ALT/AST values require the main text, which is paywalled. Pass 2 confirmed against the user-provided SI (Xue_supporting.pdf): the SI describes the ALT/AST assay methods and Fig. S25 shows the plots, but the numeric values are in figure bars only, not stated in text. The in vivo efficacy (luciferase bone delivery) is likewise figure-only. Records stay partial_pending_main_text; the main text is still needed for numeric efficacy + ALT/AST.",
+      "evidence": "Xue_supporting.pdf (user-provided SI) sections 3-5 and Fig. S25/S26 captions (2026-09-06)",
+      "recommendation": "User to provide the Xue 2022 main text (HANDOFF open decision 2). The SI alone does not yield numeric efficacy or enzyme values.",
+      "not_auto_fixed_because": "numeric values are figure-only in the SI"
+    },
+    {
+      "id": "hanafy_estimated_from_figure_fields",
+      "severity": "low",
+      "status": "documented",
+      "category": "estimated_values",
+      "affected_records": "all 14 hanafy_2025 records",
+      "description": "bm_radiance_mean_estimated values are estimated_from_figure (Fig. 2B BM panel) and were visually confirmed by the user for LNP 6, 8, 10, 11, 14 on 2026-09-05; bm_class_good_poor is from the Fig. S19 classification strip (user-confirmed). Fig. 2A row 9 EE 43.3% user-confirmed. Main text vs Fig. S19 discrepancy on BM top performers resolved in favor of S19. ICL identities are AstraZeneca proprietary; ionizable SMILES null. Pass 2 internal consistency check: all 14 composition mol% sums are within 99.9-100.1.",
+      "recommendation": "None; user confirmations recorded.",
+      "not_auto_fixed_because": "already at best available evidence"
+    },
+    {
+      "id": "iida_in_vitro_only",
+      "severity": "low",
+      "status": "documented",
+      "category": "scope",
+      "affected_records": [
+        "iida_2022_LNP43_siRUNX1",
+        "iida_2022_LNP79_siRUNX1"
+      ],
+      "description": "Iida 2022 is in vitro only (AML cell lines and primary CD34+); no in vivo data exists in the paper. Records are retained for helper-lipid class representation (DOTAP) and tumor-vs-normal HSPC selectivity context. They will project to the matrix with target NaN (excluded from supervised training).",
+      "recommendation": "None.",
+      "not_auto_fixed_because": "scope fact, not a defect"
+    },
+    {
+      "id": "dahlman_endothelial_scope",
+      "severity": "low",
+      "status": "documented",
+      "category": "scope",
+      "affected_records": [
+        "dahlman_2014_7C1_siICAM2"
+      ],
+      "description": "Dahlman 2014 7C1 is endothelial (lung), not bone marrow. Retained deliberately as the 7C1 ancestor of the Sago 2018 HSC line, flagged low BM relevance; matrix target NaN.",
+      "recommendation": "None.",
+      "not_auto_fixed_because": "scope fact, not a defect"
+    },
+    {
+      "id": "tarab_ravski_disease_burden_readout",
+      "severity": "low",
+      "status": "documented",
+      "category": "metric_scope",
+      "affected_records": [
+        "tarab_ravski_2023_aCD38_L10_tLNP_siCKAP5",
+        "tarab_ravski_2023_aCD38_L10_tLNP_siNC"
+      ],
+      "description": "Payload is siRNA (knockdown class) but the in vivo endpoint is MM tumor-cell occupancy in bone marrow (disease-burden metric), not molecular knockdown or HSC delivery. Annotations mark these unlabeled (disease-cell metric, not HSC). Audit treats them as documented info.",
+      "recommendation": "None for records; exclude from HSC efficacy training targets in Pass 3 (already unlabeled).",
+      "not_auto_fixed_because": "category set has no disease_burden value; relabeling would change semantics"
+    },
+    {
+      "id": "shi_eclnp_text_value_vs_raw_ratio",
+      "severity": "low",
+      "status": "documented",
+      "category": "text_vs_arithmetic",
+      "affected_records": [
+        "shi_2025_thesis_ECLNP_siKit1_lung_endothelium"
+      ],
+      "field": "efficacy.knockdown_percent",
+      "description": "Record keeps the thesis text-stated 95% CD117 knockdown. The quoted flow values (4.96% CD117+ treated vs 79.1% untreated) arithmetically give 93.7%. The text value is primary (extracted_from_text) and value_basis preserves both numbers. Verified verbatim in the thesis (Ch. 3, Fig. 3-4 context, 2026-09-06).",
+      "recommendation": "None; text-stated value with preserved basis is the correct extraction practice.",
+      "not_auto_fixed_because": "text value verified; arithmetic variant preserved in value_basis"
+    }
+  ],
+  "cross_reference_results": [
+    {
+      "record": "xu_2026_LNP168_ABE8e_HBG_TDT_model",
+      "check": "42.6% TDT HBG editing, two doses 1.0 mg/kg, NCG-X, sgRNA-25",
+      "source": "s41551-025-01480-y.pdf (user-provided main text) + PubMed 40796944 abstract",
+      "result": "PASS verbatim: 'average base editing frequency at the target HBG promoter reached 42.6% with two doses of intravenous infusions of LNP-168-ABE8e-HBG' at 1.0 mg/kg in TDT patient-derived HSPCs engrafted in NCG-X mice"
+    },
+    {
+      "record": "xu_2026_LNP168 vs LNP028 PCSK9",
+      "check": "48.5% vs 19.7% BM editing",
+      "source": "s41551-025-01480-y.pdf Results text",
+      "result": "PASS verbatim: 'increasing to 48.5% with second-dose injections, compared with 19.7% for LNP-028-ABE8e-PCSK9 (Fig. 4a)'. See flag xu_LNP168_text_vs_figure for the source-data spread."
+    },
+    {
+      "record": "xu_2026 liver editing",
+      "check": "miR-122T reduces liver editing 71.0% to 19.0%",
+      "source": "s41551-025-01480-y.pdf (Fig. 4d text)",
+      "result": "PASS verbatim"
+    },
+    {
+      "record": "xu_2026_LNP168_Cre_miR122T_Ai14 physicochemical",
+      "check": "size 69.1 nm, PDI 0.02, EE 89.9%, pKa 7.43",
+      "source": "41551_2025_1480_MOESM2_ESM.xlsx Supp Table 9 (LNP-168-Cre-miR-122)",
+      "result": "PASS exact"
+    },
+    {
+      "record": "xu_2026 LNP-028 / library physicochemical",
+      "check": "size/PDI/EE",
+      "source": "41551_2025_1480_MOESM2_ESM.xlsx Supp Table 7",
+      "result": "PASS exact (LNP-001 85.6/0.03/92.1, LNP-028 79/0.02/94.5, all 92 entries present)"
+    },
+    {
+      "record": "swart_2023_LNP_untargeted + swart_2023_LDV_LNP",
+      "check": "Table 1 compositions and physicochemicals; Fig. 4 efficacy; dose basis",
+      "source": "PMC10304323 full text (Europe PMC)",
+      "result": "PASS exact: 50/10/38.5/1.5 (+0.1 LDV-azide-DBCO-DSPE-PEG2000); sizes 66 (57-83) and 94 (87-105) nm; PDI 0.14/0.26; zeta -2.5/-4.1 mV; EE 94/93%; 50 ug per mouse IV confirmed; 29% vs 54% LNP+ immature HSPCs confirmed verbatim"
+    },
+    {
+      "record": "hofstraat_2025_aNP18_invivo_siLAMP1",
+      "check": "LSK 53.2 / LT-HSC 53.8 knockdown",
+      "source": "MOESM6 Fig. 3g normalized gMFI block",
+      "result": "PASS: recomputed 53.25 / 53.75"
+    },
+    {
+      "record": "hofstraat_2025 (all 9 records)",
+      "check": "all 16 per-formulation knockdown values",
+      "source": "MOESM6 Fig. 3g",
+      "result": "15/16 PASS exact; aNP72 LT-HSC FAIL (-2.4 recorded vs +5.7 verified; see flag hofstraat_aNP72_lthsc_recompute_mismatch)"
+    },
+    {
+      "record": "hofstraat_2025_aNP18_invivo_siLAMP1",
+      "check": "DLS size 50.7 nm, PDI 0.165, zeta -20.0 mV",
+      "source": "MOESM7 Fig. 4d,e source data",
+      "result": "PASS exact (means over n=10 batches size/PDI, n=6 zeta)"
+    },
+    {
+      "record": "hofstraat_2025 (all)",
+      "check": "dose schedule 4 x 0.5 mg/kg IV at 36 h intervals",
+      "source": "PMC12014499 main text",
+      "result": "PASS verbatim"
+    },
+    {
+      "record": "shi_2025_thesis_FLS_20DSPC_aCD117_ABE_invivo",
+      "check": "12.5% ABE editing, A6 target, Lin- CD117+ sorted BM, 2.5 mg/kg, 6 days",
+      "source": "MIT DSpace 1721.1/165136 Ch. 4 (Fig. 4-7)",
+      "result": "PASS verbatim, all context fields confirmed"
+    },
+    {
+      "record": "shi_2025_thesis_ECLNP_siKit1_lung_endothelium",
+      "check": "95% CD117 knockdown on lung endothelium, 0.4 mg/kg, C57BL/6",
+      "source": "thesis Ch. 3 (Fig. 3-4)",
+      "result": "PASS verbatim (text-stated 95%; raw ratio 4.96/79.1 preserved in value_basis)"
+    },
+    {
+      "record": "shi_2025_thesis strain fields",
+      "check": "CD-1 for Ch. 4 screens; strain not restated for base editing; C57BL/6 for Ch. 3",
+      "source": "thesis Ch. 3-4",
+      "result": "PASS: record null reasons accurate"
+    },
+    {
+      "record": "palchaudhuri_2025 (3 records)",
+      "check": "90% GFP LT-HSC, 75% B2M, 50% Makassar humanized, 24% NHP, 11-fold liver, 55-fold BM",
+      "source": "Palchaudhuri.pdf (user-provided ASH abstract)",
+      "result": "PASS verbatim: all abstract values match the records exactly"
+    },
+    {
+      "record": "xu_2026 composition",
+      "check": "patent IDs backing proprietary lipids",
+      "source": "PubMed 40796944 abstract (conflict-of-interest)",
+      "result": "PASS: CN114989182A, CN116162071A, PCT/CN2023/100791, /100823, /106421 match record composition_source"
+    },
+    {
+      "record": "hanafy_2025 (14 records)",
+      "check": "Fig. 2A composition mol% internal sums",
+      "source": "record-internal",
+      "result": "PASS: all 14 sums within 99.9-100.1; user-confirmed values unchanged"
+    }
+  ]
+}
