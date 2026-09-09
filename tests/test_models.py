@@ -11,7 +11,9 @@ from lnp_optimizer.models import (
     _class_weights,
     _compute_metrics,
     evaluate_cv,
+    formulation_token,
     load_feature_matrix,
+    make_validation_splits,
 )
 
 
@@ -63,6 +65,57 @@ class TestLoadFeatureMatrix:
         X, _, _ = load_feature_matrix(path)
         assert "source" not in X.columns
         assert "formulation_id" not in X.columns
+
+    def test_excludes_marked_label_boundary_rows(self, tmp_path: Path) -> None:
+        path = _make_feature_parquet(tmp_path)
+        df = pd.read_parquet(path)
+        df["label_boundary_case"] = 0
+        df.loc[[2, 9], "label_boundary_case"] = 1
+        df.to_parquet(path, index=False)
+
+        X, y, groups = load_feature_matrix(path)
+
+        assert len(X) == len(y) == len(groups) == 10
+        assert "label_boundary_case" not in X.columns
+
+    def test_can_return_formulation_groups(self, tmp_path: Path) -> None:
+        path = _make_feature_parquet(tmp_path)
+        _, _, groups = load_feature_matrix(path, group_by="formulation")
+        assert len(groups) == 12
+        assert groups[0] == "breda::f0"
+
+
+class TestFormulationGrouping:
+    """Tests for formulation-token normalization and split isolation."""
+
+    def test_xu_lead_cargo_and_library_aliases_share_token(self) -> None:
+        aliases = [
+            "LNP-028-ABE8e-PCSK9 (Library A lead)",
+            "LNP-028-ABE8e-HBG (ABE8e + sgRNA-25)",
+            "LNP-028-ABE8e/sgRNA-PCSK9",
+        ]
+        assert {
+            formulation_token("xu_2026", formulation) for formulation in aliases
+        } == {"xu-2026::lnp-028"}
+        assert formulation_token("xu_2026", "LNP-168-Cre-miR-122T") == (
+            "xu-2026::lnp-168"
+        )
+
+    def test_no_formulation_token_crosses_grouped_partitions(self) -> None:
+        y = np.tile(np.array([0, 1, 2]), 10)
+        groups = np.repeat([f"paper::lnp-{i:03d}" for i in range(10)], 3)
+        splits = make_validation_splits(
+            y,
+            groups,
+            strategy="formulation_grouped",
+            n_splits=5,
+        )
+
+        assert len(splits) == 5
+        for train_idx, held_out_idx in splits:
+            train_formulations = set(groups[train_idx])
+            held_out_formulations = set(groups[held_out_idx])
+            assert train_formulations.isdisjoint(held_out_formulations)
 
 
 class TestClassWeights:

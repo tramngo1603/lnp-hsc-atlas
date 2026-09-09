@@ -1,0 +1,330 @@
+{
+  "analysis": "atlas_pareto_and_correlations",
+  "date": "2026-09-08",
+  "matrix": {
+    "rows": 333,
+    "columns": 48,
+    "papers": 19,
+    "target_distribution": {
+      "rows": 333,
+      "labeled": 315,
+      "unlabeled": 18,
+      "low": 184,
+      "medium": 73,
+      "high": 58,
+      "low_percent_of_labeled": 58.4,
+      "medium_percent_of_labeled": 23.2,
+      "high_percent_of_labeled": 18.4
+    }
+  },
+  "pareto_and_bm_liver_correlation": {
+    "screen_barcode_counts": {
+      "n": 26,
+      "correlation": {
+        "pearson_r": 0.3686,
+        "pearson_p": 0.063905,
+        "spearman_r": 0.3447,
+        "spearman_p": 0.084647
+      },
+      "pareto_optimal": [
+        "LNP84",
+        "LNP85",
+        "LNP95",
+        "LNP111"
+      ]
+    },
+    "validation_percentages": {
+      "n_lnp_points": 6,
+      "correlation": {
+        "n": 6,
+        "pearson_r": 0.643456,
+        "pearson_p": 0.1680231337830534,
+        "spearman_r": 0.485714,
+        "spearman_p": 0.3287230320699708,
+        "interpretation": "not statistically significant; n=6 is too small for a stable estimate"
+      },
+      "lnp_pareto_optimal": [
+        "LNP67",
+        "LNP108",
+        "CD117/LNP"
+      ],
+      "ideal_zone": [
+        "Ensoma BaEVTR VLP"
+      ]
+    },
+    "standardized_absolute_bm_liver_pairs": {
+      "count": 0,
+      "record_ids": [],
+      "eligibility": "same-record numeric bone_marrow_percent and liver_percent values with comparable units"
+    },
+    "scope_note": "Relative fold changes, qualitative organ statements, and mismatched constructs are not converted or mixed into the Pareto axes."
+  },
+  "feature_target_correlations": {
+    "method": "Unadjusted Spearman correlation between each numeric matrix feature and the ordinal target (low=0, medium=1, high=2), using pairwise complete labeled rows. The four marked Lian rows at the exact 30% label boundary are excluded.",
+    "caveat": "These are descriptive sensitivity checks, not causal effects. Rows are clustered by paper and formulation, assays differ, and no multiple-testing correction is applied. Use paper-grouped validation for model claims.",
+    "top_absolute": [
+      {
+        "feature": "il_num_rings",
+        "n": 140,
+        "rho": -0.660775,
+        "p_value": 6.491772181366815e-19
+      },
+      {
+        "feature": "il_hbd",
+        "n": 140,
+        "rho": -0.631582,
+        "p_value": 5.939739485592341e-17
+      },
+      {
+        "feature": "il_rotatable_bonds",
+        "n": 140,
+        "rho": -0.622271,
+        "p_value": 2.2721580114381024e-16
+      },
+      {
+        "feature": "il_heavy_atom_count",
+        "n": 140,
+        "rho": -0.605131,
+        "p_value": 2.3969532446188467e-15
+      },
+      {
+        "feature": "il_molecular_weight",
+        "n": 140,
+        "rho": -0.605131,
+        "p_value": 2.3969532446188467e-15
+      },
+      {
+        "feature": "il_tpsa",
+        "n": 140,
+        "rho": 0.514739,
+        "p_value": 7.709284187523042e-11
+      },
+      {
+        "feature": "chol_to_helper_ratio",
+        "n": 234,
+        "rho": -0.503077,
+        "p_value": 2.0469312415138129e-16
+      },
+      {
+        "feature": "dose_mg_per_kg",
+        "n": 228,
+        "rho": -0.475894,
+        "p_value": 2.7428567025791345e-14
+      },
+      {
+        "feature": "receptor_cd117",
+        "n": 311,
+        "rho": 0.425591,
+        "p_value": 4.105770328822484e-15
+      },
+      {
+        "feature": "helper_mol_pct",
+        "n": 234,
+        "rho": 0.41067,
+        "p_value": 6.186967741241034e-11
+      }
+    ],
+    "all_features": {
+      "ionizable_mol_pct": {
+        "n": 234,
+        "rho": -0.399214,
+        "p_value": 2.3029166447794304e-10
+      },
+      "helper_mol_pct": {
+        "n": 234,
+        "rho": 0.41067,
+        "p_value": 6.186967741241034e-11
+      },
+      "cholesterol_mol_pct": {
+        "n": 234,
+        "rho": -0.209234,
+        "p_value": 0.0012853274642482533
+      },
+      "peg_mol_pct": {
+        "n": 226,
+        "rho": 0.409753,
+        "p_value": 1.4606127388996883e-10
+      },
+      "il_to_helper_ratio": {
+        "n": 234,
+        "rho": -0.392671,
+        "p_value": 4.771506014210173e-10
+      },
+      "il_to_chol_ratio": {
+        "n": 234,
+        "rho": -0.180972,
+        "p_value": 0.0054951837824978025
+      },
+      "chol_to_helper_ratio": {
+        "n": 234,
+        "rho": -0.503077,
+        "p_value": 2.0469312415138129e-16
+      },
+      "peg_chain_numeric": {
+        "n": 287,
+        "rho": 0.070854,
+        "p_value": 0.23145588837060604
+      },
+      "dose_mg_per_kg": {
+        "n": 228,
+        "rho": -0.475894,
+        "p_value": 2.7428567025791345e-14
+      },
+      "targeting_encoded": {
+        "n": 311,
+        "rho": 0.118492,
+        "p_value": 0.03674549461558168
+      },
+      "helper_is_cationic": {
+        "n": 311,
+        "rho": -0.148131,
+        "p_value": 0.008890112644244679
+      },
+      "species_mouse": {
+        "n": 311,
+        "rho": 0.122464,
+        "p_value": 0.030841135983026333
+      },
+      "species_nhp": {
+        "n": 311,
+        "rho": 0.160488,
+        "p_value": 0.004550428934228678
+      },
+      "species_human": {
+        "n": 311,
+        "rho": 0.255427,
+        "p_value": 5.060332439796413e-06
+      },
+      "assay_barcode_delivery": {
+        "n": 311,
+        "rho": -0.222979,
+        "p_value": 7.293762687138975e-05
+      },
+      "assay_depletion": {
+        "n": 311,
+        "rho": 0.092358,
+        "p_value": 0.10401928120096748
+      },
+      "assay_editing": {
+        "n": 311,
+        "rho": -0.096136,
+        "p_value": 0.09055530374501956
+      },
+      "assay_knockdown": {
+        "n": 311,
+        "rho": 0.072666,
+        "p_value": 0.20124835216153608
+      },
+      "assay_protein_expression": {
+        "n": 311,
+        "rho": 0.322692,
+        "p_value": 5.732819710200301e-09
+      },
+      "hl_dspc": {
+        "n": 311,
+        "rho": -0.119446,
+        "p_value": 0.03524692754341459
+      },
+      "hl_dope": {
+        "n": 311,
+        "rho": 0.355212,
+        "p_value": 1.1141891744009292e-10
+      },
+      "hl_dotap": {
+        "n": 311,
+        "rho": 0.084657,
+        "p_value": 0.13632790948437912
+      },
+      "hl_ddab": {
+        "n": 311,
+        "rho": -0.187144,
+        "p_value": 0.0009119205616263459
+      },
+      "hl_dotma": {
+        "n": 311,
+        "rho": -0.187144,
+        "p_value": 0.0009119205616263459
+      },
+      "hl_epc": {
+        "n": 311,
+        "rho": -0.031366,
+        "p_value": 0.5815998491235888
+      },
+      "receptor_cd117": {
+        "n": 311,
+        "rho": 0.425591,
+        "p_value": 4.105770328822484e-15
+      },
+      "receptor_cd45": {
+        "n": 311,
+        "rho": null,
+        "p_value": null
+      },
+      "clone_2b8": {
+        "n": 311,
+        "rho": 0.387957,
+        "p_value": 1.3037764454985577e-12
+      },
+      "clone_ack2": {
+        "n": 311,
+        "rho": null,
+        "p_value": null
+      },
+      "clone_igg": {
+        "n": 311,
+        "rho": 0.047488,
+        "p_value": 0.40397057827592525
+      },
+      "il_molecular_weight": {
+        "n": 140,
+        "rho": -0.605131,
+        "p_value": 2.3969532446188467e-15
+      },
+      "il_logp": {
+        "n": 140,
+        "rho": -0.074865,
+        "p_value": 0.3793400249131988
+      },
+      "il_tpsa": {
+        "n": 140,
+        "rho": 0.514739,
+        "p_value": 7.709284187523042e-11
+      },
+      "il_hbd": {
+        "n": 140,
+        "rho": -0.631582,
+        "p_value": 5.939739485592341e-17
+      },
+      "il_hba": {
+        "n": 140,
+        "rho": 0.343346,
+        "p_value": 3.280372007410497e-05
+      },
+      "il_rotatable_bonds": {
+        "n": 140,
+        "rho": -0.622271,
+        "p_value": 2.2721580114381024e-16
+      },
+      "il_num_rings": {
+        "n": 140,
+        "rho": -0.660775,
+        "p_value": 6.491772181366815e-19
+      },
+      "il_heavy_atom_count": {
+        "n": 140,
+        "rho": -0.605131,
+        "p_value": 2.3969532446188467e-15
+      },
+      "covalent_lipid_mol_pct": {
+        "n": 311,
+        "rho": 0.37072,
+        "p_value": 1.4426577452378252e-11
+      }
+    }
+  },
+  "interpretation": [
+    "Low efficacy accounts for 184/315 labeled rows (58.4%), with the Xu screen contributing a large repeated-assay block.",
+    "After excluding the four marked boundary rows, the dose correlation is rho=-0.476. This reflects the many 2 mg/kg low-efficacy Xu screen rows and must not be read as a causal dose effect.",
+    "The strongest correlations remain partly paper-identity proxies, especially ionizable-lipid descriptors represented by few chemical families."
+  ]
+}

@@ -1,15 +1,12 @@
-"""Baseline ML models for HSC efficacy classification.
-
-Trains XGBoost, LightGBM, and MLP classifiers with paper-level
-GroupKFold cross-validation on the HSC feature matrix.
-"""
+"""Classification models and leakage-aware validation for HSC efficacy."""
 
 from __future__ import annotations
 
 import json
 import logging
+import re
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import numpy as np
 import pandas as pd
@@ -19,7 +16,7 @@ from sklearn.metrics import (
     confusion_matrix,
     f1_score,
 )
-from sklearn.model_selection import GroupKFold
+from sklearn.model_selection import GroupKFold, StratifiedGroupKFold, StratifiedKFold
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
 
@@ -27,9 +24,10 @@ logger = logging.getLogger(__name__)
 
 _META_COLS = [
     "source", "paper", "formulation_id", "experiment_id",
-    "assay_category", "composition_confidence",
+    "assay_category", "composition_confidence", "label_boundary_case",
 ]
 _LABEL_MAP = {0: "low", 1: "medium", 2: "high"}
+ValidationStrategy = Literal["row_random", "formulation_grouped"]
 
 # Features to always drop (zero-variance or irrelevant)
 # NOTE: IL molecular descriptors REMOVED from drop list as of session 13
@@ -46,16 +44,31 @@ _DROP_COLS = [
 
 def load_feature_matrix(
     path: Path,
+    group_by: Literal["paper", "formulation"] = "paper",
 ) -> tuple[pd.DataFrame, np.ndarray, np.ndarray]:
-    """Load feature matrix, separating features, target, groups.
+    """Load threshold-comparable labeled rows and separate model inputs.
 
     Args:
         path: Path to feature matrix parquet.
+        group_by: Metadata grouping returned with the model inputs. Paper
+            groups support leave-one-paper-out evaluation. Formulation
+            groups support leakage-safe held-out evaluation.
 
     Returns:
-        (X features, y target, paper groups).
+        (X features, y target, requested groups). Unlabeled rows and rows marked
+        as label-boundary cases are excluded. The marker is metadata
+        and is never returned as a predictor.
     """
     df = pd.read_parquet(path)
+    df = df[df["target"].notna()].copy()
+    if "label_boundary_case" in df.columns:
+        boundary_count = int(df["label_boundary_case"].eq(1).sum())
+        if boundary_count:
+            logger.info(
+                "Excluding %d label-boundary rows from evaluation",
+                boundary_count,
+            )
+        df = df[df["label_boundary_case"].ne(1)].copy()
     feat_cols = [
         c for c in df.columns
         if c not in _META_COLS
@@ -64,8 +77,32 @@ def load_feature_matrix(
     ]
     X = df[feat_cols]
     y = df["target"].values
-    groups = df["paper"].values
+    if group_by == "paper":
+        groups = df["paper"].astype(str).to_numpy()
+    elif group_by == "formulation":
+        groups = np.array(
+            [
+                formulation_token(paper, formulation)
+                for paper, formulation in zip(
+                    df["paper"], df["formulation_id"], strict=True
+                )
+            ]
+        )
+    else:
+        raise ValueError(f"unknown grouping: {group_by}")
     return X, y, groups
+
+
+def formulation_token(paper: object, formulation_id: object) -> str:
+    """Return a source-qualified formulation identity for validation groups."""
+    paper_part = re.sub(r"[^a-z0-9]+", "-", str(paper).strip().lower()).strip("-")
+    identity = str(formulation_id).strip().lower()
+    numbered_lnp = re.search(r"(?<![a-z0-9])lnp[-_\s]*0*(\d+)", identity)
+    if numbered_lnp:
+        formulation_part = f"lnp-{int(numbered_lnp.group(1)):03d}"
+    else:
+        formulation_part = re.sub(r"[^a-z0-9]+", "-", identity).strip("-")
+    return f"{paper_part}::{formulation_part or 'unknown-formulation'}"
 
 
 # ---------------------------------------------------------------------------
@@ -208,6 +245,112 @@ def evaluate_cv(
         )
 
     return _aggregate_results(model_name, fold_results)
+
+
+def make_validation_splits(
+    y: np.ndarray,
+    formulation_groups: np.ndarray,
+    strategy: ValidationStrategy,
+    n_splits: int = 5,
+    random_state: int = 42,
+) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Build reproducible row-random or formulation-grouped held-out folds."""
+    if len(y) != len(formulation_groups):
+        raise ValueError("target and formulation group lengths differ")
+    if strategy == "row_random":
+        splitter = StratifiedKFold(
+            n_splits=n_splits,
+            shuffle=True,
+            random_state=random_state,
+        )
+        return list(splitter.split(np.zeros(len(y)), y))
+    if strategy == "formulation_grouped":
+        splitter = StratifiedGroupKFold(
+            n_splits=n_splits,
+            shuffle=True,
+            random_state=random_state,
+        )
+        return list(splitter.split(np.zeros(len(y)), y, formulation_groups))
+    raise ValueError(f"unknown validation strategy: {strategy}")
+
+
+def evaluate_holdout_cv(
+    X: pd.DataFrame,
+    y: np.ndarray,
+    formulation_groups: np.ndarray,
+    model_name: str = "xgboost",
+    strategy: ValidationStrategy = "formulation_grouped",
+    n_splits: int = 5,
+    random_state: int = 42,
+) -> dict[str, Any]:
+    """Evaluate reproducible held-out folds and audit formulation overlap.
+
+    The row-random strategy is retained as a diagnostic comparison. The
+    formulation-grouped strategy is the leakage-safe result for model claims.
+    """
+    if len(X) != len(y) or len(y) != len(formulation_groups):
+        raise ValueError("features, target, and formulation group lengths differ")
+
+    splits = make_validation_splits(
+        y,
+        formulation_groups,
+        strategy=strategy,
+        n_splits=n_splits,
+        random_state=random_state,
+    )
+    fold_results: list[dict[str, Any]] = []
+    for fold_i, (train_idx, held_out_idx) in enumerate(splits):
+        X_train, X_held_out = X.iloc[train_idx], X.iloc[held_out_idx]
+        y_train, y_held_out = y[train_idx], y[held_out_idx]
+        train_groups = set(formulation_groups[train_idx])
+        held_out_groups = set(formulation_groups[held_out_idx])
+        overlap = sorted(train_groups & held_out_groups)
+        if strategy == "formulation_grouped" and overlap:
+            raise RuntimeError(
+                f"formulation leakage in fold {fold_i}: {', '.join(overlap)}"
+            )
+
+        y_pred = _train_and_predict(model_name, X_train, y_train, X_held_out)
+        metrics = _compute_metrics(y_held_out, y_pred, fold_i, set())
+        metrics.pop("test_paper")
+        metrics.update(
+            {
+                "train_rows": len(train_idx),
+                "held_out_rows": len(held_out_idx),
+                "train_formulation_tokens": len(train_groups),
+                "held_out_formulation_tokens": len(held_out_groups),
+                "formulation_overlap_count": len(overlap),
+                "overlapping_formulation_tokens": overlap,
+            }
+        )
+        fold_results.append(metrics)
+        logger.info(
+            "%s fold %d: held out %d rows, overlap=%d, bal_acc=%.3f",
+            strategy,
+            fold_i,
+            len(held_out_idx),
+            len(overlap),
+            metrics["balanced_accuracy"],
+        )
+
+    result = _aggregate_results(model_name, fold_results)
+    result.update(
+        {
+            "validation_strategy": strategy,
+            "splitter": (
+                "StratifiedGroupKFold"
+                if strategy == "formulation_grouped"
+                else "StratifiedKFold"
+            ),
+            "random_state": random_state,
+            "n_rows": len(X),
+            "n_unique_formulation_tokens": len(set(formulation_groups)),
+            "all_folds_formulation_disjoint": all(
+                fold["formulation_overlap_count"] == 0 for fold in fold_results
+            ),
+        }
+    )
+    return result
 
 
 def _train_and_predict(

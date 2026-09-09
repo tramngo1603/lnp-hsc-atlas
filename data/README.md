@@ -1,30 +1,33 @@
 # Data
 
 ## `features/`
-ML feature matrix. `hsc_features.parquet` contains 135 rows x 47 columns (37 model features + metadata + target). One row per formulation-experiment pair across 4 papers (Breda, Shi, Kim, Lian).
 
-## `kim_screen/`
-Decoded Kim 2024 barcoded screen. `kim_2024_screen_corrected.json` contains 128 LNP formulations with helper lipid, PEG lipid, and molar ratio assignments. 66 have BM barcode delivery data.
+The canonical feature matrix. `hsc_features.parquet` and `hsc_features.csv` contain 333 formulation-experiment rows across 19 papers and 48 columns. The `target` column is populated for 315 rows.
 
-## `models/`
-Analysis outputs — JSON and parquet files from the ML pipeline:
-- `therapeutic_window.json` — 4PL dose-response fits, EC30/EC50 values
-- `pareto_validation_only.json` — 6 LNP + 1 VLP Pareto data points (% units)
-- `pareto_screen_only.json` — 26 Kim screen Pareto points (barcode units)
-- `gap_scores.json` — GP-scored gap formulations with confidence bands
-- `headgroup_tropism.json` — DOTAP vs DDAB analysis (~4x, p=0.001)
-- `sar_validation.json` — 4/8 confirmed, 2 supported, 2 inconclusive
-- `shap_values.parquet` — SHAP feature importance matrix
-- `cv_results*.json` — cross-validation results
+`label_boundary_case` is labeling metadata, not a predictor. It is 1 for four `lian_2024` rows measured at exactly 30% that retain their established `high` labels, and 0 otherwise. The current convention is strictly `high >30%`, `medium 10-30%`, and `low <10%`. Threshold-sensitive training and evaluation exclude rows where the marker is 1.
 
 ## `hsc/`
-Curated HSC-LNP records. `hsc_curated.parquet` contains the raw 156 records before feature engineering and filtering.
+
+The established curated source table. `hsc_curated.parquet` contains 131 rich records used to build the feature matrix.
+
+## `literature_records.json`
+
+Rich flat-schema records from the literature sources, plus 3 paywalled source stubs. This file retains provenance, source confidence, physicochemical measurements, toxicity observations, and open-action status that do not all fit into the fixed feature matrix.
+
+## `kim_screen/`
+
+Decoded Kim 2024 barcoded screen data. `kim_2024_screen_corrected.json` contains 128 LNP formulations with helper lipid, PEG lipid, and molar-ratio assignments. Sixty-six have bone-marrow barcode delivery data.
 
 ## `audit/`
-Post-hoc verification scripts. Each script validates a specific claim (Pareto mixed units, headgroup statistics, dose-response sensitivity, etc.). `AUDIT_REPORT.md` summarizes findings.
 
-## `extractions/`
-LLM-extracted paper data indexed by PMID. Used for evaluating extraction accuracy against ground truth annotations.
+Validation outputs and post-hoc claim checks. `literature_records_audit.json` records the source audit. `consolidated_audit.json` records dedupe decisions, contradiction checks, data-integrity invariants, and unresolved items. `AUDIT_REPORT.md` and its supporting scripts document related analyses.
+
+## `models/`
+
+Analysis outputs and serialized models. `atlas_analysis.json` records the 333-row class balance, descriptive feature-target correlations, and corrected Pareto analysis. `validation_comparison.json` reports row-random, formulation-grouped, and leave-one-paper-out LightGBM evaluation after excluding unlabeled and marked boundary rows. `lgbm_model.pkl`, `shap_values.parquet`, and `lopocv_results.json` use those same 311 threshold-comparable rows.
 
 ## `unified/`
-Combined training data parquet merging HSC records with external dataset features.
+
+Supporting training data that merges HSC records with external dataset features. It is not the canonical atlas matrix.
+
+Coverage details for every feature-matrix column are in [`docs/COVERAGE_REPORT.md`](../docs/COVERAGE_REPORT.md). Label semantics are in [`docs/LABELING_CONVENTIONS.md`](../docs/LABELING_CONVENTIONS.md).

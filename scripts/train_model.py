@@ -1,9 +1,11 @@
-"""Train LightGBM via LOPOCV and compute SHAP values.
+"""Train LightGBM with leakage-aware validation and compute SHAP values.
 
 Outputs:
   - data/models/lgbm_model.pkl
   - data/models/shap_values.csv
+  - data/models/shap_values.parquet
   - data/models/lopocv_results.json
+  - data/models/validation_comparison.json
 """
 
 from __future__ import annotations
@@ -19,8 +21,12 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from lnp_optimizer.models import load_feature_matrix, evaluate_cv  # noqa: E402
 from lnp_optimizer.evaluation import compute_shap_values  # noqa: E402
+from lnp_optimizer.models import (  # noqa: E402
+    evaluate_cv,
+    evaluate_holdout_cv,
+    load_feature_matrix,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -30,7 +36,11 @@ _MODELS_DIR = _ROOT / "data" / "models"
 
 _KNOWN_SARS = {"ionizable_mol_pct", "receptor_cd117", "dose_mg_per_kg",
                "hl_dotap", "helper_mol_pct"}
-_NEW_FINDINGS = {"chol_to_helper_ratio", "cholesterol_mol_pct", "il_molecular_weight"}
+_LITERATURE_FINDINGS = {
+    "chol_to_helper_ratio",
+    "cholesterol_mol_pct",
+    "il_molecular_weight",
+}
 
 _EXTRA_DROP = ["metric_type", "covalent_lipid_mol_pct"]
 
@@ -38,23 +48,55 @@ _EXTRA_DROP = ["metric_type", "covalent_lipid_mol_pct"]
 def main() -> int:
     """Train model and generate artifacts."""
     print("=" * 60)
-    print("Training LightGBM (LOPOCV)")
+    print("Training LightGBM with leakage-aware validation")
     print("=" * 60)
 
-    X, y, groups = load_feature_matrix(_FEAT_PATH)
+    X, y, paper_groups = load_feature_matrix(_FEAT_PATH, group_by="paper")
+    formulation_X, formulation_y, formulation_groups = load_feature_matrix(
+        _FEAT_PATH,
+        group_by="formulation",
+    )
+    if not X.equals(formulation_X) or not np.array_equal(y, formulation_y):
+        raise RuntimeError("paper and formulation group loads are not row-aligned")
     drop = [c for c in _EXTRA_DROP if c in X.columns]
     X = X.drop(columns=drop)
 
     print(f"Features: {X.shape[1]}, Rows: {X.shape[0]}")
-    print(f"Papers: {dict(pd.Series(groups).value_counts())}")
+    print(f"Papers: {dict(pd.Series(paper_groups).value_counts())}")
+    print(f"Formulation tokens: {len(set(formulation_groups))}")
     print(f"Target: {dict(pd.Series(y).value_counts())}")
 
-    # LOPOCV
-    cv = evaluate_cv(X, y, groups, model_name="lightgbm")
+    # Retain paper-level evaluation and add paired row-random and
+    # formulation-grouped five-fold evaluations.
+    cv = evaluate_cv(X, y, paper_groups, model_name="lightgbm")
     ba = cv["balanced_accuracy_mean"]
     ba_std = cv["balanced_accuracy_std"]
+    row_random = evaluate_holdout_cv(
+        X,
+        y,
+        formulation_groups,
+        model_name="lightgbm",
+        strategy="row_random",
+    )
+    formulation_grouped = evaluate_holdout_cv(
+        X,
+        y,
+        formulation_groups,
+        model_name="lightgbm",
+        strategy="formulation_grouped",
+    )
 
-    print(f"\nBalanced accuracy: {ba:.4f} ± {ba_std:.4f}")
+    print(f"\nLeave-one-paper-out balanced accuracy: {ba:.4f} ± {ba_std:.4f}")
+    print(
+        "Row-random five-fold balanced accuracy: "
+        f"{row_random['balanced_accuracy_mean']:.4f} ± "
+        f"{row_random['balanced_accuracy_std']:.4f}"
+    )
+    print(
+        "Formulation-grouped five-fold balanced accuracy: "
+        f"{formulation_grouped['balanced_accuracy_mean']:.4f} ± "
+        f"{formulation_grouped['balanced_accuracy_std']:.4f}"
+    )
     for fold in cv.get("folds", []):
         print(f"  Fold {fold['fold']}: BA={fold['balanced_accuracy']:.3f}"
               f" (test: {fold.get('test_paper', '?')})")
@@ -67,12 +109,38 @@ def main() -> int:
         "balanced_accuracy_std": round(ba_std, 4),
         "n_rows": X.shape[0],
         "n_features": X.shape[1],
-        "n_papers": len(set(groups)),
+        "n_papers": len(set(paper_groups)),
         "folds": cv.get("folds", []),
     }
     with open(lopocv_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nSaved: {lopocv_path}")
+
+    raw = pd.read_parquet(_FEAT_PATH)
+    comparison = {
+        "model": "lightgbm",
+        "primary_evaluation": "formulation_grouped_5fold",
+        "dataset": {
+            "atlas_rows": len(raw),
+            "atlas_sources": int(raw["paper"].nunique()),
+            "labeled_rows": int(raw["target"].notna().sum()),
+            "label_boundary_rows_excluded": int(raw["label_boundary_case"].eq(1).sum()),
+            "evaluated_rows": len(X),
+            "features": X.shape[1],
+            "evaluated_papers": len(set(paper_groups)),
+            "formulation_tokens": len(set(formulation_groups)),
+        },
+        "row_random_5fold": row_random,
+        "formulation_grouped_5fold": formulation_grouped,
+        "leave_one_paper_out": cv,
+        "interpretation": (
+            "Use formulation-grouped results for within-literature held-out claims. Row-random "
+            "results are shown only to quantify the optimistic effect of formulation leakage."
+        ),
+    }
+    validation_path = _MODELS_DIR / "validation_comparison.json"
+    validation_path.write_text(json.dumps(comparison, indent=2) + "\n")
+    print(f"Saved: {validation_path}")
 
     # Train full model
     print("\nTraining full model for SHAP...")
@@ -99,8 +167,8 @@ def main() -> int:
     for rank, (feat, val) in enumerate(ranked, 1):
         if feat in _KNOWN_SARS:
             ftype = "known"
-        elif feat in _NEW_FINDINGS:
-            ftype = "new"
+        elif feat in _LITERATURE_FINDINGS:
+            ftype = "literature"
         else:
             ftype = "other"
         shap_rows.append({"rank": rank, "feature": feat,
@@ -118,7 +186,7 @@ def main() -> int:
     print("\nTop 10 SHAP features:")
     for row in shap_rows[:10]:
         marker = " ← SAR" if row["type"] == "known" else (
-            " ← NEW" if row["type"] == "new" else "")
+            " <- LITERATURE" if row["type"] == "literature" else "")
         print(f"  {row['rank']:2d}. {row['feature']:30s} {row['mean_abs_shap']:.4f}{marker}")
 
     return 0

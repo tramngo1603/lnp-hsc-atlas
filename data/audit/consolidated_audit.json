@@ -1,0 +1,331 @@
+{
+  "audit": "atlas_dedupe_and_contradiction_scan",
+  "date": "2026-09-08",
+  "inputs": {
+    "feature_matrix": {
+      "path": "data/features/hsc_features.parquet",
+      "sha256": "e694c49138aed1f34c5807511596175a9b050263e0bddfd36cd07aa62fb9d2f8"
+    },
+    "curated_source": {
+      "path": "data/hsc/hsc_curated.parquet",
+      "sha256": "8a19ad2fd52ec1a1beec2c8bfee67e474e234f1e8c3121358ca3617e20b99172"
+    },
+    "literature_records": {
+      "path": "data/literature_records.json",
+      "sha256": "6f54686c9cb4a1fec146cb5bb5b305004a3027fa9aab8546d015d0da5b1fd7f4"
+    }
+  },
+  "dataset": {
+    "rows": 333,
+    "curated_rows": 135,
+    "literature_rows": 198,
+    "columns": 48,
+    "papers": 19,
+    "paper_row_counts": {
+      "breda_2023": 9,
+      "chander_2023": 3,
+      "chappell_2024": 2,
+      "dahlman_2014": 1,
+      "hanafy_2025": 14,
+      "hofstraat_2025": 9,
+      "iida_2022": 2,
+      "jyotsana_2019": 2,
+      "kim_2024": 80,
+      "lian_2024": 25,
+      "palchaudhuri_2025": 3,
+      "peng_2026": 2,
+      "shi_2023": 21,
+      "shi_2025_thesis": 4,
+      "swart_2023": 2,
+      "tarab_ravski_2023": 2,
+      "xu_2026": 148,
+      "xue_2022": 2,
+      "zhao_2026": 2
+    }
+  },
+  "invariants": {
+    "curated_matrix_values_match": true,
+    "lian_boundary_values_match": true,
+    "lian_annotation_matches": true,
+    "curated_source_matches": true,
+    "literature_projection_records_aligned": true
+  },
+  "dedupe": {
+    "status": "complete",
+    "exact_48_column_duplicate_rows": 0,
+    "exact_rows_removable": 0,
+    "duplicate_literature_record_ids": [],
+    "duplicate_matrix_identity_groups": [],
+    "cross_layer_source_overlaps": [
+      {
+        "paper_id": "palchaudhuri_2025",
+        "matching_annotation_file": "annotations/tessera_ash2025_blood.json",
+        "doi": "10.1182/blood-2025-4318",
+        "doi_match": true,
+        "title_match": true
+      }
+    ],
+    "palchaudhuri_tessera_decision": {
+      "same_source_confirmed": true,
+      "canonical_flat_schema_source": "data/literature_records.json",
+      "canonical_record_ids": [
+        "palchaudhuri_2025_HSCLNP_B2M_editing",
+        "palchaudhuri_2025_HSCLNP_Makassar_editing",
+        "palchaudhuri_2025_HSCLNP_GFP_delivery"
+      ],
+      "canonical_matrix_rows": 3,
+      "tessera_annotation_matrix_rows": 0,
+      "provenance_chain_retained": [
+        "annotations/tessera_esgct2024_press.json",
+        "annotations/tessera_ash2024_blood.json",
+        "annotations/tessera_asgct2025_press.json",
+        "annotations/tessera_ash2025_blood.json",
+        "annotations/tessera_ash2025_press.json"
+      ],
+      "action": "No matrix row removed; Tessera files remain provenance-only."
+    },
+    "chappell_breda_decision": {
+      "chappell_matrix_rows": 2,
+      "breda_matrix_rows": 9,
+      "duplicate_identity_groups": [],
+      "rich_record_composition_null": true,
+      "matrix_composition_null": true,
+      "composition_backfilled": false,
+      "action": "Retain both Chappell records with null composition. Breda is analog support for the platform, not the same experiment or a duplicate row."
+    },
+    "same_source_evidence_overlaps": [
+      {
+        "formulation_token": "LNP-028",
+        "record_ids": [
+          "xu_2026_LNP028_ABE8e_PCSK9_invivo",
+          "xu_2026_LNP028_ABE8e_PCSK9_library"
+        ],
+        "experiment_ids": [
+          "invivo_PCSK9_editing_C57_2mpk",
+          "invivo_PCSK9_editing_libraryA_screen"
+        ],
+        "primary_values": [
+          19.7,
+          20.2
+        ],
+        "structured_replicates_equal": null,
+        "classification": "same_formulation_evidence_overlap",
+        "decision": "Retain both roles. The lead record preserves narrative and lead-level context; the library record preserves the uniform screen row and replicate structure. They have distinct record_id and experiment_id values. Group by formulation token in formulation-level validation to avoid leakage."
+      },
+      {
+        "formulation_token": "LNP-217",
+        "record_ids": [
+          "xu_2026_LNP217_ABE8e_PCSK9_invivo",
+          "xu_2026_LNP217_ABE8e_PCSK9_library"
+        ],
+        "experiment_ids": [
+          "invivo_PCSK9_editing_C57_2mpk",
+          "invivo_PCSK9_editing_libraryB_screen"
+        ],
+        "primary_values": [
+          9.0,
+          9.0
+        ],
+        "structured_replicates_equal": true,
+        "classification": "same_formulation_evidence_overlap",
+        "decision": "Retain both roles. The lead record preserves narrative and lead-level context; the library record preserves the uniform screen row and replicate structure. They have distinct record_id and experiment_id values. Group by formulation token in formulation-level validation to avoid leakage."
+      },
+      {
+        "formulation_token": "LNP-306",
+        "record_ids": [
+          "xu_2026_LNP306_ABE8e_PCSK9_invivo",
+          "xu_2026_LNP306_ABE8e_PCSK9_library"
+        ],
+        "experiment_ids": [
+          "invivo_PCSK9_editing_C57_2mpk",
+          "invivo_PCSK9_editing_libraryC_screen"
+        ],
+        "primary_values": [
+          9.8,
+          9.8
+        ],
+        "structured_replicates_equal": true,
+        "classification": "same_formulation_evidence_overlap",
+        "decision": "Retain both roles. The lead record preserves narrative and lead-level context; the library record preserves the uniform screen row and replicate structure. They have distinct record_id and experiment_id values. Group by formulation token in formulation-level validation to avoid leakage."
+      }
+    ],
+    "rows_removed": 0,
+    "final_rows": 333
+  },
+  "logical_contradiction_scan": {
+    "status": "pass_with_documented_warnings",
+    "errors": [],
+    "warnings": [
+      {
+        "id": "xu_LNP123_source_outlier",
+        "severity": "medium",
+        "status": "documented_no_change",
+        "record_id": "xu_2026_LNP123_ABE8e_PCSK9_secondary_screen",
+        "single_dose_replicates": [
+          7.0,
+          8.0,
+          116.0,
+          9.0
+        ],
+        "description": "The source-reported 116% replicate is impossible but preserved verbatim."
+      }
+    ],
+    "informational": [
+      {
+        "id": "lian_30_percent_boundary",
+        "status": "documented_boundary_convention",
+        "records": [
+          {
+            "formulation_id": "Lian_A7",
+            "experiment_id": "Lian_A7_screen_n1",
+            "lt_hsc_percent": 30,
+            "stored_target": 2.0,
+            "threshold_target": 1
+          },
+          {
+            "formulation_id": "Lian_A13",
+            "experiment_id": "Lian_A13_validated_n3",
+            "lt_hsc_percent": 30,
+            "stored_target": 2.0,
+            "threshold_target": 1
+          },
+          {
+            "formulation_id": "Lian_C6",
+            "experiment_id": "Lian_C6_validated_n3",
+            "lt_hsc_percent": 30,
+            "stored_target": 2.0,
+            "threshold_target": 1
+          },
+          {
+            "formulation_id": "Lian_C9",
+            "experiment_id": "Lian_C9_screen_n1",
+            "lt_hsc_percent": 30,
+            "stored_target": 2.0,
+            "threshold_target": 1
+          }
+        ],
+        "description": "The current rule is high >30% and medium 10-30%. Four Lian rows at exactly 30% retain their established high labels. They are marked boundary cases, are excluded from threshold-sensitive evaluation, and are not errors."
+      },
+      {
+        "id": "multi_species_aggregate_rows",
+        "count": 3,
+        "rows": [
+          {
+            "paper": "palchaudhuri_2025",
+            "formulation_id": "HSC-LNP (Tessera, proprietary)",
+            "experiment_id": "invivo_B2M_gene_writing_LT-HSC"
+          },
+          {
+            "paper": "palchaudhuri_2025",
+            "formulation_id": "HSC-LNP (Tessera, proprietary)",
+            "experiment_id": "invivo_HBB_Makassar_installation_LT-HSC"
+          },
+          {
+            "paper": "palchaudhuri_2025",
+            "formulation_id": "HSC-LNP (Tessera, proprietary)",
+            "experiment_id": "invivo_GFP_reporter_delivery_LT-HSC"
+          }
+        ],
+        "description": "The three Palchaudhuri abstract records aggregate humanized-mouse and NHP claims, so multiple species bits are intentional."
+      }
+    ],
+    "checks": [
+      {
+        "id": "protected_hsc_source_identity",
+        "status": "pass",
+        "detail": "matches the curated source content fingerprint"
+      },
+      {
+        "id": "matrix_shape",
+        "status": "pass",
+        "detail": "observed 333 rows x 48 columns; expected 333 x 48"
+      },
+      {
+        "id": "curated_matrix_value_identity",
+        "status": "pass",
+        "detail": "all curated matrix values match the expected content fingerprint"
+      },
+      {
+        "id": "lian_boundary_identity",
+        "status": "pass",
+        "detail": "four boundary rows and their source annotation match expected fingerprints"
+      },
+      {
+        "id": "literature_projection_alignment",
+        "status": "pass",
+        "detail": "198/198 records aligned by order and identity"
+      },
+      {
+        "id": "finite_numeric_values",
+        "status": "pass",
+        "detail": "no positive or negative infinity"
+      },
+      {
+        "id": "ratio_consistency",
+        "status": "pass",
+        "detail": "all populated engineered ratios reproduce"
+      },
+      {
+        "id": "assay_one_hot_consistency",
+        "status": "pass",
+        "detail": "each row has exactly one assay bit matching assay_category"
+      },
+      {
+        "id": "binary_feature_domains",
+        "status": "pass",
+        "detail": "all one-hot and binary values are 0 or 1"
+      },
+      {
+        "id": "label_boundary_marker",
+        "status": "pass",
+        "detail": "exactly four Lian 30% boundary rows are marked"
+      },
+      {
+        "id": "mutually_exclusive_encodings",
+        "status": "pass",
+        "detail": "helper and clone one-hot groups contain at most one positive bit"
+      },
+      {
+        "id": "descriptor_block_consistency",
+        "status": "pass",
+        "detail": "154 complete blocks and 179 fully null blocks"
+      },
+      {
+        "id": "numeric_domains",
+        "status": "pass",
+        "detail": "mol%, dose, and target domains valid"
+      },
+      {
+        "id": "targeting_projection_semantics",
+        "status": "pass",
+        "detail": "literature rows use the established ordinal encoding: 0 none, 1 intrinsic, and 2 active"
+      },
+      {
+        "id": "covalent_projection_semantics",
+        "status": "pass",
+        "detail": "non-covalent oils, proteins, and mass values are excluded"
+      },
+      {
+        "id": "palchaudhuri_tessera_resolution",
+        "status": "pass",
+        "detail": "DOI and title match; 3 canonical rows and 0 Tessera provenance rows in matrix"
+      },
+      {
+        "id": "chappell_breda_resolution",
+        "status": "pass",
+        "detail": "2 Chappell and 9 Breda rows; no shared identity; Chappell composition remains null"
+      }
+    ]
+  },
+  "open_items_not_stubbed": {
+    "partial_pending_main_text": [
+      "xue_2022_490BP_C14_LNP",
+      "xue_2022_490_C14_LNP_control"
+    ],
+    "pending_paywall_stubs": [
+      "ramishetti_2020_advmater",
+      "zhu_2026_jcr",
+      "dacoba_2025_acsnano"
+    ]
+  }
+}

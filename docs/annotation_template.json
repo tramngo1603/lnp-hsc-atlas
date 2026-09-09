@@ -166,6 +166,8 @@
       "_tip": "Our harmonized classification label for ML training",
       "hsc_efficacy_class": "high | medium | low | null",
       "_thresholds": "high: >30% HSC transfection/editing, medium: 10-30%, low: <10%",
+      "_boundary_convention": "The >30% high threshold is strict. Four lian_2024 rows at exactly 30% retain their established high labels; these are boundary cases, not errors.",
+      "_matrix_boundary_marker": "label_boundary_case is 1 for those four rows and 0 otherwise. Exclude marker=1 rows from threshold-sensitive evaluation.",
       "primary_metric_used": "e.g. TdTomato+ in LT-HSC by flow cytometry",
       "primary_metric_value": null
     }

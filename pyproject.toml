@@ -3,6 +3,7 @@ name = "lnp-research-platform"
 version = "0.1.0"
 description = "PubMed research agent and LNP formulation optimization platform for gene therapy"
 readme = "README.md"
+license = "Apache-2.0"
 requires-python = ">=3.12,<3.14"
 dependencies = [
     # --- Core ---
