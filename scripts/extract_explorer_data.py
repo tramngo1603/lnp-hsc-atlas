@@ -16,6 +16,8 @@ import numpy as np
 import pandas as pd
 from scipy.stats import mannwhitneyu
 
+from lnp_optimizer.explorer_analysis import build_analysis
+
 _ROOT = Path(__file__).resolve().parent.parent
 _FEAT_PATH = _ROOT / "data" / "features" / "hsc_features.parquet"
 _KIM_PATH = _ROOT / "data" / "kim_screen" / "kim_2024_screen_corrected.json"
@@ -49,48 +51,6 @@ _LITERATURE_FINDINGS = {
     "cholesterol_mol_pct",
     "il_molecular_weight",
 }
-
-
-def _pareto_data() -> list[dict]:
-    """Extract Pareto data points from hardcoded verified values."""
-    return [
-        {"name": "Breda CD117", "bm": 55, "liver": 76, "metric": "editing",
-         "platform": "tLNP", "species": "Mouse",
-         "detail": "Cre editing in LSK, CD117 antibody, 0.25 mg/kg", "n": 3},
-        {"name": "Kim LNP67", "bm": 20.9, "liver": 20.1, "metric": "reporter",
-         "platform": "LNP", "species": "Mouse",
-         "detail": "aVHH protein expression, 0.5 mg/kg", "n": 3},
-        {"name": "Kim LNP108", "bm": 8.8, "liver": 1.6, "metric": "reporter",
-         "platform": "LNP", "species": "Mouse",
-         "detail": "Best selectivity in Kim screen (BM:liver = 5.5)", "n": 3},
-        {"name": "Lian AA11 Cas9", "bm": 5.2, "liver": 7.5, "metric": "editing",
-         "platform": "LNP", "species": "Mouse",
-         "detail": "BCL11A editing, covalent lipid approach, Townes mice", "n": 3},
-        {"name": "Lian AA11 ABE", "bm": 2.4, "liver": 3.0, "metric": "editing",
-         "platform": "LNP", "species": "Mouse",
-         "detail": "Sickle to Makassar base editing, Townes mice", "n": 3},
-        {"name": "Ensoma VLP", "bm": 31, "liver": 0.5, "metric": "editing",
-         "platform": "VLP", "species": "Hum. mouse",
-         "detail": "B2M editing, 8 wk, near-zero liver transduction", "n": 3},
-        {"name": "Tessera 24%", "bm": 24, "liver": 8, "metric": "editing",
-         "platform": "tLNP", "species": "NHP",
-         "detail": "HBB Makassar, single dose, liver estimated", "n": None},
-        {"name": "Tessera 40%", "bm": 40, "liver": 13.3, "metric": "editing",
-         "platform": "tLNP", "species": "NHP",
-         "detail": "Optimized Gene Writer cargo, same LNP platform", "n": None},
-        {"name": "Tessera 60%", "bm": 60, "liver": 20, "metric": "editing",
-         "platform": "tLNP", "species": "NHP",
-         "detail": "Two doses, liver estimated from 3:1 BM:liver ratio", "n": None},
-        {"name": "Kim LNP95", "bm": 48, "liver": 18.8, "metric": "reporter",
-         "platform": "LNP", "species": "Mouse",
-         "detail": "ALC-0159 PEG lipid, highest barcode in screen (30% DOTAP)", "n": 1},
-        {"name": "Breda IgG control", "bm": 19, "liver": 78, "metric": "editing",
-         "platform": "tLNP", "species": "Mouse",
-         "detail": "Isotype control, liver comparable to CD117 LNP", "n": 3},
-        {"name": "Kim E2 avg", "bm": 5.2, "liver": 44, "metric": "reporter",
-         "platform": "LNP", "species": "Mouse",
-         "detail": "4-LNP validation average, 0.5 mg/kg", "n": 4},
-    ]
 
 
 def _shap_ranking() -> list[dict[str, Any]]:
@@ -127,11 +87,13 @@ def _shap_data(ranking: list[dict[str, Any]]) -> list[dict[str, Any]]:
         "cholesterol_mol_pct": "Cholesterol %",
         "dose_mg_per_kg": "Dose (mg/kg)",
         "assay_editing": "Editing assay",
-        "il_molecular_weight": "IL molecular weight",
+        "il_molecular_weight": "Lipid molecular weight",
         "hl_dotap": "DOTAP helper",
         "helper_mol_pct": "Helper lipid %",
         "helper_is_cationic": "Cationic helper",
         "il_to_chol_ratio": "IL:chol ratio",
+        "il_to_helper_ratio": "Ionizable/helper ratio",
+        "peg_chain_numeric": "PEG chain length",
     }
     return [
         {
@@ -183,56 +145,88 @@ def _kim_screen_analysis() -> tuple[list[dict], list[dict], list[dict], dict]:
     interaction = []
     for hl in helpers:
         for peg in pegs:
-            subset = [f["bm_normalized_bc"] for f in bm_forms
-                      if f.get("helper_lipid_name") == hl and f.get("peg_lipid_name") == peg]
+            subset = [
+                f["bm_normalized_bc"]
+                for f in bm_forms
+                if f.get("helper_lipid_name") == hl and f.get("peg_lipid_name") == peg
+            ]
             if subset:
-                interaction.append({"helper": hl, "peg": peg, "n": len(subset),
-                                    "bm_mean": round(np.mean(subset), 1)})
+                interaction.append(
+                    {
+                        "helper": hl,
+                        "peg": peg,
+                        "n": len(subset),
+                        "bm_mean": round(np.mean(subset), 1),
+                    }
+                )
 
     # Headgroup data
     headgroup_data = []
     for hl in helpers:
         subset = [f for f in bm_forms if f.get("helper_lipid_name") == hl]
         bm_vals = [f["bm_normalized_bc"] for f in subset]
-        liver_vals = [f["liver_ec_normalized_bc"] for f in subset
-                      if f.get("liver_ec_normalized_bc") is not None]
-        headgroup_data.append({
-            "helper": hl, "n": len(subset),
-            "bm_mean": round(np.mean(bm_vals), 2),
-            "bm_std": round(float(np.std(bm_vals)), 2),
-            "bm_median": round(float(np.median(bm_vals)), 2),
-            "bm_max": max(bm_vals),
-            "liver_mean": round(np.mean(liver_vals), 2) if liver_vals else None,
-            "bm_liver_ratio": round(np.mean(bm_vals) / np.mean(liver_vals), 2)
-            if liver_vals and np.mean(liver_vals) > 0 else None,
-            "bm_values": sorted(bm_vals, reverse=True),
-        })
+        liver_vals = [
+            f["liver_ec_normalized_bc"]
+            for f in subset
+            if f.get("liver_ec_normalized_bc") is not None
+        ]
+        headgroup_data.append(
+            {
+                "helper": hl,
+                "n": len(subset),
+                "bm_mean": round(np.mean(bm_vals), 2),
+                "bm_std": round(float(np.std(bm_vals)), 2),
+                "bm_median": round(float(np.median(bm_vals)), 2),
+                "bm_max": max(bm_vals),
+                "liver_mean": round(np.mean(liver_vals), 2) if liver_vals else None,
+                "bm_liver_ratio": round(np.mean(bm_vals) / np.mean(liver_vals), 2)
+                if liver_vals and np.mean(liver_vals) > 0
+                else None,
+                "bm_values": sorted(bm_vals, reverse=True),
+            }
+        )
 
     # PEG comparison (DOTAP only)
     peg_comp = []
     for peg in pegs:
-        subset = [f for f in bm_forms
-                  if f.get("helper_lipid_name") == "DOTAP" and f.get("peg_lipid_name") == peg]
+        subset = [
+            f
+            for f in bm_forms
+            if f.get("helper_lipid_name") == "DOTAP" and f.get("peg_lipid_name") == peg
+        ]
         if not subset:
             continue
         bm_vals = [f["bm_normalized_bc"] for f in subset]
-        peg_comp.append({
-            "peg": peg, "helper": "DOTAP", "n": len(subset),
-            "bm_mean": round(np.mean(bm_vals), 2),
-            "bm_max": max(bm_vals),
-            "formulations": [{"id": f["lnp_name"], "bm": f["bm_normalized_bc"],
-                              "il_pct": f.get("ionizable_mol_percent"),
-                              "helper_pct": f.get("helper_mol_percent")} for f in subset],
-        })
+        peg_comp.append(
+            {
+                "peg": peg,
+                "helper": "DOTAP",
+                "n": len(subset),
+                "bm_mean": round(np.mean(bm_vals), 2),
+                "bm_max": max(bm_vals),
+                "formulations": [
+                    {
+                        "id": f["lnp_name"],
+                        "bm": f["bm_normalized_bc"],
+                        "il_pct": f.get("ionizable_mol_percent"),
+                        "helper_pct": f.get("helper_mol_percent"),
+                    }
+                    for f in subset
+                ],
+            }
+        )
 
     # Mann-Whitney
     dotap_bm = [f["bm_normalized_bc"] for f in bm_forms if f.get("helper_lipid_name") == "DOTAP"]
     ddab_bm = [f["bm_normalized_bc"] for f in bm_forms if f.get("helper_lipid_name") == "DDAB"]
     stat, pval = mannwhitneyu(dotap_bm, ddab_bm, alternative="two-sided")
-    stats = {"mann_whitney_U": float(stat), "p_value": round(pval, 4),
-             "dotap_mean": round(np.mean(dotap_bm), 2),
-             "ddab_mean": round(np.mean(ddab_bm), 2),
-             "fold_change": round(np.mean(dotap_bm) / np.mean(ddab_bm), 1)}
+    stats = {
+        "mann_whitney_U": float(stat),
+        "p_value": round(pval, 4),
+        "dotap_mean": round(np.mean(dotap_bm), 2),
+        "ddab_mean": round(np.mean(ddab_bm), 2),
+        "fold_change": round(np.mean(dotap_bm) / np.mean(ddab_bm), 1),
+    }
 
     return peg_comp, interaction, headgroup_data, stats
 
@@ -241,8 +235,22 @@ def _lian_data() -> tuple[list[str], list[dict]]:
     """Extract Lian heatmap data."""
     with open(_LIAN_PATH) as f:
         lian = json.load(f)
-    cell_types = ["LT_HSC", "LSK", "LMPP", "MPP", "CMP", "GMP", "MEP",
-                  "B", "T_total", "T_CD4", "T_CD8", "macrophage", "monocyte", "neutrophil"]
+    cell_types = [
+        "LT_HSC",
+        "LSK",
+        "LMPP",
+        "MPP",
+        "CMP",
+        "GMP",
+        "MEP",
+        "B",
+        "T_total",
+        "T_CD4",
+        "T_CD8",
+        "macrophage",
+        "monocyte",
+        "neutrophil",
+    ]
     formulations = lian["formulations_screen"]["formulations"]
     heatmap = []
     for form in formulations:
@@ -251,11 +259,15 @@ def _lian_data() -> tuple[list[str], list[dict]]:
         if not delivery:
             continue
         validated = form.get("bm_delivery_validated_n3") is not None
-        entry = {"id": fid, "validated": validated,
-                 "cell_types": {ct: delivery.get(ct, 0) for ct in cell_types}}
+        entry = {
+            "id": fid,
+            "validated": validated,
+            "cell_types": {ct: delivery.get(ct, 0) for ct in cell_types},
+        }
         if validated:
             entry["validated_cell_types"] = {
-                ct: form["bm_delivery_validated_n3"].get(ct, 0) for ct in cell_types}
+                ct: form["bm_delivery_validated_n3"].get(ct, 0) for ct in cell_types
+            }
         heatmap.append(entry)
     heatmap.sort(key=lambda x: -x["cell_types"]["LT_HSC"])
     return cell_types, heatmap
@@ -474,10 +486,7 @@ def _coverage_stats(
         for record in records
     )
     core_composition = int(
-        df[["ionizable_mol_pct", "helper_mol_pct", "cholesterol_mol_pct"]]
-        .notna()
-        .all(axis=1)
-        .sum()
+        df[["ionizable_mol_pct", "helper_mol_pct", "cholesterol_mol_pct"]].notna().all(axis=1).sum()
     )
     return {
         "completeColumns": int(sum(df[column].notna().all() for column in df.columns)),
@@ -583,82 +592,193 @@ def _stats(df: pd.DataFrame) -> dict[str, int]:
     }
 
 
-def _findings(
-    coverage: dict[str, Any],
-    labels: dict[str, Any],
-    validation: dict[str, Any],
-    stats: dict[str, int],
-) -> list[dict[str, str]]:
-    toxicity = next(
-        block for block in coverage["blocks"] if block["label"] == "Detailed toxicity"
+def _findings(analysis: dict[str, Any]) -> list[dict[str, Any]]:
+    """Explain the meaning of observed comparisons; keep numbers in supporting evidence."""
+    findings = []
+    paired = next(
+        (
+            g
+            for g in analysis["pareto"]
+            if g["paperId"] == "kim_2024" and g["unit"] == "%"
+        ),
+        None,
     )
-    return [
+    if paired:
+        frontier = [p for p in paired["points"] if p["frontier"]]
+        most_marrow = max(frontier, key=lambda p: p["bm"])
+        least_liver = min(frontier, key=lambda p: p["liver"])
+        if most_marrow["bm"] > least_liver["bm"] and most_marrow["liver"] > least_liver["liver"]:
+            comparison = (
+                "In Kim's mouse study, the recipe with the strongest marrow response "
+                "also produced a sizeable response in liver cells. Another recipe "
+                "had a lower marrow response, but much less activity in the liver."
+            )
+            if least_liver["bm"] > 0 and least_liver["liver"] > 0:
+                comparison = (
+                    "Kim's mouse study counted cells making a protein after RNA delivery. "
+                    "One recipe had about "
+                    f"{most_marrow['bm'] / least_liver['bm']:.1f} times the marrow response "
+                    "of another leading recipe, alongside "
+                    f"{most_marrow['liver'] / least_liver['liver']:.0f} times the liver response."
+                )
+            findings.append(
+                {
+                    "id": "marrow-and-liver",
+                    "title": "More marrow activity can mean more liver activity",
+                    "text": comparison,
+                    "meaning": (
+                        "Choosing a recipe means weighing both results. The highest marrow "
+                        "number alone does not tell you how well delivery stays in the cells "
+                        "you want to reach."
+                    ),
+                    "evidence": [
+                        f"{most_marrow['name']}: {most_marrow['bm']:.1f}% of the tested "
+                        f"marrow cells and {most_marrow['liver']:.1f}% of the tested liver "
+                        f"cells produced the marker protein. {least_liver['name']}: "
+                        f"{least_liver['bm']:.1f}% and {least_liver['liver']:.1f}%, respectively.",
+                        "Both were measured in the same mouse experiment at "
+                        f"{most_marrow['dose']:g} mg/kg. The test counted early blood cells "
+                        "in marrow and cells lining blood vessels in the liver. These are "
+                        "percentages of cells, not percentages of the injected dose; a liver "
+                        "response is not itself evidence of liver damage.",
+                    ],
+                    "sources": ["kim_2024"],
+                }
+            )
+
+    hofstraat = next(
+        (
+            g
+            for g in analysis["helper"]
+            if g["paperId"] == "hofstraat_2025"
+            and g["measurement"] == "LAMP1 reduction in LT-HSCs"
+        ),
+        None,
+    )
+    if hofstraat:
+        values = [p["value"] for p in hofstraat["points"]]
+        strongest = max(hofstraat["points"], key=lambda p: p["value"])
+        findings.append(
+            {
+                "id": "rna-at-work",
+                "title": "RNA can work inside blood stem cells",
+                "text": (
+                    "Hofstraat's mouse experiments delivered RNA designed to lower a "
+                    "specific protein in blood stem cells. The strongest result was a "
+                    f"reduction of about {max(values):.0f}% after four injections."
+                ),
+                "meaning": (
+                    "Reaching a cell is only the first step. Measuring the intended protein "
+                    "change checks whether the RNA did its job inside the cell. That is "
+                    "useful evidence of delivery, although it does not establish a "
+                    "treatment benefit."
+                ),
+                "evidence": [
+                    f"Across {len(values)} records, the measured reduction in a protein "
+                    f"called LAMP1 ranged from {min(values):.1f}% to {max(values):.1f}% "
+                    "in long-term blood stem cells (LT-HSCs). These values compare the "
+                    "protein signal with a matched control; they do not mean that this "
+                    "percentage of cells was edited.",
+                    f"The highest result was {strongest['name']}. Dosing: "
+                    f"{strongest['schedule']}. Source: Figure 3 and its underlying data.",
+                ],
+                "sources": ["hofstraat_2025"],
+            }
+        )
+
+    kim = next(
+        (
+            g
+            for g in analysis["helper"]
+            if g["paperId"] == "kim_2024" and g["unit"] == "barcode counts"
+        ),
+        None,
+    )
+    if kim:
+        pegs: dict[str, list[float]] = {}
+        for point in kim["points"]:
+            if point["helper"] == "DOTAP" and point.get("peg"):
+                pegs.setdefault(point["peg"], []).append(point["value"])
+        if len(pegs) > 1:
+            ranked = sorted(
+                ((float(np.mean(values)), name, len(values)) for name, values in pegs.items()),
+                reverse=True,
+            )
+            high, low = ranked[0], ranked[-1]
+            findings.append(
+                {
+                    "id": "coating-comparison",
+                    "title": "The outer coating is worth a closer look",
+                    "text": (
+                        "In Kim's mouse screen, recipes with different particle coatings "
+                        "gave very different marrow signals. Several ingredients varied "
+                        "together, so the data cannot tell us whether changing the coating "
+                        "alone would improve delivery."
+                    ),
+                    "meaning": (
+                        "This gives a useful starting point for the next comparison: "
+                        "change the coating while keeping the rest of the recipe and the "
+                        "dose the same. The current averages are a clue to investigate."
+                    ),
+                    "evidence": [
+                        "PEG is part of the particle's outer coating. Among the recipes "
+                        "using the same helper ingredient, DOTAP, "
+                        f"{high[1]} had the highest mean marrow tracking signal "
+                        f"({high[0]:.2f}; {high[2]} records), compared with {low[0]:.2f} "
+                        f"for {low[1]} ({low[2]} records).",
+                        "The signal comes from DNA tags used to track the particles "
+                        "(normalized barcode counts). It measures a different outcome "
+                        "from gene editing or protein reduction. These small groups do "
+                        "not establish that one coating is better in other recipes.",
+                    ],
+                    "sources": ["kim_2024"],
+                }
+            )
+    coverage = analysis["coverage"]
+    liver_context = (
+        "Those matching liver numbers are still missing from the newer records."
+        if coverage["newPairs"] == 0
+        else f"Currently, {coverage['newPairs']} of the {coverage['literatureRecords']} newer "
+        "records contain those matching numbers."
+    )
+    findings.append(
         {
-            "title": "Atlas scope",
+            "id": "comparing-studies",
+            "title": "More records do not yet give us a clear winner",
             "text": (
-                f"The atlas contains {stats['rows']} evidence rows from {stats['sources']} "
-                "matrix sources. The largest "
-                "sources are Xu 2026 (148), Kim 2024 (80), and Lian 2024 (25)."
+                "The newer records mix different tests: some measure gene changes, "
+                "others a protein decrease or light produced in marrow. A bigger score "
+                "in one test does not mean a recipe would perform better in another."
             ),
-        },
-        {
-            "title": "Label distribution",
-            "text": (
-                f"Low efficacy accounts for {labels['low']}/{labels['labeled']} labeled rows "
-                f"({labels['lowShare']}%). The large Xu screen contributes many repeated-assay "
-                "observations, so formulation-grouped validation is primary."
+            "meaning": (
+                "Start with the test that matches your goal. To also judge how well "
+                "delivery avoids the liver, we need marrow and liver measurements from "
+                "the same experiment. " + liver_context
             ),
-        },
-        {
-            "title": "Coverage is uneven",
-            "text": (
-                f"{coverage['completeColumns']} of {coverage['totalColumns']} matrix columns "
-                f"are complete. Ionizable-lipid descriptors cover {stats['descriptorRows']}/"
-                f"{stats['rows']} rows, while detailed toxicity evidence covers "
-                f"{toxicity['filled']}/{toxicity['total']} rich records. Missing values are "
-                "not inferred."
-            ),
-        },
-        {
-            "title": "Formulation leakage matters",
-            "text": (
-                "Row-random LightGBM balanced accuracy is "
-                f"{validation['rowRandom']['balancedAccuracy']:.4f}, versus "
-                f"{validation['formulationGrouped']['balancedAccuracy']:.4f} when each "
-                "formulation token is confined to one fold. The grouped result is primary."
-            ),
-        },
-        {
-            "title": "The 30% boundary is explicit",
-            "text": (
-                "The current rule uses high >30% strictly. Four Lian 2024 rows at exactly 30% "
-                "retain their established high labels and carry the boundary marker. They are "
-                "boundary cases, not errors."
-            ),
-        },
-        {
-            "title": "Pareto scope",
-            "text": (
-                "The corrected Pareto analysis includes only standardized same-record absolute "
-                "bone-marrow and liver percentage pairs. Relative and qualitative values are "
-                "not converted into the Pareto axes."
-            ),
-        },
-    ]
+            "evidence": [
+                "Xu 2026 measures gene editing; Hofstraat 2025 measures a reduction in "
+                "a chosen protein; Hanafy 2025 measures light from a protein made after "
+                "RNA delivery. These results describe different steps and cannot be "
+                "combined into a single performance score.",
+                f"Of {coverage['literatureRecords']} added literature records, "
+                f"{coverage['newPairs']} currently have both numeric marrow and liver "
+                "percentages from the same experiment. This is a gap in the collected "
+                "records, not a claim that the original studies never measured the liver.",
+            ],
+            "sources": ["xu_2026", "hofstraat_2025", "hanafy_2025"],
+        }
+    )
+    return findings
 
 
 def build_data() -> dict[str, Any]:
     """Build every generated explorer data block."""
     df = pd.read_parquet(_FEAT_PATH)
     records = json.loads(_LITERATURE_RECORDS_PATH.read_text())["records"]
-    if df.shape != (_ATLAS_ROWS, 48):
-        raise ValueError(f"expected {_ATLAS_ROWS} x 48 feature matrix, observed {df.shape}")
-    if len(records) != _LITERATURE_RECORD_COUNT:
-        raise ValueError(
-            f"expected {_LITERATURE_RECORD_COUNT} rich literature records, "
-            f"observed {len(records)}"
-        )
+    if df.empty or df.shape[1] != 48:
+        raise ValueError(f"expected a non-empty 48-column feature table, observed {df.shape}")
 
+    analysis = build_analysis(_ROOT, df, records)
     ranking = _shap_ranking()
     peg_comp, interaction, headgroup, headgroup_stats = _kim_screen_analysis()
     cell_types, lian_formulations = _lian_data()
@@ -668,7 +788,8 @@ def build_data() -> dict[str, Any]:
     stats = _stats(df)
 
     return {
-        "paretoData": _pareto_data(),
+        "paretoData": [point for group in analysis["pareto"] for point in group["points"]],
+        "analysisData": analysis,
         "shapData": _shap_data(ranking),
         "shapContext": _shap_context(ranking),
         "pegComparison": peg_comp,
@@ -728,7 +849,7 @@ def build_data() -> dict[str, Any]:
         "labelDistribution": labels,
         "sourceSummary": _source_summary(df, records),
         "validationSummary": validation,
-        "findings": _findings(coverage, labels, validation, stats),
+        "findings": _findings(analysis),
         "bmGapData": [
             {"study": "Radmand 2024", "lnps": 196, "measured": False},
             {"study": "Radmand 2023", "lnps": 137, "measured": False},
@@ -758,8 +879,8 @@ def main() -> int:
     print(f"Stats: {data['stats']}")
     print(f"Pareto points: {len(data['paretoData'])}")
     print(f"SHAP features: {len(data['shapData'])}")
-    print(f"Matrix records: {len(data['formulations'])}")
-    print(f"Matrix sources: {len(data['papers'])}")
+    print(f"Records: {len(data['formulations'])}")
+    print(f"Sources: {len(data['papers'])}")
     print(f"Lian formulations: {len(data['lianFormulations'])}")
     return 0
 

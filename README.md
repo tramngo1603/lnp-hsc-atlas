@@ -2,6 +2,10 @@
 
 The LNP-HSC Atlas is a curated dataset and analysis framework for in vivo lipid nanoparticle delivery to hematopoietic stem and progenitor cells (HSPCs). It contains 331 formulation-experiment evidence rows from 18 published sources.
 
+[**Open the interactive explorer →**](https://tramngo1603.github.io/lnp-hsc-atlas/)
+
+Compare formulations, explore marrow and liver results, and read the key findings with their supporting evidence.
+
 **Release snapshot:** 331 rows | 18 matrix sources | 48 columns | 315 efficacy labels | 154 rows with ionizable-lipid descriptors
 
 Missing values are preserved when the literature does not support a defensible value.
@@ -25,7 +29,9 @@ Rows are formulation-experiment evidence units, not guaranteed unique chemical f
 | `data/models/atlas_analysis.json` | Sensitivity analysis and established Pareto results |
 | `docs/COVERAGE_REPORT.md` | Per-column fill rates and sparse evidence blocks |
 | `docs/MODEL_VALIDATION.md` | Leakage-aware model validation design and results |
-| `explorer/src/App.jsx` | Interactive explorer generated from the atlas matrix and model reports |
+| `explorer/src/App.jsx` | Generated explorer data from the atlas matrix and model reports |
+| `explorer/src/Explorer.jsx` | Explorer layout and interactive charts |
+| `src/lnp_optimizer/explorer_analysis.py` | Source-specific chart data and measurement checks |
 
 ## Installation
 
@@ -66,13 +72,32 @@ uv run python scripts/generate_coverage_report.py
 uv run python scripts/analyze_atlas.py
 ```
 
-Regenerate the explorer data blocks with the existing extraction and patch pipeline, then build
-the deployable site:
+Regenerate the explorer data after updating the dataset:
 
 ```bash
 make patch
-cd explorer && npm ci && npm run build
 ```
+
+Build and serve the explorer from the repository root:
+
+```bash
+npm --prefix explorer ci
+npm --prefix explorer run build
+npm --prefix explorer run preview -- --host 127.0.0.1 --port 4173 --strictPort
+```
+
+Open the [local explorer](http://localhost:4173/lnp-hsc-atlas/). Keep the preview command
+running while you use it.
+
+Pushing to `main` runs the GitHub Pages workflow, which builds and publishes the
+[public explorer](https://tramngo1603.github.io/lnp-hsc-atlas/).
+
+This pipeline refreshes the Pareto, PEG lipid, helper lipid, and dose charts when records
+are added. Charts compare measurements within a source, assay, unit, species, and target
+cell group. Pareto points require numeric bone-marrow and liver results from the same
+experiment. The 196 added literature records currently contain no such percentage pairs;
+usable single-organ results still appear in the other charts. Barcode counts are kept
+separate from percentages, and estimated light measurements are labeled as estimates.
 
 ## Coverage and analysis cautions
 

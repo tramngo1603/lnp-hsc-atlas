@@ -22,6 +22,7 @@ _JSX_COPY_PATH = _ROOT / "explorer.jsx"
 # Map JSON keys to JS variable names
 _KEY_TO_VAR = {
     "paretoData": "paretoData",
+    "analysisData": "analysisData",
     "shapData": "shapData",
     "shapContext": "shapContext",
     "bmGapData": "bmGapData",
@@ -55,9 +56,7 @@ def patch_jsx(jsx: str, data: dict[str, object]) -> tuple[str, int, list[str]]:
         if not re.search(pattern, jsx, re.DOTALL):
             missing.append(f"marker:{key}")
             continue
-        replacement = (
-            f"// DATA:{key}\n{_json_to_js(var_name, data[key])}\n// END:{key}"
-        )
+        replacement = f"// DATA:{key}\n{_json_to_js(var_name, data[key])}\n// END:{key}"
         jsx = re.sub(
             pattern,
             lambda _match, replacement=replacement: replacement,
