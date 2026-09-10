@@ -37,7 +37,7 @@ def test_analysis_preserves_pareto_inputs_and_reports_matrix_summary() -> None:
 def test_feature_correlations_exclude_boundary_rows() -> None:
     report = _ANALYSIS.build_report()
     dose = report["feature_target_correlations"]["all_features"]["dose_mg_per_kg"]
-    assert dose["n"] < 333
+    assert dose["n"] < 331
     assert "exact 30% label boundary are excluded" in (
         report["feature_target_correlations"]["method"]
     )

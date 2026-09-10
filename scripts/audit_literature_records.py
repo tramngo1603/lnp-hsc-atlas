@@ -1,4 +1,4 @@
-"""Validate data/literature_records.json (198 flat records).
+"""Validate data/literature_records.json (196 flat records).
 
 Applies the repo's existing validation semantics (scripts/validate_annotations.py,
 docs/annotation_template.json vocabularies, label_for_ml thresholds) to the
@@ -61,8 +61,7 @@ _VALID_STRATEGY = {"antibody_conjugated", "intrinsic_tropism", "aptamer",
 _VALID_CONFIDENCE = {"HIGH", "MEDIUM", "LOW", "DISPROVEN"}
 _VALID_EXTRACTION = {"extracted_from_table", "extracted_from_text",
                      "estimated_from_figure"}
-_VALID_STATUS = {"extracted", "extracted_abstract_only",
-                 "partial_pending_main_text"}
+_VALID_STATUS = {"extracted", "extracted_abstract_only"}
 _VALID_EVIDENCE = {"empirically_measured", "estimated_from_figure",
                    "abstract_claim"}
 

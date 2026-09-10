@@ -19,8 +19,9 @@ def test_report_contains_all_48_columns_and_sparse_blocks() -> None:
     report = _COVERAGE.build_report()
     matrix_rows = [line for line in report.splitlines() if line.startswith("| `")]
     assert len(matrix_rows) == 48
-    assert "154/333 (46.2%)" in report
-    assert "Any toxicity detail beyond reported flag | 13/198 (6.6%)" in report
-    assert "partial_pending_main_text" in report
+    assert "154/331 (46.5%)" in report
+    assert "Any toxicity detail beyond reported flag | 11/196 (5.6%)" in report
+    assert "partial_pending_main_text" not in report
+    assert "pending_paywall" not in report
     assert "`label_boundary_case`" in report
     assert "| Column | Group | Coverage |" in report

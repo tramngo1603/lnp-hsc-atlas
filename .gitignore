@@ -99,7 +99,7 @@ explorer/dist/
 project_structure.txt
 *_summary.md
 *_sync_report.md
-explorer_data/
+explorer_data.json
 explorer_data_formulations.json
 
 # Generated SHAP plots (regenerable)

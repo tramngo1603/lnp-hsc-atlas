@@ -2,8 +2,8 @@
   "model": "lightgbm",
   "primary_evaluation": "formulation_grouped_5fold",
   "dataset": {
-    "atlas_rows": 333,
-    "atlas_sources": 19,
+    "atlas_rows": 331,
+    "atlas_sources": 18,
     "labeled_rows": 315,
     "label_boundary_rows_excluded": 4,
     "evaluated_rows": 311,

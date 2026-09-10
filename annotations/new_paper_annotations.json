@@ -429,39 +429,6 @@
    }
   },
   {
-   "paper_id": "xue_2022",
-   "tier": "T2-2",
-   "paper_metadata": {
-    "pmid": "35616998",
-    "doi": "10.1021/jacs.2c02706",
-    "title": "Rational Design of Bisphosphonate Lipid-like Materials for mRNA Delivery to the Bone Microenvironment",
-    "authors": [
-     "Xue, Lulu",
-     "Gong, Ningqiang",
-     "Shepherd, Sarah J.",
-     "et al."
-    ],
-    "journal": "Journal of the American Chemical Society",
-    "publication_year": 2022,
-    "paper_type": "research"
-   },
-   "access": "user-provided Supporting Information PDF; main paper pending",
-   "record_ids": [
-    "xue_2022_490BP_C14_LNP",
-    "xue_2022_490_C14_LNP_control"
-   ],
-   "extraction_log": [
-    "Composition (35:16:46.5:2.5 ionizable/DOPE/chol/C14-PEG2000), microfluidic method, in vivo protocol (0.5 mg/kg IV, C57BL/6J female) from SI sections 4a/4e",
-    "490BP-C14 structure confirmed (Fig S10), 21-day stability (Fig S14), ALT/AST at 12 h protocol (SI 4h)",
-    "Efficacy magnitudes are in main paper figures; records marked partial_pending_main_text"
-   ],
-   "label_for_ml": {
-    "hsc_efficacy_class": {
-     "490BP_C14": "pending main text"
-    }
-   }
-  },
-  {
    "paper_id": "xu_2026",
    "tier": "T1-1",
    "paper_metadata": {

@@ -15,7 +15,7 @@ New papers measuring bone marrow delivery of LNPs, VLPs, or other non-viral vect
 - Papers reporting **both** BM and liver delivery for the same formulation (very rare)
 - Independent replication of the **DOTAP-BM tropism** finding outside Kim's screen
 - **Liver de-targeting** data paired with BM measurements
-- Full-text access to paywalled papers with BM data, especially Zhu 2026, Ramishetti 2020, and Dacoba 2025
+- Complete source material for additional papers reporting bone marrow delivery
 
 ### Annotation format
 Each data point should include:

@@ -2,7 +2,7 @@
 
 ## `features/`
 
-The canonical feature matrix. `hsc_features.parquet` and `hsc_features.csv` contain 333 formulation-experiment rows across 19 papers and 48 columns. The `target` column is populated for 315 rows.
+The canonical feature matrix. `hsc_features.parquet` and `hsc_features.csv` contain 331 formulation-experiment rows across 18 papers and 48 columns. The `target` column is populated for 315 rows.
 
 `label_boundary_case` is labeling metadata, not a predictor. It is 1 for four `lian_2024` rows measured at exactly 30% that retain their established `high` labels, and 0 otherwise. The current convention is strictly `high >30%`, `medium 10-30%`, and `low <10%`. Threshold-sensitive training and evaluation exclude rows where the marker is 1.
 
@@ -12,7 +12,7 @@ The established curated source table. `hsc_curated.parquet` contains 131 rich re
 
 ## `literature_records.json`
 
-Rich flat-schema records from the literature sources, plus 3 paywalled source stubs. This file retains provenance, source confidence, physicochemical measurements, toxicity observations, and open-action status that do not all fit into the fixed feature matrix.
+Rich flat-schema records from the literature sources. This file retains provenance, source confidence, physicochemical measurements, and toxicity observations that do not all fit into the fixed feature matrix.
 
 ## `kim_screen/`
 
@@ -24,7 +24,7 @@ Validation outputs and post-hoc claim checks. `literature_records_audit.json` re
 
 ## `models/`
 
-Analysis outputs and serialized models. `atlas_analysis.json` records the 333-row class balance, descriptive feature-target correlations, and corrected Pareto analysis. `validation_comparison.json` reports row-random, formulation-grouped, and leave-one-paper-out LightGBM evaluation after excluding unlabeled and marked boundary rows. `lgbm_model.pkl`, `shap_values.parquet`, and `lopocv_results.json` use those same 311 threshold-comparable rows.
+Analysis outputs and serialized models. `atlas_analysis.json` records the 331-row class balance, descriptive feature-target correlations, and corrected Pareto analysis. `validation_comparison.json` reports row-random, formulation-grouped, and leave-one-paper-out LightGBM evaluation after excluding unlabeled and marked boundary rows. `lgbm_model.pkl`, `shap_values.parquet`, and `lopocv_results.json` use those same 311 threshold-comparable rows.
 
 ## `unified/`
 

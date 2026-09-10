@@ -13,8 +13,8 @@ _ROOT = Path(__file__).resolve().parent.parent
 _FEATURES = _ROOT / "data" / "features" / "hsc_features.parquet"
 _LITERATURE_RECORDS_PATH = _ROOT / "data" / "literature_records.json"
 _OUTPUT = _ROOT / "docs" / "COVERAGE_REPORT.md"
-_ATLAS_ROWS = 333
-_LITERATURE_RECORD_COUNT = 198
+_ATLAS_ROWS = 331
+_LITERATURE_RECORD_COUNT = 196
 
 _METADATA = {
     "source",
@@ -158,19 +158,32 @@ def build_report() -> str:
     df = pd.read_parquet(_FEATURES)
     records = json.loads(_LITERATURE_RECORDS_PATH.read_text())["records"]
     if df.shape != (_ATLAS_ROWS, 48):
-        raise ValueError(f"expected 333 x 48 matrix, observed {df.shape}")
+        raise ValueError(f"expected {_ATLAS_ROWS} x 48 matrix, observed {df.shape}")
     if len(records) != _LITERATURE_RECORD_COUNT:
-        raise ValueError(f"expected 198 literature records, observed {len(records)}")
+        raise ValueError(
+            f"expected {_LITERATURE_RECORD_COUNT} literature records, observed {len(records)}"
+        )
 
     complete_columns = sum(df[column].notna().all() for column in df.columns)
     descriptor_count = int(df["il_molecular_weight"].notna().sum())
     target_count = int(df["target"].notna().sum())
+    unlabeled_count = len(df) - target_count
+    core_composition_count = int(
+        df[["ionizable_mol_pct", "helper_mol_pct", "cholesterol_mol_pct"]]
+        .notna()
+        .all(axis=1)
+        .sum()
+    )
+    dose_count = int(df["dose_mg_per_kg"].notna().sum())
+    rich_coverage = _rich_record_coverage(records)
+    rich_counts = dict(rich_coverage)
+    toxicity_detail_count = rich_counts["Any toxicity detail beyond reported flag"]
 
     lines = [
         "# Atlas Coverage Report",
         "",
-        "Generated from `data/features/hsc_features.parquet`. The matrix contains 333 rows "
-        "across 19 papers and 48 columns.",
+        f"Generated from `data/features/hsc_features.parquet`. The matrix contains {len(df)} "
+        f"rows across {df['paper'].nunique()} papers and 48 columns.",
         "",
         "## Method",
         "",
@@ -181,17 +194,20 @@ def build_report() -> str:
         "",
         "## Summary",
         "",
-        f"- {complete_columns}/48 columns are complete across all 333 rows.",
+        f"- {complete_columns}/48 columns are complete across all {len(df)} rows.",
         "- `label_boundary_case` marks four Lian 2024 rows whose exact 30% measurements "
         "retain their established `high` labels. The current rule is strictly `high >30%`.",
-        f"- The supervised target is populated for {target_count}/333 rows "
-        f"({target_count / len(df) * 100:.1f}%). The 18 unlabeled rows remain in the atlas "
+        f"- The supervised target is populated for {target_count}/{len(df)} rows "
+        f"({target_count / len(df) * 100:.1f}%). The {unlabeled_count} unlabeled rows remain "
+        "in the atlas "
         "but must be excluded from supervised training.",
-        "- Core ionizable/helper/cholesterol composition is available for 250/333 rows "
-        "(75.1%).",
-        "- Dose is available for 246/333 rows (73.9%). Absolute per-mouse doses are "
-        "intentionally not converted to mg/kg.",
-        f"- All eight ionizable-lipid descriptor columns cover {descriptor_count}/333 "
+        f"- Core ionizable/helper/cholesterol composition is available for "
+        f"{core_composition_count}/{len(df)} rows "
+        f"({core_composition_count / len(df) * 100:.1f}%).",
+        f"- Dose is available for {dose_count}/{len(df)} rows "
+        f"({dose_count / len(df) * 100:.1f}%). Absolute per-mouse doses are intentionally "
+        "not converted to mg/kg.",
+        f"- All eight ionizable-lipid descriptor columns cover {descriptor_count}/{len(df)} "
         f"({descriptor_count / len(df) * 100:.1f}%). Missing descriptors reflect proprietary "
         "or unverified lipid identities, not a failed calculation.",
         "",
@@ -220,7 +236,7 @@ def build_report() -> str:
             "| --- | ---: |",
         ]
     )
-    for label, count in _rich_record_coverage(records):
+    for label, count in rich_coverage:
         lines.append(f"| {label} | {count}/{len(records)} ({count / len(records) * 100:.1f}%) |")
 
     lines.extend(
@@ -228,17 +244,18 @@ def build_report() -> str:
             "",
             "Particle size, PDI, and encapsulation efficiency are well represented in the rich "
             "records because the Xu screen includes per-formulation characterization. The "
-            "remaining physicochemical block is sparse: zeta potential and apparent pKa each "
-            "cover only 3/198 records, while morphology and stability each cover 2/198. "
-            "Toxicity is the largest evidence gap, with any detailed toxicity information in "
-            "13/198 records (6.6%). Missing values were not inferred.",
+            "remaining physicochemical block is sparse: zeta potential covers "
+            f"{rich_counts['Zeta potential']}/{len(records)} records, apparent pKa covers "
+            f"{rich_counts['Apparent pKa']}/{len(records)}, morphology covers "
+            f"{rich_counts['Morphology']}/{len(records)}, and stability covers "
+            f"{rich_counts['Stability']}/{len(records)}. Toxicity is the largest evidence "
+            "gap, with any detailed toxicity information in "
+            f"{toxicity_detail_count}/{len(records)} records "
+            f"({toxicity_detail_count / len(records) * 100:.1f}%). "
+            "Missing values were not inferred.",
             "",
-            "## Coverage limitations and open sources",
+            "## Coverage limitations",
             "",
-            "- The two Xue 2022 rows remain `partial_pending_main_text`; efficacy and numeric "
-            "ALT/AST values are not backfilled from figures.",
-            "- Ramishetti 2020, Zhu 2026, and Dacoba 2025 remain paywalled source stubs and do "
-            "not contribute matrix rows.",
             "- Chappell 2024 composition remains null. Breda 2023 is analog support only and "
             "was not copied into those records.",
             "- Figure-only efficacy for Chander, Peng, Zhao, and Iida remains null. The only "

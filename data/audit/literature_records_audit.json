@@ -1,7 +1,7 @@
 {
   "audit": "literature_records",
   "date": "2026-09-06",
-  "records_audited": 198,
+  "records_audited": 196,
   "errors": [],
   "warnings": [
     "xu_2026_LNP123_ABE8e_PCSK9_secondary_screen: replicate single_dose value 116.0 outside 0-100 (source-data anomaly; flagged, not altered)"
