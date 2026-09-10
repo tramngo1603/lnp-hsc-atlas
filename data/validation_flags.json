@@ -1,5 +1,4 @@
 {
-  "pass": 2,
   "date": "2026-09-06",
   "scope": "Literature records in data/literature_records.json",
   "generated_by": "source review review: scripts/audit_literature_records.py + manual cross-referencing against source texts and supplementary source data (user-provided PDFs/xlsx + PMC OA + MIT DSpace + PubMed)",
@@ -150,20 +149,6 @@
       "evidence": "MIT DSpace thesis 1721.1/165136 full text, Ch. 4 methods and Fig. 4-7 caption (2026-09-06)",
       "recommendation": "None. If the user wants, CD-1 could be recorded as inferred_from_same_chapter with confidence LOW; current conservative null is preferred.",
       "not_auto_fixed_because": "not stated in source"
-    },
-    {
-      "id": "xue_2022_partial_records",
-      "severity": "medium",
-      "status": "open",
-      "category": "pending_source",
-      "affected_records": [
-        "xue_2022_490BP_C14_LNP",
-        "xue_2022_490_C14_LNP_control"
-      ],
-      "description": "Composition and protocol mined from the SI; efficacy and ALT/AST values require the main text, which is paywalled. source review confirmed against the user-provided SI (Xue_supporting.pdf): the SI describes the ALT/AST assay methods and Fig. S25 shows the plots, but the numeric values are in figure bars only, not stated in text. The in vivo efficacy (luciferase bone delivery) is likewise figure-only. Records stay partial_pending_main_text; the main text is still needed for numeric efficacy + ALT/AST.",
-      "evidence": "Xue_supporting.pdf (user-provided SI) sections 3-5 and Fig. S25/S26 captions (2026-09-06)",
-      "recommendation": "The Xue 2022 main text is required. The SI alone does not yield numeric efficacy or enzyme values.",
-      "not_auto_fixed_because": "numeric values are figure-only in the SI"
     },
     {
       "id": "hanafy_estimated_from_figure_fields",

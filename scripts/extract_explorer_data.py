@@ -28,6 +28,8 @@ _LITERATURE_RECORDS_PATH = _ROOT / "data" / "literature_records.json"
 _LITERATURE_ANNOTATIONS_PATH = _ROOT / "annotations" / "new_paper_annotations.json"
 _OUT_PATH = _ROOT / "explorer_data.json"
 _CURATED_ROWS = 135
+_ATLAS_ROWS = 331
+_LITERATURE_RECORD_COUNT = 196
 
 _LEGACY_ANNOTATIONS = {
     "breda_2023": _ROOT / "annotations" / "breda_2023.json",
@@ -331,8 +333,6 @@ def _record_type(record: dict[str, Any] | None) -> str:
     status = record.get("status")
     if status == "extracted_abstract_only":
         return "abstract-only"
-    if status == "partial_pending_main_text":
-        return "partial"
     experiment = str(record.get("experiment_id") or "").lower()
     if "screen" in experiment or "library" in experiment:
         return "screen"
@@ -343,7 +343,7 @@ def _formulations(
     df: pd.DataFrame,
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """Project all 333 matrix rows into the established explorer schema."""
+    """Project all 331 matrix rows into the established explorer schema."""
     record_index = {
         (
             record["source_paper"],
@@ -484,7 +484,12 @@ def _coverage_stats(
         "totalColumns": len(df.columns),
         "reportPath": "docs/COVERAGE_REPORT.md",
         "blocks": [
-            block("Efficacy label", int(df["target"].notna().sum()), len(df), "18 unlabeled"),
+            block(
+                "Efficacy label",
+                int(df["target"].notna().sum()),
+                len(df),
+                f"{int(df['target'].isna().sum())} unlabeled",
+            ),
             block("Core composition", core_composition, len(df), "IL, helper, cholesterol"),
             block("Dose", int(df["dose_mg_per_kg"].notna().sum()), len(df), "mg/kg only"),
             block(
@@ -582,12 +587,17 @@ def _findings(
     coverage: dict[str, Any],
     labels: dict[str, Any],
     validation: dict[str, Any],
+    stats: dict[str, int],
 ) -> list[dict[str, str]]:
+    toxicity = next(
+        block for block in coverage["blocks"] if block["label"] == "Detailed toxicity"
+    )
     return [
         {
             "title": "Atlas scope",
             "text": (
-                "The atlas contains 333 evidence rows from 19 matrix sources. The largest "
+                f"The atlas contains {stats['rows']} evidence rows from {stats['sources']} "
+                "matrix sources. The largest "
                 "sources are Xu 2026 (148), Kim 2024 (80), and Lian 2024 (25)."
             ),
         },
@@ -603,8 +613,10 @@ def _findings(
             "title": "Coverage is uneven",
             "text": (
                 f"{coverage['completeColumns']} of {coverage['totalColumns']} matrix columns "
-                "are complete. Ionizable-lipid descriptors cover 154/333 rows, while detailed "
-                "toxicity evidence covers 13/198 rich records. Missing values are not inferred."
+                f"are complete. Ionizable-lipid descriptors cover {stats['descriptorRows']}/"
+                f"{stats['rows']} rows, while detailed toxicity evidence covers "
+                f"{toxicity['filled']}/{toxicity['total']} rich records. Missing values are "
+                "not inferred."
             ),
         },
         {
@@ -639,10 +651,13 @@ def build_data() -> dict[str, Any]:
     """Build every generated explorer data block."""
     df = pd.read_parquet(_FEAT_PATH)
     records = json.loads(_LITERATURE_RECORDS_PATH.read_text())["records"]
-    if df.shape != (333, 48):
-        raise ValueError(f"expected 333 x 48 feature matrix, observed {df.shape}")
-    if len(records) != 198:
-        raise ValueError(f"expected 198 rich literature records, observed {len(records)}")
+    if df.shape != (_ATLAS_ROWS, 48):
+        raise ValueError(f"expected {_ATLAS_ROWS} x 48 feature matrix, observed {df.shape}")
+    if len(records) != _LITERATURE_RECORD_COUNT:
+        raise ValueError(
+            f"expected {_LITERATURE_RECORD_COUNT} rich literature records, "
+            f"observed {len(records)}"
+        )
 
     ranking = _shap_ranking()
     peg_comp, interaction, headgroup, headgroup_stats = _kim_screen_analysis()
@@ -650,6 +665,7 @@ def build_data() -> dict[str, Any]:
     coverage = _coverage_stats(df, records)
     labels = _label_distribution(df)
     validation = _validation_summary()
+    stats = _stats(df)
 
     return {
         "paretoData": _pareto_data(),
@@ -712,7 +728,7 @@ def build_data() -> dict[str, Any]:
         "labelDistribution": labels,
         "sourceSummary": _source_summary(df, records),
         "validationSummary": validation,
-        "findings": _findings(coverage, labels, validation),
+        "findings": _findings(coverage, labels, validation, stats),
         "bmGapData": [
             {"study": "Radmand 2024", "lnps": 196, "measured": False},
             {"study": "Radmand 2023", "lnps": 137, "measured": False},
@@ -726,7 +742,7 @@ def build_data() -> dict[str, Any]:
             {"study": "Breda 2023", "lnps": 14, "measured": True},
             {"study": "Cullis 2025", "lnps": 10, "measured": True},
         ],
-        "stats": _stats(df),
+        "stats": stats,
     }
 
 

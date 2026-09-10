@@ -1,10 +1,10 @@
 {
   "audit": "atlas_dedupe_and_contradiction_scan",
-  "date": "2026-09-08",
+  "date": "2026-09-10",
   "inputs": {
     "feature_matrix": {
       "path": "data/features/hsc_features.parquet",
-      "sha256": "e694c49138aed1f34c5807511596175a9b050263e0bddfd36cd07aa62fb9d2f8"
+      "sha256": "53bee541925fec2c682e05842d17487f19f202807c2a047abd58a34b7b22b0dc"
     },
     "curated_source": {
       "path": "data/hsc/hsc_curated.parquet",
@@ -12,15 +12,15 @@
     },
     "literature_records": {
       "path": "data/literature_records.json",
-      "sha256": "6f54686c9cb4a1fec146cb5bb5b305004a3027fa9aab8546d015d0da5b1fd7f4"
+      "sha256": "6a6308b76287325cf62c472b73a33115260560ac53eb86970ebba5f7ac024df8"
     }
   },
   "dataset": {
-    "rows": 333,
+    "rows": 331,
     "curated_rows": 135,
-    "literature_rows": 198,
+    "literature_rows": 196,
     "columns": 48,
-    "papers": 19,
+    "papers": 18,
     "paper_row_counts": {
       "breda_2023": 9,
       "chander_2023": 3,
@@ -39,7 +39,6 @@
       "swart_2023": 2,
       "tarab_ravski_2023": 2,
       "xu_2026": 148,
-      "xue_2022": 2,
       "zhao_2026": 2
     }
   },
@@ -150,7 +149,7 @@
       }
     ],
     "rows_removed": 0,
-    "final_rows": 333
+    "final_rows": 331
   },
   "logical_contradiction_scan": {
     "status": "pass_with_documented_warnings",
@@ -238,7 +237,7 @@
       {
         "id": "matrix_shape",
         "status": "pass",
-        "detail": "observed 333 rows x 48 columns; expected 333 x 48"
+        "detail": "observed 331 rows x 48 columns; expected 331 x 48"
       },
       {
         "id": "curated_matrix_value_identity",
@@ -253,7 +252,7 @@
       {
         "id": "literature_projection_alignment",
         "status": "pass",
-        "detail": "198/198 records aligned by order and identity"
+        "detail": "196/196 records aligned by order and identity"
       },
       {
         "id": "finite_numeric_values",
@@ -288,7 +287,7 @@
       {
         "id": "descriptor_block_consistency",
         "status": "pass",
-        "detail": "154 complete blocks and 179 fully null blocks"
+        "detail": "154 complete blocks and 177 fully null blocks"
       },
       {
         "id": "numeric_domains",
@@ -315,17 +314,6 @@
         "status": "pass",
         "detail": "2 Chappell and 9 Breda rows; no shared identity; Chappell composition remains null"
       }
-    ]
-  },
-  "open_items_not_stubbed": {
-    "partial_pending_main_text": [
-      "xue_2022_490BP_C14_LNP",
-      "xue_2022_490_C14_LNP_control"
-    ],
-    "pending_paywall_stubs": [
-      "ramishetti_2020_advmater",
-      "zhu_2026_jcr",
-      "dacoba_2025_acsnano"
     ]
   }
 }

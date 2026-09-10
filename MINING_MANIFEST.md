@@ -6,14 +6,13 @@ Curation manifest for the LNP-HSC Atlas literature sources reviewed on 2026-09-0
 
 | Outcome | Count |
 | --- | --- |
-| Sources mined (full or partial text accessible) | 15 |
-| Sources stubbed (paywall) | 3 |
-| Formulation-experiment records | 198 (196 full + 2 partial pending Xue main text) |
-| Records from Tier 1 sources | 174 |
+| Sources represented | 14 |
+| Formulation-experiment records | 196 |
+| Records from Tier 1 sources | 180 |
 | Records from Tier 2 sources | 6 |
 | Records from Tier 3 sources | 10 |
 
-Deliverables: `data/literature_records.json` (198 records + 3 stubs),
+Deliverables: `data/literature_records.json` (196 records),
 `annotations/new_paper_annotations.json` (per-paper metadata and extraction logs).
 
 ## Source details
@@ -47,7 +46,6 @@ Deliverables: `data/literature_records.json` (198 records + 3 stubs),
   report mischaracterized the title). Composition analog-supported by breda_2023.
 - Palchaudhuri 2025: abstract-only, all records confidence LOW; quantitative claims
   recorded from abstract text with explicit value_basis.
-- Xue 2022: composition/protocol mined from SI; efficacy pending main paper.
 - Hanafy 2025 (PRELIVE): curated from user-provided PDFs. 14 DoE-selected LNPs
   with full Fig 2A compositions and physicochemicals. BM efficacy recorded at two levels:
   Fig S19 good/poor class (good = LNP 6, 10, 11, 14) and Fig 2B mean radiance estimates
@@ -58,28 +56,18 @@ Deliverables: `data/literature_records.json` (198 records + 3 stubs),
 - Dahlman 2014 is endothelial (lung), not bone marrow. Retained as the 7C1 ancestor of
   the Sago 2018 HSC line, flagged low BM relevance.
 
-## Stubbed sources, status: pending_paywall
-
-| # | Source | Why skipped | Unblock path |
-| --- | --- | --- | --- |
-| T3-2 | Ramishetti et al., Adv Mater (PMID 31999380) | Wiley paywall | Institutional access |
-| T3-6 | Zhu et al., J Control Release (PMID 41905408) | Elsevier paywall, very recent | Institutional access |
-| T3-8 | Dacoba et al., ACS Nano (PMID 40080677) | ACS paywall | Institutional access or author manuscript |
-
-All 3 remaining stubs were verified to exist (PubMed/Crossref checks) and carry full citation
-metadata in `data/literature_records.json`. Remaining stubs: T3-2 (Ramishetti), T3-6 (Zhu), T3-8 (Dacoba), all Tier 3. Iida mined from user-provided file (note: in vitro only, no in vivo data). T1 is now fully mined (Xu unblocked by user-provided main text; Supp Tables 1-15 still pending). Xue awaits its main text.
-
 ## Verification and integrity notes
 
 - Every numeric value in the curated records traces to a named table, figure, source-data
   spreadsheet, or text passage (see per-record `provenance` and per-paper
   `extraction_log`). No value was invented. Figure-only magnitudes are null with
   explicit `null_reason`, not estimated.
-- Evidence-strength hierarchy applied: extracted_from_table (Hofstraat, Swart) >
-  extracted_from_text (all others). No estimated_from_figure values were admitted.
+- Evidence-strength hierarchy applied: extracted_from_table and extracted_from_text are used
+  for directly reported values. User-confirmed PRELIVE radiance fields are explicitly marked
+  estimated_from_figure.
 - One record (shi_2025_thesis formulation D, 2.3x normalized MFI) uses a text-stated
   ratio and is marked confidence MEDIUM.
-- Existence check results: all 18 sources verified via Europe PMC / PubMed / Crossref.
+- Existence check results: all 14 represented sources verified via Europe PMC, PubMed, or Crossref.
   No phantom citations in the mining report. Note: Xu et al. is indexed as 2026
   (online 2025); Hanafy et al. is 2025 (Crossref 2025-11-26).
 - External databases (LNPDB, AGILE, LANCE, LiON) deliberately not imported, per scope.
@@ -89,8 +77,6 @@ metadata in `data/literature_records.json`. Remaining stubs: T3-2 (Ramishetti), 
 1. Xu et al.: fully mined, 148 records. Full 92-lipid primary screen and 50-formulation
    secondary screen imported per user decision (2026-09-05). Screen records carry
    bar-vs-replicate-mean caveat and per-record labels (110 low, 24 medium).
-   Xue main text remains pending.
-   Ramishetti, Zhu, and Dacoba remain paywalled.
 2. Figure-only magnitudes in Chander Fig. 8, Peng Fig. 1H, and Zhao Fig. 4g-h remain
    null under the source-value policy.
 3. Shi thesis strain ambiguity for the base editing experiment (null, unclear_in_source).

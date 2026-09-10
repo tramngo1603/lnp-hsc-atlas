@@ -266,7 +266,7 @@ const bmGapData = [
 const findings = [
   {
     "title": "Atlas scope",
-    "text": "The atlas contains 333 evidence rows from 19 matrix sources. The largest sources are Xu 2026 (148), Kim 2024 (80), and Lian 2024 (25)."
+    "text": "The atlas contains 331 evidence rows from 18 matrix sources. The largest sources are Xu 2026 (148), Kim 2024 (80), and Lian 2024 (25)."
   },
   {
     "title": "Label distribution",
@@ -274,7 +274,7 @@ const findings = [
   },
   {
     "title": "Coverage is uneven",
-    "text": "30 of 48 matrix columns are complete. Ionizable-lipid descriptors cover 154/333 rows, while detailed toxicity evidence covers 13/198 rich records. Missing values are not inferred."
+    "text": "30 of 48 matrix columns are complete. Ionizable-lipid descriptors cover 154/331 rows, while detailed toxicity evidence covers 11/196 rich records. Missing values are not inferred."
   },
   {
     "title": "Formulation leakage matters",
@@ -470,17 +470,6 @@ const papers = [
     "url": "https://doi.org/10.1182/blood-2025-4318"
   },
   {
-    "id": "Xue 2022",
-    "paperId": "xue_2022",
-    "journal": "Journal of the American Chemical Society",
-    "title": "Rational Design of Bisphosphonate Lipid-like Materials for mRNA Delivery to the Bone Microenvironment",
-    "role": "Atlas source",
-    "records": 2,
-    "status": "partial_pending_main_text",
-    "paperType": "research",
-    "url": "https://doi.org/10.1021/jacs.2c02706"
-  },
-  {
     "id": "Xu 2026",
     "paperId": "xu_2026",
     "journal": "Nature Biomedical Engineering",
@@ -507,8 +496,8 @@ const papers = [
 
 // DATA:stats
 const stats = {
-  "rows": 333,
-  "sources": 19,
+  "rows": 331,
+  "sources": 18,
   "columns": 48,
   "labeled": 315,
   "modelFeatures": 37,
@@ -525,36 +514,36 @@ const coverageStats = {
     {
       "label": "Efficacy label",
       "filled": 315,
-      "total": 333,
-      "percent": 94.6,
-      "note": "18 unlabeled"
+      "total": 331,
+      "percent": 95.2,
+      "note": "16 unlabeled"
     },
     {
       "label": "Core composition",
-      "filled": 250,
-      "total": 333,
-      "percent": 75.1,
+      "filled": 248,
+      "total": 331,
+      "percent": 74.9,
       "note": "IL, helper, cholesterol"
     },
     {
       "label": "Dose",
-      "filled": 246,
-      "total": 333,
-      "percent": 73.9,
+      "filled": 244,
+      "total": 331,
+      "percent": 73.7,
       "note": "mg/kg only"
     },
     {
       "label": "IL descriptors",
       "filled": 154,
-      "total": 333,
-      "percent": 46.2,
+      "total": 331,
+      "percent": 46.5,
       "note": "8 descriptor columns"
     },
     {
       "label": "Detailed toxicity",
-      "filled": 13,
-      "total": 198,
-      "percent": 6.6,
+      "filled": 11,
+      "total": 196,
+      "percent": 5.6,
       "note": "normalized rich records"
     }
   ]
@@ -563,12 +552,12 @@ const coverageStats = {
 
 // DATA:labelDistribution
 const labelDistribution = {
-  "rows": 333,
+  "rows": 331,
   "labeled": 315,
   "low": 184,
   "medium": 73,
   "high": 58,
-  "unlabeled": 18,
+  "unlabeled": 16,
   "lowShare": 58.4
 };
 // END:labelDistribution
@@ -627,11 +616,6 @@ const sourceSummary = {
       "rows": 3
     },
     {
-      "id": "xue_2022",
-      "label": "Xue 2022",
-      "rows": 2
-    },
-    {
       "id": "chappell_2024",
       "label": "Chappell 2024",
       "rows": 2
@@ -675,7 +659,6 @@ const sourceSummary = {
   "recordTypes": {
     "abstract-only": 3,
     "detailed": 186,
-    "partial": 2,
     "screen": 142
   }
 };
@@ -4333,46 +4316,6 @@ const formulations = [
     "recordType": "abstract-only",
     "status": "extracted_abstract_only",
     "confidence": "LOW"
-  },
-  {
-    "p": "Xue 2022",
-    "paperId": "xue_2022",
-    "id": "490BP-C14 LNP",
-    "experiment": "invivo_luciferase_bone_delivery_0.5mpk",
-    "il": 35.0,
-    "hl": "DOPE",
-    "hlPct": 16.0,
-    "chol": 46.5,
-    "peg": 2.5,
-    "dose": 0.5,
-    "tgt": "Intrinsic",
-    "mt": "protein_expression",
-    "cv": 0.0,
-    "cls": null,
-    "boundary": false,
-    "recordType": "partial",
-    "status": "partial_pending_main_text",
-    "confidence": "MEDIUM"
-  },
-  {
-    "p": "Xue 2022",
-    "paperId": "xue_2022",
-    "id": "490-C14 LNP (BP-free control)",
-    "experiment": "invivo_luciferase_bone_delivery_0.5mpk",
-    "il": 35.0,
-    "hl": "DOPE",
-    "hlPct": 16.0,
-    "chol": 46.5,
-    "peg": 2.5,
-    "dose": 0.5,
-    "tgt": "Intrinsic",
-    "mt": "protein_expression",
-    "cv": 0.0,
-    "cls": null,
-    "boundary": false,
-    "recordType": "partial",
-    "status": "partial_pending_main_text",
-    "confidence": "MEDIUM"
   },
   {
     "p": "Xu 2026",
@@ -8358,7 +8301,6 @@ export default function Explorer() {
             ))}
           </div>
           <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #e0e0e0" }}>
-            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}><strong>Open evidence:</strong> Two Xue 2022 rows remain partial pending main text. Ramishetti 2020, Zhu 2026, and Dacoba 2025 remain paywalled source stubs and do not contribute matrix rows. Unsupported values stay null.</p>
             <div style={{ marginTop: 16, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 1, background: "#e0e0e0", border: "1px solid #e0e0e0" }}>
               <div style={{ background: "#fff", padding: "16px 20px" }}>
                 <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: INK }}>Queryable evidence</div>
@@ -8370,7 +8312,7 @@ export default function Explorer() {
               </div>
               <div style={{ background: "#fff", padding: "16px 20px" }}>
                 <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6, color: "#999" }}>Coverage gap</div>
-                <div style={{ fontSize: 13, color: "#666", lineHeight: 1.5 }}>Ionizable-lipid descriptors cover 154/333 rows and detailed toxicity covers 13/198 rich records.</div>
+                <div style={{ fontSize: 13, color: "#666", lineHeight: 1.5 }}>Ionizable-lipid descriptors cover 154/331 rows and detailed toxicity covers 11/196 rich records.</div>
               </div>
             </div>
           </div>

@@ -74,8 +74,8 @@ def main() -> int:
     df.to_parquet(_OUT_PATH, index=False)
     df.to_csv(_OUT_PATH.with_suffix(".csv"), index=False)
 
-    # Step 4: Integrate 198 records onto the 47 released columns, then add label metadata
-    print("\n4. Integrating 198 literature extraction records (literature_records.json)...")
+    # Step 4: Integrate 196 records onto the 47 released columns, then add label metadata
+    print("\n4. Integrating 196 literature extraction records (literature_records.json)...")
     df = integrate_literature(save=True)
 
     il_coverage = df["il_molecular_weight"].notna().sum()

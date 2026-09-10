@@ -29,7 +29,7 @@ _LITERATURE_ANNOTATIONS = _ROOT / "annotations" / "new_paper_annotations.json"
 _REPORT = _ROOT / "data" / "audit" / "consolidated_audit.json"
 
 _CURATED_ROWS = 135
-_LITERATURE_ROWS = 198
+_LITERATURE_ROWS = 196
 _EXPECTED_COLUMNS = 48
 _EXPECTED_HSC_SHA256 = "8a19ad2fd52ec1a1beec2c8bfee67e474e234f1e8c3121358ca3617e20b99172"
 _EXPECTED_CURATED_MATRIX_SHA256 = (
@@ -320,7 +320,7 @@ def build_report() -> dict[str, Any]:
         _check(
             df.shape == (_CURATED_ROWS + _LITERATURE_ROWS, _EXPECTED_COLUMNS),
             "matrix_shape",
-            f"observed {df.shape[0]} rows x {df.shape[1]} columns; expected 333 x 48",
+            f"observed {df.shape[0]} rows x {df.shape[1]} columns; expected 331 x 48",
         )
     )
 
@@ -881,14 +881,6 @@ def build_report() -> dict[str, Any]:
             "warnings": warnings,
             "informational": informational,
             "checks": checks,
-        },
-        "open_items_not_stubbed": {
-            "partial_pending_main_text": [
-                record["record_id"]
-                for record in records
-                if record.get("status") == "partial_pending_main_text"
-            ],
-            "pending_paywall_stubs": [stub["source_paper"] for stub in records_doc["stubs"]],
         },
     }
 

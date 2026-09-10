@@ -35,19 +35,20 @@ def test_extracted_data_matches_atlas() -> None:
     data = _EXTRACT.build_data()
 
     assert data["stats"] == {
-        "rows": 333,
-        "sources": 19,
+        "rows": 331,
+        "sources": 18,
         "columns": 48,
         "labeled": 315,
         "modelFeatures": 37,
         "descriptorRows": 154,
     }
-    assert len(data["formulations"]) == 333
-    assert len(data["papers"]) == 19
+    assert len(data["formulations"]) == 331
+    assert len(data["papers"]) == 18
     paper_counts = Counter(row["paperId"] for row in data["formulations"])
     assert paper_counts["xu_2026"] == 148
     assert paper_counts["hanafy_2025"] == 14
     assert paper_counts["hofstraat_2025"] == 9
+    assert paper_counts["xue_2022"] == 0
 
     assert data["coverageStats"]["completeColumns"] == 30
     assert data["coverageStats"]["totalColumns"] == 48
@@ -65,7 +66,6 @@ def test_extracted_data_matches_atlas() -> None:
         "screen": 142,
         "detailed": 186,
         "abstract-only": 3,
-        "partial": 2,
     }
 
 
@@ -90,8 +90,8 @@ def test_deployed_explorer_embeds_atlas_data_and_matches_root_copy() -> None:
 
     assert deployed == root_copy
     assert chr(0x2014) not in deployed
-    assert len(_embedded_block(deployed, "formulations")) == 333
-    assert len(_embedded_block(deployed, "papers")) == 19
+    assert len(_embedded_block(deployed, "formulations")) == 331
+    assert len(_embedded_block(deployed, "papers")) == 18
     stats = _embedded_block(deployed, "stats")
-    assert stats["rows"] == 333
-    assert stats["sources"] == 19
+    assert stats["rows"] == 331
+    assert stats["sources"] == 18

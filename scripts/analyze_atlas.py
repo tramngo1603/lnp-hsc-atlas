@@ -142,8 +142,8 @@ def _validation_correlation(validation: dict[str, Any]) -> dict[str, Any]:
 def build_report() -> dict[str, Any]:
     df = pd.read_parquet(_FEATURES)
     records = json.loads(_LITERATURE_RECORDS.read_text())["records"]
-    if df.shape != (333, 48):
-        raise ValueError(f"expected 333 x 48 matrix, observed {df.shape}")
+    if df.shape != (331, 48):
+        raise ValueError(f"expected 331 x 48 matrix, observed {df.shape}")
 
     screen = compute_screen_pareto()
     validation = compute_validation_pareto()

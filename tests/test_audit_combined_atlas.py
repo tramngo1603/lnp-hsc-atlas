@@ -17,17 +17,23 @@ _SPEC.loader.exec_module(_AUDIT)
 def test_atlas_audit_has_no_blocking_errors() -> None:
     report = _AUDIT.build_report()
     assert report["dataset"] == {
-        "rows": 333,
+        "rows": 331,
         "curated_rows": 135,
-        "literature_rows": 198,
+        "literature_rows": 196,
         "columns": 48,
-        "papers": 19,
+        "papers": 18,
         "paper_row_counts": report["dataset"]["paper_row_counts"],
     }
     assert report["logical_contradiction_scan"]["errors"] == []
     assert report["invariants"]["curated_matrix_values_match"] is True
     assert report["invariants"]["lian_boundary_values_match"] is True
     assert report["invariants"]["curated_source_matches"] is True
+
+
+def test_pending_source_records_are_absent() -> None:
+    report = _AUDIT.build_report()
+    assert "open_items_not_stubbed" not in report
+    assert "xue_2022" not in report["dataset"]["paper_row_counts"]
 
 
 def test_lian_boundary_is_marked_and_not_an_error() -> None:
